@@ -63,7 +63,7 @@
               </a>
             </li>
             <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
+              <a href="#" id="contentterminal" class="nav-link">
                 <i class="nav-icon fas fa-cash-register"></i>
                 <p>
                   Terminal
@@ -73,9 +73,9 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="register.html" class="nav-link">
+                  <a href="#" id="contentcounter" class="nav-link">
                     <i class="nav-icon fas fa-box"></i>
-                    <p>Register</p>
+                    <p>Counter</p>
                   </a>
                 </li>
                 <li class="nav-item">
