@@ -9,13 +9,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <link href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
   <!-- Ekko Lightbox -->
-  <link rel="stylesheet" href="plugins/ekko-lightbox/ekko-lightbox.css">
+  <link href="{{ asset('plugins/ekko-lightbox/ekko-lightbox.css') }}" rel="stylesheet">
   <!-- Ionicons -->
-  <link rel="stylesheet" href="plugins/ionicons-2.0.1/css/ionicons.min.css">
+  <link href="{{ asset('plugins/ionicons-2.0.1/css/ionicons.min.css') }}" rel="stylesheet">
   <!-- overlayScrollbars -->
-  <link rel="stylesheet" href="css/adminlte.min.css">
+  <link href="{{ asset('css/adminlte.min.css') }}" rel="stylesheet">
+  <!-- DataTables -->
+  <link href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -187,8 +189,28 @@
     <!-- #END# Left Sidebar -->
     
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper" id="contentpage">
-    @include('dashboard.dashboard')
+    <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+          <div class="container-fluid">
+              <div class="row mb-2">
+                  <div class="col-sm-6">
+                      <h1>Home Page</h1>
+                  </div>
+                  <div class="col-sm-6">
+                      <ol class="breadcrumb float-sm-right">
+                          <li class="breadcrumb-item"><a href="home">Home</a></li>
+                          <li class="breadcrumb-item active">Home Page</li>
+                      </ol>
+                  </div>
+              </div>
+          </div><!-- /.container-fluid -->
+      </section>
+      <!-- Main content -->
+      <section class="content"  id="contentpage">
+      @include('dashboard.dashboard')
+      </section>
+      <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
 
@@ -209,37 +231,24 @@
   <!-- ./wrapper -->
 
   <!-- jQuery -->
-  <script src="plugins/jquery/jquery.min.js"></script>
+  <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
   <!-- Bootstrap 4 -->
-  <script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <!-- DataTables -->
+  <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+  <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
   <!-- AdminLTE App -->
-  <script src="js/adminlte.min.js"></script>
+  <script src="{{ asset('js/adminlte.min.js') }}"></script>
   <!-- AdminLTE for demo purposes -->
-  <script src="js/demo.js"></script>
+  <script src="{{ asset('js/demo.js') }}"></script>
   <!-- Content Page-->
-  <script src="js/content.js"></script>
-   <!-- Ekko Lightbox -->
-   <script src="plugins/ekko-lightbox/ekko-lightbox.min.js"></script>
+  <script src="{{ asset('js/content.js') }}"></script>
+  <!-- Ekko Lightbox -->
+  <script src="{{ asset('plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
   <!-- Filterizr-->
-  <script src="plugins/filterizr/jquery.filterizr.min.js"></script>
+  <script src="{{ asset('plugins/filterizr/jquery.filterizr.min.js') }}"></script>
   <!-- Page specific script -->
-  <script>
-    $(function () {
-      $(document).on('click', '[data-toggle="lightbox"]', function (event) {
-        event.preventDefault();
-        $(this).ekkoLightbox({
-          alwaysShowClose: true
-        });
-      });
-
-      $('.filter-container').filterizr({
-        gutterPixels: 3
-      });
-      $('.btn[data-filter]').on('click', function () {
-        $('.btn[data-filter]').removeClass('active');
-        $(this).addClass('active');
-      });
-    })
-  </script>
 </body>
 </html>
