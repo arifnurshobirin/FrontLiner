@@ -22,6 +22,7 @@ Route::get('/tes2', 'EDCController@index');
 Route::get('/reset-admin', 'ReportController@index');
 Route::get('/tes', 'ReportController@index');
 Route::get('/gallery', 'ScheduleController@index');
+Route::get('/calendar', 'ReportController@calendar');
 Route::get('/edc/json', 'EDCController@json');
 Route::get('edc/show', 'EDCController@show');
 
