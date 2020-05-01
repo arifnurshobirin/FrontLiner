@@ -17,6 +17,11 @@ class ReportController extends Controller
         return view('dashboard.dashboardv1');
     }
 
+    public function calendar()
+    {
+        return view('calendar.calendar');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
