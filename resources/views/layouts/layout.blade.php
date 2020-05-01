@@ -14,6 +14,11 @@
   <link href="{{ asset('plugins/ekko-lightbox/ekko-lightbox.css') }}" rel="stylesheet">
   <!-- Ionicons -->
   <link href="{{ asset('plugins/ionicons-2.0.1/css/ionicons.min.css') }}" rel="stylesheet">
+  <!-- fullCalendar -->
+  <link href="{{ asset('plugins/fullcalendar/main.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('plugins/fullcalendar-daygrid/main.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('plugins/fullcalendar-timegrid/main.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('plugins/fullcalendar-bootstrap/main.min.css') }}" rel="stylesheet">
   <!-- overlayScrollbars -->
   <link href="{{ asset('css/adminlte.min.css') }}" rel="stylesheet">
   <!-- DataTables -->
@@ -239,6 +244,8 @@
   <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
   <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+  <!-- jQuery UI -->
+  <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
   <!-- AdminLTE App -->
   <script src="{{ asset('js/adminlte.min.js') }}"></script>
   <!-- AdminLTE for demo purposes -->
@@ -249,6 +256,12 @@
   <script src="{{ asset('plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
   <!-- Filterizr-->
   <script src="{{ asset('plugins/filterizr/jquery.filterizr.min.js') }}"></script>
-  <!-- Page specific script -->
+  <!-- fullCalendar 2.2.5 -->
+  <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+  <script src="{{ asset('plugins/fullcalendar/main.min.js') }}"></script>
+  <script src="{{ asset('plugins/fullcalendar-daygrid/main.min.js') }}"></script>
+  <script src="{{ asset('plugins/fullcalendar-timegrid/main.min.js') }}"></script>
+  <script src="{{ asset('plugins/fullcalendar-interaction/main.min.js') }}"></script>
+  <script src="{{ asset('plugins/fullcalendar-bootstrap/main.min.js') }}"></script>
 </body>
 </html>
