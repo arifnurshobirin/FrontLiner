@@ -16,7 +16,7 @@ class CreateEdctableTable extends Migration
         Schema::create('edctable', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('TIDEDC')->unique;;
-            $table->integer('MIDEDC');
+            $table->string('MIDEDC');
             $table->string('IPAdress')->unique;
             $table->string('NoTerminal')->unique;
             $table->string('Connection');
