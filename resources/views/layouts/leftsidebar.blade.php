@@ -54,7 +54,7 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a id="linkedc" class="nav-link">
+              <a href="#" id="contentmonitoring" class="nav-link">
                 <i class="nav-icon fas fa-desktop"></i>
                 <p>
                   Monitoring
@@ -79,13 +79,13 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="pos.html" class="nav-link">
+                  <a href="#" id="contentpos" class="nav-link">
                     <i class="nav-icon fas fa-hdd"></i>
                     <p>POS</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="edcdatatable.html" class="nav-link">
+                  <a href="#" id="contentedc" class="nav-link">
                     <i class="nav-icon fas fa-fax"></i>
                     <p>EDC</p>
                   </a>
@@ -93,7 +93,7 @@
               </ul>
             </li>
             <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
+              <a href="#" id="contentusers"  class="nav-link">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Users
@@ -103,27 +103,27 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="../charts/chartjs.html" class="nav-link">
+                  <a href="#" id="contentadmin"  class="nav-link">
                     <i class="nav-icon fas fa-fingerprint"></i>
                     <p>Super Admin</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="../charts/flot.html" class="nav-link">
-                    <i class="nav-icon fas fa-user-tie"></i>
-                    <p>Senior Cashier</p>
+                  <a href="#" id="contentcashier"  class="nav-link">
+                    <i class="nav-icon fas fa-user"></i>
+                    <p>Cashier</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="../charts/inline.html" class="nav-link">
-                    <i class="nav-icon fas fa-user"></i>
-                    <p>Cashier</p>
+                  <a href="#" id="contentmanagement"  class="nav-link">
+                    <i class="nav-icon fas fa-user-tie"></i>
+                    <p>Management</p>
                   </a>
                 </li>
               </ul>
             </li>
             <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
+              <a href="#" id="contenttraining"  class="nav-link">
                 <i class="nav-icon fas fa-book"></i>
                 <p>
                   Training
@@ -133,13 +133,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="../UI/general.html" class="nav-link">
+                  <a href="#" id="contentmateri"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Materi Training</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="../UI/icons.html" class="nav-link">
+                  <a href="#" id="contentelearning"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>e-Learning</p>
                   </a>
@@ -151,13 +151,13 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="../UI/sliders.html" class="nav-link">
+                  <a href="#" id="contentquestion"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Question</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="../UI/modals.html" class="nav-link">
+                  <a href="#" id="contentscore"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Score</p>
                   </a>
@@ -165,7 +165,7 @@
               </ul>
             </li>
             <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
+              <a href="#" id="contentform"  class="nav-link">
                 <i class="nav-icon fas fa-file-signature"></i>
                 <p>
                   Forms
@@ -174,25 +174,25 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="../forms/general.html" class="nav-link">
+                  <a href="#" id="contentpicasso"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Picasso</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="../forms/advanced.html" class="nav-link">
+                  <a href="#" id="contentformsenior"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Senior Kasir</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="../forms/editors.html" class="nav-link">
+                  <a href="#" id="contentformtdr"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>TDR</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="../forms/validation.html" class="nav-link">
+                  <a href="#" id="contentformcs"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Customer Service</p>
                   </a>
@@ -200,7 +200,7 @@
               </ul>
             </li>
             <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
+              <a href="#" id="contentreport"  class="nav-link">
                 <i class="nav-icon fas fa-clipboard-check"></i>
                 <p>
                   Report
@@ -209,19 +209,19 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="../tables/simple.html" class="nav-link">
+                  <a href="#" id="contentopening"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Opening Toko</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="../tables/data.html" class="nav-link">
+                  <a href="#" id="contentclosing"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Closing Toko</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="../tables/jsgrid.html" class="nav-link">
+                  <a href="#" id="contenteod"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>EOD</p>
                   </a>
@@ -230,10 +230,9 @@
             </li>
             <li class="nav-header">EXAMPLES</li>
             <li class="nav-item">
-              <a href="../calendar.html" class="nav-link">
+              <a href="#" id="contentcalendar"  class="nav-link">
                 <i class="nav-icon far fa-calendar-alt"></i>
-                <p>
-                  Calendar
+                <p>Calendar
                   <span class="badge badge-info right">2</span>
                 </p>
               </a>
@@ -247,7 +246,7 @@
               </a>
             </li>
             <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
+              <a href="#" id="contentmailbox"  class="nav-link">
                 <i class="nav-icon far fa-envelope"></i>
                 <p>
                   Mailbox
@@ -256,19 +255,19 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="../mailbox/mailbox.html" class="nav-link">
+                  <a href="#" id="content"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Inbox</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="../mailbox/compose.html" class="nav-link">
+                  <a href="#" id="content" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Compose</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="../mailbox/read-mail.html" class="nav-link">
+                  <a href="#" id="content" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Read</p>
                   </a>
@@ -276,7 +275,7 @@
               </ul>
             </li>
             <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
+              <a href="#" id="content" class="nav-link">
                 <i class="nav-icon fas fa-running"></i>
                 <p>
                   Performance
@@ -285,57 +284,15 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="../examples/invoice.html" class="nav-link">
+                  <a href="#" id="content" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Invoice</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../examples/profile.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Profile</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../examples/e-commerce.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>E-commerce</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../examples/projects.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Projects</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../examples/project-add.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Project Add</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../examples/project-edit.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Project Edit</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../examples/project-detail.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Project Detail</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../examples/contacts.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Contacts</p>
                   </a>
                 </li>
               </ul>
             </li>
             <li class="nav-item has-treeview">
-              <a href="#" class="nav-link">
+              <a href="#" id="content" class="nav-link">
                 <i class="nav-icon far fa-plus-square"></i>
                 <p>
                   Extras
@@ -344,75 +301,9 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="../examples/login.html" class="nav-link">
+                  <a href="#" id="content" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Login</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../examples/register.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Register</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../examples/forgot-password.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Forgot Password</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../examples/recover-password.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Recover Password</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../examples/lockscreen.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Lockscreen</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../examples/legacy-user-menu.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Legacy User Menu</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../examples/language-menu.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Language Menu</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../examples/404.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Error 404</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../examples/500.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Error 500</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../examples/pace.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Pace</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="../examples/blank.html" class="nav-link active">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Blank Page</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="starter.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Starter Page</p>
                   </a>
                 </li>
               </ul>
