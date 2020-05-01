@@ -24,9 +24,9 @@ class ManagementController extends Controller
             $data = ManagementModel::latest()->get();
             return DataTables::of($data)
             ->addColumn('action', function($data){
-                $button = '<button type="button" name="edit" id="'.$data->id.'" class="managementshow btn btn-warning waves-effect" data-type="with-custom-icon"><i class="material-icons">airplay</i> Show</button>';
-                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="managementedit btn btn-primary waves-effect"><i class="material-icons">border_color</i> Edit</button>';
-                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="managementdelete btn btn-danger waves-effect js-sweetalert" data-type="cancel"><i class="material-icons">delete</i> Delete</button>';
+                $button = '<button type="button" name="edit" id="'.$data->id.'" class="managementshow btn btn-warning waves-effect" data-type="with-custom-icon"><i class="fas fa-desktop"></i> Show</button>';
+                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="managementedit btn btn-primary waves-effect"><i class="fas fa-edit"></i>  Edit</button>';
+                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="managementdelete btn btn-danger waves-effect js-sweetalert" data-type="cancel"><i class="fas fa-trash"></i> Delete</button>';
                 return $button;
             })
             ->rawColumns(['action'])
