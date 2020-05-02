@@ -115,9 +115,8 @@
 <!-- #END# Create Table -->
 
 <script>
-    var jq = jQuery.noConflict();
-    jq(document).ready(function() {
-            var table = jq('#ManagementDatatable').DataTable({
+    $(document).ready(function() {
+            var table = $('#ManagementDatatable').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
@@ -138,7 +137,7 @@
         });
 
 
-        jq('#managementcreate').click(function () {
+        $('#managementcreate').click(function () {
             $('#managementsave').val("create-management");
             $('#managementsave').html('Save');
             $('#managementid').val('');
@@ -223,7 +222,7 @@
                 url:"management/destroy/"+managementid,
                 success:function(data){
                     swal("Deleted!", "Your Management file has been deleted.", "success")
-                    jq('#ManagementDatatable').DataTable().ajax.reload();
+                    $('#ManagementDatatable').DataTable().ajax.reload();
                 }
                 });
                 } else {

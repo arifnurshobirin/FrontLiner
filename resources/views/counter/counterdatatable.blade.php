@@ -121,9 +121,8 @@
 <!-- #END# Create Table -->
 
 <script>
-    var jq = jQuery.noConflict();
-    jq(document).ready(function() {
-            var table = jq('#CounterDatatable').DataTable({
+    $(document).ready(function() {
+            var table = $('#CounterDatatable').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
@@ -139,7 +138,7 @@
             ]
         });
 
-        jq('#countercreate').click(function () {
+        $('#countercreate').click(function () {
             $('#countersave').val("create Counter");
             $('#countersave').html('Save');
             $('#counterid').val('');
@@ -225,7 +224,7 @@
                 url:"counter/destroy/"+counterid,
                 success:function(data){
                     swal("Deleted!", "Your Counter file has been deleted.", "success")
-                    jq('#CounterDatatable').DataTable().ajax.reload();
+                    $('#CounterDatatable').DataTable().ajax.reload();
                 }
                 });
                 } else {
@@ -233,7 +232,7 @@
                 }
             });
         }
-        jq('.ip').inputmask('999.999.999.999', { placeholder: '___.___.___.___' });
+        $('.ip').inputmask('999.999.999.999', { placeholder: '___.___.___.___' });
     });
 
 </script>

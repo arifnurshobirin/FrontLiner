@@ -148,9 +148,8 @@
 <!-- #END# Create Table -->
 
 <script>
-    var jq = jQuery.noConflict();
-    jq(document).ready(function() {
-            var table = jq('#CashierDatatable').DataTable({
+    $(document).ready(function() {
+            var table = $('#CashierDatatable').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
@@ -170,14 +169,14 @@
             ]
         });
 
-        jq('.datepicker').bootstrapMaterialDatePicker({
+        $('.datepicker').bootstrapMaterialDatePicker({
             format: 'dddd DD MMMM YYYY',
             clearButton: true,
             weekStart: 1,
             time: false
         });
 
-        jq('#cashiercreate').click(function () {
+        $('#cashiercreate').click(function () {
             $('#cashiersave').val("create-cashier");
             $('#cashiersave').html('Save');
             $('#cashierid').val('');
@@ -266,7 +265,7 @@
                 url:"cashier/destroy/"+cashier_id,
                 success:function(data){
                     swal("Deleted!", "Your Cashier file has been deleted.", "success")
-                    jq('#CashierDatatable').DataTable().ajax.reload();
+                    $('#CashierDatatable').DataTable().ajax.reload();
                 }
                 });
                 } else {

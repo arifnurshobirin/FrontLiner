@@ -140,9 +140,8 @@
 <!-- #END# Create Table -->
 
 <script>
-    var jq = jQuery.noConflict();
-    jq(document).ready(function() {
-        var table = jq('#EDCDatatable').DataTable({
+    $(document).ready(function() {
+        var table = $('#EDCDatatable').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
@@ -158,7 +157,7 @@
             ]
         });
 
-        jq('#create_edc').click(function () {
+        $('#create_edc').click(function () {
             $('#saveBtn').val("create-edc");
             $('#saveBtn').html('Save');
             $('#edc_id').val('');
@@ -295,7 +294,7 @@
                 url:"edc/destroy/"+edc_id,
                 success:function(data){
                     swal("Deleted!", "Your edc file has been deleted.", "success")
-                    jq('#EDCDatatable').DataTable().ajax.reload();
+                    $('#EDCDatatable').DataTable().ajax.reload();
                 }
                 });
                 } else {
