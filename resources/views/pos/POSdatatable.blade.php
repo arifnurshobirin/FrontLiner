@@ -155,9 +155,8 @@
 <!-- #END# Create Table -->
 
 <script>
-    var jq = jQuery.noConflict();
-    jq(document).ready(function() {
-            var table = jq('#POSDatatable').DataTable({
+    $(document).ready(function() {
+            var table = $('#POSDatatable').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
@@ -175,7 +174,7 @@
             ]
         });
 
-        jq('#poscreate').click(function () {
+        $('#poscreate').click(function () {
             $('#possave').val("create POS");
             $('#possave').html('Save');
             $('#posid').val('');
@@ -204,7 +203,7 @@
 
         $(document).on('click', '.showpos', function () {
             var id = $(this).attr('id');
-                $('#mainpage').load('pos'+'/'+id);
+                $('#contentpage').load('pos'+'/'+id);
         });
 
 
@@ -263,7 +262,7 @@
                 url:"pos/destroy/"+posid,
                 success:function(data){
                     swal("Deleted!", "Your Cashier file has been deleted.", "success")
-                    jq('#POSDatatable').DataTable().ajax.reload();
+                    $('#POSDatatable').DataTable().ajax.reload();
                 }
                 });
                 } else {
