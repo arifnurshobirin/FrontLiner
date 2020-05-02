@@ -17,12 +17,14 @@ Route::get('/', function () {return view('welcome');});
 Route::get('/coba', function () {return view('login3');});
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/profile', 'UserController@index');
+Route::get('/lockscreen', 'UserController@index');
 Route::get('/contact', 'UserController@create');
 Route::get('/tes2', 'EDCController@index');
 Route::get('/reset-admin', 'ReportController@index');
 Route::get('/tes', 'ReportController@index');
 Route::get('/gallery', 'ScheduleController@index');
 Route::get('/calendar', 'ReportController@calendar');
+Route::get('/monitoring', 'ReportController@monitoring');
 Route::get('/edc/json', 'EDCController@json');
 Route::get('edc/show', 'EDCController@show');
 
