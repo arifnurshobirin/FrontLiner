@@ -15,6 +15,11 @@ class CreateScheduletableTable extends Migration
     {
         Schema::create('scheduletable', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->foreignId('Employee')->constrained('cashiertable');
+            $table->string('FullName');
+            $table->date('Date');
+            $table->timeTz('StartWork');
+            $table->timeTz('EndWork');
             $table->timestamps();
         });
     }
