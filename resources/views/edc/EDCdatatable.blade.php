@@ -157,7 +157,7 @@
             ]
         });
 
-        $('#create_edc').click(function () {
+        $('#edccreate').click(function () {
             $('#saveBtn').val("create-edc");
             $('#saveBtn').html('Save');
             $('#edc_id').val('');
@@ -187,7 +187,7 @@
 
         $(document).on('click', '.showedc', function () {
             var id = $(this).attr('id');
-                $('#mainpage').load('edc'+'/'+id);
+                $('#contentpage').load('edc'+'/'+id);
         });
 
         $('#saveBtn').click(function (e) {
