@@ -61,7 +61,15 @@ $(function () {
         $('#contentpage').load('countertable');
         return false;
     })
+    $('#contentschedule').click(function () {
+        $('a').removeClass('active');
+        document.getElementById('contentschedule').className = "nav-link active";
+        $('#contentpage').load('scheduletable');
+        return false;
+    })
     $('#contentmonitoring').click(function () {
+        $('a').removeClass('active');
+        document.getElementById('contentmonitoring').className = "nav-link active";
         $('#contentpage').load('monitoring');
         return false;
     })
