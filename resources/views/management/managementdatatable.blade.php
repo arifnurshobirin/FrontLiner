@@ -163,7 +163,7 @@
 
         $(document).on('click', '.managementshow', function () {
             var id = $(this).attr('id');
-                $('#mainpage').load('management'+'/'+id);
+                $('#contentpage').load('management'+'/'+id);
         });
 
 
