@@ -14,6 +14,10 @@
   <link href="{{ asset('plugins/ekko-lightbox/ekko-lightbox.css') }}" rel="stylesheet">
   <!-- Ionicons -->
   <link href="{{ asset('plugins/ionicons-2.0.1/css/ionicons.min.css') }}" rel="stylesheet">
+  <!-- Sweetalert Css -->
+  <link href="{{ asset('plugins/sweetalert/sweetalert.css') }}" rel="stylesheet">
+  <!-- Bootstrap DatePicker Css -->
+  <link href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker.css') }}" rel="stylesheet">
   <!-- fullCalendar -->
   <link href="{{ asset('plugins/fullcalendar/main.min.css') }}" rel="stylesheet">
   <link href="{{ asset('plugins/fullcalendar-daygrid/main.min.css') }}" rel="stylesheet">
@@ -175,6 +179,7 @@
             <!-- Menu Footer-->
             <li class="user-footer">
               <a href="#" id="contentprofile" class="btn btn-default btn-flat">Profile</a>
+              <a href="lockscreen" class="btn btn-default btn-flat">Lockscreen</a>
               <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" class="btn btn-default btn-flat float-right">{{ __('Logout') }}</a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf
               </form>
@@ -252,6 +257,10 @@
   <script src="{{ asset('js/demo.js') }}"></script>
   <!-- Content Page-->
   <script src="{{ asset('js/content.js') }}"></script>
+  <!-- SweetAlert Plugin Js -->
+  <script src="{{ asset('plugins/sweetalert/sweetalert.min.js') }}"></script>
+  <!-- Bootstrap Datepicker Plugin Js -->
+  <script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
   <!-- Ekko Lightbox -->
   <script src="{{ asset('plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
   <!-- Filterizr-->
