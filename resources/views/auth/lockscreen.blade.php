@@ -9,13 +9,13 @@
     <a href="javascript:void(0);"><b>Admin</b>FR</a>
   </div>
   <!-- User name -->
-  <div class="lockscreen-name">John Doe</div>
+  <div class="lockscreen-name">Arif Nur Shobirin</div>
 
   <!-- START LOCK SCREEN ITEM -->
   <div class="lockscreen-item">
     <!-- lockscreen image -->
     <div class="lockscreen-image">
-      <img src="../../dist/img/user1-128x128.jpg" alt="User Image">
+      <img src="img/userarif160x160.jpg" alt="User Image">
     </div>
     <!-- /.lockscreen-image -->
 
