@@ -169,7 +169,7 @@
             ]
         });
 
-        $('.datepicker').bootstrapMaterialDatePicker({
+        $('.datepicker').datepicker({
             format: 'dddd DD MMMM YYYY',
             clearButton: true,
             weekStart: 1,
@@ -206,7 +206,7 @@
 
         $(document).on('click', '.showcashier', function () {
             var id = $(this).attr('id');
-                $('#mainpage').load('cashier'+'/'+id);
+                $('#contentpage').load('cashier'+'/'+id);
         });
 
 
