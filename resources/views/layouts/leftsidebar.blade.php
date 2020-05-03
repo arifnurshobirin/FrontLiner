@@ -15,15 +15,16 @@
             <img src="img/userarif160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Arif Nur Shobirin</a>
+            <a href="#" class="d-block">Arif Nur Shobirin online</a>
           </div>
         </div>
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-header">MAIN NAVIGATION</li>
             <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
+              with font-awesome or any other icon font library -->
             <li class="nav-item has-treeview">
               <a href="#" id="contentdashboard" class="nav-link">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -35,20 +36,20 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="#" id="contentdashboardv1" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
+                    <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>Dashboard v1</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="index2.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Dashboard v2</p>
+                  <a href="#" id="contentsales" class="nav-link">
+                    <i class="nav-icon fas fa-meteor"></i>
+                    <p>Sales</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="index3.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Dashboard v3</p>
+                <a href="#" id="contenthelpdesk" class="nav-link">
+                    <i class="nav-icon fas fa-handshake"></i>
+                    <p>Help Desk</p>
                   </a>
                 </li>
               </ul>
@@ -228,7 +229,15 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-header">EXAMPLES</li>
+            <li class="nav-header">EXTRA NAVIGATION</li>
+            <li class="nav-item">
+              <a href="#" id="contentschedule"  class="nav-link">
+                <i class="nav-icon far fa-calendar-check"></i>
+                <p>Schedule
+                  <span class="badge badge-info right">2</span>
+                </p>
+              </a>
+            </li>
             <li class="nav-item">
               <a href="#" id="contentcalendar"  class="nav-link">
                 <i class="nav-icon far fa-calendar-alt"></i>
