@@ -165,7 +165,7 @@
 
         $(document).on('click', '.showcounter', function () {
             var id = $(this).attr('id');
-                $('#mainpage').load('counter'+'/'+id);
+                $('#contentpage').load('counter'+'/'+id);
         });
 
 
