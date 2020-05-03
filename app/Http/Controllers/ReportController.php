@@ -21,6 +21,18 @@ class ReportController extends Controller
     {
         return view('calendar.calendar');
     }
+    public function gallery()
+    {
+        return view('multimedia.gallery');
+    }
+    public function monitoring()
+    {
+        return view('monitoring.monitoring');
+    }
+    public function lockscreen()
+    {
+        return view('auth.lockscreen');
+    }
 
     /**
      * Show the form for creating a new resource.
