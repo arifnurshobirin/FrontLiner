@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\ScheduleModel;
+use DataTables;
+use Alert;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -12,9 +14,28 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function table()
     {
-        return view('multimedia.gallery');
+        return view('schedule.scheduledatatable');
+    }
+    public function index(Request $request)
+    {
+        if($request->ajax())
+        {
+            $data = ScheduleModel::latest()->get();
+            return DataTables::of($data)
+            ->addColumn('action', function($data){
+                $button = '<button type="button" name="edit" id="'.$data->id.'" class="showschedule btn btn-warning waves-effect" data-type="with-custom-icon"><i class="fas fa-desktop"></i> Show</button>';
+                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="scheduleedit btn btn-primary waves-effect"><i class="fas fa-edit"></i> Edit</button>';
+                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="scheduledelete btn btn-danger waves-effect js-sweetalert" data-type="cancel"><i class="fas fa-trash"></i> Delete</button>';
+                return $button;
+            })
+            ->rawColumns(['action'])
+            ->make(true);
+
+
+        }
+        return view('schedule.scheduledatatable');
     }
     
 
@@ -36,7 +57,21 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $date = $request->date;
+
+        $newdate=date("Y-m-d",strtotime($date));
+        
+        $form_data = array(
+            'Employee' => $request->emp,
+            'FullName' => $request->name,
+            'Date' => $newdate,
+            'StartWork' => $request->startwork,
+            'EndWork' => $request->endwork,
+        );
+
+        ScheduleModel::updateOrCreate($form_data);
+
+        return response()->json(['success' => 'Data Added successfully.']);
     }
 
     /**
@@ -45,9 +80,10 @@ class ScheduleController extends Controller
      * @param  \App\ScheduleModel  $scheduleModel
      * @return \Illuminate\Http\Response
      */
-    public function show(ScheduleModel $scheduleModel)
+    public function show($id)
     {
-        //
+        $data = ScheduleModel::findOrFail($id);
+        return view('schedule.scheduleprofile',compact('data'));
     }
 
     /**
@@ -56,9 +92,10 @@ class ScheduleController extends Controller
      * @param  \App\ScheduleModel  $scheduleModel
      * @return \Illuminate\Http\Response
      */
-    public function edit(ScheduleModel $scheduleModel)
+    public function edit($id)
     {
-        //
+        $data = ScheduleModel::find($id);
+        return response()->json($data);
     }
 
     /**
@@ -79,8 +116,9 @@ class ScheduleController extends Controller
      * @param  \App\ScheduleModel  $scheduleModel
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ScheduleModel $scheduleModel)
+    public function destroy($id)
     {
-        //
+        $data = ScheduleModel::findOrFail($id);
+        $data->delete();
     }
 }
