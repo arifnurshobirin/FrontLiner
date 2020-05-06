@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ReportModel;
 use Illuminate\Http\Request;
+Use Alert;
 
 class ReportController extends Controller
 {
@@ -15,10 +16,12 @@ class ReportController extends Controller
     public function index()
     {
         return view('dashboard.dashboardv1');
+        
     }
 
     public function calendar()
     {
+        Alert::success('Success Title', 'Success Message');
         return view('calendar.calendar');
     }
     public function gallery()

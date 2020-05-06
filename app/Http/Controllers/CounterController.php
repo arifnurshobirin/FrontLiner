@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CounterModel;
 use DataTables;
 use Illuminate\Http\Request;
+Use Alert;
 
 class CounterController extends Controller
 {
@@ -62,8 +63,8 @@ class CounterController extends Controller
             'MacAddress' => $request->macaddress,
             'TypeCounter' => $request->typecounter
         );
-
-        CounterModel::updateOrCreate($form_data);
+    
+        CounterModel::updateOrCreate(['id'=>$request->counterid],$form_data);
 
         return response()->json(['success' => 'Data Added successfully.']);
     }

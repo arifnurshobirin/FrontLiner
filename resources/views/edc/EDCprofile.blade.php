@@ -4,12 +4,13 @@
     <div class="row">
         <div class="col-md-3">
 
+
             <!-- Profile Image -->
             <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
                     <div class="text-center">
-                        <img class="profile-user-img img-fluid img-circle" src="img/user4-128x128.jpg"
-                            alt="User profile picture">
+                        <img class="profile-user-img img-fluid img-circle" src="img/{{ $data->TypeEDC }}.jpg"
+                            alt="EDC profile picture">
                     </div>
 
                     <h3 class="profile-username text-center">Nina Mcintire</h3>
@@ -85,6 +86,8 @@
                         </li>
                         <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
                         <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
+                        <li class="nav-item"><a class="btn btn-success waves-effect" href="#" id="backedc"><i class="fas fa-hand-point-left mr-1"></i><span>Back to Table</span></a></li>
+                        
                     </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
@@ -96,7 +99,7 @@
                                     <img class="img-circle img-bordered-sm" src="img/user1-128x128.jpg"
                                         alt="user image">
                                     <span class="username">
-                                        <a href="#">Jonathan Burke Jr.</a>
+                                        <a href="#">EDC {{ $data->TypeEDC }}</a>
                                         <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
                                     </span>
                                     <span class="description">Shared publicly - 7:30 PM today</span>
@@ -369,3 +372,10 @@
     </div>
     <!-- /.row -->
 </div><!-- /.container-fluid -->
+<script>
+    $(document).ready(function() {
+        $('#backedc').click(function() {
+            $('#contentpage').load('edctable');
+        })
+    });
+</script>

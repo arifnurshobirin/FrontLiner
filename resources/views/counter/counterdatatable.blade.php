@@ -1,3 +1,4 @@
+@include('sweetalert::alert')
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -11,7 +12,7 @@
                         title="Remove">
                         <i class="fas fa-times"></i></button>
                 </div>
-            </div>
+            </div> 
             <!-- /.card-header -->
             <div class="card-body">
                 <div align="right">
@@ -187,7 +188,7 @@
                 },
                 error: function (data) {
                     console.log('Error:', data);
-                    $('#countersave').html('Save Changes');
+                    $('#countersave').html('Eror');
                 }
             });
         });
