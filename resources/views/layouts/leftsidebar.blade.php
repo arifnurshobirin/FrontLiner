@@ -123,6 +123,14 @@
                 </li>
               </ul>
             </li>
+            <li class="nav-item">
+              <a href="#" id="contentschedule"  class="nav-link">
+                <i class="nav-icon far fa-calendar-check"></i>
+                <p>Schedule
+                  <span class="right badge badge-danger">New</span>
+                </p>
+              </a>
+            </li>
             <li class="nav-item has-treeview">
               <a href="#" id="contenttraining"  class="nav-link">
                 <i class="nav-icon fas fa-book"></i>
@@ -166,41 +174,6 @@
               </ul>
             </li>
             <li class="nav-item has-treeview">
-              <a href="#" id="contentform"  class="nav-link">
-                <i class="nav-icon fas fa-file-signature"></i>
-                <p>
-                  Forms
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="#" id="contentpicasso"  class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Picasso</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" id="contentformsenior"  class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Senior Kasir</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" id="contentformtdr"  class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>TDR</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" id="contentformcs"  class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Customer Service</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item has-treeview">
               <a href="#" id="contentreport"  class="nav-link">
                 <i class="nav-icon fas fa-clipboard-check"></i>
                 <p>
@@ -230,14 +203,6 @@
               </ul>
             </li>
             <li class="nav-header">EXTRA NAVIGATION</li>
-            <li class="nav-item">
-              <a href="#" id="contentschedule"  class="nav-link">
-                <i class="nav-icon far fa-calendar-check"></i>
-                <p>Schedule
-                  <span class="badge badge-info right">2</span>
-                </p>
-              </a>
-            </li>
             <li class="nav-item">
               <a href="#" id="contentcalendar"  class="nav-link">
                 <i class="nav-icon far fa-calendar-alt"></i>
@@ -315,6 +280,41 @@
                     <p>Login</p>
                   </a>
                 </li>
+                <li class="nav-item has-treeview">
+              <a href="#" id="contentform"  class="nav-link">
+                <i class="nav-icon fas fa-file-signature"></i>
+                <p>
+                  Forms
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="#" id="contentpicasso"  class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Picasso</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" id="contentformsenior"  class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Senior Kasir</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" id="contentformtdr"  class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>TDR</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" id="contentformcs"  class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Customer Service</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
               </ul>
             </li>
           </ul>
