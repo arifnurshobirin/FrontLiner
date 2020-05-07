@@ -15,9 +15,11 @@
   <!-- Ionicons -->
   <link href="{{ asset('plugins/ionicons-2.0.1/css/ionicons.min.css') }}" rel="stylesheet">
   <!-- Sweetalert Css -->
-  <link href="{{ asset('plugins/sweetalert/sweetalert.css') }}" rel="stylesheet">
-  <!-- Bootstrap DatePicker Css -->
-  <link href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker.css') }}" rel="stylesheet">
+  <link href="{{ asset('plugins/sweetalert2/sweetalert2.css') }}" rel="stylesheet">
+  <!-- Tempusdominus Bbootstrap 4 -->
+  <link href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet">
+  <!-- Bootstrap DatePicker Css
+  <link href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker.css') }}" rel="stylesheet"> -->
   <!-- fullCalendar -->
   <link href="{{ asset('plugins/fullcalendar/main.min.css') }}" rel="stylesheet">
   <link href="{{ asset('plugins/fullcalendar-daygrid/main.min.css') }}" rel="stylesheet">
@@ -258,15 +260,20 @@
   <!-- Content Page-->
   <script src="{{ asset('js/content.js') }}"></script>
   <!-- SweetAlert Plugin Js -->
-  <script src="{{ asset('plugins/sweetalert/sweetalert.min.js') }}"></script>
-  <!-- Bootstrap Datepicker Plugin Js -->
-  <script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script>
+  <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
+  <!-- Moment -->
+  <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+  <!-- Tempusdominus Bootstrap 4 -->
+  <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+  <!-- Bootstrap Datepicker Plugin Js
+  <script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script> -->
+  <!-- InputMask -->
+  <script src="{{ asset('plugins/inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>
   <!-- Ekko Lightbox -->
   <script src="{{ asset('plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
   <!-- Filterizr-->
   <script src="{{ asset('plugins/filterizr/jquery.filterizr.min.js') }}"></script>
   <!-- fullCalendar 2.2.5 -->
-  <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
   <script src="{{ asset('plugins/fullcalendar/main.min.js') }}"></script>
   <script src="{{ asset('plugins/fullcalendar-daygrid/main.min.js') }}"></script>
   <script src="{{ asset('plugins/fullcalendar-timegrid/main.min.js') }}"></script>
