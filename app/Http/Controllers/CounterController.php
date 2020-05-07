@@ -26,7 +26,7 @@ class CounterController extends Controller
             $data = CounterModel::latest()->get();
             return DataTables::of($data)
             ->addColumn('action', function($data){
-                $button = '<button type="button" name="edit" id="'.$data->id.'" class="showcounter btn btn-warning waves-effect" data-type="with-custom-icon"><i class="fas fa-desktop"></i> Show</button>';
+                $button = '<button type="button" name="edit" id="'.$data->id.'" class="showcounter btn btn-warning waves-effect"><i class="fas fa-desktop"></i> Show</button>';
                 $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="counteredit btn btn-primary waves-effect"><i class="fas fa-edit"></i> Edit</button>';
                 $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="counterdelete btn btn-danger waves-effect sweetalert" ><i class="fas fa-trash"></i> Delete</button>';
                 return $button;
