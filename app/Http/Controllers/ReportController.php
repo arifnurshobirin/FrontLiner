@@ -21,7 +21,7 @@ class ReportController extends Controller
 
     public function calendar()
     {
-        Alert::success('Success Title', 'Success Message');
+        alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.')->showConfirmButton('Confirm', '#3085d6')->showCancelButton('Cancel');
         return view('calendar.calendar');
     }
     public function gallery()
@@ -30,6 +30,7 @@ class ReportController extends Controller
     }
     public function monitoring()
     {
+        Alert::success('Success Title', 'Success Message');
         return view('monitoring.monitoring');
     }
     public function lockscreen()
