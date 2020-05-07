@@ -28,7 +28,7 @@
                             <tr>
                                 <th>Employee</th>
                                 <th>Full Name</th>
-                                <th>Date</th>
+                                <th>Date Work</th>
                                 <th>Start Work</th>
                                 <th>End Work</th>
                                 <th>Action</th>
@@ -38,7 +38,7 @@
                             <tr>
                                 <th>Employee</th>
                                 <th>Full Name</th>
-                                <th>Date</th>
+                                <th>Date Work</th>
                                 <th>Start Work</th>
                                 <th>End Work</th>
                                 <th>Action</th>
@@ -71,10 +71,12 @@
                     <input type="hidden" name="scheduleid" id="scheduleid">
                     <label for="emp">Employee</label>
                         <div class="form-group">
-                            <div class="form-line">
-                                <input type="number" id="emp" name="emp" class="form-control"
-                                    placeholder="Enter your Employee" required>
-                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-id-badge"></i></span>
+                                </div>
+                                <input type="text" id="emp" name="emp" class="form-control" data-inputmask='"mask": "(999)"' data-mask required>
+                            </div>    
                         </div>
                     <label for="fullname">Full Name</label>
                             <div class="form-group">
@@ -83,62 +85,37 @@
                                         placeholder="Enter your Full Name" required>
                                 </div>
                             </div>
-                            <label for="birth">Date Of Birth</label>
+                            <label for="birth">Date Work</label>
                             <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="material-icons">date_range</i>
+                                <div class="input-group" id="datetimepicker1" data-target-input="nearest">
+                                    <div class="input-group-prepend" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt"></i>
                                     </span>
-                                    <div class="form-line">
-                                        <input type="text" id="birth" name="birth" class="datepicker form-control" placeholder="Please choose a date...">
                                     </div>
+                                        <input type="text" id="date" name="date" class="form-control datetimepicker-input" data-target="#datetimepicker1" placeholder="dd/mm/yyyy">
                                 </div>
                             </div>
-                            <label for="address">Address</label>
-                            <div class="input-group">
-                                <div class="form-line">
-                                    <textarea rows="2" id="address" name="address" class="form-control no-resize" placeholder="Please input your Address..."></textarea>
-                                </div>
-                            </div>
-                            <label for="phone">Phone Number</label>
+                            <label for="birth">Start Work</label>
                             <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="material-icons">phone_iphone</i>
+                                <div class="input-group" id="datetimepicker2" data-target-input="nearest">
+                                    <div class="input-group-prepend" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                    <span class="input-group-text">
+                                        <i class="far fa-clock"></i>
                                     </span>
-                                    <div class="form-line">
-                                        <input type="text" id="phone" name="phone" class="form-control" placeholder="Please input Your Number">
                                     </div>
+                                        <input type="text" id="start" name="start" class="form-control datetimepicker-input" data-target="#datetimepicker2" paceholder="Chosee Start Work">
                                 </div>
                             </div>
-                            <label for="position">Position</label>
+                            <label for="birth">End Work</label>
                             <div class="form-group">
-                                <div class="form-line">
-                                    <select class="form-control show-tick" id="position" name="position">
-                                        <option value="">-- Please select --</option>
-                                        <option value="Cashier">Cashier</option>
-                                        <option value="Customer Service">Customer Service</option>
-                                        <option value="TDR">TDR</option>
-                                        <option value="Senior Cashier">Senior Cashier</option>
-                                        <option value="Cashier Head">Cashier Head</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <label for="join">Join Date</label>
-                            <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="material-icons">date_range</i>
+                                <div class="input-group" id="datetimepicker3" data-target-input="nearest">
+                                    <div class="input-group-prepend" data-target="#datetimepicker3" data-toggle="datetimepicker">
+                                    <span class="input-group-text">
+                                        <i class="far fa-clock"></i>
                                     </span>
-                                    <div class="form-line">
-                                        <input type="text" id="join" name="join" class="datepicker form-control" placeholder="Please choose a date...">
                                     </div>
-                                </div>
-                            </div>
-                        <label for="image">Select Profile Image</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="file" id="image" name="image" class="form-control">
+                                        <input type="text" id="end" name="end" class="form-control datetimepicker-input" data-target="#datetimepicker3" paceholder="Chosee End Work">
                                 </div>
                             </div>
                         <button type="submit" class="btn btn-primary m-t-15 waves-effect" id="schedulesave" value="create">Save</button>
@@ -272,6 +249,16 @@
                 }
             });
         }
+        $('#datetimepicker1').datetimepicker({
+                    format: 'L'
+                });
+        $('#datetimepicker2').datetimepicker({
+                    format: 'LT'
+                });
+        $('#datetimepicker3').datetimepicker({
+                    format: 'LT'
+                });
+        $('[data-mask]').inputmask()
 
     });
 
