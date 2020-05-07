@@ -15,7 +15,7 @@ class CreateManagementtableTable extends Migration
     {
         Schema::create('managementtable', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('IdNumber')->unique;
+            $table->integer('IdCard')->unique;
             $table->string('FullName');
             $table->string('Position');
             $table->string('Avatar');

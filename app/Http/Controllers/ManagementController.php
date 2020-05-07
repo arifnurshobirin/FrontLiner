@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\ManagementModel;
 use DataTables;
 use Illuminate\Http\Request;
+Use Alert;
 
 class ManagementController extends Controller
 {
@@ -24,9 +25,9 @@ class ManagementController extends Controller
             $data = ManagementModel::latest()->get();
             return DataTables::of($data)
             ->addColumn('action', function($data){
-                $button = '<button type="button" name="edit" id="'.$data->id.'" class="managementshow btn btn-warning waves-effect" data-type="with-custom-icon"><i class="fas fa-desktop"></i> Show</button>';
+                $button = '<button type="button" name="edit" id="'.$data->id.'" class="managementshow btn btn-warning waves-effect"><i class="fas fa-desktop"></i> Show</button>';
                 $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="managementedit btn btn-primary waves-effect"><i class="fas fa-edit"></i>  Edit</button>';
-                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="managementdelete btn btn-danger waves-effect js-sweetalert" data-type="cancel"><i class="fas fa-trash"></i> Delete</button>';
+                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="managementdelete btn btn-danger waves-effect js-sweetalert"><i class="fas fa-trash"></i> Delete</button>';
                 return $button;
             })
             ->rawColumns(['action'])
@@ -66,13 +67,13 @@ class ManagementController extends Controller
         }
 
         $form_data = array(
-            'IdNumber' => $request->idnumber,
+            'IdCard' => $request->idcard,
             'FullName' => $request->name,
             'Position' => $request->position,
             'Avatar' => $imagename
         );
 
-        ManagementModel::updateOrCreate($form_data);
+        ManagementModel::updateOrCreate(['id'=>$request->managementid],$form_data);
 
         return response()->json(['success' => 'Data Added successfully.']);
     }

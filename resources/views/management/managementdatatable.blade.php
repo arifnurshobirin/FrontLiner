@@ -1,3 +1,4 @@
+@include('sweetalert::alert')
 <!-- Management Table -->
 <div class="row">
     <div class="col-12">
@@ -67,11 +68,11 @@
                 <form method="post" id="managementform" name="managementform" enctype="multipart/form-data">
                         @csrf
                     <input type="hidden" name="managementid" id="managementid">
-                    <label for="emp">Id Number</label>
+                    <label for="emp">Id Card</label>
                         <div class="form-group">
                             <div class="form-line">
-                                <input type="number" id="idnumber" name="idnumber" class="form-control"
-                                    placeholder="Enter your Id Number" required>
+                                <input type="text" id="idcard" name="idcard" class="form-control"
+                                    placeholder="Enter your Id Card" required>
                             </div>
                         </div>
                     <label for="fullname">Full Name</label>
@@ -106,7 +107,7 @@
                                     <input type="file" id="image" name="image" class="form-control">
                                 </div>
                             </div>
-                        <button type="submit" class="btn btn-primary m-t-15 waves-effect" id="cashiersave" value="create">Save</button>
+                        <button type="submit" class="btn btn-primary m-t-15 waves-effect" id="managementsave" value="create">Save</button>
                 </form>
             </div>
         </div>
@@ -129,7 +130,7 @@
                             return '<img src="../../img/'+JsonResultRow.Avatar+'" class="avatar" width="50" height="50">';
                         }
                     },
-                { data: 'IdNumber', name: 'IdNumber' },
+                { data: 'IdCard', name: 'IdCard' },
                 { data: 'FullName', name: 'FullName' },
                 { data: 'Position', name: 'Position' },
                 { data: 'action', name: 'action', orderable: false}
@@ -155,7 +156,7 @@
                 $('#managementsave').html('Save Changes');
                 $('#ajaxModel').modal('show');
                 $('#managementid').val(data.id);
-                $('#idnumber').val(data.IdNumber);
+                $('#idcard').val(data.IdCard);
                 $('#name').val(data.FullName);
                 $('#position').val(data.Position);
             })
@@ -169,6 +170,7 @@
 
         $('#managementform').on("submit",function (event) {
             event.preventDefault();
+            $('#managementsave').html('Sending..');
             var formdata = new FormData($(this)[0]);
             $.ajax({
                 url: "{{ route('management.store') }}",
@@ -182,6 +184,7 @@
                     $('#ajaxModel').modal('hide');
                     $('#managementsave').html('Save');
                     table.draw();
+                    showSuccessMessage();
                 },
                 error: function (data) {
                     console.log('Error:', data);
@@ -190,45 +193,37 @@
             });
         });
 
-            var type;
             var managementid;
             $(document).on('click', '.js-sweetalert', function(){
                 managementid = $(this).attr('id');
-            var type = $(this).data('type');
-            if (type === 'basic') {
-                showBasicMessage();
-            }
-            else if (type === 'cancel') {
-                showCancelMessage();
-            }
+                showDeleteTable()
         });
 
 
-        function showCancelMessage() {
-            swal({
+        function showDeleteTable() {
+            swal.fire({
                 title: "Are you sure?",
-                text: "You will not be able to recover this Management file!",
-                type: "warning",
+                icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, delete!",
-                cancelButtonText: "No, cancel!",
-                closeOnConfirm: false,
-                closeOnCancel: false,
-                showLoaderOnConfirm: true
-            }, function (isConfirm) {
-                if (isConfirm) {
+                cancelButtonText: "No, cancel!"
+            }).then((result) => {
+                if (result.value) {
                     $.ajax({
                 url:"management/destroy/"+managementid,
                 success:function(data){
-                    swal("Deleted!", "Your Management file has been deleted.", "success")
+                    swal.fire("Deleted!", "Your Management file has been deleted.", "success")
                     $('#ManagementDatatable').DataTable().ajax.reload();
                 }
                 });
                 } else {
-                    swal("Cancelled", "Your Management file is safe :)", "error");
+                    swal.fire("Cancelled", "Your Management file is safe :)", "error");
                 }
             });
+        }
+        function showSuccessMessage() {
+            swal.fire("Good job!", "You success update Management!", "success");
         }
 
     });
