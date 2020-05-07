@@ -1,3 +1,4 @@
+@include('sweetalert::alert')
 <!-- EDC Table -->
 <div class="row">
     <div class="col-12">
@@ -68,7 +69,7 @@
             <div class="modal-body">
                 <form method="post" id="edcForm" name="edcForm">
                     @csrf
-                    <input type="hidden" name="edc_id" id="edc_id">
+                    <input type="hidden" name="edcid" id="edcid">
                     <label for="tid">TID EDC</label>
                     <div class="form-group">
                         <div class="form-line">
@@ -160,21 +161,21 @@
         $('#edccreate').click(function () {
             $('#saveBtn').val("create-edc");
             $('#saveBtn').html('Save');
-            $('#edc_id').val('');
+            $('#edcid').val('');
             $('#edcForm').trigger("reset");
             $('#modelHeading').html("Create New EDC");
             $('#ajaxModel').modal('show');
         });
 
         $(document).on('click', '.editedc', function () {
-            var edc_id = $(this).attr('id');
-            $.get("{{ route('edc.index') }}" +'/' + edc_id +'/edit', function (data)
+            var edcid = $(this).attr('id');
+            $.get("{{ route('edc.index') }}" +'/' + edcid +'/edit', function (data)
             {
                 $('#modelHeading').html("Edit Data EDC");
                 $('#saveBtn').val("edit-edc");
                 $('#saveBtn').html('Save Changes');
                 $('#ajaxModel').modal('show');
-                $('#edc_id').val(data.id);
+                $('#edcid').val(data.id);
                 $('#tidedc').val(data.TIDEDC);
                 $('#midedc').val(data.MIDEDC);
                 $('#ipedc').val(data.IPAdress);
@@ -193,7 +194,6 @@
         $('#saveBtn').click(function (e) {
             e.preventDefault();
             $(this).html('Sending..');
-
             $.ajax({
                 data: $('#edcForm').serialize(),
                 url: "{{ route('edc.store') }}",
@@ -205,6 +205,7 @@
                     $('#ajaxModel').modal('hide');
                     $('#saveBtn').html('Save');
                     table.draw();
+                    showSuccessMessage();
                 },
                 error: function (data) {
                     console.log('Error:', data);
@@ -214,154 +215,39 @@
         });
 
         var type;
-        var edc_id;
+        var edcid;
         $(document).on('click', '.js-sweetalert', function(){
-            edc_id = $(this).attr('id');
-            var type = $(this).data('type');
-            if (type === 'basic') {
-            showBasicMessage();
-            }
-            else if (type === 'with-title') {
-                showWithTitleMessage();
-            }
-            else if (type === 'success') {
-                showSuccessMessage();
-            }
-            else if (type === 'confirm') {
-                showConfirmMessage();
-            }
-            else if (type === 'cancel') {
-                showCancelMessage();
-            }
-            else if (type === 'with-custom-icon') {
-                showWithCustomIconMessage();
-            }
-            else if (type === 'html-message') {
-                showHtmlMessage();
-            }
-            else if (type === 'autoclose-timer') {
-                showAutoCloseTimerMessage();
-            }
-            else if (type === 'prompt') {
-                showPromptMessage();
-            }
-            else if (type === 'ajax-loader') {
-                showAjaxLoaderMessage();
-            }
+            edcid = $(this).attr('id');
+            showDeleteTable();
         });
 
-        function showBasicMessage() {
-            swal("Here's a message!");
-        }
 
-        function showWithTitleMessage() {
-            swal("Here's a message!", "It's pretty, isn't it?");
-        }
-
-        function showSuccessMessage() {
-            swal("Good job!", "You clicked the button!", "success");
-        }
-
-        function showConfirmMessage() {
-            swal({
-                title: "Are you sure?",
-                text: "You will not be able to recover this imaginary file!",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete it!",
-                closeOnConfirm: false
-            }, function () {
-                swal("Deleted!", "Your imaginary file has been deleted.", "success")
-            });
-        }
-
-        function showCancelMessage() {
-            swal({
+        function showDeleteTable() {
+            swal.fire({
                 title: "Are you sure?",
                 text: "You will not be able to recover this edc file!",
-                type: "warning",
+                icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, delete!",
                 cancelButtonText: "No, cancel!",
-                closeOnConfirm: false,
-                closeOnCancel: false,
-                showLoaderOnConfirm: true
-            }, function (isConfirm) {
-                if (isConfirm) {
+            }).then((result) => {
+                if (result.value) {
                     $.ajax({
-                url:"edc/destroy/"+edc_id,
+                url:"edc/destroy/"+edcid,
                 success:function(data){
-                    swal("Deleted!", "Your edc file has been deleted.", "success")
+                    swal.fire("Deleted!", "Your edc file has been deleted.", "success")
                     $('#EDCDatatable').DataTable().ajax.reload();
                 }
                 });
                 } else {
-                    swal("Cancelled", "Your edc file is safe :)", "error");
+                    swal.fire("Cancelled", "Your edc file is safe :)", "error");
                 }
             });
+        }   
+        function showSuccessMessage() {
+            swal.fire("Good job!", "You success update EDC!", "success");
         }
-
-        function showWithCustomIconMessage() {
-            swal({
-                title: "EDC "+edc_id,
-                text: "TID EDC :<br>MID EDC :<br>NO Terminal :<br>Connection :<br>SIM Card :<br>Type EDC :<br>",
-                html: true,
-                imageUrl: "../../images/EDCBCA.jpg"
-            });
-        }
-
-        function showHtmlMessage() {
-            swal({
-                title: "<small>From Create Data </small>EDC",
-                text: "A custom <span style=\"color: #CC0000\">html<span> message.",
-                html: true
-            });
-        }
-
-        function showAutoCloseTimerMessage() {
-            swal({
-                title: "Auto close alert!",
-                text: "I will close in 2 seconds.",
-                timer: 2000,
-                showConfirmButton: false
-            });
-        }
-
-        function showPromptMessage() {
-            swal({
-                title: "An input!",
-                text: "Write something interesting:",
-                type: "input",
-                showCancelButton: true,
-                closeOnConfirm: false,
-                animation: "slide-from-top",
-                inputPlaceholder: "Write something"
-            }, function (inputValue) {
-                if (inputValue === false) return false;
-                if (inputValue === "") {
-                    swal.showInputError("You need to write something!"); return false
-                }
-                swal("Nice!", "You wrote: " + inputValue, "success");
-            });
-        }
-
-        function showAjaxLoaderMessage() {
-            swal({
-                title: "Ajax request example",
-                text: "Submit to run ajax request",
-                type: "info",
-                showCancelButton: true,
-                closeOnConfirm: false,
-                showLoaderOnConfirm: true,
-            }, function () {
-                setTimeout(function () {
-                    swal("Ajax request finished!");
-                }, 2000);
-            });
-        }
-
 
     });
 
