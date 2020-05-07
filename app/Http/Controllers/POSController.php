@@ -25,9 +25,9 @@ class POSController extends Controller
             $data = POSModel::latest()->get();
             return DataTables::of($data)
             ->addColumn('action', function($data){
-                $button = '<button type="button" name="edit" id="'.$data->id.'" class="showpos btn btn-warning waves-effect" data-type="with-custom-icon"><i class="fas fa-desktop"></i> Show</button>';
+                $button = '<button type="button" name="edit" id="'.$data->id.'" class="showpos btn btn-warning waves-effect"><i class="fas fa-desktop"></i> Show</button>';
                 $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="posedit btn btn-primary waves-effect"><i class="fas fa-edit"></i> Edit</button>';
-                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="posdelete btn btn-danger waves-effect js-sweetalert" data-type="cancel"><i class="fas fa-trash"></i> Delete</button>';
+                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="posdelete btn btn-danger waves-effect js-sweetalert"><i class="fas fa-trash"></i> Delete</button>';
                 return $button;
             })
             ->rawColumns(['action'])
@@ -65,7 +65,7 @@ class POSController extends Controller
             'Monitor' => $request->monitor
         );
 
-        POSModel::updateOrCreate($form_data);
+        POSModel::updateOrCreate(['id'=>$request->posid],$form_data);
 
         return response()->json(['success' => 'Data Added successfully.']);
     }

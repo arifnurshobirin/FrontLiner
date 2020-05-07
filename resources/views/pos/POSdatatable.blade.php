@@ -209,6 +209,7 @@
 
         $('#posform').on("submit",function (event) {
             event.preventDefault();
+            $('#possave').html('Sending..');
             var formdata = new FormData($(this)[0]);
             $.ajax({
                 url: "{{ route('pos.store') }}",
@@ -222,55 +223,49 @@
                     $('#ajaxModel').modal('hide');
                     $('#possave').html('Save');
                     table.draw();
+                    showSuccessMessage();
                 },
                 error: function (data) {
                     console.log('Error:', data);
                     $('#possave').html('Save Changes');
+                    alert('Status: ' + data);
                 }
             });
         });
 
-            var type;
             var posid;
             $(document).on('click', '.js-sweetalert', function(){
             posid = $(this).attr('id');
-            var type = $(this).data('type');
-            if (type === 'basic') {
-                showBasicMessage();
-            }
-            else if (type === 'cancel') {
-                showCancelMessage();
-            }
+            showDeleteTable();
         });
 
 
-        function showCancelMessage() {
-            swal({
+        function showDeleteTable() {
+            swal.fire({
                 title: "Are you sure?",
                 text: "You will not be able to recover this POS file!",
-                type: "warning",
+                icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, delete!",
-                cancelButtonText: "No, cancel!",
-                closeOnConfirm: false,
-                closeOnCancel: false,
-                showLoaderOnConfirm: true
-            }, function (isConfirm) {
-                if (isConfirm) {
+                cancelButtonText: "No, cancel!"
+            }).then((result) => {
+                if (result.value) {
                     $.ajax({
                 url:"pos/destroy/"+posid,
                 success:function(data){
-                    swal("Deleted!", "Your Cashier file has been deleted.", "success")
+                    swal.fire("Deleted!", "Your Cashier file has been deleted.", "success")
                     $('#POSDatatable').DataTable().ajax.reload();
                 }
                 });
                 } else {
-                    swal("Cancelled", "Your Cashier file is safe :)", "error");
+                    swal.fire("Cancelled", "Your Cashier file is safe :)", "error");
                 }
             });
         }
-
+        function showSuccessMessage() {
+            swal.fire("Good job!", "You success update POS!", "success");
+        }
     });
 
 </script>
