@@ -172,6 +172,7 @@
 
         $('#counterform').on("submit",function (event) {
             event.preventDefault();
+            $('#countersave').html('Sending..');
             var formdata = new FormData($(this)[0]);
             $.ajax({
                 url: "{{ route('counter.store') }}",
@@ -185,55 +186,49 @@
                     $('#ajaxModel').modal('hide');
                     $('#possave').html('Save');
                     table.draw();
+                    showSuccessMessage();
                 },
                 error: function (data) {
                     console.log('Error:', data);
-                    $('#countersave').html('Eror');
+                    alert('Status: ' + data);
                 }
             });
         });
 
-            var type;
             var counterid;
-            $(document).on('click', '.js-sweetalert', function(){
+            $(document).on('click', '.sweetalert', function(){
             counterid = $(this).attr('id');
-            var type = $(this).data('type');
-            if (type === 'basic') {
-                showBasicMessage();
-            }
-            else if (type === 'cancel') {
-                showCancelMessage();
-            }
+            showDeleteTable();
         });
 
 
-        function showCancelMessage() {
-            swal({
+        function showDeleteTable() {
+            swal.fire({
                 title: "Are you sure?",
-                text: "You will not be able to recover this POS file!",
-                type: "warning",
+                text: "You will not be able to recover this Counter file!",
+                icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, delete!",
-                cancelButtonText: "No, cancel!",
-                closeOnConfirm: false,
-                closeOnCancel: false,
-                showLoaderOnConfirm: true
-            }, function (isConfirm) {
-                if (isConfirm) {
+                cancelButtonText: "No, cancel!"
+            }).then((result) => {
+                if (result.value) {
                     $.ajax({
                 url:"counter/destroy/"+counterid,
                 success:function(data){
-                    swal("Deleted!", "Your Counter file has been deleted.", "success")
+                    swal.fire("Deleted!", "Your Counter file has been deleted.", "success")
                     $('#CounterDatatable').DataTable().ajax.reload();
                 }
                 });
                 } else {
-                    swal("Cancelled", "Your Cashier file is safe :)", "error");
+                    swal.fire("Cancelled", "Your Counter file is safe :)", "error");
                 }
             });
         }
-        $('.ip').inputmask('999.999.999.999', { placeholder: '___.___.___.___' });
+
+        function showSuccessMessage() {
+            swal.fire("Good job!", "You success update Counter!", "success");
+        }
     });
 
 </script>
