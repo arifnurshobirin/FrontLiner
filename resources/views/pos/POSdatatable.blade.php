@@ -1,3 +1,4 @@
+@include('sweetalert::alert')
 <!-- POS Table -->
 <div class="row">
     <div class="col-12">
@@ -74,7 +75,7 @@
                     <label for="nopos">No POS</label>
                     <div class="form-group">
                         <div class="form-line">
-                            <input type="number" id="nopos" name="nopos" class="form-control"
+                            <input type="text" id="nopos" name="nopos" class="form-control"
                                 placeholder="Enter your No POS" required>
                         </div>
                     </div>

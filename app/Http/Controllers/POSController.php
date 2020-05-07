@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\POSModel;
 use DataTables;
 use Illuminate\Http\Request;
+Use Alert;
 
 class POSController extends Controller
 {
