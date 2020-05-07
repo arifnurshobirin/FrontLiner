@@ -76,14 +76,14 @@ class CashierController extends Controller
             'Employee' => $request->emp,
             'FullName' => $request->name,
             'DateOfBirth' => $newbirth,
-            'Adress' => $request->adress,
+            'Address' => $request->address,
             'PhoneNumber' => $request->phone,
             'Position' => $request->position,
             'JoinDate' => $newjoin,
             'Avatar' => $imagename
         );
 
-        CashierModel::updateOrCreate($form_data);
+        CashierModel::updateOrCreate(['id'=>$request->cashierid],$form_data);
 
         return response()->json(['success' => 'Data Added successfully.']);
     }
