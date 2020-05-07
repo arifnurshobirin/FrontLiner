@@ -1,3 +1,4 @@
+@include('sweetalert::alert')
 <!-- Cashier Table -->
 <div class="row">
     <div class="col-12">
@@ -69,10 +70,12 @@
                     <input type="hidden" name="cashierid" id="cashierid">
                     <label for="emp">Employee</label>
                         <div class="form-group">
-                            <div class="form-line">
-                                <input type="number" id="emp" name="emp" class="form-control"
-                                    placeholder="Enter your Employee" required>
-                            </div>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                <span class="input-group-text"><i class="far fa-id-badge"></i></span>
+                                </div>
+                                <input type="text" id="emp" name="emp" class="form-control" data-inputmask='"mask": "(999)"' data-mask required>
+                            </div>    
                         </div>
                     <label for="fullname">Full Name</label>
                             <div class="form-group">
@@ -83,13 +86,13 @@
                             </div>
                             <label for="birth">Date Of Birth</label>
                             <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="material-icons">date_range</i>
+                                <div class="input-group" id="datetimepicker1" data-target-input="nearest">
+                                    <div class="input-group-prepend" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt"></i>
                                     </span>
-                                    <div class="form-line">
-                                        <input type="text" id="birth" name="birth" class="datepicker form-control" placeholder="Please choose a date...">
                                     </div>
+                                        <input type="text" id="birth" name="birth" class="form-control datetimepicker-input" data-target="#datetimepicker1" placeholder="dd/mm/yyyy">
                                 </div>
                             </div>
                             <label for="address">Address</label>
@@ -101,12 +104,10 @@
                             <label for="phone">Phone Number</label>
                             <div class="form-group">
                                 <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="material-icons">phone_iphone</i>
-                                    </span>
-                                    <div class="form-line">
-                                        <input type="text" id="phone" name="phone" class="form-control" placeholder="Please input Your Number">
+                                    <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
                                     </div>
+                                        <input type="text" id="phone" name="phone" class="form-control" data-inputmask='"mask": "9999-99999999"' data-mask>
                                 </div>
                             </div>
                             <label for="position">Position</label>
@@ -124,15 +125,14 @@
                             </div>
                             <label for="join">Join Date</label>
                             <div class="form-group">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="material-icons">date_range</i>
+                                <div class="input-group" id="datetimepicker2" data-target-input="nearest">
+                                    <div class="input-group-prepend" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt"></i>
                                     </span>
-                                    <div class="form-line">
-                                        <input type="text" id="join" name="join" class="datepicker form-control" placeholder="Please choose a date...">
                                     </div>
+                                        <input type="text" id="join" name="join" class="form-control datetimepicker-input" data-target="#datetimepicker2" placeholder="dd/mm/yyyy">
                                 </div>
-                            </div>
                         <label for="image">Select Profile Image</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -167,13 +167,6 @@
                 { data: 'Position', name: 'Position' },
                 { data: 'action', name: 'action', orderable: false}
             ]
-        });
-
-        $('.datepicker').datepicker({
-            format: 'dddd DD MMMM YYYY',
-            clearButton: true,
-            weekStart: 1,
-            time: false
         });
 
         $('#cashiercreate').click(function () {
@@ -212,6 +205,7 @@
 
         $('#cashierform').on("submit",function (event) {
             event.preventDefault();
+            $('#cashiersave').html('Sending..');
             var formdata = new FormData($(this)[0]);
             $.ajax({
                 url: "{{ route('cashier.store') }}",
@@ -225,6 +219,7 @@
                     $('#ajaxModel').modal('hide');
                     $('#cashiersave').html('Save');
                     table.draw();
+                    showSuccessMessage();
                 },
                 error: function (data) {
                     console.log('Error:', data);
@@ -233,46 +228,47 @@
             });
         });
 
-            var type;
-            var cashier_id;
+            
+            var cashierid;
             $(document).on('click', '.js-sweetalert', function(){
-            cashier_id = $(this).attr('id');
-            var type = $(this).data('type');
-            if (type === 'basic') {
-                showBasicMessage();
-            }
-            else if (type === 'cancel') {
-                showCancelMessage();
-            }
+            cashierid = $(this).attr('id');
+            showDeleteTable();
         });
 
 
-        function showCancelMessage() {
-            swal({
+        function showDeleteTable() {
+            swal.fire({
                 title: "Are you sure?",
-                text: "You will not be able to recover this edc file!",
-                type: "warning",
+                text: "You will not be able to recover this cashier file!",
+                icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, delete!",
-                cancelButtonText: "No, cancel!",
-                closeOnConfirm: false,
-                closeOnCancel: false,
-                showLoaderOnConfirm: true
-            }, function (isConfirm) {
-                if (isConfirm) {
+                cancelButtonText: "No, cancel!"
+            }).then((result) => {
+                if (result.value) {
                     $.ajax({
-                url:"cashier/destroy/"+cashier_id,
+                url:"cashier/destroy/"+cashierid,
                 success:function(data){
-                    swal("Deleted!", "Your Cashier file has been deleted.", "success")
+                    swal.fire("Deleted!", "Your Cashier file has been deleted.", "success")
                     $('#CashierDatatable').DataTable().ajax.reload();
                 }
                 });
                 } else {
-                    swal("Cancelled", "Your Cashier file is safe :)", "error");
+                    swal.fire("Cancelled", "Your Cashier file is safe :)", "error");
                 }
             });
         }
+        function showSuccessMessage() {
+            swal.fire("Good job!", "You success update Cashier!", "success");
+        }
+        $('#datetimepicker1').datetimepicker({
+                    format: 'L'
+                });
+        $('#datetimepicker2').datetimepicker({
+                    format: 'L'
+                });
+        $('[data-mask]').inputmask()
 
     });
 
