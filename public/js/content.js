@@ -1,20 +1,24 @@
-$(function () {
+
+$(document).ready(function () {
     $('#contentdashboardv1').click(function () {
         $('a').removeClass('active');
         document.getElementById('contentdashboard').className = "nav-link active";
         document.getElementById('contentdashboardv1').className = "nav-link active";
+        $('.urlpage').html('Dashboard Page');
         $('#contentpage').load('tes');
         return false;
     })
     $('#contentgallery').click(function () {
         $('a').removeClass('active');
         document.getElementById('contentgallery').className = "nav-link active";
+        $('.urlpage').html('Gallery Page');
         $('#contentpage').load('gallery');
         return false;
     })
     $('#contentcalendar').click(function () {
         $('a').removeClass('active');
         document.getElementById('contentcalendar').className = "nav-link active";
+        $('.urlpage').html('Calendar Page');
         $('#contentpage').load('calendar');
         return false;
     })
@@ -23,6 +27,7 @@ $(function () {
         return false;
     })
     $('#contentcontact').click(function () {
+        $('.urlpage').html('Profile Page');
         $('#contentpage').load('contact');
         return false;
     })
@@ -30,6 +35,7 @@ $(function () {
         $('a').removeClass('active');
         document.getElementById('contentterminal').className = "nav-link active";
         document.getElementById('contentedc').className = "nav-link active";
+        $('.urlpage').html('EDC Page');
         $('#contentpage').load('edctable');
         return false;
     })
@@ -37,6 +43,7 @@ $(function () {
         $('a').removeClass('active');
         document.getElementById('contentusers').className = "nav-link active";
         document.getElementById('contentcashier').className = "nav-link active";
+        $('.urlpage').html('Cashier Page');
         $('#contentpage').load('cashiertable');
         return false;
     })
@@ -44,6 +51,7 @@ $(function () {
         $('a').removeClass('active');
         document.getElementById('contentusers').className = "nav-link active";
         document.getElementById('contentmanagement').className = "nav-link active";
+        $('.urlpage').html('Management Page');
         $('#contentpage').load('managementtable');
         return false;
     })
@@ -51,6 +59,7 @@ $(function () {
         $('a').removeClass('active');
         document.getElementById('contentterminal').className = "nav-link active";
         document.getElementById('contentpos').className = "nav-link active";
+        $('.urlpage').html('POS Page');
         $('#contentpage').load('postable');
         return false;
     })
@@ -58,18 +67,21 @@ $(function () {
         $('a').removeClass('active');
         document.getElementById('contentterminal').className = "nav-link active";
         document.getElementById('contentcounter').className = "nav-link active";
+        $('.urlpage').html('Counter Page');
         $('#contentpage').load('countertable');
         return false;
     })
     $('#contentschedule').click(function () {
         $('a').removeClass('active');
         document.getElementById('contentschedule').className = "nav-link active";
+        $('.urlpage').html('Schedule Page');
         $('#contentpage').load('scheduletable');
         return false;
     })
     $('#contentmonitoring').click(function () {
         $('a').removeClass('active');
         document.getElementById('contentmonitoring').className = "nav-link active";
+        $('.urlpage').html('Monitoring Page');
         $('#contentpage').load('monitoring');
         return false;
     })
