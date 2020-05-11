@@ -62,7 +62,7 @@ class EDCController extends Controller
             'TIDEDC' => $request->tidedc,
             'MIDEDC' => $request->midedc,
             'IPAdress' => $request->ipedc,
-            'NoTerminal' => $request->noterminal,
+            'NoCounter ' => $request->nocounter,
             'Connection' => $request->connection,
             'SIMCard' => $request->simcard,
             'TypeEDC' => $request->typeedc

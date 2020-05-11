@@ -28,7 +28,7 @@
                         <thead>
                             <tr>
                                 <th>TID EDC</th>
-                                <th>NO Terminal</th>
+                                <th>No Counter</th>
                                 <th>Connection</th>
                                 <th>SIM Card</th>
                                 <th>Type EDC</th>
@@ -38,7 +38,7 @@
                         <tfoot>
                             <tr>
                                 <th>TID EDC</th>
-                                <th>NO Terminal</th>
+                                <th>No Counter</th>
                                 <th>Connection</th>
                                 <th>SIM Card</th>
                                 <th>Type EDC</th>
@@ -91,11 +91,11 @@
                                 placeholder="Enter your IP Adress" required>
                         </div>
                     </div>
-                    <label for="no">No Terminal</label>
+                    <label for="no">No Counter</label>
                     <div class="form-group">
                         <div class="form-line">
-                            <input type="number" id="noterminal" name="noterminal" class="form-control"
-                                placeholder="Enter your No Terminal" required>
+                            <input type="number" id="nocounter" name="nocounter" class="form-control"
+                                placeholder="Enter your No Counter" required>
                         </div>
                     </div>
                     <label for="connection">Connection</label>
@@ -150,7 +150,7 @@
             },
             columns: [
                 { data: 'TIDEDC', name: 'TIDEDC' },
-                { data: 'NoTerminal', name: 'NoTerminal' },
+                { data: 'NoCounter', name: 'NoCounter' },
                 { data: 'Connection', name: 'Connection' },
                 { data: 'SIMCard', name: 'SIMCard' },
                 { data: 'TypeEDC', name: 'TypeEDC' },
@@ -179,7 +179,7 @@
                 $('#tidedc').val(data.TIDEDC);
                 $('#midedc').val(data.MIDEDC);
                 $('#ipedc').val(data.IPAdress);
-                $('#noterminal').val(data.NoTerminal);
+                $('#nocounter').val(data.NoCounter);
                 $('#connection').val(data.Connection);
                 $('#simcard').val(data.SIMCard);
                 $('#typeedc').val(data.TypeEDC);

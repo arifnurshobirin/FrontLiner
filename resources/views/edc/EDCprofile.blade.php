@@ -13,19 +13,19 @@
                             alt="EDC profile picture">
                     </div>
 
-                    <h3 class="profile-username text-center">Nina Mcintire</h3>
+                    <h3 class="profile-username text-center">EDC {{ $data->TypeEDC }}</h3>
 
-                    <p class="text-muted text-center">Software Engineer</p>
+                    <p class="text-muted text-center">Transmart EDC</p>
 
                     <ul class="list-group list-group-unbordered mb-3">
                         <li class="list-group-item">
-                            <b>Followers</b> <a class="float-right">1,322</a>
+                            <b>MID</b> <a class="float-right">{{ $data->MIDEDC }}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Following</b> <a class="float-right">543</a>
+                            <b>TID</b> <a class="float-right">{{ $data->TIDEDC }}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>Friends</b> <a class="float-right">13,287</a>
+                            <b>No Terminal</b> <a class="float-right">{{ $data->NoTerminal }}</a>
                         </li>
                     </ul>
 
@@ -52,19 +52,18 @@
 
                     <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
 
-                    <p class="text-muted">Malibu, California</p>
+                    <p class="text-muted">Jakarta, Indonesia</p>
 
                     <hr>
 
                     <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
 
                     <p class="text-muted">
-                        <span class="tag tag-danger">UI Design</span>
-                        <span class="tag tag-success">Coding</span>
-                        <span class="tag tag-info">Javascript</span>
-                        <span class="tag tag-warning">PHP</span>
-                        <span class="tag tag-primary">Node.js</span>
-                    </p>
+                        <span class="label bg-red">UI Design</span>
+                        <span class="label bg-red">Coding</span>
+                        <span class="label bg-teal">JavaScript</span>
+                        <span class="label bg-blue">PHP</span>
+                        <span class="label bg-amber">Node.js</span>
 
                     <hr>
 
@@ -96,7 +95,7 @@
                             <!-- Post -->
                             <div class="post">
                                 <div class="user-block">
-                                    <img class="img-circle img-bordered-sm" src="img/user1-128x128.jpg"
+                                    <img class="img-circle img-bordered-sm" src="img/{{ $data->TypeEDC }}.jpg"
                                         alt="user image">
                                     <span class="username">
                                         <a href="#">EDC {{ $data->TypeEDC }}</a>
@@ -106,11 +105,9 @@
                                 </div>
                                 <!-- /.user-block -->
                                 <p>
-                                    Lorem ipsum represents a long-held tradition for designers,
-                                    typographers and the like. Some people hate it and argue for
-                                    its demise, but others ignore the hate as they create awesome
-                                    tools to help create filler text for everyone from bacon lovers
-                                    to Charlie Sheen fans.
+                                I am a very simple wall post. I am good at containing <a
+                                                    href="#">#small</a> bits of <a href="#">#information</a>. I
+                                                require little more information to use effectively.
                                 </p>
 
                                 <p>
@@ -132,21 +129,20 @@
                             <!-- Post -->
                             <div class="post clearfix">
                                 <div class="user-block">
-                                    <img class="img-circle img-bordered-sm" src="img/user7-128x128.jpg"
+                                    <img class="img-circle img-bordered-sm" src="img/{{ $data->TypeEDC }}.jpg"
                                         alt="User Image">
                                     <span class="username">
-                                        <a href="#">Sarah Ross</a>
+                                        <a href="#">EDC {{ $data->TypeEDC }}</a>
                                         <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
                                     </span>
                                     <span class="description">Sent you a message - 3 days ago</span>
                                 </div>
                                 <!-- /.user-block -->
                                 <p>
-                                    Lorem ipsum represents a long-held tradition for designers,
-                                    typographers and the like. Some people hate it and argue for
-                                    its demise, but others ignore the hate as they create awesome
-                                    tools to help create filler text for everyone from bacon lovers
-                                    to Charlie Sheen fans.
+                                " Kamu tidak akan pernah bisa kehabisan kreativitas. 
+                                Semakin kamu menggunakannya, semakin banyak yang kamu miliki." - Maya Angelou
+                                “Senyuman di setiap hariku bukan karena hidupku sempurna
+                                ountertapi karena aku bersyukur untuk setiap rahmat yang diberi Tuhan.”
                                 </p>
 
                                 <form class="form-horizontal">
@@ -163,10 +159,10 @@
                             <!-- Post -->
                             <div class="post">
                                 <div class="user-block">
-                                    <img class="img-circle img-bordered-sm" src="img/user6-128x128.jpg"
+                                    <img class="img-circle img-bordered-sm" src="img/{{ $data->TypeEDC }}.jpg"
                                         alt="User Image">
                                     <span class="username">
-                                        <a href="#">Adam Jones</a>
+                                        <a href="#">EDC {{ $data->TypeEDC }}</a>
                                         <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
                                     </span>
                                     <span class="description">Posted 5 photos - 5 days ago</span>
@@ -233,10 +229,9 @@
                                         <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
 
                                         <div class="timeline-body">
-                                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                            quora plaxo ideeli hulu weebly balihoo...
+                                        <p>jalanin hidup dengan bersyukur dan berusaha sebaik mungkin agar
+                                                tidak ada penyesalan." Pertama, berpikirlah. Yang kedua, percayalah. Yang ketiga, mimpikanlah.
+                                                Lalu yang terakhir, tantanglah." - Walt Disney</p>
                                         </div>
                                         <div class="timeline-footer">
                                             <a href="#" class="btn btn-primary btn-sm">Read more</a>
