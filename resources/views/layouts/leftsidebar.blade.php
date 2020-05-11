@@ -15,7 +15,7 @@
             <img src="img/userarif160x160.jpg" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">Arif Nur Shobirin online</a>
+            <a href="#" class="d-block">{{ Auth::user()->name }} online</a>
           </div>
         </div>
 
@@ -105,7 +105,7 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a href="#" id="contentadmin"  class="nav-link">
-                    <i class="nav-icon fas fa-fingerprint"></i>
+                    <i class="nav-icon fas fa-user-astronaut"></i>
                     <p>Super Admin</p>
                   </a>
                 </li>
@@ -133,7 +133,7 @@
             </li>
             <li class="nav-item has-treeview">
               <a href="#" id="contenttraining"  class="nav-link">
-                <i class="nav-icon fas fa-book"></i>
+                <i class="nav-icon fas fa-user-graduate"></i>
                 <p>
                   Training
                   <i class="fas fa-angle-left right"></i>
@@ -267,7 +267,7 @@
             </li>
             <li class="nav-item has-treeview">
               <a href="#" id="content" class="nav-link">
-                <i class="nav-icon far fa-plus-square"></i>
+                <i class="nav-icon far fa-smile-beam"></i>
                 <p>
                   Extras
                   <i class="fas fa-angle-left right"></i>
@@ -277,7 +277,7 @@
                 <li class="nav-item">
                   <a href="#" id="content" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Login</p>
+                    <p>Game</p>
                   </a>
                 </li>
                 <li class="nav-item has-treeview">
