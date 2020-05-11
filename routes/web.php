@@ -24,7 +24,6 @@ Route::get('/reset-admin', 'ReportController@index');
 Route::get('/tes', 'ReportController@index');
 Route::get('/gallery', 'ReportController@gallery');
 Route::get('/calendar', 'ReportController@calendar');
-Route::get('/monitoring', 'ReportController@monitoring');
 Route::get('/edc/json', 'EDCController@json');
 Route::get('edc/show', 'EDCController@show');
 
@@ -55,3 +54,6 @@ Route::get('management/destroy/{id}', 'ManagementController@destroy');
 Route::get('scheduletable', 'ScheduleController@table');
 Route::resource('schedule', 'ScheduleController');
 Route::get('schedule/destroy/{id}', 'ScheduleController@destroy');
+
+Route::resource('monitoring', 'MonitoringController');
+Route::get('monitoring/destroy/{id}', 'MonitoringController@destroy');
