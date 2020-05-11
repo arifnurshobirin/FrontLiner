@@ -1,4 +1,3 @@
-@include('sweetalert::alert')
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -15,9 +14,12 @@
             </div> 
             <!-- /.card-header -->
             <div class="card-body">
-                <div align="right">
+                <div>
                     <button type="button" name="countercreate" id="countercreate" class="btn btn-success waves-effect">
                         <i class="fas fa-plus"></i><span> Add Counter</span>
+                    </button>
+                    <button type="button" name="counterdelete" id="counterdelete" class="btn btn-danger waves-effect">
+                        <i class="fas fa-times"></i><span> Delete Multipy</span>
                     </button>
                 </div>
                 <br>
@@ -26,6 +28,7 @@
                         id="CounterDatatable">
                         <thead>
                             <tr>
+                                <th>Checklist</th>
                                 <th>No Counter</th>
                                 <th>Ip Address</th>
                                 <th>Mac Address</th>
@@ -35,6 +38,7 @@
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>Checklist</th>
                                 <th>No Counter</th>
                                 <th>Ip Address</th>
                                 <th>Mac Address</th>
@@ -131,6 +135,7 @@
             },
             "order": [[ 0, "asc" ]],
             columns: [
+                { data: 'id', name: 'id' },
                 { data: 'NoCounter', name: 'NoCounter' },
                 { data: 'IpAddress', name: 'IpAddress' },
                 { data: 'MacAddress', name: 'MacAddress' },
@@ -231,4 +236,4 @@
         }
     });
 
-</script>
+</script> 
