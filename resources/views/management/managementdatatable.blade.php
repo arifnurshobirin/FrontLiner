@@ -16,9 +16,12 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <div align="right">
+                <div>
                     <button type="button" name="managementcreate" id="managementcreate" class="btn btn-success waves-effect">
                         <i class="fas fa-plus"></i><span> Add Management</span>
+                    </button>
+                    <button type="button" name="managementsomedelete" id="managementsomedelete" class="btn btn-danger waves-effect">
+                        <i class="fas fa-times"></i><span> Delete Some Managaement</span>
                     </button>
                 </div>
                 <br>
@@ -27,6 +30,7 @@
                         id="ManagementDatatable">
                         <thead>
                             <tr>
+                                <th>Checkbox</th>
                                 <th>Avatar</th>
                                 <th>Id Card</th>
                                 <th>Full Name</th>
@@ -36,6 +40,7 @@
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>Checkbox</th>
                                 <th>Avatar</th>
                                 <th>Id Card</th>
                                 <th>Full Name</th>
@@ -123,8 +128,9 @@
             ajax: {
             url:"{{ route('management.index') }}",
             },
-            "order": [[ 1, "asc" ]],
+            "order": [[ 2, "asc" ]],
             columns: [
+                { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
                 {
                         "render": function (data, type, JsonResultRow, meta) {
                             return '<img src="../../img/'+JsonResultRow.Avatar+'" class="avatar" width="50" height="50">';
@@ -133,7 +139,7 @@
                 { data: 'IdCard', name: 'IdCard' },
                 { data: 'FullName', name: 'FullName' },
                 { data: 'Position', name: 'Position' },
-                { data: 'action', name: 'action', orderable: false}
+                { data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
 
