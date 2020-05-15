@@ -1,3 +1,4 @@
+@include('sweetalert::alert')
 <div class="row">
     <div class="col-12">
         <div class="card">
@@ -18,8 +19,8 @@
                     <button type="button" name="countercreate" id="countercreate" class="btn btn-success waves-effect">
                         <i class="fas fa-plus"></i><span> Add Counter</span>
                     </button>
-                    <button type="button" name="counterdelete" id="counterdelete" class="btn btn-danger waves-effect">
-                        <i class="fas fa-times"></i><span> Delete Multipy</span>
+                    <button type="button" name="countersomedelete" id="countersomedelete" class="btn btn-danger waves-effect">
+                        <i class="fas fa-times"></i><span> Delete Some Counter</span>
                     </button>
                 </div>
                 <br>
@@ -28,7 +29,7 @@
                         id="CounterDatatable">
                         <thead>
                             <tr>
-                                <th>Checklist</th>
+                                <th>Checkbox</th>
                                 <th>No Counter</th>
                                 <th>Ip Address</th>
                                 <th>Mac Address</th>
@@ -38,7 +39,7 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Checklist</th>
+                                <th>Checkbox</th>
                                 <th>No Counter</th>
                                 <th>Ip Address</th>
                                 <th>Mac Address</th>
@@ -130,17 +131,25 @@
             var table = $('#CounterDatatable').DataTable({
             processing: true,
             serverSide: true,
+            "responsive": true,
             ajax: {
             url:"{{ route('counter.index') }}",
             },
-            "order": [[ 0, "asc" ]],
+            "order": [[ 1, "asc" ]],
             columns: [
-                { data: 'id', name: 'id' },
+                { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
                 { data: 'NoCounter', name: 'NoCounter' },
                 { data: 'IpAddress', name: 'IpAddress' },
                 { data: 'MacAddress', name: 'MacAddress' },
                 { data: 'TypeCounter', name: 'TypeCounter' },
-                { data: 'action', name: 'action', orderable: false}
+                { data: 'action', name: 'action', orderable: false,searchable: false}
+            ],
+            buttons: [
+            {
+                extend: 'collection',
+                text: 'Export',
+                buttons: ['copy','excel','csv','pdf','print']
+            }
             ]
         });
 
@@ -169,7 +178,7 @@
             })
         });
 
-        $(document).on('click', '.showcounter', function () {
+        $(document).on('click', '.countershow', function () {
             var id = $(this).attr('id');
                 $('#contentpage').load('counter'+'/'+id);
         });
@@ -233,6 +242,33 @@
 
         function showSuccessMessage() {
             swal.fire("Good job!", "You success update Counter!", "success");
+        }
+    });
+
+    $(document).on('click', '#countersomedelete', function(){
+        var id = [];
+        if(confirm("Are you sure you want to Delete this data?"))
+        {
+            $('.countercheckbox:checked').each(function(){
+                id.push($(this).val());
+            });
+            if(id.length > 0)
+            {
+                $.ajax({
+                    url:"{{ route('counter.somedelete')}}",
+                    method:"get",
+                    data:{id:id},
+                    success:function(data)
+                    {
+                        alert(data);
+                        $('#CounterDatatable').DataTable().ajax.reload();
+                    }
+                });
+            }
+            else
+            {
+                alert("Please select atleast one checkbox");
+            }
         }
     });
 

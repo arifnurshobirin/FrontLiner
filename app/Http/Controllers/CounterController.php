@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CounterModel;
 use DataTables;
 use Illuminate\Http\Request;
+use Validator;
 Use Alert;
 
 class CounterController extends Controller
@@ -25,15 +26,24 @@ class CounterController extends Controller
         {
             $data = CounterModel::latest()->get();
             return DataTables::of($data)
-            ->addColumn('action', function($data){
-                $button = '<button type="button" name="edit" id="'.$data->id.'" class="showcounter btn btn-warning waves-effect"><i class="fas fa-desktop"></i> Show</button>';
-                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="counteredit btn btn-primary waves-effect"><i class="fas fa-edit"></i> Edit</button>';
-                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="counterdelete btn btn-danger waves-effect sweetalert" ><i class="fas fa-trash"></i> Delete</button>';
-                return $button;
-            })
-            ->rawColumns(['action'])
+            ->addColumn('action',
+            '<div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+            <div class="dropdown-menu dropdown-menu-right" role="menu">
+            <a href="#" class="countershow dropdown-item" id="{{$id}}"><i class="fas fa-desktop"></i> Show</a>
+            <a href="#" class="counteredit dropdown-item" id="{{$id}}"><i class="fas fa-edit"></i> Edit</a>
+            <a href="#" class="counterdelete dropdown-item sweetalert" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
+            </div></div>')
+            ->addColumn('checkbox', '<input type="checkbox" name="countercheckbox[]" class="checkbox countercheckbox" value="{{$id}}" />')
+            // ->addColumn('status', function($data) {
+            //     if($data->is_active == '1'){
+            //         return '<label class="badge badge-success">Active</label>';
+            //     }else{
+            //         return '<label class="badge badge-danger">Inactive</label>';
+            //     }
+            // })
+            ->rawColumns(['checkbox','action'])
             ->make(true);
-
 
         }
         return view('counter.counterdatatable');
@@ -115,5 +125,19 @@ class CounterController extends Controller
     {
         $data = CounterModel::findOrFail($id);
         $data->delete();
+    }
+
+    public function somedelete(Request $request)
+    {   
+        // if($request->ajax()){
+        //     return response()->json(['status'=>'Ajax request']);
+        // }
+        // return response()->json(['status'=>'Http request']);
+        $idarray = $request->input('id');
+        $counter = CounterModel::whereIn('id',$idarray);
+        if($counter->delete())
+        {
+            echo 'Data Deleted';
+        }
     }
 }
