@@ -16,9 +16,12 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <div align="right">
+                <div>
                     <button type="button" name="cashiercreate" id="cashiercreate" class="btn btn-success waves-effect">
                         <i class="fas fa-plus"></i><span> Add Cashier</span>
+                    </button>
+                    <button type="button" name="cashiersomedelete" id="cashiersomedelete" class="btn btn-danger waves-effect">
+                        <i class="fas fa-times"></i><span> Delete Some Cashier</span>
                     </button>
                 </div>
                 <br>
@@ -27,6 +30,7 @@
                         id="CashierDatatable">
                         <thead>
                             <tr>
+                                <th>Checkbox</th>
                                 <th>Avatar</th>
                                 <th>Employee</th>
                                 <th>Full Name</th>
@@ -36,6 +40,7 @@
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>Checkbox</th>
                                 <th>Avatar</th>
                                 <th>Employee</th>
                                 <th>Full Name</th>
@@ -46,7 +51,7 @@
                     </table>
                 </div>
             </div>
-            <<!-- /.card-body -->
+            <!-- /.card-body -->
             <div class="card-footer">
                 Project Website Cashier Carrefour Taman Palem
             </div>
@@ -155,17 +160,18 @@
             ajax: {
             url:"{{ route('cashier.index') }}",
             },
-            "order": [[ 1, "asc" ]],
+            "order": [[ 2, "asc" ]],
             columns: [
+                { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
                 {
-                        "render": function (data, type, JsonResultRow, meta) {
-                            return '<img src="../../img/'+JsonResultRow.Avatar+'" class="avatar" width="50" height="50">';
-                        }
-                    },
+                    "render": function (data, type, JsonResultRow, meta) {
+                        return '<img src="../../img/'+JsonResultRow.Avatar+'" class="avatar" width="50" height="50">';
+                    }
+                },
                 { data: 'Employee', name: 'Employee' },
                 { data: 'FullName', name: 'FullName' },
                 { data: 'Position', name: 'Position' },
-                { data: 'action', name: 'action', orderable: false}
+                { data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
 
@@ -197,7 +203,7 @@
             })
         });
 
-        $(document).on('click', '.showcashier', function () {
+        $(document).on('click', '.cashiershow', function () {
             var id = $(this).attr('id');
                 $('#contentpage').load('cashier'+'/'+id);
         });
@@ -230,7 +236,7 @@
 
             
             var cashierid;
-            $(document).on('click', '.js-sweetalert', function(){
+            $(document).on('click', '.sweetalert', function(){
             cashierid = $(this).attr('id');
             showDeleteTable();
         });
