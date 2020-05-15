@@ -16,9 +16,12 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <div align="right">
+                <div>
                     <button type="button" name="edccreate" id="edccreate" class="btn btn-success waves-effect">
                         <i class="fas fa-plus"></i><span> Add EDC</span>
+                    </button>
+                    <button type="button" name="edcsomedelete" id="edcsomedelete" class="btn btn-danger waves-effect">
+                        <i class="fas fa-times"></i><span> Delete Some EDC</span>
                     </button>
                 </div>
                 <br>
@@ -27,6 +30,7 @@
                         id="EDCDatatable">
                         <thead>
                             <tr>
+                                <th>Checkbox</th>
                                 <th>TID EDC</th>
                                 <th>No Counter</th>
                                 <th>Connection</th>
@@ -37,6 +41,7 @@
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>Checkbox</th>
                                 <th>TID EDC</th>
                                 <th>No Counter</th>
                                 <th>Connection</th>
@@ -148,7 +153,9 @@
             ajax: {
             url:"{{ route('edc.index') }}",
             },
+            "order": [[ 1, "asc" ]],
             columns: [
+                { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
                 { data: 'TIDEDC', name: 'TIDEDC' },
                 { data: 'NoCounter', name: 'NoCounter' },
                 { data: 'Connection', name: 'Connection' },
@@ -186,7 +193,7 @@
             })
         });
 
-        $(document).on('click', '.showedc', function () {
+        $(document).on('click', '.edcshow', function () {
             var id = $(this).attr('id');
                 $('#contentpage').load('edc'+'/'+id);
         });
