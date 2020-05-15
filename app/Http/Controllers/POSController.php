@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\POSModel;
 use DataTables;
 use Illuminate\Http\Request;
+use Validator;
 Use Alert;
 
 class POSController extends Controller
@@ -25,13 +26,16 @@ class POSController extends Controller
         {
             $data = POSModel::latest()->get();
             return DataTables::of($data)
-            ->addColumn('action', function($data){
-                $button = '<button type="button" name="edit" id="'.$data->id.'" class="showpos btn btn-warning waves-effect"><i class="fas fa-desktop"></i> Show</button>';
-                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="posedit btn btn-primary waves-effect"><i class="fas fa-edit"></i> Edit</button>';
-                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="posdelete btn btn-danger waves-effect js-sweetalert"><i class="fas fa-trash"></i> Delete</button>';
-                return $button;
-            })
-            ->rawColumns(['action'])
+            ->addColumn('action',
+                '<div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                <a href="#" class="posshow dropdown-item" id="{{$id}}"><i class="fas fa-desktop"></i> Show</a>
+                <a href="#" class="posedit dropdown-item" id="{{$id}}"><i class="fas fa-edit"></i> Edit</a>
+                <a href="#" class="posdelete dropdown-item sweetalert" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
+                </div></div>')
+            ->addColumn('checkbox', '<input type="checkbox" name="poscheckbox[]" class="poscheckbox" value="{{$id}}" />')
+            ->rawColumns(['checkbox','action'])
             ->make(true);
 
 

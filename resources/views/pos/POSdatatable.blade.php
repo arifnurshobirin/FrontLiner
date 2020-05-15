@@ -16,9 +16,12 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <div align="right">
+                <div>
                     <button type="button" name="poscreate" id="poscreate" class="btn btn-success waves-effect">
                         <i class="fas fa-plus"></i><span> Add POS</span>
+                    </button>
+                    <button type="button" name="possomedelete" id="possomedelete" class="btn btn-danger waves-effect">
+                        <i class="fas fa-times"></i><span> Delete Some EDC</span>
                     </button>
                 </div>
                 <br>
@@ -27,6 +30,7 @@
                         id="POSDatatable">
                         <thead>
                             <tr>
+                                <th>Checkbox</th>
                                 <th>No POS</th>
                                 <th>CPU</th>
                                 <th>Printer</th>
@@ -38,6 +42,7 @@
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>Checkbox</th>
                                 <th>No POS</th>
                                 <th>CPU</th>
                                 <th>Printer</th>
@@ -165,6 +170,7 @@
             },
             "order": [[ 0, "asc" ]],
             columns: [
+                { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
                 { data: 'NoPOS', name: 'NoPOS' },
                 { data: 'CPU', name: 'CPU' },
                 { data: 'Printer', name: 'Printer' },
@@ -202,7 +208,7 @@
             })
         });
 
-        $(document).on('click', '.showpos', function () {
+        $(document).on('click', '.posshow', function () {
             var id = $(this).attr('id');
                 $('#contentpage').load('pos'+'/'+id);
         });
