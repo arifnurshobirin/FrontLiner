@@ -46,6 +46,7 @@ Route::get('pos/destroy/{id}', 'POSController@destroy');
 Route::get('countertable', 'CounterController@table');
 Route::resource('counter', 'CounterController');
 Route::get('counter/destroy/{id}', 'CounterController@destroy');
+Route::get('countersomedelete', 'CounterController@somedelete')->name('counter.somedelete');
 
 Route::get('managementtable', 'ManagementController@table');
 Route::resource('management', 'ManagementController');
