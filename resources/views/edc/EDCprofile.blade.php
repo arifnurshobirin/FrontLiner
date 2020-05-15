@@ -25,7 +25,7 @@
                             <b>TID</b> <a class="float-right">{{ $data->TIDEDC }}</a>
                         </li>
                         <li class="list-group-item">
-                            <b>No Terminal</b> <a class="float-right">{{ $data->NoTerminal }}</a>
+                            <b>No Counter</b> <a class="float-right">{{ $data->NoCounter }}</a>
                         </li>
                     </ul>
 
