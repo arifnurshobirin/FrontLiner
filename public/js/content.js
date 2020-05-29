@@ -23,11 +23,12 @@ $(document).ready(function () {
         return false;
     })
     $('#contentprofile').click(function () {
+        $('.urlpage').html('Profile Page');
         $('#contentpage').load('profile');
         return false;
     })
     $('#contentcontact').click(function () {
-        $('.urlpage').html('Profile Page');
+        $('.urlpage').html('Contact Page');
         $('#contentpage').load('contact');
         return false;
     })
@@ -71,11 +72,18 @@ $(document).ready(function () {
         $('#contentpage').load('countertable');
         return false;
     })
-    $('#contentschedule').click(function () {
+    $('#contentscheduledatatable').click(function () {
         $('a').removeClass('active');
-        document.getElementById('contentschedule').className = "nav-link active";
-        $('.urlpage').html('Schedule Page');
+        document.getElementById('contentscheduledatatable').className = "nav-link active";
+        $('.urlpage').html('Schedule Datatable Page');
         $('#contentpage').load('scheduletable');
+        return false;
+    })
+    $('#contentscheduleadd').click(function () {
+        $('a').removeClass('active');
+        document.getElementById('contentscheduleadd').className = "nav-link active";
+        $('.urlpage').html(' Add Schedule Page');
+        $('#contentpage').load('scheduleadd');
         return false;
     })
     $('#contentmonitoring').click(function () {
