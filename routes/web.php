@@ -53,6 +53,7 @@ Route::resource('management', 'ManagementController');
 Route::get('management/destroy/{id}', 'ManagementController@destroy');
 
 Route::get('scheduletable', 'ScheduleController@table');
+Route::get('scheduleadd', 'ScheduleController@add');
 Route::resource('schedule', 'ScheduleController');
 Route::get('schedule/destroy/{id}', 'ScheduleController@destroy');
 
