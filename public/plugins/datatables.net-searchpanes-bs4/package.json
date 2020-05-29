@@ -1,0 +1,63 @@
+{
+  "_from": "datatables.net-searchpanes-bs4",
+  "_id": "datatables.net-searchpanes-bs4@1.1.0",
+  "_inBundle": false,
+  "_integrity": "sha512-EUNGg249YxZgJT+qjvVwg4RHgT5ENjYYVciOyOVxmj/rdCZlr20sWXgrSi2w5wYZ+xZtqey5SoDO9qE3+8mWfw==",
+  "_location": "/datatables.net-searchpanes-bs4",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "datatables.net-searchpanes-bs4",
+    "name": "datatables.net-searchpanes-bs4",
+    "escapedName": "datatables.net-searchpanes-bs4",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/datatables.net-searchpanes-bs4/-/datatables.net-searchpanes-bs4-1.1.0.tgz",
+  "_shasum": "62e47b19afbb9cce393f592c2882c4b9977c4190",
+  "_spec": "datatables.net-searchpanes-bs4",
+  "_where": "E:\\project\\frontliner",
+  "author": {
+    "name": "SpryMedia Ltd",
+    "url": "http://datatables.net"
+  },
+  "bugs": {
+    "url": "https://datatables.net/forums"
+  },
+  "bundleDependencies": false,
+  "dependencies": {
+    "datatables.net-bs4": "^1.10.15",
+    "datatables.net-searchpanes": "1.1.0",
+    "jquery": ">=1.7"
+  },
+  "deprecated": false,
+  "description": "SearchPanes for DataTables with styling for [Bootstrap](http://getbootstrap.com/)",
+  "files": [
+    "css/**/*.css",
+    "js/**/*.js"
+  ],
+  "homepage": "https://datatables.net",
+  "keywords": [
+    "Search",
+    "Filter",
+    "DataTables",
+    "jQuery",
+    "table",
+    "Bootstrap"
+  ],
+  "license": "MIT",
+  "main": "js/searchPanes.bootstrap4.js",
+  "name": "datatables.net-searchpanes-bs4",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DataTables/Dist-DataTables-SearchPanes-Bootstrap4.git"
+  },
+  "style": "css/searchPanes.bootstrap4.css",
+  "version": "1.1.0"
+}
