@@ -31,6 +31,7 @@
                 <p>
                   Dashboard
                   <i class="right fas fa-angle-left"></i>
+                  <span class="badge badge-info right">3</span>
                 </p>
               </a>
               <ul class="nav nav-treeview">
@@ -59,6 +60,15 @@
                 <i class="nav-icon fas fa-desktop"></i>
                 <p>
                   Monitoring
+                  <span class="right badge badge-danger">New</span>
+                </p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" id="contentchronology" class="nav-link">
+                <i class="nav-icon fas fa-clipboard-list"></i>
+                <p>
+                  Chronology
                   <span class="right badge badge-danger">New</span>
                 </p>
               </a>
@@ -123,13 +133,29 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item">
+            <li class="nav-item has-treeview">
               <a href="#" id="contentschedule"  class="nav-link">
-                <i class="nav-icon far fa-calendar-check"></i>
-                <p>Schedule
-                  <span class="right badge badge-danger">New</span>
+                <i class="nav-icon far fa-calendar-alt"></i>
+                <p>
+                  Schedule
+                  <i class="right fas fa-angle-left"></i>
+                  <span class="badge badge-info right">2</span>
                 </p>
               </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="#" id="contentscheduleadd"  class="nav-link">
+                    <i class="nav-icon fas fa-calendar-plus"></i>
+                    <p>Add Schedule</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" id="contentscheduledatatable"   class="nav-link">
+                    <i class="nav-icon fas fa-calendar-check"></i>
+                    <p>Datatable Schedule</p>
+                  </a>
+                </li>
+              </ul>
             </li>
             <li class="nav-item has-treeview">
               <a href="#" id="contenttraining"  class="nav-link">
@@ -178,7 +204,8 @@
                 <i class="nav-icon fas fa-clipboard-check"></i>
                 <p>
                   Report
-                  <i class="fas fa-angle-left right"></i>
+                  <i class="right fas fa-angle-left"></i>
+                  <span class="badge badge-info right">3</span>
                 </p>
               </a>
               <ul class="nav nav-treeview">
@@ -207,7 +234,7 @@
               <a href="#" id="contentcalendar"  class="nav-link">
                 <i class="nav-icon far fa-calendar-alt"></i>
                 <p>Calendar
-                  <span class="badge badge-info right">2</span>
+                  <span class="right badge badge-success">Beta</span>
                 </p>
               </a>
             </li>
@@ -216,6 +243,7 @@
                 <i class="nav-icon far fa-image"></i>
                 <p>
                   Multimedia
+                  <span class="right badge badge-success">Beta</span>
                 </p>
               </a>
             </li>
