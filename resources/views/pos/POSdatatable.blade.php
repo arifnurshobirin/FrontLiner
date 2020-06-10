@@ -1,4 +1,5 @@
 @include('sweetalert::alert')
+
 <!-- POS Table -->
 <div class="row">
     <div class="col-12">
@@ -16,21 +17,15 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <div>
-                    <button type="button" name="poscreate" id="poscreate" class="btn btn-success waves-effect">
-                        <i class="fas fa-plus"></i><span> Add POS</span>
-                    </button>
-                    <button type="button" name="possomedelete" id="possomedelete" class="btn btn-danger waves-effect">
-                        <i class="fas fa-times"></i><span> Delete Some EDC</span>
-                    </button>
-                </div>
-                <br>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable"
                         id="POSDatatable">
                         <thead>
                             <tr>
-                                <th>Checkbox</th>
+                                <th><button type="button" name="posmoredelete" id="posmoredelete" class="btn btn-danger">
+                                <i class="fas fa-times"></i><span></span>
+                                </button></th>
+                                <th>Detail</th>
                                 <th>No POS</th>
                                 <th>CPU</th>
                                 <th>Printer</th>
@@ -43,6 +38,7 @@
                         <tfoot>
                             <tr>
                                 <th>Checkbox</th>
+                                <th>Detail</th>
                                 <th>No POS</th>
                                 <th>CPU</th>
                                 <th>Printer</th>
@@ -55,7 +51,7 @@
                     </table>
                 </div>
             </div>
-        <<!-- /.card-body -->
+        <!-- /.card-body -->
         <div class="card-footer">
                 Project Website Cashier Carrefour Taman Palem
             </div>
@@ -159,35 +155,114 @@
     </div>
 </div>
 <!-- #END# Create Table -->
-
+<!-- <script id="details-template" type="text/x-handlebars-template">
+    <table class="table">
+        <tr>
+            <td>data.id</td>
+            <td>Printer</td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>And any further details here images etc...</td>
+        </tr>
+        <tr>
+            <td>Extra info:</td>
+            <td>And any further details here images etc...</td>
+        </tr>
+    </table>
+</script> -->
 <script>
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Full name:</td>'+
+            '<td>'+d.Printer+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extension number:</td>'+
+            '<td>'+d.Printer+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extra info:</td>'+
+            '<td>And any further details here (images etc)...</td>'+
+        '</tr>'+
+    '</table>';
+}
     $(document).ready(function() {
-            var table = $('#POSDatatable').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: {
-            url:"{{ route('pos.index') }}",
+        // var template = Handlebars.compile($("#details-template").html());
+        var table = $('#POSDatatable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: { url:"{{ route('pos.index') }}",},
+        "order": [[ 2, "asc" ]],
+        columns: [
+            { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
+            {
+                "className":      'details-control',
+                "orderable":      false,
+                "searchable":     false,
+                "data":           null,
+                "defaultContent": ''
             },
-            "order": [[ 0, "asc" ]],
-            columns: [
-                { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
-                { data: 'NoPOS', name: 'NoPOS' },
-                { data: 'CPU', name: 'CPU' },
-                { data: 'Printer', name: 'Printer' },
-                { data: 'Drawer', name: 'Drawer' },
-                { data: 'Scanner', name: 'Scanner' },
-                { data: 'Monitor', name: 'Monitor' },
-                { data: 'action', name: 'action', orderable: false}
-            ]
+            { data: 'NoPOS', name: 'NoPOS' },
+            { data: 'CPU', name: 'CPU' },
+            { data: 'Printer', name: 'Printer' },
+            { data: 'Drawer', name: 'Drawer' },
+            { data: 'Scanner', name: 'Scanner' },
+            { data: 'Monitor', name: 'Monitor' },
+            { data: 'action', name: 'action', orderable: false,searchable: false}
+            ],
+            dom: 'Bfrtip',
+        lengthMenu: [
+            [ 10, 25, 50, -1 ],
+            [ '10 rows', '25 rows', '50 rows', 'Show all' ]
+        ],
+        buttons:['pageLength',
+                    
+                        {
+                            extend: 'collection',
+                            text: 'Export',
+                            className: 'btn btn-info',
+                            buttons:[ 'copy', 'csv', 'excel', 'pdf', 'print',
+                                        {
+                                            collectionTitle: 'Visibility control',
+                                            extend: 'colvis',
+                                            collectionLayout: 'two-column'
+                                        }
+                                    ]
+                        },
+                        {
+                            text: '<i class="fas fa-plus"></i><span> Add POS</span>',
+                            className: 'btn btn-success',
+                            action: function ( e, dt, node, config ) {
+                                $('#possave').val("create POS");
+                                $('#possave').html('Save');
+                                $('#posid').val('');
+                                $('#posform').trigger("reset");
+                                $('#modelHeading').html("Create New POS");
+                                $('#ajaxModel').modal('show');
+                            }
+                        }
+                    ]
+        
         });
 
-        $('#poscreate').click(function () {
-            $('#possave').val("create POS");
-            $('#possave').html('Save');
-            $('#posid').val('');
-            $('#posform').trigger("reset");
-            $('#modelHeading').html("Create New POS");
-            $('#ajaxModel').modal('show');
+        // Add event listener for opening and closing details
+        $('#POSDatatable').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = table.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format(row.data()) ).show();
+                tr.addClass('shown');
+            }
         });
 
         $(document).on('click', '.posedit', function () {
@@ -230,7 +305,7 @@
                     $('#ajaxModel').modal('hide');
                     $('#possave').html('Save');
                     table.draw();
-                    showSuccessMessage();
+                    swal.fire("Good job!", "You success update POS!", "success");
                 },
                 error: function (data) {
                     console.log('Error:', data);
@@ -241,13 +316,8 @@
         });
 
             var posid;
-            $(document).on('click', '.js-sweetalert', function(){
+            $(document).on('click', '.posdelete', function(){
             posid = $(this).attr('id');
-            showDeleteTable();
-        });
-
-
-        function showDeleteTable() {
             swal.fire({
                 title: "Are you sure?",
                 text: "You will not be able to recover this POS file!",
@@ -269,10 +339,38 @@
                     swal.fire("Cancelled", "Your Cashier file is safe :)", "error");
                 }
             });
+        });
+
+        $(document).on('click', '#posmoredelete', function(){
+        
+        if(confirm("Are you sure you want to Delete this data?"))
+        {
+            var id = [];
+            $('.poscheckbox:checked').each(function(){
+                id.push($(this).val());
+            });
+            if(id.length > 0)
+            {
+                $.ajax({
+                    url:"{{ route('pos.moredelete')}}",
+                    method:"get",
+                    data:{id:id},
+                    success:function(data)
+                    {
+
+                        swal.fire("Good job!", "You success delete POS!", "success");
+                        $('#POSDatatable').DataTable().ajax.reload();
+                        
+                    }
+                });
+            }
+            else
+            {
+                alert("Please select atleast one checkbox");
+            }
         }
-        function showSuccessMessage() {
-            swal.fire("Good job!", "You success update POS!", "success");
-        }
+        });
+
     });
 
 </script>
