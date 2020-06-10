@@ -7,6 +7,7 @@ use DataTables;
 use Illuminate\Http\Request;
 use Validator;
 Use Alert;
+use Yajra\Datatables\Html\Builder;
 
 class POSController extends Controller
 {
@@ -32,7 +33,7 @@ class POSController extends Controller
                 <div class="dropdown-menu dropdown-menu-right" role="menu">
                 <a href="#" class="posshow dropdown-item" id="{{$id}}"><i class="fas fa-desktop"></i> Show</a>
                 <a href="#" class="posedit dropdown-item" id="{{$id}}"><i class="fas fa-edit"></i> Edit</a>
-                <a href="#" class="posdelete dropdown-item sweetalert" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
+                <a href="#" class="posdelete dropdown-item" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
                 </div></div>')
             ->addColumn('checkbox', '<input type="checkbox" name="poscheckbox[]" class="poscheckbox" value="{{$id}}" />')
             ->rawColumns(['checkbox','action'])
@@ -40,7 +41,7 @@ class POSController extends Controller
 
 
         }
-        return view('pos.POSdatatable');
+        return view('pos.POSdatatable', compact('data'));
     }
 
     /**
@@ -121,5 +122,14 @@ class POSController extends Controller
     {
         $data = POSModel::findOrFail($id);
         $data->delete();
+    }
+    public function moredelete(Request $request)
+    {   
+        // if($request->ajax()){
+        //     return response()->json(['status'=>'Ajax request']);
+        // }
+        // return response()->json(['status'=>'Http request']);
+        $idarray = $request->input('id');
+        $pos = POSModel::whereIn('id',$idarray)->delete();
     }
 }
