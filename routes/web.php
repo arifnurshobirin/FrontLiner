@@ -42,6 +42,7 @@ Route::get('edc/destroy/{id}', 'EDCController@destroy');
 Route::get('postable', 'POSController@table');
 Route::resource('pos', 'POSController');
 Route::get('pos/destroy/{id}', 'POSController@destroy');
+Route::get('posmoredelete', 'POSController@moredelete')->name('pos.moredelete');
 
 Route::get('countertable', 'CounterController@table');
 Route::resource('counter', 'CounterController');
