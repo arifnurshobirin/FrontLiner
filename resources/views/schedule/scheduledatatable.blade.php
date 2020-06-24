@@ -29,8 +29,7 @@
                                 <th>Employee</th>
                                 <th>Full Name</th>
                                 <th>Date Work</th>
-                                <th>Start Work</th>
-                                <th>End Work</th>
+                                <th>Shift</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -39,9 +38,8 @@
                                 <th>Employee</th>
                                 <th>Full Name</th>
                                 <th>Date Work</th>
-                                <th>Start Work</th>
-                                <th>End Work</th>
-                                <th>Action</th>
+                                <th>Shift</th>
+                                <th>Action</t>
                             </tr>
                         </tfoot>
                     </table>
@@ -139,8 +137,7 @@
                 { data: 'Employee', name: 'Employee' },
                 { data: 'FullName', name: 'FullName' },
                 { data: 'Date', name: 'Date' },
-                { data: 'StartWork', name: 'StartWork' },
-                { data: 'EndWork', name: 'EndWork' },
+                { data: 'Shift', name: 'Shift' },
                 { data: 'action', name: 'action', orderable: false}
             ]
         });
