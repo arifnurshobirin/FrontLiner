@@ -12,6 +12,7 @@ $factory->define(CounterModel::class, function () {
         'NoCounter' => $faker->unique()->numberBetween(1,99),
         'IpAddress' => $faker->unique()->ipv4,
         'MacAddress' => $faker->unique()->macAddress,
-        'TypeCounter' => $faker->randomElement($array = array ('Regular', 'SaladBar','Milk','Wine','Deptstore','Electronic','TransHello','Homedel','Cigarette','TransLiving','TransHardware','Bakery','Dokar','Canvasing')),
+        'TypeCounter' => $faker->randomElement($array = array ('Regular', 'SaladBar','Milk','Wine','Deptstore','Electronic','TransHello','Homedel','Cigarette','TransLiving','TransHardware','Bakery','Dokar','Canvasing','Backup')),
+        'StatusCounter' => $faker->randomElement($array = array ('Active', 'Inaktive','Normal','Broken','Queueing'))
     ];
 });
