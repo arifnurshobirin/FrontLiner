@@ -71,7 +71,8 @@ class CounterController extends Controller
             'NoCounter' => $request->nocounter,
             'IpAddress' => $request->ipaddress,
             'MacAddress' => $request->macaddress,
-            'TypeCounter' => $request->typecounter
+            'TypeCounter' => $request->typecounter,
+            'StatusCounter' => $request->statuscounter
         );
     
         CounterModel::updateOrCreate(['id'=>$request->counterid],$form_data);
@@ -134,10 +135,6 @@ class CounterController extends Controller
         // }
         // return response()->json(['status'=>'Http request']);
         $idarray = $request->input('id');
-        $counter = CounterModel::whereIn('id',$idarray);
-        if($counter->delete())
-        {
-            echo 'Data Deleted';
-        }
+        $counter = CounterModel::whereIn('id',$idarray)->delete();
     }
 }
