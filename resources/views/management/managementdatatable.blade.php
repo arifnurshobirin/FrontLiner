@@ -20,9 +20,6 @@
                     <button type="button" name="managementcreate" id="managementcreate" class="btn btn-success waves-effect">
                         <i class="fas fa-plus"></i><span> Add Management</span>
                     </button>
-                    <button type="button" name="managementsomedelete" id="managementsomedelete" class="btn btn-danger waves-effect">
-                        <i class="fas fa-times"></i><span> Delete Some Managaement</span>
-                    </button>
                 </div>
                 <br>
                 <div class="table-responsive">
@@ -30,7 +27,9 @@
                         id="ManagementDatatable">
                         <thead>
                             <tr>
-                                <th>Checkbox</th>
+                                <th><button type="button" name="managementsomedelete" id="managementsomedelete" class="btn btn-danger">
+                                <i class="fas fa-times"></i><span></span>
+                                </button></th>
                                 <th>Avatar</th>
                                 <th>Id Card</th>
                                 <th>Full Name</th>
