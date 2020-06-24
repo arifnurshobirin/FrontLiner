@@ -20,9 +20,6 @@
                     <button type="button" name="edccreate" id="edccreate" class="btn btn-success waves-effect">
                         <i class="fas fa-plus"></i><span> Add EDC</span>
                     </button>
-                    <button type="button" name="edcsomedelete" id="edcsomedelete" class="btn btn-danger waves-effect">
-                        <i class="fas fa-times"></i><span> Delete Some EDC</span>
-                    </button>
                 </div>
                 <br>
                 <div class="table-responsive">
@@ -30,7 +27,9 @@
                         id="EDCDatatable">
                         <thead>
                             <tr>
-                                <th>Checkbox</th>
+                                <th><button type="button" name="edcsomedelete" id="edcsomedelete" class="btn btn-danger">
+                                <i class="fas fa-times"></i><span></span>
+                                </button></th>
                                 <th>TID EDC</th>
                                 <th>No Counter</th>
                                 <th>Connection</th>
