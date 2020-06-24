@@ -16,6 +16,7 @@ $factory->define(CashierModel::class, function () {
         'PhoneNumber' =>$faker->phoneNumber,
         'Position' =>$faker->randomElement($array = array ('Cashier', 'Senior Cashier','Cashier Head','TDR','Customer Service')),
         'JoinDate' =>$faker->date($format = 'Y-m-d', $max = 'now'),
+        'Status' =>$faker->randomElement($array = array ('Active', 'Inactive')),
         'Avatar' => $faker->randomElement($array = array ('arif.jpg', 'desi.jpg','shopa.jpg','kasir1.jpg','kasir2.jpg')),
     ];
 });
