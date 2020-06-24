@@ -20,9 +20,6 @@
                     <button type="button" name="cashiercreate" id="cashiercreate" class="btn btn-success waves-effect">
                         <i class="fas fa-plus"></i><span> Add Cashier</span>
                     </button>
-                    <button type="button" name="cashiersomedelete" id="cashiersomedelete" class="btn btn-danger waves-effect">
-                        <i class="fas fa-times"></i><span> Delete Some Cashier</span>
-                    </button>
                 </div>
                 <br>
                 <div class="table-responsive">
@@ -30,11 +27,14 @@
                         id="CashierDatatable">
                         <thead>
                             <tr>
-                                <th>Checkbox</th>
+                            <th><button type="button" name="cashiersomedelete" id="cashiersomedelete" class="btn btn-danger">
+                                <i class="fas fa-times"></i><span></span>
+                                </button></th>
                                 <th>Avatar</th>
                                 <th>Employee</th>
                                 <th>Full Name</th>
                                 <th>Position</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -45,6 +45,7 @@
                                 <th>Employee</th>
                                 <th>Full Name</th>
                                 <th>Position</th>
+                                <th>Status</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -79,7 +80,7 @@
                                 <div class="input-group-prepend">
                                 <span class="input-group-text"><i class="far fa-id-badge"></i></span>
                                 </div>
-                                <input type="text" id="emp" name="emp" class="form-control" data-inputmask='"mask": "(999)"' data-mask required>
+                                <input type="text" id="emp" name="emp" class="form-control" data-inputmask='"mask": "999"' data-mask required>
                             </div>    
                         </div>
                     <label for="fullname">Full Name</label>
@@ -138,6 +139,16 @@
                                     </div>
                                         <input type="text" id="join" name="join" class="form-control datetimepicker-input" data-target="#datetimepicker2" placeholder="dd/mm/yyyy">
                                 </div>
+                                <label for="position">Status</label>
+                            <div class="form-group">
+                                <div class="form-line">
+                                    <select class="form-control show-tick" id="status" name="status">
+                                        <option value="">-- Please select --</option>
+                                        <option value="Active">Active</option>
+                                        <option value="Inactive">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
                         <label for="image">Select Profile Image</label>
                             <div class="form-group">
                                 <div class="form-line">
@@ -157,6 +168,10 @@
             var table = $('#CashierDatatable').DataTable({
             processing: true,
             serverSide: true,
+            // "responsive": true,
+            // "columnDefs":[ { responsivePriority: 1, targets: 1 },
+            //                 { responsivePriority: 2, targets: 4 }
+            //             ],
             ajax: {
             url:"{{ route('cashier.index') }}",
             },
@@ -171,6 +186,7 @@
                 { data: 'Employee', name: 'Employee' },
                 { data: 'FullName', name: 'FullName' },
                 { data: 'Position', name: 'Position' },
+                { data: 'Status', name: 'Status' },
                 { data: 'action', name: 'action', orderable: false, searchable: false}
             ]
         });
@@ -200,6 +216,7 @@
                 $('#phone').val(data.PhoneNumber);
                 $('#position').val(data.Position);
                 $('#join').val(data.JoinDate);
+                $('#image').val(data.Avatar);
             })
         });
 
