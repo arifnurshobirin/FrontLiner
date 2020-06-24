@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\ScheduleModel;
+use App\CashierModel;
+use App\WorkingHourModel;
 use DataTables;
 use Alert;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class ScheduleController extends Controller
@@ -18,6 +21,7 @@ class ScheduleController extends Controller
     {
         return view('schedule.scheduledatatable');
     }
+    
     public function index(Request $request)
     {
         if($request->ajax())
@@ -44,10 +48,44 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function getBasic()
     {
-        //
+         // $dataschedule = ScheduleModel::latest()->get();
+         // $datacashier = CashierModel::latest()->get();
+        $dataworkinghour = WorkingHourModel::all();
+        return view('schedule.scheduleadd',compact('dataworkinghour'));
     }
+
+    public function getBasicData()
+    {
+            // $dataworkinghour = WorkingHourModel::all();
+            $data = CashierModel::where('Status','Active')->get();
+            return DataTables::of($data)
+            ->addColumn('cashier', '{{$Employee}} {{$FullName}}')
+            ->addColumn('monday', '<input type="text" name="monshift{{$id}}" id="monshift{{$id}}" class="form-control input-uppercase" oninput="shifthour({{$id}})"/>')
+            ->addColumn('tuesday', '<input type="text" name="tueshift{{$id}}" id="tueshift{{$id}}" class="form-control input-uppercase" oninput="shifthour({{$id}})" />')
+            ->addColumn('wednesday', '<input type="text" name="wedshift{{$id}}" id="wedshift{{$id}}" class="form-control input-uppercase" oninput="shifthour({{$id}})" />')
+            ->addColumn('thursday', '<input type="text" name="thurshift{{$id}}" id="thurshift{{$id}}" class="form-control input-uppercase" oninput="shifthour({{$id}})" />')
+            ->addColumn('friday', '<input type="text" name="frishift{{$id}}" id="frishift{{$id}}" class="form-control input-uppercase" oninput="shifthour({{$id}})" />')
+            ->addColumn('saturday', '<input type="text" name="saturshift{{$id}}" id="saturshift{{$id}}" class="form-control input-uppercase" oninput="shifthour({{$id}})" />')
+            ->addColumn('sunday', '<input type="text" name="sunshift{{$id}}" id="sunshift{{$id}}" class="form-control input-uppercase" oninput="shifthour({{$id}})" />')
+            ->addColumn('action',
+                '<div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                <a class="schedulesave dropdown-item" id="{{$id}}" onclick="freezeschedule({{$id}})"><i class="fas fa-desktop"></i> Save</a>
+                <a class="scheduleedit dropdown-item" id="{{$id}}" onclick="editschedule({{$id}})"><i class="fas fa-edit"></i> Edit</a>
+                <a class="scheduledelete dropdown-item" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
+                </div></div></form>')
+            ->rawColumns(['monday','tuesday','wednesday','thursday','friday','saturday','sunday','action'])
+            ->make(true);
+
+    }
+
+    // public function create(Request $request)
+    // {
+    
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -117,6 +155,11 @@ class ScheduleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+    {
+        $data = ScheduleModel::findOrFail($id);
+        $data->delete();
+    }
+    public function day($monday)
     {
         $data = ScheduleModel::findOrFail($id);
         $data->delete();
