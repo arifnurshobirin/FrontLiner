@@ -54,9 +54,11 @@ Route::resource('management', 'ManagementController');
 Route::get('management/destroy/{id}', 'ManagementController@destroy');
 
 Route::get('scheduletable', 'ScheduleController@table');
-Route::get('scheduleadd', 'ScheduleController@add');
+Route::get('scheduleadd', 'ScheduleController@getBasic');
+Route::get('schedule/getbasicdata', 'ScheduleController@getBasicData')->name('schedule.getBasicData');
 Route::resource('schedule', 'ScheduleController');
 Route::get('schedule/destroy/{id}', 'ScheduleController@destroy');
+Route::post('schedule/day', 'ScheduleController@day');
 
 Route::resource('monitoring', 'MonitoringController');
 Route::get('monitoring/destroy/{id}', 'MonitoringController@destroy');

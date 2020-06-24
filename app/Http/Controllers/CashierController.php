@@ -85,6 +85,7 @@ class CashierController extends Controller
             'PhoneNumber' => $request->phone,
             'Position' => $request->position,
             'JoinDate' => $newjoin,
+            'Status' => $request->status,
             'Avatar' => $imagename
         );
 
