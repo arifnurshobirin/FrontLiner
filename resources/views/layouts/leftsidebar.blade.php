@@ -146,7 +146,7 @@
                 <li class="nav-item">
                   <a href="#" id="contentscheduleadd"  class="nav-link">
                     <i class="nav-icon fas fa-calendar-plus"></i>
-                    <p>Add Schedule</p>
+                    <p>Create Schedule</p>
                   </a>
                 </li>
                 <li class="nav-item">
