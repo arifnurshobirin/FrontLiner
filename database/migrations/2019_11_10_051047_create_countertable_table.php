@@ -19,6 +19,7 @@ class CreateCountertableTable extends Migration
             $table->ipAddress('IpAddress')->unique;
             $table->macAddress('MacAddress')->unique;
             $table->string('TypeCounter');
+            $table->string('StatusCounter');
             $table->timestamps();
         });
     }
