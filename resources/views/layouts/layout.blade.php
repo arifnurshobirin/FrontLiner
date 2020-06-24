@@ -18,8 +18,6 @@
   <link href="{{ asset('plugins/sweetalert2/sweetalert2.css') }}" rel="stylesheet">
   <!-- Tempusdominus Bbootstrap 4 -->
   <link href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet">
-  <!-- Bootstrap DatePicker Css
-  <link href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker.css') }}" rel="stylesheet"> -->
   <!-- fullCalendar -->
   <link href="{{ asset('plugins/fullcalendar/main.min.css') }}" rel="stylesheet">
   <link href="{{ asset('plugins/fullcalendar-daygrid/main.min.css') }}" rel="stylesheet">
@@ -28,9 +26,14 @@
   <!-- overlayScrollbars -->
   <link href="{{ asset('css/adminlte.min.css') }}" rel="stylesheet">
   <!-- DataTables -->
-  <link href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
+  <link href="{{ asset('plugins/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
+  <!-- datepicker -->
+  <link href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -247,11 +250,18 @@
   <!-- Bootstrap 4 -->
   <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
   <!-- DataTables -->
-  <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-  <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-  <script src="{{ asset('plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-  <script src="{{ asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-  <script src="{{ asset('plugins/datatables-editor/editor.min.js') }}"></script>
+  <script src="{{ asset('plugins/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('plugins/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('plugins/datatables.net-responsive/js/dataTables.responsive.min.js') }}"></script>
+  <script src="{{ asset('plugins/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('plugins/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+  <script src="{{ asset('plugins/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('plugins/datatables.net-buttons/js/buttons.colVis.min.js') }}"></script>
+  <script src="{{ asset('plugins/datatables.net-buttons/js/buttons.flash.min.js') }}"></script>
+  <script src="{{ asset('plugins/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+  <script src="{{ asset('plugins/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+  <script src="{{ asset('plugins/pdfmake/build/pdfmake.min.js') }}"></script>
+  <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
   <!-- jQuery UI -->
   <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
   <!-- AdminLTE App -->
@@ -266,8 +276,8 @@
   <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
   <!-- Tempusdominus Bootstrap 4 -->
   <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-  <!-- Bootstrap Datepicker Plugin Js
-  <script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.js') }}"></script> -->
+  <!-- datepicker -->
+  <script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
   <!-- InputMask -->
   <script src="{{ asset('plugins/inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>
   <!-- Ekko Lightbox -->
