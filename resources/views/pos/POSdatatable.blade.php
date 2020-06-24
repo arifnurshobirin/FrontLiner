@@ -155,22 +155,7 @@
     </div>
 </div>
 <!-- #END# Create Table -->
-<!-- <script id="details-template" type="text/x-handlebars-template">
-    <table class="table">
-        <tr>
-            <td>data.id</td>
-            <td>Printer</td>
-        </tr>
-        <tr>
-            <td>Email:</td>
-            <td>And any further details here images etc...</td>
-        </tr>
-        <tr>
-            <td>Extra info:</td>
-            <td>And any further details here images etc...</td>
-        </tr>
-    </table>
-</script> -->
+
 <script>
 function format ( d ) {
     // `d` is the original data object for the row
