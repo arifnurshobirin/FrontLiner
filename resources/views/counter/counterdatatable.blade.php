@@ -15,25 +15,19 @@
             </div> 
             <!-- /.card-header -->
             <div class="card-body">
-                <div>
-                    <button type="button" name="countercreate" id="countercreate" class="btn btn-success waves-effect">
-                        <i class="fas fa-plus"></i><span> Add Counter</span>
-                    </button>
-                    <button type="button" name="countersomedelete" id="countersomedelete" class="btn btn-danger waves-effect">
-                        <i class="fas fa-times"></i><span> Delete Some Counter</span>
-                    </button>
-                </div>
-                <br>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable"
                         id="CounterDatatable">
                         <thead>
                             <tr>
-                                <th>Checkbox</th>
+                                <th><button type="button" name="countersomedelete" id="countersomedelete" class="btn btn-danger">
+                                <i class="fas fa-times"></i><span></span>
+                                </button></th>
                                 <th>No Counter</th>
                                 <th>Ip Address</th>
                                 <th>Mac Address</th>
                                 <th>Type Counter</th>
+                                <th>Status Counter</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -44,6 +38,7 @@
                                 <th>Ip Address</th>
                                 <th>Mac Address</th>
                                 <th>Type Counter</th>
+                                <th>Status Counter</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
@@ -113,6 +108,21 @@
                                 <option value="Bakery">Bakery</option>
                                 <option value="Dokar">Dokar</option>
                                 <option value="Canvasing">Canvasing</option>
+                                <option value="Backup">Backup</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <label for="type">Status Counter</label>
+                    <div class="form-group">
+                        <div class="form-line">
+                            <select class="form-control show-tick" id="satuscounter" name="statuscounter">
+                                <option value="">-- Please select --</option>
+                                <option value="Active">Active</option>
+                                <option value="Inaktive">Inaktive</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Broken">Broken</option>
+                                <option value="Queueing">Queueing</option>
                             </select>
                         </div>
                     </div>
@@ -126,41 +136,63 @@
 </div>
 <!-- #END# Create Table -->
 
+
+
 <script>
     $(document).ready(function() {
-            var table = $('#CounterDatatable').DataTable({
-            processing: true,
-            serverSide: true,
-            "responsive": true,
-            ajax: {
-            url:"{{ route('counter.index') }}",
-            },
-            "order": [[ 1, "asc" ]],
-            columns: [
-                { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
-                { data: 'NoCounter', name: 'NoCounter' },
-                { data: 'IpAddress', name: 'IpAddress' },
-                { data: 'MacAddress', name: 'MacAddress' },
-                { data: 'TypeCounter', name: 'TypeCounter' },
-                { data: 'action', name: 'action', orderable: false,searchable: false}
-            ],
-            buttons: [
-            {
-                extend: 'collection',
-                text: 'Export',
-                buttons: ['copy','excel','csv','pdf','print']
-            }
-            ]
+        
+        var table = $('#CounterDatatable').DataTable({
+        processing: true,
+        serverSide: true,
+        "responsive": true,
+        paging: true,
+        ajax: { url:"{{ route('counter.index') }}",},
+        "order": [[ 1, "asc" ]],
+        columns: [
+            { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
+            { data: 'NoCounter', name: 'NoCounter' },
+            { data: 'IpAddress', name: 'IpAddress' },
+            { data: 'MacAddress', name: 'MacAddress' },
+            { data: 'TypeCounter', name: 'TypeCounter' },
+            { data: 'StatusCounter', name: 'StatusCounter' },
+            { data: 'action', name: 'action', orderable: false,searchable: false}
+                ],
+        dom: 'Bfrtip',
+        lengthMenu: [
+            [ 10, 25, 50, -1 ],
+            [ '10 rows', '25 rows', '50 rows', 'Show all' ]
+        ],
+        buttons:['pageLength',
+                    
+                        {
+                            extend: 'collection',
+                            text: 'Export',
+                            buttons:[ 'copy', 'csv', 'excel', 'pdf', 'print',
+                                        {
+                                            collectionTitle: 'Visibility control',
+                                            extend: 'colvis',
+                                            collectionLayout: 'two-column'
+                                        }
+                                    ]
+                        },
+                        {
+                            text: '<i class="fas fa-plus"></i><span> Add Counter</span>',
+                            className: 'btn btn-success',
+                            action: function ( e, dt, node, config ) {
+                                $('#countersave').val("create Counter");
+                                $('#countersave').html('Save');
+                                $('#counterid').val('');
+                                $('#counterform').trigger("reset");
+                                $('#modelHeading').html("Create New Counter");
+                                $('#ajaxModel').modal('show');
+                            }
+                        }
+                    ]
         });
 
-        $('#countercreate').click(function () {
-            $('#countersave').val("create Counter");
-            $('#countersave').html('Save');
-            $('#counterid').val('');
-            $('#counterform').trigger("reset");
-            $('#modelHeading').html("Create New Counter");
-            $('#ajaxModel').modal('show');
-        });
+        // table.buttons( 0, null ).container().prependTo(
+        //     table.table().container()
+        // );
 
         $(document).on('click', '.counteredit', function () {
             var counterid = $(this).attr('id');
@@ -175,6 +207,7 @@
                 $('#ipaddress').val(data.IpAddress);
                 $('#macaddress').val(data.MacAddress);
                 $('#typecounter').val(data.TypeCounter);
+                $('#statuscounter').val(data.StatusCounter);
             })
         });
 
@@ -215,6 +248,35 @@
             showDeleteTable();
         });
 
+        $(document).on('click', '#countersomedelete', function(){
+        var id = [];
+        if(confirm("Are you sure you want to Delete this data?"))
+        {
+            $('.countercheckbox:checked').each(function(){
+                id.push($(this).val());
+            });
+            if(id.length > 0)
+            {
+                $.ajax({
+                    url:"{{ route('counter.somedelete')}}",
+                    method:"get",
+                    data:{id:id},
+                    success:function(data)
+                    {
+
+                        swal.fire("Good job!", "You success delete Counter!", "success");
+                        $('#CounterDatatable').DataTable().ajax.reload();
+                        
+                    }
+                });
+            }
+            else
+            {
+                alert("Please select atleast one checkbox");
+            }
+        }
+        });
+
 
         function showDeleteTable() {
             swal.fire({
@@ -243,33 +305,10 @@
         function showSuccessMessage() {
             swal.fire("Good job!", "You success update Counter!", "success");
         }
+
+
+
     });
 
-    $(document).on('click', '#countersomedelete', function(){
-        var id = [];
-        if(confirm("Are you sure you want to Delete this data?"))
-        {
-            $('.countercheckbox:checked').each(function(){
-                id.push($(this).val());
-            });
-            if(id.length > 0)
-            {
-                $.ajax({
-                    url:"{{ route('counter.somedelete')}}",
-                    method:"get",
-                    data:{id:id},
-                    success:function(data)
-                    {
-                        alert(data);
-                        $('#CounterDatatable').DataTable().ajax.reload();
-                    }
-                });
-            }
-            else
-            {
-                alert("Please select atleast one checkbox");
-            }
-        }
-    });
 
 </script> 
