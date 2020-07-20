@@ -8,6 +8,46 @@ $(document).ready(function () {
         $('#contentpage').load('tes');
         return false;
     })
+    $('#contenthelpdesk').click(function () {
+        $('a').removeClass('active');
+        document.getElementById('contentdashboard').className = "nav-link active";
+        document.getElementById('contenthelpdesk').className = "nav-link active";
+        $('.urlpage').html('Helpdesk Page');
+        $('#contentpage').load('helpdesk');
+        return false;
+    })
+    $('#contentsales').click(function () {
+        $('a').removeClass('active');
+        document.getElementById('contentdashboard').className = "nav-link active";
+        document.getElementById('contentsales').className = "nav-link active";
+        $('.urlpage').html('Sales Page');
+        $('#contentpage').load('sales');
+        return false;
+    })
+    $('#contentpicasso').click(function () {
+        $('a').removeClass('active');
+        document.getElementById('contentdaily').className = "nav-link active";
+        document.getElementById('contentpicasso').className = "nav-link active";
+        $('.urlpage').html('Picasso Page');
+        $('#contentpage').load('picasso');
+        return false;
+    })
+    $('#contentdeposit').click(function () {
+        $('a').removeClass('active');
+        document.getElementById('contentdaily').className = "nav-link active";
+        document.getElementById('contentdeposit').className = "nav-link active";
+        $('.urlpage').html('Deposit Page');
+        $('#contentpage').load('deposit');
+        return false;
+    })
+    $('#contentbanana').click(function () {
+        $('a').removeClass('active');
+        document.getElementById('contentdaily').className = "nav-link active";
+        document.getElementById('contentbanana').className = "nav-link active";
+        $('.urlpage').html('Banana Page');
+        $('#contentpage').load('banana');
+        return false;
+    })
     $('#contentgallery').click(function () {
         $('a').removeClass('active');
         document.getElementById('contentgallery').className = "nav-link active";
@@ -37,7 +77,7 @@ $(document).ready(function () {
         document.getElementById('contentterminal').className = "nav-link active";
         document.getElementById('contentedc').className = "nav-link active";
         $('.urlpage').html('EDC Page');
-        $('#contentpage').load('edctable');
+        $('#contentpage').load('edcdatatable');
         return false;
     })
     $('#contentcashier').click(function () {
@@ -45,7 +85,7 @@ $(document).ready(function () {
         document.getElementById('contentusers').className = "nav-link active";
         document.getElementById('contentcashier').className = "nav-link active";
         $('.urlpage').html('Cashier Page');
-        $('#contentpage').load('cashiertable');
+        $('#contentpage').load('cashierdatatable');
         return false;
     })
     $('#contentmanagement').click(function () {
@@ -53,7 +93,7 @@ $(document).ready(function () {
         document.getElementById('contentusers').className = "nav-link active";
         document.getElementById('contentmanagement').className = "nav-link active";
         $('.urlpage').html('Management Page');
-        $('#contentpage').load('managementtable');
+        $('#contentpage').load('managementdatatable');
         return false;
     })
     $('#contentpos').click(function () {
@@ -61,7 +101,7 @@ $(document).ready(function () {
         document.getElementById('contentterminal').className = "nav-link active";
         document.getElementById('contentpos').className = "nav-link active";
         $('.urlpage').html('POS Page');
-        $('#contentpage').load('postable');
+        $('#contentpage').load('posdatatable');
         return false;
     })
     $('#contentcounter').click(function () {
@@ -69,21 +109,21 @@ $(document).ready(function () {
         document.getElementById('contentterminal').className = "nav-link active";
         document.getElementById('contentcounter').className = "nav-link active";
         $('.urlpage').html('Counter Page');
-        $('#contentpage').load('countertable');
+        $('#contentpage').load('counterdatatable');
         return false;
     })
     $('#contentscheduledatatable').click(function () {
         $('a').removeClass('active');
         document.getElementById('contentscheduledatatable').className = "nav-link active";
         $('.urlpage').html('Schedule Datatable Page');
-        $('#contentpage').load('scheduletable');
+        $('#contentpage').load('scheduledatatable');
         return false;
     })
-    $('#contentscheduleadd').click(function () {
+    $('#contentschedulecreate').click(function () {
         $('a').removeClass('active');
-        document.getElementById('contentscheduleadd').className = "nav-link active";
-        $('.urlpage').html(' Add Schedule Page');
-        $('#contentpage').load('scheduleadd');
+        document.getElementById('contentschedulecreate').className = "nav-link active";
+        $('.urlpage').html('Add Schedule Page');
+        $('#contentpage').load('schedule/create');
         return false;
     })
     $('#contentmonitoring').click(function () {
@@ -94,6 +134,5 @@ $(document).ready(function () {
         return false;
     })
 
-
-
 })
+
