@@ -7,6 +7,7 @@ use DataTables;
 use Illuminate\Http\Request;
 use Validator;
 Use Alert;
+use Yajra\Datatables\Html\Builder;
 
 class CashierController extends Controller
 {
@@ -15,15 +16,13 @@ class CashierController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function table()
+    public function datatable()
     {
         return view('cashier.cashierdatatable');
     }
 
     public function index(Request $request)
     {
-        if($request->ajax())
-        {
             $data = CashierModel::latest()->get();
             return DataTables::of($data)
             ->addColumn('action',
@@ -32,14 +31,12 @@ class CashierController extends Controller
                 <div class="dropdown-menu dropdown-menu-right" role="menu">
                 <a href="#" class="cashiershow dropdown-item" id="{{$id}}"><i class="fas fa-desktop"></i> Show</a>
                 <a href="#" class="cashieredit dropdown-item" id="{{$id}}"><i class="fas fa-edit"></i> Edit</a>
-                <a href="#" class="cashierdelete dropdown-item sweetalert" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
+                <a href="#" class="cashierdelete dropdown-item" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
                 </div></div>')
             ->addColumn('checkbox', '<input type="checkbox" name="cashiercheckbox[]" class="cashiercheckbox" value="{{$id}}" />')
             ->rawColumns(['checkbox','action'])
             ->make(true);
 
-        }
-        return view('cashier.cashierdatatable');
     }
 
     /**
@@ -85,7 +82,7 @@ class CashierController extends Controller
             'PhoneNumber' => $request->phone,
             'Position' => $request->position,
             'JoinDate' => $newjoin,
-            'Status' => $request->status,
+            'StatusCashier' => $request->statuscashier,
             'Avatar' => $imagename
         );
 
@@ -140,5 +137,10 @@ class CashierController extends Controller
     {
         $data = CashierModel::findOrFail($id);
         $data->delete();
+    }
+    public function moredelete(Request $request)
+    {   
+        $idarray = $request->input('id');
+        $pos = CashierModel::whereIn('id',$idarray)->delete();
     }
 }

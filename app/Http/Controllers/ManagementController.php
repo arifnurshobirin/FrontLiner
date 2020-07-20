@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\ManagementModel;
 use DataTables;
 use Illuminate\Http\Request;
+use Validator;
 Use Alert;
+use Yajra\Datatables\Html\Builder;
 
 class ManagementController extends Controller
 {
@@ -14,14 +16,12 @@ class ManagementController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function table()
+    public function datatable()
     {
         return view('management.managementdatatable');
     }
     public function index(Request $request)
     {
-        if($request->ajax())
-        {
             $data = ManagementModel::latest()->get();
             return DataTables::of($data)
             ->addColumn('action',
@@ -30,14 +30,11 @@ class ManagementController extends Controller
                 <div class="dropdown-menu dropdown-menu-right" role="menu">
                 <a href="#" class="managementshow dropdown-item" id="{{$id}}"><i class="fas fa-desktop"></i> Show</a>
                 <a href="#" class="managementedit dropdown-item" id="{{$id}}"><i class="fas fa-edit"></i> Edit</a>
-                <a href="#" class="managementdelete dropdown-item sweetalert" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
+                <a href="#" class="managementdelete dropdown-item" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
                 </div></div>')
-            ->addColumn('checkbox', '<input type="checkbox" name="managementcheckbox[]" class="managamentcheckbox" value="{{$id}}" />')
+            ->addColumn('checkbox', '<input type="checkbox" name="managementcheckbox[]" class="managementcheckbox" value="{{$id}}" />')
             ->rawColumns(['checkbox','action'])
             ->make(true);
-
-        }
-        return view('management.managementdatatable');
     }
 
     /**
@@ -127,5 +124,10 @@ class ManagementController extends Controller
     {
         $data = ManagementModel::findOrFail($id);
         $data->delete();
+    }
+    public function moredelete(Request $request)
+    {   
+        $idarray = $request->input('id');
+        $management = ManagementModel::whereIn('id',$idarray)->delete();
     }
 }

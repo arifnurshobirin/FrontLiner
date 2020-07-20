@@ -16,15 +16,13 @@ class POSController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function table()
+    public function datatable()
     {
-        return view('pos.POSdatatable');
+        return view('pos.posdatatable');
     }
 
     public function index(Request $request)
-    {
-        if($request->ajax())
-        {
+    {  
             $data = POSModel::latest()->get();
             return DataTables::of($data)
             ->addColumn('action',
@@ -39,9 +37,6 @@ class POSController extends Controller
             ->rawColumns(['checkbox','action'])
             ->make(true);
 
-
-        }
-        return view('pos.POSdatatable', compact('data'));
     }
 
     /**
@@ -85,7 +80,7 @@ class POSController extends Controller
     public function show($id)
     {
         $data = POSModel::findOrFail($id);
-        return view('pos.POSprofile',compact('data'));
+        return view('pos.posprofile',compact('data'));
     }
 
     /**
@@ -125,10 +120,6 @@ class POSController extends Controller
     }
     public function moredelete(Request $request)
     {   
-        // if($request->ajax()){
-        //     return response()->json(['status'=>'Ajax request']);
-        // }
-        // return response()->json(['status'=>'Http request']);
         $idarray = $request->input('id');
         $pos = POSModel::whereIn('id',$idarray)->delete();
     }

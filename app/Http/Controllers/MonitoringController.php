@@ -15,8 +15,14 @@ class MonitoringController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $data = CounterModel::all();
+    {   
+        $data = DB::table('countertable')
+            ->select('countertable.id','countertable.NoCounter','countertable.StatusCounter', 'countertable.TypeCounter',
+                    'edctable.id as idEDC','edctable.TIDEDC', 'edctable.MIDEDC','edctable.TypeEDC')
+            ->leftJoin('edctable', 'countertable.NoCounter', '=', 'edctable.NoCounter')
+            ->get();
+            // $data = CounterModel::all();
+            // dd($data);
         return view('monitoring.monitoring',compact('data'));
     }
 

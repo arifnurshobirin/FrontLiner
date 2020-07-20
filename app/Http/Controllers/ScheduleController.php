@@ -17,29 +17,30 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function table()
+    public function datatable()
     {
         return view('schedule.scheduledatatable');
+        // "'.$data->id.'"
     }
     
     public function index(Request $request)
     {
-        if($request->ajax())
-        {
+        
             $data = ScheduleModel::latest()->get();
             return DataTables::of($data)
-            ->addColumn('action', function($data){
-                $button = '<button type="button" name="edit" id="'.$data->id.'" class="showschedule btn btn-warning waves-effect" data-type="with-custom-icon"><i class="fas fa-desktop"></i> Show</button>';
-                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="scheduleedit btn btn-primary waves-effect"><i class="fas fa-edit"></i> Edit</button>';
-                $button .= '&nbsp;&nbsp;&nbsp;<button type="button" name="edit" id="'.$data->id.'" class="scheduledelete btn btn-danger waves-effect js-sweetalert" data-type="cancel"><i class="fas fa-trash"></i> Delete</button>';
-                return $button;
-            })
-            ->rawColumns(['action'])
+            ->addColumn('action',
+                '<div class="btn-group">
+                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+                <div class="dropdown-menu dropdown-menu-right" role="menu">
+                <a href="#" class="scheduleshow dropdown-item" id="{{$id}}"><i class="fas fa-desktop"></i> Show</a>
+                <a href="#" class="scheduleedit dropdown-item" id="{{$id}}"><i class="fas fa-edit"></i> Edit</a>
+                <a href="#" class="scheduledelete dropdown-item" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
+                </div></div>')
+            ->addColumn('checkbox', '<input type="checkbox" name="schedulecheckbox[]" class="poscheckbox" value="{{$id}}" />')
+            ->rawColumns(['checkbox','action'])
             ->make(true);
 
 
-        }
-        return view('schedule.scheduledatatable');
     }
     
 
@@ -48,15 +49,15 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function getBasic()
+    public function create()
     {
          // $dataschedule = ScheduleModel::latest()->get();
          // $datacashier = CashierModel::latest()->get();
         $dataworkinghour = WorkingHourModel::all();
-        return view('schedule.scheduleadd',compact('dataworkinghour'));
+        return view('schedule.schedulecreate',compact('dataworkinghour'));
     }
 
-    public function getBasicData()
+    public function datatablecreate()
     {
             // $dataworkinghour = WorkingHourModel::all();
             $data = CashierModel::where('Status','Active')->get();
@@ -76,7 +77,7 @@ class ScheduleController extends Controller
                 <a class="schedulesave dropdown-item" id="{{$id}}" onclick="freezeschedule({{$id}})"><i class="fas fa-desktop"></i> Save</a>
                 <a class="scheduleedit dropdown-item" id="{{$id}}" onclick="editschedule({{$id}})"><i class="fas fa-edit"></i> Edit</a>
                 <a class="scheduledelete dropdown-item" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
-                </div></div></form>')
+                </div></div>')
             ->rawColumns(['monday','tuesday','wednesday','thursday','friday','saturday','sunday','action'])
             ->make(true);
 
@@ -95,21 +96,28 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-        $date = $request->date;
 
-        $newdate=date("Y-m-d",strtotime($date));
+        $date[$a] = $request->day+$a;
+        for($a=1;$a<7;$a++)
+        {
+        $date[$a] = $request->day+$a;
+        $newdate[$a]=date("Y-m-d",strtotime($date[$a]));
+        }
+        dd($date);
         
-        $form_data = array(
-            'Employee' => $request->emp,
-            'FullName' => $request->name,
-            'Date' => $newdate,
-            'StartWork' => $request->startwork,
-            'EndWork' => $request->endwork,
-        );
+        
+        
+        // $form_data = array(
+        //     'Employee' => $request->emp,
+        //     'FullName' => $request->name,
+        //     'Date' => $newdate,
+        //     'StartWork' => $request->startwork,
+        //     'EndWork' => $request->endwork,
+        // );
 
-        ScheduleModel::updateOrCreate($form_data);
+        // ScheduleModel::updateOrCreate($form_data);
 
-        return response()->json(['success' => 'Data Added successfully.']);
+        // return response()->json(['success' => 'Data Added successfully.']);
     }
 
     /**
@@ -155,6 +163,11 @@ class ScheduleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+    {
+        $data = ScheduleModel::findOrFail($id);
+        $data->delete();
+    }
+    public function destroydatatable    ($id)
     {
         $data = ScheduleModel::findOrFail($id);
         $data->delete();

@@ -15,15 +15,13 @@ class CounterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function table()
+    public function datatable()
     {
         return view('counter.counterdatatable');
     }
 
     public function index(Request $request)
     {
-        if($request->ajax())
-        {
             $data = CounterModel::latest()->get();
             return DataTables::of($data)
             ->addColumn('action',
@@ -32,7 +30,7 @@ class CounterController extends Controller
             <div class="dropdown-menu dropdown-menu-right" role="menu">
             <a href="#" class="countershow dropdown-item" id="{{$id}}"><i class="fas fa-desktop"></i> Show</a>
             <a href="#" class="counteredit dropdown-item" id="{{$id}}"><i class="fas fa-edit"></i> Edit</a>
-            <a href="#" class="counterdelete dropdown-item sweetalert" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
+            <a href="#" class="counterdelete dropdown-item" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
             </div></div>')
             ->addColumn('checkbox', '<input type="checkbox" name="countercheckbox[]" class="checkbox countercheckbox" value="{{$id}}" />')
             // ->addColumn('status', function($data) {
@@ -45,8 +43,6 @@ class CounterController extends Controller
             ->rawColumns(['checkbox','action'])
             ->make(true);
 
-        }
-        return view('counter.counterdatatable');
     }
 
     /**
@@ -128,7 +124,7 @@ class CounterController extends Controller
         $data->delete();
     }
 
-    public function somedelete(Request $request)
+    public function moredelete(Request $request)
     {   
         // if($request->ajax()){
         //     return response()->json(['status'=>'Ajax request']);

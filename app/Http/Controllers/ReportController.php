@@ -37,6 +37,28 @@ class ReportController extends Controller
     {
         return view('auth.lockscreen');
     }
+    public function helpdesk()
+    {
+        return view('dashboard.helpdesk');
+    }
+    public function sales()
+    {
+        return view('dashboard.sales');
+    }
+    public function picasso()
+    {
+        return view('daily.picasso');
+    }
+    public function deposit()
+    {
+        return view('daily.deposit');
+    }
+    public function banana()
+    {
+        return view('daily.banana');
+    }
+
+
 
     /**
      * Show the form for creating a new resource.

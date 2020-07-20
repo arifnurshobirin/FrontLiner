@@ -17,14 +17,12 @@ class EDCController extends Controller
      */
 
 
-    public function table()
+    public function datatable()
     {
-        return view('edc.EDCdatatable');
+        return view('edc.edcdatatable');
     }
     public function index(Request $request)
     {
-        if($request->ajax())
-        {
             $data = EDCModel::latest()->get();
             return DataTables::of($data)
             ->addColumn('action','<div class="btn-group">
@@ -32,14 +30,12 @@ class EDCController extends Controller
                 <div class="dropdown-menu dropdown-menu-right" role="menu">
                 <a href="#" class="edcshow dropdown-item" id="{{$id}}"><i class="fas fa-desktop"></i> Show</a>
                 <a href="#" class="editedc dropdown-item" id="{{$id}}"><i class="fas fa-edit"></i> Edit</a>
-                <a href="#" class="deleteedc dropdown-item sweetalert" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
+                <a href="#" class="deleteedc dropdown-item" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
                 </div></div>')
             ->addColumn('checkbox', '<input type="checkbox" name="edccheckbox[]" class="edccheckbox" value="{{$id}}" />')
             ->rawColumns(['action','checkbox'])
             ->make(true);
 
-        }
-        return view('edc.EDCdatatable');
     }
     /**
      * Show the form for creating a new resource.
@@ -65,10 +61,11 @@ class EDCController extends Controller
             'TIDEDC' => $request->tidedc,
             'MIDEDC' => $request->midedc,
             'IPAdress' => $request->ipedc,
-            'NoCounter ' => $request->nocounter,
+            'NoCounter' => $request->nocounter,
             'Connection' => $request->connection,
             'SIMCard' => $request->simcard,
-            'TypeEDC' => $request->typeedc
+            'TypeEDC' => $request->typeedc,
+            'StatusEDC' => $request->statusedc
         );
 
         EDCModel::updateOrCreate(['id'=>$request->edcid],$form_data);
@@ -124,5 +121,10 @@ class EDCController extends Controller
     {
         $data = EDCModel::findOrFail($id);
         $data->delete();
+    }
+    public function moredelete(Request $request)
+    {   
+        $idarray = $request->input('id');
+        $edc = EDCModel::whereIn('id',$idarray)->delete();
     }
 }
