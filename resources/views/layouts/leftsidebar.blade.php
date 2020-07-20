@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-primary elevation-4">
+<aside class="main-sidebar sidebar-dark-danger elevation-4">
       <!-- Brand Logo -->
-      <a href="index3.html" class="brand-link">
+      <a href="home" class="brand-link navbar-danger">
         <img src="img/TPLogo2.png" alt="TP Logo" class="brand-image img-circle elevation-3"
           style="opacity: .8">
         <span class="brand-text font-weight-light">CashLiner TP</span>
@@ -144,7 +144,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" id="contentscheduleadd"  class="nav-link">
+                  <a href="#" id="contentschedulecreate"  class="nav-link">
                     <i class="nav-icon fas fa-calendar-plus"></i>
                     <p>Create Schedule</p>
                   </a>
@@ -200,10 +200,41 @@
               </ul>
             </li>
             <li class="nav-item has-treeview">
-              <a href="#" id="contentreport"  class="nav-link">
+              <a href="#" id="contentdaily"  class="nav-link">
                 <i class="nav-icon fas fa-clipboard-check"></i>
                 <p>
-                  Report
+                  Daily Report
+                  <i class="right fas fa-angle-left"></i>
+                  <span class="badge badge-info right">3</span>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="#" id="contentpicasso"  class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Picasso</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" id="contentdeposit"  class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Deposit Form</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" id="contentbanana"  class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Banana Media</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-header">EXTRA NAVIGATION</li>
+            <li class="nav-item has-treeview">
+              <a href="#" id="contentreport"  class="nav-link">
+                <i class="nav-icon fas fa-file-download"></i>
+                <p>
+                  Report Download
                   <i class="right fas fa-angle-left"></i>
                   <span class="badge badge-info right">3</span>
                 </p>
@@ -229,29 +260,46 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-header">EXTRA NAVIGATION</li>
             <li class="nav-item">
-              <a href="#" id="contentcalendar"  class="nav-link">
-                <i class="nav-icon far fa-calendar-alt"></i>
-                <p>Calendar
-                  <span class="right badge badge-success">Beta</span>
-                </p>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a href="#" id="contentgallery" class="nav-link">
-                <i class="nav-icon far fa-image"></i>
+            <a href="#" id="contentform"  class="nav-link">
+                <i class="nav-icon fas fa-file-signature"></i>
                 <p>
-                  Multimedia
-                  <span class="right badge badge-success">Beta</span>
+                  Forms
+                  <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
+              <ul class="nav nav-treeview">
+              <li class="nav-item">
+                  <a href="#" id="contentformsenior"  class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Cashier Head</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" id="contentformsenior"  class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Senior Cashier</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" id="contentformtdr"  class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>TDR</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" id="contentformcs"  class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Customer Service</p>
+                  </a>
+                </li>
+              </ul>
             </li>
             <li class="nav-item has-treeview">
               <a href="#" id="contentmailbox"  class="nav-link">
                 <i class="nav-icon far fa-envelope"></i>
                 <p>
-                  Mailbox
+                  E-mail
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
@@ -303,6 +351,23 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
+                  <a href="#" id="contentcalendar"  class="nav-link">
+                    <i class="nav-icon far fa-calendar-alt"></i>
+                    <p>Calendar
+                      <span class="right badge badge-success">Beta</span>
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" id="contentgallery" class="nav-link">
+                    <i class="nav-icon far fa-image"></i>
+                    <p>
+                      Multimedia
+                      <span class="right badge badge-success">Beta</span>
+                    </p>
+                  </a>
+                </li>
+                <li class="nav-item">
                   <a href="#" id="content" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Game</p>
@@ -317,16 +382,16 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="#" id="contentpicasso"  class="nav-link">
+              <li class="nav-item">
+                  <a href="#" id="contentformsenior"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Picasso</p>
+                    <p>Cashier Head</p>
                   </a>
                 </li>
                 <li class="nav-item">
                   <a href="#" id="contentformsenior"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Senior Kasir</p>
+                    <p>Senior Cashier</p>
                   </a>
                 </li>
                 <li class="nav-item">
