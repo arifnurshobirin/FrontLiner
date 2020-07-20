@@ -1,7 +1,14 @@
 @include('sweetalert::alert')
-
 <!-- POS Table -->
 <div class="row">
+    <div class="preloader">
+        <div class="loading">
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
+            <strong>Loading...</strong>
+        </div>
+    </div>
     <div class="col-12">
         <div class="card">
             <div class="card-header">
@@ -25,7 +32,7 @@
                                 <th><button type="button" name="posmoredelete" id="posmoredelete" class="btn btn-danger">
                                 <i class="fas fa-times"></i><span></span>
                                 </button></th>
-                                <th>Detail</th>
+                                <th></th>
                                 <th>No POS</th>
                                 <th>CPU</th>
                                 <th>Printer</th>
@@ -37,8 +44,8 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Checkbox</th>
-                                <th>Detail</th>
+                                <th></th>
+                                <th></th>
                                 <th>No POS</th>
                                 <th>CPU</th>
                                 <th>Printer</th>
@@ -157,6 +164,7 @@
 <!-- #END# Create Table -->
 
 <script>
+    $(".preloader").fadeOut("slow");
 function format ( d ) {
     // `d` is the original data object for the row
     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
@@ -198,38 +206,38 @@ function format ( d ) {
             { data: 'Monitor', name: 'Monitor' },
             { data: 'action', name: 'action', orderable: false,searchable: false}
             ],
-            dom: 'Bfrtip',
+        dom: 'Bfrtip',
         lengthMenu: [
             [ 10, 25, 50, -1 ],
             [ '10 rows', '25 rows', '50 rows', 'Show all' ]
         ],
         buttons:['pageLength',
                     
-                        {
-                            extend: 'collection',
-                            text: 'Export',
-                            className: 'btn btn-info',
-                            buttons:[ 'copy', 'csv', 'excel', 'pdf', 'print',
-                                        {
-                                            collectionTitle: 'Visibility control',
-                                            extend: 'colvis',
-                                            collectionLayout: 'two-column'
-                                        }
-                                    ]
-                        },
-                        {
-                            text: '<i class="fas fa-plus"></i><span> Add POS</span>',
-                            className: 'btn btn-success',
-                            action: function ( e, dt, node, config ) {
-                                $('#possave').val("create POS");
-                                $('#possave').html('Save');
-                                $('#posid').val('');
-                                $('#posform').trigger("reset");
-                                $('#modelHeading').html("Create New POS");
-                                $('#ajaxModel').modal('show');
-                            }
+                    {
+                        extend: 'collection',
+                        text: 'Export',
+                        className: 'btn btn-info',
+                        buttons:[ 'copy', 'csv', 'excel', 'pdf', 'print',
+                                    {
+                                        collectionTitle: 'Visibility control',
+                                        extend: 'colvis',
+                                        collectionLayout: 'two-column'
+                                    }
+                                ]
+                    },
+                    {
+                        text: '<i class="fas fa-plus"></i><span> Add POS</span>',
+                        className: 'btn btn-success',
+                        action: function ( e, dt, node, config ) {
+                            $('#possave').val("create POS");
+                            $('#possave').html('Save');
+                            $('#posid').val('');
+                            $('#posform').trigger("reset");
+                            $('#modelHeading').html("Create New POS");
+                            $('#ajaxModel').modal('show');
                         }
-                    ]
+                    }
+                ]
         
         });
 
@@ -248,24 +256,6 @@ function format ( d ) {
                 row.child( format(row.data()) ).show();
                 tr.addClass('shown');
             }
-        });
-
-        $(document).on('click', '.posedit', function () {
-            var posid = $(this).attr('id');
-            $.get("{{ route('pos.index') }}" +'/' + posid +'/edit', function (data)
-            {
-                $('#modelHeading').html("Edit Data POS");
-                $('#possave').val("edit-pos");
-                $('#possave').html('Save Changes');
-                $('#ajaxModel').modal('show');
-                $('#posid').val(data.id);
-                $('#nopos').val(data.NoPOS);
-                $('#cpu').val(data.CPU);
-                $('#printer').val(data.Printer);
-                $('#drawer').val(data.Drawer);
-                $('#scanner').val(data.Scanner);
-                $('#monitor').val(data.Monitor);
-            })
         });
 
         $(document).on('click', '.posshow', function () {
@@ -300,6 +290,24 @@ function format ( d ) {
             });
         });
 
+        $(document).on('click', '.posedit', function () {
+            var posid = $(this).attr('id');
+            $.get("{{ route('pos.index') }}" +'/' + posid +'/edit', function (data)
+            {
+                $('#modelHeading').html("Edit Data POS");
+                $('#possave').val("edit-pos");
+                $('#possave').html('Save Changes');
+                $('#ajaxModel').modal('show');
+                $('#posid').val(data.id);
+                $('#nopos').val(data.NoPOS);
+                $('#cpu').val(data.CPU);
+                $('#printer').val(data.Printer);
+                $('#drawer').val(data.Drawer);
+                $('#scanner').val(data.Scanner);
+                $('#monitor').val(data.Monitor);
+            })
+        });
+
             var posid;
             $(document).on('click', '.posdelete', function(){
             posid = $(this).attr('id');
@@ -316,45 +324,50 @@ function format ( d ) {
                     $.ajax({
                 url:"pos/destroy/"+posid,
                 success:function(data){
-                    swal.fire("Deleted!", "Your Cashier file has been deleted.", "success")
+                    swal.fire("Deleted!", "Your POS file has been deleted.", "success")
                     $('#POSDatatable').DataTable().ajax.reload();
                 }
                 });
                 } else {
-                    swal.fire("Cancelled", "Your Cashier file is safe :)", "error");
+                    swal.fire("Cancelled", "Your POS file is safe :)", "error");
                 }
             });
         });
 
         $(document).on('click', '#posmoredelete', function(){
-        
-        if(confirm("Are you sure you want to Delete this data?"))
-        {
             var id = [];
-            $('.poscheckbox:checked').each(function(){
-                id.push($(this).val());
-            });
-            if(id.length > 0)
-            {
-                $.ajax({
-                    url:"{{ route('pos.moredelete')}}",
-                    method:"get",
-                    data:{id:id},
-                    success:function(data)
+            swal.fire({
+                title: "Are you sure?",
+                text: "You will not be able to recover this POS file!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete!",
+                cancelButtonText: "No, cancel!"
+            }).then((result) => {
+                if (result.value) {
+                    $('.poscheckbox:checked').each(function(){
+                        id.push($(this).val());
+                    });
+                    if(id.length > 0)
                     {
-
-                        swal.fire("Good job!", "You success delete POS!", "success");
+                        $.ajax({
+                        url:"{{ route('pos.moredelete')}}",
+                        method:"get",
+                        data:{id:id},
+                        success:function(data){
+                        swal.fire("Deleted!", "Your POS file has been deleted.", "success")
                         $('#POSDatatable').DataTable().ajax.reload();
-                        
+                            }
+                        });
                     }
+                    else
+                    {swal.fire("Please select atleast one checkbox");}
+                } 
+                else 
+                {swal.fire("Cancelled", "Your POS file is safe :)", "error");}
                 });
-            }
-            else
-            {
-                alert("Please select atleast one checkbox");
-            }
-        }
-        });
+            });
 
     });
 
