@@ -1,5 +1,13 @@
 <!-- Schedule Table -->
 <div class="row">
+    <div class="preloader">
+        <div class="loading">
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
+            <strong>Loading...</strong>
+        </div>
+    </div>
     <div class="col-12">
         <div class="card">
             <div class="card-header">
@@ -15,17 +23,15 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <div align="right">
-                    <button type="button" name="schedulecreate" id="schedulecreate" class="btn btn-success waves-effect">
-                        <i class="fas fa-plus"></i><span> Add Schedule</span>
-                    </button>
-                </div>
-                <br>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable"
                         id="ScheduleDatatable">
                         <thead>
                             <tr>
+                                <th><button type="button" name="schedulemoredelete" id="schedulemoredelete" class="btn btn-danger">
+                                <i class="fas fa-times"></i><span></span>
+                                </button></th>
+                                <th>Detail</th>
                                 <th>Employee</th>
                                 <th>Full Name</th>
                                 <th>Date Work</th>
@@ -35,6 +41,8 @@
                         </thead>
                         <tfoot>
                             <tr>
+                                <th>Checkbox</th>
+                                <th>Detail</th>
                                 <th>Employee</th>
                                 <th>Full Name</th>
                                 <th>Date Work</th>
@@ -125,6 +133,23 @@
 <!-- #END# Create Table -->
 
 <script>
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Full name:</td>'+
+            '<td>'+d.FullName+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extension number:</td>'+
+            '<td>'+d.FullName+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extra info:</td>'+
+            '<td>And any further details here (images etc)...</td>'+
+        '</tr>'+
+    '</table>';
+}
     $(document).ready(function() {
             var table = $('#ScheduleDatatable').DataTable({
             processing: true,
@@ -132,14 +157,71 @@
             ajax: {
             url:"{{ route('schedule.index') }}",
             },
-            "order": [[ 1, "asc" ]],
+            "order": [[ 2, "asc" ]],
             columns: [
+                { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
+                {
+                "className":      'details-control',
+                "orderable":      false,
+                "searchable":     false,
+                "data":           null,
+                "defaultContent": ''
+                },
                 { data: 'Employee', name: 'Employee' },
                 { data: 'FullName', name: 'FullName' },
                 { data: 'Date', name: 'Date' },
-                { data: 'Shift', name: 'Shift' },
+                { data: 'CodeShift', name: 'CodeShift' },
                 { data: 'action', name: 'action', orderable: false}
-            ]
+            ],
+            dom: 'Bfrtip',
+        lengthMenu: [
+            [ 10, 25, 50, -1 ],
+            [ '10 rows', '25 rows', '50 rows', 'Show all' ]
+        ],
+        buttons:['pageLength',
+                    
+                    {
+                        extend: 'collection',
+                        text: 'Export',
+                        className: 'btn btn-info',
+                        buttons:[ 'copy', 'csv', 'excel', 'pdf', 'print',
+                                    {
+                                        collectionTitle: 'Visibility control',
+                                        extend: 'colvis',
+                                        collectionLayout: 'two-column'
+                                    }
+                                ]
+                    },
+                    {
+                        text: '<i class="fas fa-plus"></i><span> Add Schedule</span>',
+                        className: 'btn btn-success',
+                        action: function ( e, dt, node, config ) {
+                            $('#schedulesave').val("create-schedule");
+                            $('#schedulesave').html('Save');
+                            $('#scheduleid').val('');
+                            $('#scheduleform').trigger("reset");
+                            $('#modelHeading').html("Create New Schedule");
+                            $('#ajaxModel').modal('show');
+                        }
+                    }
+                ]
+        });
+
+         // Add event listener for opening and closing details
+         $('#ScheduleDatatable').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = table.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format(row.data()) ).show();
+                tr.addClass('shown');
+            }
         });
 
         $('.datepicker').datepicker({
@@ -147,15 +229,6 @@
             clearButton: true,
             weekStart: 1,
             time: false
-        });
-
-        $('#schedulecreate').click(function () {
-            $('#schedulesave').val("create-schedule");
-            $('#schedulesave').html('Save');
-            $('#scheduleid').val('');
-            $('#scheduleform').trigger("reset");
-            $('#modelHeading').html("Create New Schedule");
-            $('#ajaxModel').modal('show');
         });
 
         $(document).on('click', '.scheduleedit', function () {
@@ -258,5 +331,6 @@
         $('[data-mask]').inputmask()
 
     });
+    $(".preloader").fadeOut("slow");
 
 </script>

@@ -1,6 +1,14 @@
 @include('sweetalert::alert')
 <!-- Cashier Table -->
 <div class="row">
+    <div class="preloader">
+        <div class="loading">
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
+            <strong>Loading...</strong>
+        </div>
+    </div>
     <div class="col-12">
         <div class="card">
             <div class="card-header">
@@ -16,20 +24,15 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <div>
-                    <button type="button" name="cashiercreate" id="cashiercreate" class="btn btn-success waves-effect">
-                        <i class="fas fa-plus"></i><span> Add Cashier</span>
-                    </button>
-                </div>
-                <br>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable"
                         id="CashierDatatable">
                         <thead>
                             <tr>
-                            <th><button type="button" name="cashiersomedelete" id="cashiersomedelete" class="btn btn-danger">
+                            <th><button type="button" name="cashiermoredelete" id="cashiermoredelete" class="btn btn-danger">
                                 <i class="fas fa-times"></i><span></span>
                                 </button></th>
+                                <th>Detail</th>
                                 <th>Avatar</th>
                                 <th>Employee</th>
                                 <th>Full Name</th>
@@ -41,6 +44,7 @@
                         <tfoot>
                             <tr>
                                 <th>Checkbox</th>
+                                <th>Detail</th>
                                 <th>Avatar</th>
                                 <th>Employee</th>
                                 <th>Full Name</th>
@@ -142,7 +146,7 @@
                                 <label for="position">Status</label>
                             <div class="form-group">
                                 <div class="form-line">
-                                    <select class="form-control show-tick" id="status" name="status">
+                                    <select class="form-control show-tick" id="statuscashier" name="statuscashier">
                                         <option value="">-- Please select --</option>
                                         <option value="Active">Active</option>
                                         <option value="Inactive">Inactive</option>
@@ -164,20 +168,40 @@
 <!-- #END# Create Table -->
 
 <script>
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Full name:</td>'+
+            '<td>'+d.FullName+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extension number:</td>'+
+            '<td>'+d.Position+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extra info:</td>'+
+            '<td>And any further details here (images etc)...</td>'+
+        '</tr>'+
+    '</table>';
+}
     $(document).ready(function() {
             var table = $('#CashierDatatable').DataTable({
             processing: true,
             serverSide: true,
-            // "responsive": true,
-            // "columnDefs":[ { responsivePriority: 1, targets: 1 },
-            //                 { responsivePriority: 2, targets: 4 }
-            //             ],
             ajax: {
             url:"{{ route('cashier.index') }}",
             },
-            "order": [[ 2, "asc" ]],
+            "order": [[ 3, "asc" ]],
             columns: [
                 { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
+                {
+                "className":      'details-control',
+                "orderable":      false,
+                "searchable":     false,
+                "data":           null,
+                "defaultContent": ''
+                },
                 {
                     "render": function (data, type, JsonResultRow, meta) {
                         return '<img src="../../img/'+JsonResultRow.Avatar+'" class="avatar" width="50" height="50">';
@@ -188,43 +212,57 @@
                 { data: 'Position', name: 'Position' },
                 { data: 'Status', name: 'Status' },
                 { data: 'action', name: 'action', orderable: false, searchable: false}
-            ]
+            ],
+            dom: 'Bfrtip',
+            lengthMenu: [
+            [ 10, 25, 50, -1 ],
+            [ '10 rows', '25 rows', '50 rows', 'Show all' ]
+            ],
+            buttons:['pageLength',
+                    
+                    {
+                        extend: 'collection',
+                        text: 'Export',
+                        className: 'btn btn-info',
+                        buttons:[ 'copy', 'csv', 'excel', 'pdf', 'print',
+                                    {
+                                        collectionTitle: 'Visibility control',
+                                        extend: 'colvis',
+                                        collectionLayout: 'two-column'
+                                    }
+                                ]
+                    },
+                    {
+                        text: '<i class="fas fa-plus"></i><span> Add Cashier</span>',
+                        className: 'btn btn-success',
+                        action: function ( e, dt, node, config ) {
+                            $('#cashiersave').val("create-cashier");
+                            $('#cashiersave').html('Save');
+                            $('#cashierid').val('');
+                            $('#cashierform').trigger("reset");
+                            $('#modelHeading').html("Create New Cashier");
+                            $('#ajaxModel').modal('show');
+                        }
+                    }
+                ]
         });
 
-        $('#cashiercreate').click(function () {
-            $('#cashiersave').val("create-cashier");
-            $('#cashiersave').html('Save');
-            $('#cashierid').val('');
-            $('#cashierform').trigger("reset");
-            $('#modelHeading').html("Create New Cashier");
-            $('#ajaxModel').modal('show');
-        });
+         // Add event listener for opening and closing details
+         $('#CashierDatatable').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = table.row( tr );
 
-        $(document).on('click', '.cashieredit', function () {
-            var cashierid = $(this).attr('id');
-            $.get("{{ route('cashier.index') }}" +'/' + cashierid +'/edit', function (data)
-            {
-                $('#modelHeading').html("Edit Data Cashier");
-                $('#cashiersave').val("edit-cashier");
-                $('#cashiersave').html('Save Changes');
-                $('#ajaxModel').modal('show');
-                $('#cashierid').val(data.id);
-                $('#emp').val(data.Employee);
-                $('#name').val(data.FullName);
-                $('#birth').val(data.DateOfBirth);
-                $('#address').val(data.Address);
-                $('#phone').val(data.PhoneNumber);
-                $('#position').val(data.Position);
-                $('#join').val(data.JoinDate);
-                $('#image').val(data.Avatar);
-            })
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format(row.data()) ).show();
+                tr.addClass('shown');
+            }
         });
-
-        $(document).on('click', '.cashiershow', function () {
-            var id = $(this).attr('id');
-                $('#contentpage').load('cashier'+'/'+id);
-        });
-
 
         $('#cashierform').on("submit",function (event) {
             event.preventDefault();
@@ -242,7 +280,7 @@
                     $('#ajaxModel').modal('hide');
                     $('#cashiersave').html('Save');
                     table.draw();
-                    showSuccessMessage();
+                    swal.fire("Good job!", "You success update Cashier!", "success");
                 },
                 error: function (data) {
                     console.log('Error:', data);
@@ -251,15 +289,36 @@
             });
         });
 
-            
-            var cashierid;
-            $(document).on('click', '.sweetalert', function(){
-            cashierid = $(this).attr('id');
-            showDeleteTable();
+
+        $(document).on('click', '.cashieredit', function () {
+            var cashierid = $(this).attr('id');
+            $.get("{{ route('cashier.index') }}" +'/' + cashierid +'/edit', function (data)
+            {
+                $('#modelHeading').html("Edit Data Cashier");
+                $('#cashiersave').val("edit-cashier");
+                $('#cashiersave').html('Save Changes');
+                $('#ajaxModel').modal('show');
+                $('#cashierid').val(data.id);
+                $('#emp').val(data.Employee);
+                $('#name').val(data.FullName);
+                $('#birth').val(data.DateOfBirth);
+                $('#address').val(data.Address);
+                $('#phone').val(data.PhoneNumber);
+                $('#position').val(data.Position);
+                $('#join').val(data.JoinDate);
+                $('#statuscashier').val(data.StatusCashier);
+                $('#image').val(data.Avatar);
+            })
         });
 
+        $(document).on('click', '.cashiershow', function () {
+            var id = $(this).attr('id');
+                $('#contentpage').load('cashier'+'/'+id);
+        });
 
-        function showDeleteTable() {
+            var cashierid;
+            $(document).on('click', '.cashierdelete', function(){
+            cashierid = $(this).attr('id');
             swal.fire({
                 title: "Are you sure?",
                 text: "You will not be able to recover this cashier file!",
@@ -281,10 +340,44 @@
                     swal.fire("Cancelled", "Your Cashier file is safe :)", "error");
                 }
             });
-        }
-        function showSuccessMessage() {
-            swal.fire("Good job!", "You success update Cashier!", "success");
-        }
+        });
+
+        $(document).on('click', '#cashiermoredelete', function(){
+            var id = [];
+            swal.fire({
+                title: "Are you sure?",
+                text: "You will not be able to recover this Cashier file!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete!",
+                cancelButtonText: "No, cancel!"
+            }).then((result) => {
+                if (result.value) {
+                    $('.cashiercheckbox:checked').each(function(){
+                        id.push($(this).val());
+                    });
+                    if(id.length > 0)
+                    {
+                        $.ajax({
+                        url:"{{ route('cashier.moredelete')}}",
+                        method:"get",
+                        data:{id:id},
+                        success:function(data){
+                        swal.fire("Deleted!", "Your Cashier file has been deleted.", "success")
+                        $('#CashierDatatable').DataTable().ajax.reload();
+                            }
+                        });
+                    }
+                    else
+                    {swal.fire("Please select atleast one checkbox");}
+                } 
+                else 
+                {swal.fire("Cancelled", "Your Cashier file is safe :)", "error");}
+                });
+            });
+
+
         $('#datetimepicker1').datetimepicker({
                     format: 'L'
                 });
@@ -294,5 +387,6 @@
         $('[data-mask]').inputmask()
 
     });
+    $(".preloader").fadeOut("slow");
 
 </script>

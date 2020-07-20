@@ -2,6 +2,14 @@
 
 <div class="container-fluid">
     <div class="row">
+        <div class="preloader">
+            <div class="loading">
+                <div class="spinner-grow text-danger" role="status"></div>
+                <div class="spinner-grow text-danger" role="status"></div>
+                <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
+                <strong>Loading...</strong>
+            </div>
+        </div>
         <div class="col-md-3">
 
             <!-- Profile Image -->
@@ -369,3 +377,12 @@
     </div>
     <!-- /.row -->
 </div><!-- /.container-fluid -->
+<script>
+    $(document).ready(function() {
+        $('#linkcashierprofile').click(function() {
+            $('#mainpage').load('cashierdatatable');
+        })
+    });
+    $(".preloader").fadeOut("slow");
+
+</script>

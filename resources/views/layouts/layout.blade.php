@@ -5,6 +5,7 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>CashLiner TP | Admin Page</title>
+  <!-- @preload -->
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,14 +34,43 @@
   <link href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+<style type="text/css">
+    .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 9999;
+        background-color: #fff;
+    }
+    .loading {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%,-50%);
+        font: 14px arial;
+    }
+</style>  
   
 </head>
 
 <body class="hold-transition sidebar-mini">
+  <!-- Page Loader -->
+  <div class="preloader">
+        <div class="loading">
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
+            <strong>Loading...</strong>
+        </div>
+    </div>
+  <!-- #END# Page Loader -->
+
   <!-- Site wrapper -->
   <div class="wrapper">
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-dark navbar-danger">
       <!-- Left navbar links -->
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -192,7 +222,8 @@
           </ul>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+          <a class="nav-link" data-widget="" data-slide="true" href="#" role="button">
+          <!-- <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"> -->
             <i class="fas fa-th-large"></i>
           </a>
         </li>
@@ -244,7 +275,8 @@
     <!-- /.control-sidebar -->
   </div>
   <!-- ./wrapper -->
-
+  
+  
   <!-- jQuery -->
   <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
   <!-- Bootstrap 4 -->
@@ -290,5 +322,9 @@
   <script src="{{ asset('plugins/fullcalendar-timegrid/main.min.js') }}"></script>
   <script src="{{ asset('plugins/fullcalendar-interaction/main.min.js') }}"></script>
   <script src="{{ asset('plugins/fullcalendar-bootstrap/main.min.js') }}"></script>
+  
+  <script>
+    $(".preloader").fadeOut("slow");
+  </script>
 </body>
 </html>

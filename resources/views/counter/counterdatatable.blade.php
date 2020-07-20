@@ -1,5 +1,13 @@
 @include('sweetalert::alert')
 <div class="row">
+    <div class="preloader">
+        <div class="loading">
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
+            <strong>Loading...</strong>
+        </div>
+    </div>
     <div class="col-12">
         <div class="card">
             <div class="card-header">
@@ -20,9 +28,10 @@
                         id="CounterDatatable">
                         <thead>
                             <tr>
-                                <th><button type="button" name="countersomedelete" id="countersomedelete" class="btn btn-danger">
+                                <th><button type="button" name="countermoredelete" id="countermoredelete" class="btn btn-danger">
                                 <i class="fas fa-times"></i><span></span>
                                 </button></th>
+                                <th></th>
                                 <th>No Counter</th>
                                 <th>Ip Address</th>
                                 <th>Mac Address</th>
@@ -33,7 +42,8 @@
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Checkbox</th>
+                                <th></th>
+                                <th></th>
                                 <th>No Counter</th>
                                 <th>Ip Address</th>
                                 <th>Mac Address</th>
@@ -119,7 +129,7 @@
                             <select class="form-control show-tick" id="satuscounter" name="statuscounter">
                                 <option value="">-- Please select --</option>
                                 <option value="Active">Active</option>
-                                <option value="Inaktive">Inaktive</option>
+                                <option value="Inactive">Inactive</option>
                                 <option value="Normal">Normal</option>
                                 <option value="Broken">Broken</option>
                                 <option value="Queueing">Queueing</option>
@@ -139,6 +149,23 @@
 
 
 <script>
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Full name:</td>'+
+            '<td>'+d.TypeCounter+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extension number:</td>'+
+            '<td>'+d.StatusCounter+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extra info:</td>'+
+            '<td>And any further details here (images etc)...</td>'+
+        '</tr>'+
+    '</table>';
+}
     $(document).ready(function() {
         
         var table = $('#CounterDatatable').DataTable({
@@ -147,9 +174,16 @@
         "responsive": true,
         paging: true,
         ajax: { url:"{{ route('counter.index') }}",},
-        "order": [[ 1, "asc" ]],
+        "order": [[ 2, "asc" ]],
         columns: [
             { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
+            {
+                "className":      'details-control',
+                "orderable":      false,
+                "searchable":     false,
+                "data":           null,
+                "defaultContent": ''
+            },
             { data: 'NoCounter', name: 'NoCounter' },
             { data: 'IpAddress', name: 'IpAddress' },
             { data: 'MacAddress', name: 'MacAddress' },
@@ -167,6 +201,7 @@
                         {
                             extend: 'collection',
                             text: 'Export',
+                            className: 'btn btn-info',
                             buttons:[ 'copy', 'csv', 'excel', 'pdf', 'print',
                                         {
                                             collectionTitle: 'Visibility control',
@@ -190,9 +225,47 @@
                     ]
         });
 
-        // table.buttons( 0, null ).container().prependTo(
-        //     table.table().container()
-        // );
+        // Add event listener for opening and closing details
+        $('#CounterDatatable').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = table.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format(row.data()) ).show();
+                tr.addClass('shown');
+            }
+        });
+
+        $('#counterform').on("submit",function (event) {
+            event.preventDefault();
+            $('#countersave').html('Sending..');
+            var formdata = new FormData($(this)[0]);
+            $.ajax({
+                url: "{{ route('counter.store') }}",
+                type: "POST",
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+
+                    $('#counterform').trigger("reset");
+                    $('#ajaxModel').modal('hide');
+                    $('#possave').html('Save');
+                    table.draw();
+                    swal.fire("Good job!", "You success update Counter!", "success");
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                    alert('Status: ' + data);
+                }
+            });
+        });
 
         $(document).on('click', '.counteredit', function () {
             var counterid = $(this).attr('id');
@@ -216,69 +289,9 @@
                 $('#contentpage').load('counter'+'/'+id);
         });
 
-
-        $('#counterform').on("submit",function (event) {
-            event.preventDefault();
-            $('#countersave').html('Sending..');
-            var formdata = new FormData($(this)[0]);
-            $.ajax({
-                url: "{{ route('counter.store') }}",
-                type: "POST",
-                data: formdata,
-                processData: false,
-                contentType: false,
-                success: function (data) {
-
-                    $('#counterform').trigger("reset");
-                    $('#ajaxModel').modal('hide');
-                    $('#possave').html('Save');
-                    table.draw();
-                    showSuccessMessage();
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                    alert('Status: ' + data);
-                }
-            });
-        });
-
             var counterid;
-            $(document).on('click', '.sweetalert', function(){
+            $(document).on('click', '.counterdelete', function(){
             counterid = $(this).attr('id');
-            showDeleteTable();
-        });
-
-        $(document).on('click', '#countersomedelete', function(){
-        var id = [];
-        if(confirm("Are you sure you want to Delete this data?"))
-        {
-            $('.countercheckbox:checked').each(function(){
-                id.push($(this).val());
-            });
-            if(id.length > 0)
-            {
-                $.ajax({
-                    url:"{{ route('counter.somedelete')}}",
-                    method:"get",
-                    data:{id:id},
-                    success:function(data)
-                    {
-
-                        swal.fire("Good job!", "You success delete Counter!", "success");
-                        $('#CounterDatatable').DataTable().ajax.reload();
-                        
-                    }
-                });
-            }
-            else
-            {
-                alert("Please select atleast one checkbox");
-            }
-        }
-        });
-
-
-        function showDeleteTable() {
             swal.fire({
                 title: "Are you sure?",
                 text: "You will not be able to recover this Counter file!",
@@ -300,15 +313,44 @@
                     swal.fire("Cancelled", "Your Counter file is safe :)", "error");
                 }
             });
-        }
+        });
 
-        function showSuccessMessage() {
-            swal.fire("Good job!", "You success update Counter!", "success");
-        }
-
-
+        $(document).on('click', '#countermoredelete', function(){
+            var id = [];
+            swal.fire({
+                title: "Are you sure?",
+                text: "You will not be able to recover this Counter file!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "Yes, delete!",
+                cancelButtonText: "No, cancel!"
+            }).then((result) => {
+                if (result.value) {
+                    $('.countercheckbox:checked').each(function(){
+                        id.push($(this).val());
+                    });
+                    if(id.length > 0)
+                    {
+                        $.ajax({
+                        url:"{{ route('counter.moredelete')}}",
+                        method:"get",
+                        data:{id:id},
+                        success:function(data){
+                        swal.fire("Good job!", "You success delete Counter!", "success");
+                        $('#CounterDatatable').DataTable().ajax.reload();           
+                            }
+                        });
+                    }
+                    else
+                    {swal.fire("Please select atleast one checkbox");}
+                }
+                else
+                swal.fire("Cancelled", "Your Counter file is safe :)", "error");
+            });
+        });
 
     });
-
+    $(".preloader").fadeOut("slow");
 
 </script> 

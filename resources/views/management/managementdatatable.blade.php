@@ -1,6 +1,14 @@
 @include('sweetalert::alert')
 <!-- Management Table -->
 <div class="row">
+    <div class="preloader">
+        <div class="loading">
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
+            <strong>Loading...</strong>
+        </div>
+    </div>
     <div class="col-12">
         <div class="card">
             <div class="card-header">
@@ -16,20 +24,15 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <div>
-                    <button type="button" name="managementcreate" id="managementcreate" class="btn btn-success waves-effect">
-                        <i class="fas fa-plus"></i><span> Add Management</span>
-                    </button>
-                </div>
-                <br>
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable"
                         id="ManagementDatatable">
                         <thead>
                             <tr>
-                                <th><button type="button" name="managementsomedelete" id="managementsomedelete" class="btn btn-danger">
+                                <th><button type="button" name="managementmoredelete" id="managementmoredelete" class="btn btn-danger">
                                 <i class="fas fa-times"></i><span></span>
                                 </button></th>
+                                <th>Detail</th>
                                 <th>Avatar</th>
                                 <th>Id Card</th>
                                 <th>Full Name</th>
@@ -40,6 +43,7 @@
                         <tfoot>
                             <tr>
                                 <th>Checkbox</th>
+                                <th>Detail</th>
                                 <th>Avatar</th>
                                 <th>Id Card</th>
                                 <th>Full Name</th>
@@ -50,7 +54,7 @@
                     </table>
                 </div>
             </div>
-            <<!-- /.card-body -->
+            <!-- /.card-body -->
             <div class="card-footer">
                 Project Website Cashier Carrefour Taman Palem
             </div>
@@ -120,6 +124,23 @@
 <!-- #END# Create Table -->
 
 <script>
+function format ( d ) {
+    // `d` is the original data object for the row
+    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+        '<tr>'+
+            '<td>Full name:</td>'+
+            '<td>'+d.IdCard+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extension number:</td>'+
+            '<td>'+d.FullName+'</td>'+
+        '</tr>'+
+        '<tr>'+
+            '<td>Extra info:</td>'+
+            '<td>And any further details here (images etc)...</td>'+
+        '</tr>'+
+    '</table>';
+}
     $(document).ready(function() {
             var table = $('#ManagementDatatable').DataTable({
             processing: true,
@@ -127,9 +148,16 @@
             ajax: {
             url:"{{ route('management.index') }}",
             },
-            "order": [[ 2, "asc" ]],
+            "order": [[ 3, "asc" ]],
             columns: [
                 { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
+                {
+                "className":      'details-control',
+                "orderable":      false,
+                "searchable":     false,
+                "data":           null,
+                "defaultContent": ''
+                },
                 {
                         "render": function (data, type, JsonResultRow, meta) {
                             return '<img src="../../img/'+JsonResultRow.Avatar+'" class="avatar" width="50" height="50">';
@@ -139,17 +167,82 @@
                 { data: 'FullName', name: 'FullName' },
                 { data: 'Position', name: 'Position' },
                 { data: 'action', name: 'action', orderable: false, searchable: false}
-            ]
+            ],
+        dom: 'Bfrtip',
+        lengthMenu: [
+            [ 10, 25, 50, -1 ],
+            [ '10 rows', '25 rows', '50 rows', 'Show all' ]
+        ],
+        buttons:['pageLength',
+                    
+                    {
+                        extend: 'collection',
+                        text: 'Export',
+                        className: 'btn btn-info',
+                        buttons:[ 'copy', 'csv', 'excel', 'pdf', 'print',
+                                    {
+                                        collectionTitle: 'Visibility control',
+                                        extend: 'colvis',
+                                        collectionLayout: 'two-column'
+                                    }
+                                ]
+                    },
+                    {
+                        text: '<i class="fas fa-plus"></i><span> Add Management</span>',
+                        className: 'btn btn-success',
+                        action: function ( e, dt, node, config ) {
+                            $('#managementsave').val("create-management");
+                            $('#managementsave').html('Save');
+                            $('#managementid').val('');
+                            $('#managementform').trigger("reset");
+                            $('#modelHeading').html("Create New Management");
+                            $('#ajaxModel').modal('show');
+                        }
+                    }
+                ]
+        });
+
+        // Add event listener for opening and closing details
+        $('#ManagementDatatable').on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = table.row( tr );
+
+            if ( row.child.isShown() ) {
+                // This row is already open - close it
+                row.child.hide();
+                tr.removeClass('shown');
+            }
+            else {
+                // Open this row
+                row.child( format(row.data()) ).show();
+                tr.addClass('shown');
+            }
         });
 
 
-        $('#managementcreate').click(function () {
-            $('#managementsave').val("create-management");
-            $('#managementsave').html('Save');
-            $('#managementid').val('');
-            $('#managementform').trigger("reset");
-            $('#modelHeading').html("Create New Management");
-            $('#ajaxModel').modal('show');
+        $('#managementform').on("submit",function (event) {
+            event.preventDefault();
+            $('#managementsave').html('Sending..');
+            var formdata = new FormData($(this)[0]);
+            $.ajax({
+                url: "{{ route('management.store') }}",
+                type: "POST",
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+
+                    $('#managementform').trigger("reset");
+                    $('#ajaxModel').modal('hide');
+                    $('#managementsave').html('Save');
+                    table.draw();
+                    swal.fire("Good job!", "You success update Management!", "success");
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                    $('#managementsave').html('Save Changes');
+                }
+            });
         });
 
         $(document).on('click', '.managementedit', function () {
@@ -173,41 +266,38 @@
         });
 
 
-        $('#managementform').on("submit",function (event) {
-            event.preventDefault();
-            $('#managementsave').html('Sending..');
-            var formdata = new FormData($(this)[0]);
-            $.ajax({
-                url: "{{ route('management.store') }}",
-                type: "POST",
-                data: formdata,
-                processData: false,
-                contentType: false,
-                success: function (data) {
 
-                    $('#managementform').trigger("reset");
-                    $('#ajaxModel').modal('hide');
-                    $('#managementsave').html('Save');
-                    table.draw();
-                    showSuccessMessage();
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                    $('#managementsave').html('Save Changes');
-                }
+
+        var managementid;
+        $(document).on('click', '.managementdelete', function(){
+            managementid = $(this).attr('id');
+            swal.fire({
+            title: "Are you sure?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "Yes, delete!",
+            cancelButtonText: "No, cancel!"
+            }).then((result) => {
+            if (result.value) {
+                $.ajax({
+            url:"management/destroy/"+managementid,
+            success:function(data){
+                swal.fire("Deleted!", "Your Management file has been deleted.", "success")
+                $('#ManagementDatatable').DataTable().ajax.reload();
+            }
+            });
+            } else {
+                swal.fire("Cancelled", "Your Management file is safe :)", "error");
+            }
             });
         });
 
-            var managementid;
-            $(document).on('click', '.js-sweetalert', function(){
-                managementid = $(this).attr('id');
-                showDeleteTable()
-        });
-
-
-        function showDeleteTable() {
+        $(document).on('click', '#managementmoredelete', function(){
+            var id = [];
             swal.fire({
                 title: "Are you sure?",
+                text: "You will not be able to recover this Management file!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
@@ -215,22 +305,31 @@
                 cancelButtonText: "No, cancel!"
             }).then((result) => {
                 if (result.value) {
-                    $.ajax({
-                url:"management/destroy/"+managementid,
-                success:function(data){
-                    swal.fire("Deleted!", "Your Management file has been deleted.", "success")
-                    $('#ManagementDatatable').DataTable().ajax.reload();
-                }
+                    $('.managementcheckbox:checked').each(function(){
+                        id.push($(this).val());
+                    });
+                    if(id.length > 0)
+                    {
+                        $.ajax({
+                        url:"{{ route('management.moredelete')}}",
+                        method:"get",
+                        data:{id:id},
+                        success:function(data){
+                        swal.fire("Deleted!", "Your Management file has been deleted.", "success")
+                        $('#ManagementDatatable').DataTable().ajax.reload();
+                            }
+                        });
+                    }
+                    else
+                    {swal.fire("Please select atleast one checkbox");}
+                } 
+                else 
+                {swal.fire("Cancelled", "Your management file is safe :)", "error");}
                 });
-                } else {
-                    swal.fire("Cancelled", "Your Management file is safe :)", "error");
-                }
             });
-        }
-        function showSuccessMessage() {
-            swal.fire("Good job!", "You success update Management!", "success");
-        }
 
+        
     });
+    $(".preloader").fadeOut("slow");
 
 </script>

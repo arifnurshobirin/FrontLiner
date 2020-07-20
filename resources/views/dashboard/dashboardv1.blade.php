@@ -1,5 +1,13 @@
- <!-- Content Header (Page header) -->
- <div class="content-header">
+<!-- Content Header (Page header) -->
+<div class="content-header">
+  <div class="preloader">
+        <div class="loading">
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
+            <strong>Loading...</strong>
+        </div>
+    </div>
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
@@ -605,3 +613,6 @@
     </div><!-- /.container-fluid -->
   </section>
   <!-- /.content -->
+<script>
+      $(".preloader").fadeOut("slow");
+</script>

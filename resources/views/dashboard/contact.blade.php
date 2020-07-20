@@ -1,4 +1,12 @@
 <!-- Default box -->
+  <div class="preloader">
+        <div class="loading">
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
+            <strong>Loading...</strong>
+        </div>
+  </div>
       <div class="card card-solid">
         <div class="card-body pb-0">
           <div class="row d-flex align-items-stretch">
@@ -309,3 +317,7 @@
       </div>
       <!-- /.card -->
 
+
+<script>
+      $(".preloader").fadeOut("slow");
+</script>
