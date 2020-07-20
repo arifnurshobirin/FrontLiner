@@ -7,7 +7,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <title>PortfolioPerfect</title>
+    <title>PortfolioANS</title>
 
     <meta name="description" content="">
     <meta name="author" content="">
@@ -85,10 +85,10 @@
                     <h1>Arif Nur Shobirin</h1>
                     <div class="page-scroll">
                         <p class="job-title">Full Web Developer</p>
+                       <a href="{{ route('login') }}" class="btn btn-fill ">Login</a>
                         <a href="#contact" class="btn btn-fill ">Hire me</a>
                         <div class="clearfix visible-xxs"></div>
                         <a href="#portfolio" class="btn btn-border">Explore more</a>
-                        <a href="{{ route('login') }}" class="btn btn-fill ">Login</a>
                     </div>
                 </div>
             
@@ -209,7 +209,7 @@
                 <div class="row">
                     <div class="col-md-4 col-xs-6">
                         <div class="portfolio-item">
-                            <img src="portfolio/img/portfolio-1.jpg" class="img-res" alt="">
+                            <img src="portfolio/img/bootstrap.png" class="img-res" alt="">
                             <div class="portfolio-item-info">
                                 <h4>Project Title</h4>
                                 <a href="#" data-toggle="modal" data-target="#portfolioItem1"><span class="glyphicon glyphicon-eye-open"></span></a>
@@ -219,7 +219,7 @@
                     </div>
                     <div class="col-md-4 col-xs-6">
                         <div class="portfolio-item">
-                            <img src="portfolio/img/portfolio-2.jpg" class="img-res" alt="">
+                            <img src="portfolio/img/javascript.jpg" class="img-res" alt="">
                             <div class="portfolio-item-info">
                                 <h4>Project Title</h4>
                                 <a href="#" data-toggle="modal" data-target="#portfolioItem2"><span class="glyphicon glyphicon-eye-open"></span></a>
@@ -229,7 +229,7 @@
                     </div>
                     <div class="col-md-4 col-xs-6">
                         <div class="portfolio-item">
-                            <img src="portfolio/img/portfolio-3.jpg" class="img-res" alt="">
+                            <img src="portfolio/img/laravel.png" class="img-res" alt="">
                             <div class="portfolio-item-info">
                                 <h4>Project Title</h4>
                                 <a href="#" data-toggle="modal" data-target="#portfolioItem3"><span class="glyphicon glyphicon-eye-open"></span></a>
@@ -239,7 +239,7 @@
                     </div>
                     <div class="col-md-4 col-xs-6">
                         <div class="portfolio-item">
-                            <img src="portfolio/img/portfolio-4.jpg" class="img-res" alt="">
+                            <img src="portfolio/img/jquery.jpg" class="img-res" alt="">
                             <div class="portfolio-item-info">
                                 <h4>Project Title</h4>
                                 <a href="#" data-toggle="modal" data-target="#portfolioItem4"><span class="glyphicon glyphicon-eye-open"></span></a>
@@ -249,7 +249,7 @@
                     </div>
                     <div class="col-md-4 col-xs-6">
                         <div class="portfolio-item">
-                            <img src="portfolio/img/portfolio-5.jpg" class="img-res" alt="">
+                            <img src="portfolio/img/mysql.png" class="img-res" alt="">
                             <div class="portfolio-item-info">
                                 <h4>Project Title</h4>
                                 <a href="#" data-toggle="modal" data-target="#portfolioItem5"><span class="glyphicon glyphicon-eye-open"></span></a>
@@ -259,7 +259,7 @@
                     </div>
                     <div class="col-md-4 col-xs-6">
                         <div class="portfolio-item">
-                            <img src="portfolio/img/portfolio-6.jpg" class="img-res" alt="">
+                            <img src="portfolio/img/htmlcssphp.jpg" class="img-res" alt="">
                             <div class="portfolio-item-info">
                                 <h4>Project Title</h4>
                                 <a href="#" data-toggle="modal" data-target="#portfolioItem6"><span class="glyphicon glyphicon-eye-open"></span></a>
@@ -339,7 +339,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
-            <img class="img-res" src="portfolio/img/portfolio-1.jpg" alt="">
+            <img class="img-res" src="portfolio/img/bootstrap.png" alt="">
           </div>
           <div class="modal-body">
             <h4 class="modal-title">Project title</h4>
@@ -357,7 +357,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
-            <img class="img-res" src="portfolio/img/portfolio-2.jpg" alt="">
+            <img class="img-res" src="portfolio/img/javascript.jpg" alt="">
           </div>
           <div class="modal-body">
             <h4 class="modal-title">Project title</h4>
@@ -375,7 +375,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
-            <img class="img-res" src="portfolio/img/portfolio-3.jpg" alt="">
+            <img class="img-res" src="portfolio/img/laravel.png" alt="">
           </div>
           <div class="modal-body">
             <h4 class="modal-title">Project title</h4>
@@ -393,7 +393,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
-            <img class="img-res" src="portfolio/img/portfolio-4.jpg" alt="">
+            <img class="img-res" src="portfolio/img/jquery.jpg" alt="">
           </div>
           <div class="modal-body">
             <h4 class="modal-title">Project title</h4>
@@ -411,7 +411,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
-            <img class="img-res" src="portfolio/img/portfolio-5.jpg" alt="">
+            <img class="img-res" src="portfolio/img/mysql.png" alt="">
           </div>
           <div class="modal-body">
             <h4 class="modal-title">Project title</h4>
@@ -429,7 +429,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <a class="close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
-            <img class="img-res" src="portfolio/img/portfolio-6.jpg" alt="">
+            <img class="img-res" src="portfolio/img/htmlcssphp.jpg" alt="">
           </div>
           <div class="modal-body">
             <h4 class="modal-title">Project title</h4>
