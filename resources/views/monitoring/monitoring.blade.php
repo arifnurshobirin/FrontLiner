@@ -1,5 +1,13 @@
 <!-- Monitoring Data -->
 <div class="row">
+    <div class="preloader">
+        <div class="loading">
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"></div>
+            <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
+            <strong>Loading...</strong>
+        </div>
+    </div>
     <div class="col-12">
         <div class="card">
             <div class="card-header">
@@ -35,9 +43,27 @@
                     </div>
                 </div>
                 <!-- /.form group -->
-                <br>
+                <div class="form-group">
+                    <button type="button" name="infocolor" id="infocolor" class="btn btn-danger"><i class="fas fa-User"></i></button>
+                    <label>POS Queueing</label>
+                    <button type="button" name="infocolor" id="infocolor" class="btn btn-success"><i class="fas fa-User"></i></button>
+                    <label>POS Active</label>
+                    <button type="button" name="infocolor" id="infocolor" class="btn btn-warning"><i class="fas fa-User"></i></button>
+                    <label>POS Inactive</label>
+                    <button type="button" name="infocolor" id="infocolor" class="btn btn-secondary"><i class="fas fa-User"></i></button>
+                    <label>POS Ready</label>
+                    <button type="button" name="infocolor" id="infocolor" class="btn bg-black"><i class="fas fa-User"></i></button>
+                    <label>POS Broken</label>
+                </div>
                 <div class="row">
+                    <?php
+                        $oldcounter= 0;
+                    ?>
                     @foreach($data as $list)
+                    <?php
+                        if($oldcounter != $list->id)
+                        {
+                    ?>
                     <div class="col-lg-2 col-6">
                         <!-- small card -->
                         @if($list->StatusCounter == 'Queueing')
@@ -57,9 +83,19 @@
                                 <p>{{ $list->TypeCounter }}</p>
                             </div>
                             <div class="icon">
+                            @if($list->StatusCounter == 'Queueing')
+                                <i class="fas fa-user"></i>
+                            @elseif($list->StatusCounter == 'Active')
+                                <i class="fas fa-user"></i>
+                            @elseif($list->StatusCounter == 'Inactive')
                                 <i class="fas fa-cash-register"></i>
+                            @elseif($list->StatusCounter == 'Ready')
+                                <i class="fas fa-cash-register"></i>
+                            @elseif($list->StatusCounter == 'Broken')
+                                <i class="fas fa-cash-register"></i>
+                            @endif
                             </div>
-                            <a class="small-box-footer nav-link" data-toggle="collapse" data-parent="#accordion"
+                            <a class="small-box-footer nav-link" data-toggle="collapse" 
                                 href="#collapse{{ $list->id }}">
                                 More info <i class="fas fa-arrow-circle-right"></i>
                             </a>
@@ -71,12 +107,58 @@
                         </div> -->
                             <div id="collapse{{ $list->id }}" class="panel-collapse collapse in">
                                 <div class="card-body">
-                                    Anim pariatur
+                                    <div class="info-box bg-info">
+                                        <span class="info-box-icon"><i class="fas fa-fax"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">{{$list->TIDEDC}}</span>
+                                            <span class="info-box-text">{{$list->TypeEDC}}</span>
+                                            <span class="info-box-number">41,410</span>
+                                            <div class="progress">
+                                                <div class="progress-bar" style="width: 70%"></div>
+                                            </div>
+                                            <span class="progress-description">
+                                            70%
+                                            </span>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <?php
+                        }
+                    else
+                    { ?>
+                            <div id="collapse{{ $oldcounter }}" class="panel-collapse collapse in">
+                               
+                                    <div class="info-box bg-info">
+                                        <span class="info-box-icon"><i class="fas fa-fax"></i></span>
+                                        <div class="info-box-content">
+                                            <span class="info-box-text">{{$list->TIDEDC}}</span>
+                                            <span class="info-box-text">{{$list->TypeEDC}}</span>
+                                            <span class="info-box-number">41,410</span>
+                                            <div class="progress">
+                                                <div class="progress-bar" style="width: 70%"></div>
+                                            </div>
+                                            <span class="progress-description">
+                                            70%
+                                            </span>
+                                        </div>
+                                        <!-- /.info-box-content -->
+                                    </div>
+                                    <!-- /.info-box -->
+                               
+                            </div>
+                    
+                        <?php
+                        }
+                            $oldcounter = $list->id;
+                        ?>
+                    
                     @endforeach
+                    
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
@@ -92,6 +174,7 @@
 
 
 <script>
+     $(".preloader").fadeOut("slow");
     $(document).ready(function() {
         // var datapos = new Array();
         // var status = $(this).attr('list->StatusCounter');
@@ -116,4 +199,5 @@
         //     }
 
     });
+   
 </script>
