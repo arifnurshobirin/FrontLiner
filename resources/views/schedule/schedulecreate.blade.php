@@ -38,33 +38,34 @@
                         <div class="col-md-4">
                         <button type="button" name="scheduleapply" id="scheduleapply" class="btn btn-primary">Apply</button>
                         <button type="button" name="refresh" id="refresh" class="btn btn-default">Refresh</button>
+                        <button type="submit" name="saveallschedule" id="saveallschedule" class="btn btn-success"  value="create">
+                                Save Schedule
+                                </button>
                         </div>
                     </div>
                 </div>
                 <!-- /.form group -->
                 <br>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover dataTable js-exportable"
+                    <table class="display responsive table table-striped table-hover dataTable js-exportable"
                         id="ScheduleAddDatatable">
                         <thead>
                             <tr>
-                                <th><button type="submit" name="saveallschedule" id="saveallschedule" class="btn btn-success"  value="create">
-                                Save Schedule
-                                </button></th>
+                                <th></th>
                                 <th>Cashier</th>
-                                <th><input type="text" name="day1" id="day1" class="form-control" value="Monday" readonly/></th>
-                                <th><input type="text" name="day2" id="day2" class="form-control" value="Tuesday" readonly/></th>
-                                <th><input type="text" name="day3" id="day3" class="form-control" value="Wednesday" readonly/></th>
-                                <th><input type="text" name="day4" id="day4" class="form-control" value="Thursday" readonly/></th>
-                                <th><input type="text" name="day5" id="day5" class="form-control" value="Friday" readonly/></th>
-                                <th><input type="text" name="day6" id="day6" class="form-control" value="Saturday" readonly/></th>
-                                <th><input type="text" name="day7" id="day7" class="form-control" value="Sunday" readonly/></th>
+                                <th name="day1" id="day1" class="">Monday</th>
+                                <th name="day2" id="day2" class="">Tuesday</th>
+                                <th name="day3" id="day3" class="">Wednesday</th>
+                                <th name="day4" id="day4" class="">Thursday</th>
+                                <th name="day5" id="day5" class="">Friday</th>
+                                <th name="day6" id="day6" class="">Saturday</th>
+                                <th name="day7" id="day7" class="">Sunday</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
-                                <th>Detail</th>
+                                <th></th>
                                 <th>Cashier</th>
                                 <th>Monday</th>
                                 <th>Tuesday</th>
@@ -226,17 +227,24 @@ function format ( d ) {
     // `d` is the original data object for the row
     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
-            '<td width="155px">Work Schedule :'+'</td>'+
-            '<td id=childmon'+d.id+' width="75px"></td>'+
-            '<td id=childtue'+d.id+' width="75px"></td>'+
-            '<td id=childwed'+d.id+' width="93px"></td>'+
-            '<td id=childthur'+d.id+' width="75px"></td>'+
-            '<td id=childfri'+d.id+' width="75px"></td>'+
-            '<td id=childsatur'+d.id+' width="75px"></td>'+
-            '<td id=childsun'+d.id+' width="75px"></td>'+
+            '<td>Work Schedule :'+'</td>'+
+            '<td id=childmon'+d.id+'></td>'+
+            '<td id=childtue'+d.id+'></td>'+
+            '<td id=childwed'+d.id+'></td>'+
+            '<td id=childthur'+d.id+'></td>'+
+            '<td id=childfri'+d.id+'></td>'+
+            '<td id=childsatur'+d.id+'></td>'+
+            '<td id=childsun'+d.id+'></td>'+
         '</tr>'+
         '<tr>'+
             '<td>Working Hour:</td>'+
+            '<td id=childhourmon'+d.id+'></td>'+
+            '<td id=childhourtue'+d.id+'></td>'+
+            '<td id=childhourwed'+d.id+'></td>'+
+            '<td id=childhourthur'+d.id+'></td>'+
+            '<td id=childhourfri'+d.id+'></td>'+
+            '<td id=childhoursatur'+d.id+'></td>'+
+            '<td id=childhoursun'+d.id+'></td>'+
             '<td id=childhour'+d.id+'> Hour</td>'+
         '</tr>'+
     '</table>';
@@ -246,34 +254,46 @@ function shifthour(id){
     var datajs = {!! json_encode($dataworkinghour->toArray()) !!};
     var arrayday = ['monshift','tueshift','wedshift','thurshift','frishift','saturshift','sunshift'];
     var arrchild = ['childmon','childtue','childwed','childthur','childfri','childsatur','childsun'];
+    var arrchildhour = ['childhourmon','childhourtue','childhourwed','childhourthur','childhourfri','childhoursatur','childhoursun'];
     for( a=0;a<7;a++)
     {
         joinday = arrayday[a].concat(id);
         joinchild = arrchild[a].concat(id);
-        joinchildhour = 'childhour'.concat(id);
+        joinchildhour = arrchildhour[a].concat(id);
+        joinchildtotalhour = 'childhour'.concat(id);
         shift = $('#'+joinday).val();
         shift = shift.toUpperCase(shift);
-        timework = timework;
+        timework = 0;
         for(b=0;b<22;b++)
         {
             if(shift==datajs[b]['CodeShift']){
                 timework = datajs[b]['WorkingHour'];
                 shiftstart = datajs[b]['StartShift'];
                 shiftend = datajs[b]['EndShift'];
-                shift=shiftstart.concat('-',shiftend);
+                shift=shiftstart.concat(' - ',shiftend);
                 break;
             }
             else if(shift=="OFF"){
                 shift="OFF Work";
             }
         }
+        
         $('#'+joinchild).html(shift);
-    }
-    console.log('timework '+timework);
-    totaltimework=totaltimework+timework;
-    console.log('totaltimework '+totaltimework);
-    timework=0;
-    $('#'+joinchildhour).html(totaltimework);
+        $('#'+joinchildhour).html(timework);
+        
+    } 
+    
+        hour1= $('#childhourmon18').html();
+        hour2= $('#childhourtue18').html();
+        hour3= $('#childhourwed18').html();
+        hour4= $('#childhourthur18').html();
+        hour5= $('#childhourfri18').html();
+        hour6= $('#childhoursatur18').html();
+        hour7= $('#childhoursun18').html();
+        totaltimework= parseInt(hour1)+parseInt(hour2)+parseInt(hour3)+parseInt(hour4)+parseInt(hour5)+parseInt(hour6)+parseInt(hour7)+ " Hour";
+        console.log('totaltimework '+totaltimework);
+    $('#'+joinchildtotalhour).html(totaltimework);
+
 }
 
 function freezeschedule(id){
@@ -299,7 +319,7 @@ function freezeschedule(id){
                 timework = datajs[b]['WorkingHour'];
                 shiftstart = datajs[b]['StartShift'];
                 shiftend = datajs[b]['EndShift'];
-                shift=shiftstart.concat('-',shiftend);
+                shift=shiftstart.concat(' - ',shiftend);
             }
             else if(shift=="OFF"){
                 shift="OFF Work";
@@ -350,12 +370,15 @@ function editshift(id){
         serverSide: true,
         ajax: { url:"{{ route('schedule.datatablecreate') }}",},
         "order": [[ 1, "asc" ]],
+        responsive: {
+                        details: {type: 'column',target: 'td'}
+                    },
         columns: [
             {
                 "className":      'details-control',
                 "orderable":      false,
                 "searchable":     false,
-                "data":           null,
+                "data":           'null',
                 "defaultContent": '',
             },
             { data: 'cashier', name: 'cashier' },
@@ -534,7 +557,7 @@ function editshift(id){
                     day.setDate(day.getDate()+1);
                 }
                 formatday = moment(day).format('dddd DD MMMM YYYY');    
-                $('#day'+i).val(formatday);
+                $('#day'+i).html(formatday);
             }
             var enddate = moment(day).format('MMMM DD YYYY');
             $('#todate').val(enddate);
