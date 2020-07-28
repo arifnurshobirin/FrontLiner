@@ -1,4 +1,4 @@
-@section('title page','Gallery Page')
+
 
 <div class="container-fluid">
     <div class="row">

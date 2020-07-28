@@ -16,6 +16,7 @@
           </div>
           <div class="info">
             <a href="#" class="d-block">{{ Auth::user()->name }} online</a>
+            <!-- <i class="fas fa-asymmetrik"></i> -->
           </div>
         </div>
 
@@ -64,14 +65,39 @@
                 </p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="#" id="contentchronology" class="nav-link">
-                <i class="nav-icon fas fa-clipboard-list"></i>
+            <li class="nav-item has-treeview">
+              <a href="#" id="contentactivity" class="nav-link">
+                <i class="nav-icon fas fa-running"></i>
                 <p>
-                  Chronology
-                  <span class="right badge badge-danger">New</span>
+                  Activity
+                  <i class="fas fa-angle-left right"></i>
+                  <span class="badge badge-info right">3</span>
                 </p>
               </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="#" id="contentchronology" class="nav-link">
+                    <i class="nav-icon fas fa-clipboard-list"></i>
+                    <p>Chronology</p>
+                  </a>
+                </li>
+              </ul>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="#" id="contentreminder" class="nav-link">
+                    <i class="nav-icon fas fa-stopwatch"></i>
+                    <p>Reminder</p>
+                  </a>
+                </li>
+              </ul>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="#" id="contentperformance" class="nav-link">
+                  <i class="nav-icon fas fa-trophy"></i>
+                  <p>Performance</p>
+                  </a>
+                </li>
+              </ul>
             </li>
             <li class="nav-item has-treeview">
               <a href="#" id="contentterminal" class="nav-link">
@@ -210,6 +236,12 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
+                    <a href="#" id="contentconsolidate"  class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Consolidate</p>
+                    </a>
+                </li>
+                <li class="nav-item">
                   <a href="#" id="contentpicasso"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Picasso</p>
@@ -320,23 +352,6 @@
                   <a href="#" id="content" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Read</p>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <li class="nav-item has-treeview">
-              <a href="#" id="content" class="nav-link">
-                <i class="nav-icon fas fa-running"></i>
-                <p>
-                  Performance
-                  <i class="fas fa-angle-left right"></i>
-                </p>
-              </a>
-              <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="#" id="content" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Invoice</p>
                   </a>
                 </li>
               </ul>

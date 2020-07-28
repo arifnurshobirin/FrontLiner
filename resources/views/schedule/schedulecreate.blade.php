@@ -250,8 +250,8 @@ function format ( d ) {
     '</table>';
 }
 function shifthour(id){
-
     var datajs = {!! json_encode($dataworkinghour->toArray()) !!};
+    var size = Object.keys(datajs).length;
     var arrayday = ['monshift','tueshift','wedshift','thurshift','frishift','saturshift','sunshift'];
     var arrchild = ['childmon','childtue','childwed','childthur','childfri','childsatur','childsun'];
     var arrchildhour = ['childhourmon','childhourtue','childhourwed','childhourthur','childhourfri','childhoursatur','childhoursun'];
@@ -263,8 +263,7 @@ function shifthour(id){
         joinchildtotalhour = 'childhour'.concat(id);
         shift = $('#'+joinday).val();
         shift = shift.toUpperCase(shift);
-        timework = 0;
-        for(b=0;b<22;b++)
+        for(b=0;b<size;b++)
         {
             if(shift==datajs[b]['CodeShift']){
                 timework = datajs[b]['WorkingHour'];
@@ -276,39 +275,59 @@ function shifthour(id){
             else if(shift=="OFF"){
                 shift="OFF Work";
             }
+            timework = 0;
         }
-        
         $('#'+joinchild).html(shift);
         $('#'+joinchildhour).html(timework);
-        
+        // // totaltimework = 0;
+        // for(c=0;c<7;c++)
+        // {
+        //     hour2= $('#'+joinchildhour).html();
+        // }
+        timework = 0;
+
     } 
+    for( c=0;c<7;c++)
+    {
+        joinchildhour = arrchildhour[c].concat(id);
+        joinchildtotalhour = 'childhour'.concat(id);
+        // for(d=0;d<size;d++)
+        // {
+            hour = $('#'+joinchildhour).html();
+            console.log('hour '+hour);
+            totaltimework = totaltimework+parseInt(hour);
+            console.log('totaltimework '+totaltimework);
+        // }
+    }
+    $('#'+joinchildtotalhour).html(totaltimework+ " Hour");
+    totaltimework=0;
+    console.log('totaltimework0 '+totaltimework);
     
-        hour1= $('#childhourmon18').html();
-        hour2= $('#childhourtue18').html();
-        hour3= $('#childhourwed18').html();
-        hour4= $('#childhourthur18').html();
-        hour5= $('#childhourfri18').html();
-        hour6= $('#childhoursatur18').html();
-        hour7= $('#childhoursun18').html();
-        totaltimework= parseInt(hour1)+parseInt(hour2)+parseInt(hour3)+parseInt(hour4)+parseInt(hour5)+parseInt(hour6)+parseInt(hour7)+ " Hour";
-        console.log('totaltimework '+totaltimework);
-    $('#'+joinchildtotalhour).html(totaltimework);
+        // hour2= $('#childhourtue18').html();
+        // hour3= $('#childhourwed18').html();
+        // hour4= $('#childhourthur18').html();
+        // hour5= $('#childhourfri18').html();
+        // hour6= $('#childhoursatur18').html();
+        // hour7= $('#childhoursun18').html();
+        // totaltimework= parseInt(hour1)+parseInt(hour2)+parseInt(hour3)+parseInt(hour4)+parseInt(hour5)+parseInt(hour6)+parseInt(hour7)+ " Hour";
+        
+    // $('#'+joinchildtotalhour).html(totaltimework);
 
 }
 
 function freezeschedule(id){
 
     var datajs = {!! json_encode($dataworkinghour->toArray()) !!};
-    var totaltimework=0;
-    var timework=0;
-    var arrayday = ['monshift','tueshift','wedshift','thurshift','frishift','saturshift','sunshift']
-    var arraychild = ['childmon','childtue','childwed','childthur','childfri','childsatur','childsun']
+    var arrayday = ['monshift','tueshift','wedshift','thurshift','frishift','saturshift','sunshift'];
+    var arraychild = ['childmon','childtue','childwed','childthur','childfri','childsatur','childsun'];
+    var arrchildhour = ['childhourmon','childhourtue','childhourwed','childhourthur','childhourfri','childhoursatur','childhoursun'];
     for( a=0;a<7;a++)
     {
         joinday = arrayday[a].concat(id);
         joinchild = arraychild[a].concat(id);
-        joinchildhour = 'childhour'.concat(id);
-
+        joinchildhour = arrchildhour[a].concat(id);
+        joinchildtotalhour = 'childhour'.concat(id);
+        timework = 0;
         $('#'+joinday).attr("readonly",true);
         document.getElementById(joinday).className = "form-control is-valid input-uppercase";
         shift = $('#'+joinday).val();
@@ -325,10 +344,19 @@ function freezeschedule(id){
                 shift="OFF Work";
             }
         }
-        totaltimework=totaltimework+timework;
         $('#'+joinchild).html(shift);
         $('#'+joinchildhour).html(totaltimework);
     }
+    hour1= $('#childhourmon18').html();
+        hour2= $('#childhourtue18').html();
+        hour3= $('#childhourwed18').html();
+        hour4= $('#childhourthur18').html();
+        hour5= $('#childhourfri18').html();
+        hour6= $('#childhoursatur18').html();
+        hour7= $('#childhoursun18').html();
+        totaltimework= parseInt(hour1)+parseInt(hour2)+parseInt(hour3)+parseInt(hour4)+parseInt(hour5)+parseInt(hour6)+parseInt(hour7)+ " Hour";
+        console.log('totaltimework '+totaltimework);
+    $('#'+joinchildtotalhour).html(totaltimework);
     
 }
 function freezeshift(id){

@@ -71,3 +71,5 @@ Route::post('schedule/day', 'ScheduleController@day');
 
 Route::resource('monitoring', 'MonitoringController');
 Route::get('monitoring/destroy/{id}', 'MonitoringController@destroy');
+
+Route::resource('chronology', 'ActivityController');

@@ -23,25 +23,29 @@
             </div>
             <!-- /.card-header -->
             <div class="card-body">
-                <!-- Date range -->
-                <div class="form-group">
-                    <label>Date range:</label>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <input type="text" name="fromdate" id="fromdate" class="form-control inputdaterange"
-                                placeholder="From Date" readonly />
+                    <div>
+                        <div class="btn-group w-100 mb-2">
+                            <a class="btn btn-info active" href="javascript:void(0)" data-filter="all"> All items </a>
+                            <a class="btn btn-info" href="javascript:void(0)" data-filter="1"> Category 1 (RED) </a>
+                            <a class="btn btn-info" href="javascript:void(0)" data-filter="2"> Category 2 (GREEN) </a>
+                            <a class="btn btn-info" href="javascript:void(0)" data-filter="3"> Category 3 (YELLOW) </a>
+                            <a class="btn btn-info" href="javascript:void(0)" data-filter="4"> Category 4 (GRAY)</a>
+                            <a class="btn btn-info" href="javascript:void(0)" data-filter="5"> Category 5 (BLACK)</a>
                         </div>
-                        <div class="col-md-4 todate2">
-                            <input type="text" name="todate" id="todate" class="form-control todate"
-                                placeholder="To Date" readonly />
-                        </div>
-                        <div class="col-md-4">
-                            <button type="button" name="scheduleapply" id="scheduleapply"
-                                class="btn btn-primary">Apply</button>
-                            <button type="button" name="refresh" id="refresh" class="btn btn-default">Refresh</button>
+                        <div class="mb-2">
+                            <a class="btn btn-secondary" href="javascript:void(0)" data-shuffle> Shuffle items </a>
+                            <div class="float-right">
+                                <select class="custom-select" style="width: auto;" data-sortOrder>
+                                    <option value="index"> Sort by Position </option>
+                                    <option value="sortData"> Sort by Custom Data </option>
+                                </select>
+                                <div class="btn-group">
+                                    <a class="btn btn-default" href="javascript:void(0)" data-sortAsc> Ascending </a>
+                                    <a class="btn btn-default" href="javascript:void(0)" data-sortDesc> Descending </a>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
                 <!-- /.form group -->
                 <div class="form-group">
                     <button type="button" name="infocolor" id="infocolor" class="btn btn-danger"><i class="fas fa-User"></i></button>
@@ -55,84 +59,90 @@
                     <button type="button" name="infocolor" id="infocolor" class="btn bg-black"><i class="fas fa-User"></i></button>
                     <label>POS Broken</label>
                 </div>
-                <div class="row">
+                <div class="filter-container row">
                     <?php
                         $oldcounter= 0;
                     ?>
                     @foreach($data as $list)
-                    <?php
-                        if($oldcounter != $list->id)
-                        {
-                    ?>
-                    <div class="col-lg-2 col-6">
-                        <!-- small card -->
-                        @if($list->StatusCounter == 'Queueing')
-                        <div id="changecolor" class="small-box bg-danger">
-                        @elseif($list->StatusCounter == 'Active')
-                        <div id="changecolor" class="small-box bg-success">
-                        @elseif($list->StatusCounter == 'Inactive')
-                        <div id="changecolor" class="small-box bg-warning">
-                        @elseif($list->StatusCounter == 'Ready')
-                        <div id="changecolor" class="small-box bg-secondary">
-                        @elseif($list->StatusCounter == 'Broken')
-                        <div id="changecolor" class="small-box bg-black">
-                        @endif
-                            <div class="inner">
-                                <h3>{{ $list->NoCounter }}</h3>
 
-                                <p>{{ $list->TypeCounter }}</p>
-                            </div>
-                            <div class="icon">
+                    <?php
+                        if($oldcounter != $list->NoCounter)
+                        {
+                            ?>
+                        @if($list->StatusCounter == 'Queueing')
+                        <div class="col-lg-2 col-6 filtr-item" data-category="1" data-sort="{{$list->NoCounter}}">
+                            <!-- small card -->
+                            <div id="changecolor" class="small-box bg-danger">
+                        @elseif($list->StatusCounter == 'Active')
+                        <div class="col-lg-2 col-6 filtr-item" data-category="2" data-sort="{{$list->NoCounter}}">
+                            <!-- small card -->
+                            <div id="changecolor" class="small-box bg-success">
+                        @elseif($list->StatusCounter == 'Inactive')
+                        <div class="col-lg-2 col-6 filtr-item" data-category="3" data-sort="{{$list->NoCounter}}">
+                            <!-- small card -->
+                            <div id="changecolor" class="small-box bg-warning">
+                        @elseif($list->StatusCounter == 'Ready')
+                        <div class="col-lg-2 col-6 filtr-item" data-category="4" data-sort="{{$list->NoCounter}}">
+                            <!-- small card -->
+                            <div id="changecolor" class="small-box bg-secondary">
+                        @elseif($list->StatusCounter == 'Broken')
+                        <div class="col-lg-2 col-6 filtr-item" data-category="5" data-sort="{{$list->NoCounter}}">
+                            <!-- small card -->
+                            <div id="changecolor" class="small-box bg-black">
+                        @endif
+                                <div class="inner">
+                                    <h3>{{ $list->NoCounter }}</h3>
+
+                                    <p>{{ $list->TypeCounter }}</p>
+                                </div>
+                                <div class="icon">
                             @if($list->StatusCounter == 'Queueing')
-                                <i class="fas fa-user"></i>
+                                    <i class="fas fa-user"></i>
                             @elseif($list->StatusCounter == 'Active')
-                                <i class="fas fa-user"></i>
+                                    <i class="fas fa-user"></i>
                             @elseif($list->StatusCounter == 'Inactive')
-                                <i class="fas fa-cash-register"></i>
+                                    <i class="fas fa-cash-register"></i>
                             @elseif($list->StatusCounter == 'Ready')
-                                <i class="fas fa-cash-register"></i>
+                                    <i class="fas fa-cash-register"></i>
                             @elseif($list->StatusCounter == 'Broken')
-                                <i class="fas fa-cash-register"></i>
+                                    <i class="fas fa-cash-register"></i>
                             @endif
-                            </div>
-                            <a class="small-box-footer nav-link" data-toggle="collapse" 
-                                href="#collapse{{ $list->id }}">
+                                </div>
+                                <a class="small-box-footer nav-link" data-toggle="collapse" 
+                                href=".buka{{ $list->NoCounter }}">
                                 More info <i class="fas fa-arrow-circle-right"></i>
-                            </a>
+                                </a>
+                            </div>
+                        </div>
                             <!-- <a href="#" class="small-box-footer nav-link" data-toggle="dropdown">
                     More info <i class="fas fa-arrow-circle-right"></i>
                 </a>
                         <div class="box-body bg-white dropdown-menu">
                         <button class="btn-primary dropdown-item">Change Color</button>
                         </div> -->
-                            <div id="collapse{{ $list->id }}" class="panel-collapse collapse in">
-                                <div class="card-body">
-                                    <div class="info-box bg-info">
-                                        <span class="info-box-icon"><i class="fas fa-fax"></i></span>
-                                        <div class="info-box-content">
-                                            <span class="info-box-text">{{$list->TIDEDC}}</span>
-                                            <span class="info-box-text">{{$list->TypeEDC}}</span>
-                                            <span class="info-box-number">41,410</span>
-                                            <div class="progress">
-                                                <div class="progress-bar" style="width: 70%"></div>
-                                            </div>
-                                            <span class="progress-description">
-                                            70%
-                                            </span>
+                            <div class="panel-collapse collapse in buka{{$list->NoCounter}}">
+                                <div class="info-box bg-info">
+                                    <span class="info-box-icon"><i class="fas fa-fax"></i></span>
+                                    <div class="info-box-content">
+                                        <span class="info-box-text">{{$list->TIDEDC}}</span>
+                                        <span class="info-box-text">{{$list->TypeEDC}}</span>
+                                        <span class="info-box-number">41,410</span>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: 70%"></div>
                                         </div>
-                                        <!-- /.info-box-content -->
+                                        <span class="progress-description">
+                                        70%
+                                        </span>
                                     </div>
-                                    <!-- /.info-box -->
+                                    <!-- /.info-box-content -->
                                 </div>
+                                <!-- /.info-box -->
                             </div>
-                        </div>
-                    </div>
                     <?php
                         }
                     else
                     { ?>
-                            <div id="collapse{{ $oldcounter }}" class="panel-collapse collapse in">
-                               
+                            <div class="panel-collapse collapse in buka{{$list->NoCounter}}">
                                     <div class="info-box bg-info">
                                         <span class="info-box-icon"><i class="fas fa-fax"></i></span>
                                         <div class="info-box-content">
@@ -149,14 +159,12 @@
                                         <!-- /.info-box-content -->
                                     </div>
                                     <!-- /.info-box -->
-                               
                             </div>
-                    
+                        
                         <?php
                         }
-                            $oldcounter = $list->id;
-                        ?>
-                    
+                            $oldcounter = $list->NoCounter;
+                            ?>
                     @endforeach
                     
                 </div>
@@ -176,6 +184,13 @@
 <script>
      $(".preloader").fadeOut("slow");
     $(document).ready(function() {
+        $('.filter-container').filterizr({
+            gutterPixels: 3
+        });
+        $('.btn[data-filter]').on('click', function () {
+            $('.btn[data-filter]').removeClass('active');
+            $(this).addClass('active');
+        });
         // var datapos = new Array();
         // var status = $(this).attr('list->StatusCounter');
 

@@ -133,6 +133,13 @@ $(document).ready(function () {
         $('#contentpage').load('monitoring');
         return false;
     })
+    $('#contentchronology').click(function () {
+        $('a').removeClass('active');
+        document.getElementById('contentchronology').className = "nav-link active";
+        $('.urlpage').html('Chronology');
+        $('#contentpage').load('chronology');
+        return false;
+    })
 
 })
 
