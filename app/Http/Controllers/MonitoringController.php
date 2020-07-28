@@ -19,7 +19,7 @@ class MonitoringController extends Controller
         $data = DB::table('countertable')
             ->select('countertable.id','countertable.NoCounter','countertable.StatusCounter', 'countertable.TypeCounter',
                     'edctable.id as idEDC','edctable.TIDEDC', 'edctable.MIDEDC','edctable.TypeEDC')
-            ->leftJoin('edctable', 'countertable.NoCounter', '=', 'edctable.NoCounter')
+            ->leftJoin('edctable', 'countertable.NoCounter', '=', 'edctable.NoCounter')->orderBy('countertable.NoCounter','asc')
             ->get();
             // $data = CounterModel::all();
             // dd($data);

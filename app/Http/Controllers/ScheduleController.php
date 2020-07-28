@@ -7,6 +7,7 @@ use App\CashierModel;
 use App\WorkingHourModel;
 use DataTables;
 use Alert;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
@@ -25,19 +26,18 @@ class ScheduleController extends Controller
     
     public function index(Request $request)
     {
-        
-            $data = ScheduleModel::latest()->get();
-            return DataTables::of($data)
-            ->addColumn('action',
-                '<div class="btn-group">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
-                <div class="dropdown-menu dropdown-menu-right" role="menu">
-                <a href="#" class="scheduleshow dropdown-item" id="{{$id}}"><i class="fas fa-desktop"></i> Show</a>
-                <a href="#" class="scheduleedit dropdown-item" id="{{$id}}"><i class="fas fa-edit"></i> Edit</a>
-                <a href="#" class="scheduledelete dropdown-item" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
-                </div></div>')
-            ->addColumn('checkbox', '<input type="checkbox" name="schedulecheckbox[]" class="poscheckbox" value="{{$id}}" />')
-            ->rawColumns(['checkbox','action'])
+        $data = DB::table('scheduletable')
+            ->select('scheduletable.id','scheduletable.Employee','scheduletable.FullName','scheduletable.Date','scheduletable.CodeShift',
+                    'workinghourtable.id as idWH','workinghourtable.StartShift', 'workinghourtable.EndShift','workinghourtable.WorkingHour')
+            ->leftJoin('workinghourtable', 'scheduletable.CodeShift', '=', 'workinghourtable.CodeShift')->orderBy('scheduletable.Employee','asc')
+            ->get();
+            //$data = ScheduleModel::latest()->get();
+        return DataTables::of($data)
+            ->addColumn('attendance',
+                '<button type="button" class="btn btn-primary"><i class="fas fa-wrench"></i> Masuk</button>')
+            ->addColumn('activity', '<input type="text" name="activity{{$id}}" id="activity{{$id}}" class="form-control" />')
+            ->addColumn('shift', '<label for="shift">{{$StartShift}} - {{$EndShift}}</label>')
+            ->rawColumns(['shift','activity','attendance'])
             ->make(true);
 
 
@@ -96,23 +96,36 @@ class ScheduleController extends Controller
      */
     public function store(Request $request)
     {
-
-        $date[$a] = $request->day+$a;
-        for($a=1;$a<7;$a++)
+        $arrayday = ['monshift','tueshift','wedshift','thurshift','frishift','saturshift','sunshift'];
+        for($a=0;$a<7;$a++)
         {
-        $date[$a] = $request->day+$a;
-        $newdate[$a]=date("Y-m-d",strtotime($date[$a]));
+            $fromdatedb = $request->fromdate;
+            $startdate = Carbon::parse($fromdatedb);
+            if($a==0){
+                $date[$a] = $startdate;
+            }
+            else{
+                $date[$a] =  $startdate->add($a, 'day');
+            }
         }
-        dd($date);
+        dd($date[6]);
+
+
+        //$date[$a]= $newnextdate->isoFormat('YYYY-MM-DD');
+
+        // for($a=1;$a<7;$a++)
+        // {
+        // $date[$a] = $request->day+$a;
+        // $newdate[$a]=date("Y-m-d",strtotime($date[$a]));
+        // }
         
         
         
         // $form_data = array(
-        //     'Employee' => $request->emp,
-        //     'FullName' => $request->name,
-        //     'Date' => $newdate,
-        //     'StartWork' => $request->startwork,
-        //     'EndWork' => $request->endwork,
+        //     'Employee' => $emp,
+        //     'FullName' => $name,
+        //     'Date' => $date,
+        //     'CodeShift' => $codeshift
         // );
 
         // ScheduleModel::updateOrCreate($form_data);
