@@ -11,7 +11,7 @@
     <div class="col-12">
         <div class="card">
             <div class="card-header">
-                <h3 class="card-title">Picasso Datatable</h3>
+                <h3 class="card-title">Cash Pick Up Report</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                         title="Collapse">
@@ -22,65 +22,273 @@
                 </div>
             </div>
             <!-- /.card-header -->
-            <form method="post" id="scheduleform" name="scheduleform">
-            @csrf
             <div class="card-body">
-                <!-- Date range -->
-                <div class="form-group">
-                    <label>Hour range:</label>
-                    <div class="row">
-                        <div class="col-md-4">
-                        <input type="text" name="fromdate" id="fromdate" class="form-control inputdaterange" placeholder="From Date" readonly />
-                        </div>
-                        <div class="col-md-4 todate2">
-                        <input type="text" name="todate" id="todate" class="form-control todate" placeholder="To Date" readonly />
-                        </div>
-                        <div class="col-md-4">
-                        <button type="button" name="scheduleapply" id="scheduleapply" class="btn btn-primary">Apply</button>
-                        <button type="button" name="refresh" id="refresh" class="btn btn-default">Refresh</button>
+                <!-- Deposit Form-->
+                <form method="post" id="counterform" name="counterform">
+                    @csrf
+                    <input type="hidden" name="hiddeniddeposit" id="hiddeniddeposit">
+                    <div class="form-group row">
+                        <label for="labelcashiercode" class="col-sm-2 col-form-label">Cashier Employee :</label>
+                        <div class="form-line">
+                            <select class="custom-select" id="selectemp" name="selectemp">
+                                <option value="">-- Please select --</option>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                                <option value="Normal">Normal</option>
+                                <option value="Broken">Broken</option>
+                                <option value="Queueing">Queueing</option>
+                            </select>
                         </div>
                     </div>
-                </div>
+
+                    <div class="form-group row">
+                        <label for="labeltype" class="col-sm-2 col-form-label">Deposit Type:</label>
+                        <div class="form-line">
+                            <select class="custom-select" id="selecttype" name="selecttype">
+                                <option value="">-- Please select --</option>
+                                <option value="Active">MDS</option>
+                                <option value="Inactive">CVS</option>
+                                <option value="Normal">OP</option>
+                                <option value="Broken">SC</option>
+                                <option value="Broken">TH</option>
+                                <option value="Broken">Billpayment</option>
+                                <option value="Queueing">Warung</option>
+                                <option value="Broken">Simpatindo</option>
+                                <option value="Broken">Antum</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="labeldate" class="col-sm-2 col-form-label">Date :</label>
+                        <div class="form-line">
+                            <input type="text" class="form-control" id="inputdate" name="inputdate" placeholder="Enter Date">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="labeldate" class="col-sm-2 col-form-label">Time :</label>
+                        <div class="form-line">
+                            <input type="text" class="form-control" id="inputtime" name="inputtime" placeholder="Enter Time">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="labeldate" class="col-sm-2 col-form-label">Cashier Name :</label>
+                        <div class="form-line">
+                            <input type="text" class="form-control" id="inputname" name="inputname" placeholder="Enter Cashier Name"  readonly>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="labeldate" class="col-sm-2 col-form-label">Counter Number :</label>
+                        <div class="form-line">
+                            <input type="text" class="form-control" id="inputcounter" name="inputcounter" placeholder="Enter Counter Number">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" name="buttonsave" id="buttonsave" value="create">Save</button>
+                </form>
+
 
                     <table class="table table-bordered table-striped table-hover dataTable js-exportable" id="CodeShiftDatatable">
                         <thead>
                             <tr>
-                                <th>Hour</th>
-                                <th>jumlah cashier</th>
-                                <th>jumlah customer</th>
-                                <th>Keterangan</th>
+                                <th>Currency Type</th>
+                                <th>Denomination</th>
+                                <th>Number Of Unit</th>
+                                <th>Amount</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                              
+                        <tbody>   
                             <tr>
-                                <td><input type="text" name="codetes" id="codetes" class="form-control input-uppercase" value="tes" readonly/></td>
-                                <td><input type="text" name="starttes" id="starttes" class="form-control input-uppercase" value="tes" readonly/></td>
-                                <td><input type="text" name="endtes" id="endtes" class="form-control input-uppercase" value="tes" readonly/></td>
-                                <td><div class="input-group">
-                                        <input type="text" name="hourtes" id="hourtes" class="form-control input-uppercase" value="tes" readonly/>
-                                        <div class="input-group-prepend"><span class="input-group-text">Hour</span> </div>
-                                    </div>
-                                </td>
+                                <td><input type="text" name="inputbanknote" id="inputbanknote" class="form-control" value="Banknote" readonly/></td>
+                                <td>Rp. 100.000</td>
+                                <td><input type="text" name="inputunit" id="inputunit" class="form-control" /></td>
+                                <td><input type="text" name="inputamount" id="inputamount" class="form-control" value="tes" readonly/></td>
                                 <td><div class="btn-group">
                                         <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
                                         <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                        <a class="scheduleedit dropdown-item" id="tes" onclick="editshift(tes)"><i class="fas fa-edit"></i> Edit</a>
-                                            <a class="schedulesave dropdown-item" id="tes" onclick="freezeshift(tes)"><i class="fas fa-desktop"></i> Save</a>
-                                            <a class="scheduledelete dropdown-item" id="tes"><i class="fas fa-trash"></i> Delete</a>
+                                        <a class="dropdown-item" name="editdeposit" id="editdeposit" onclick="editshift(tes)"><i class="fas fa-edit"></i> Edit</a>
+                                            <a class="dropdown-item" name="savedeposit" id="savedeposit" onclick="freezeshift(tes)"><i class="fas fa-desktop"></i> Save</a>
+                                            <a class="dropdown-item"  name="deletedeposit" id="deletedeposit"><i class="fas fa-trash"></i> Delete</a>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
-                   
+                            <tr>
+                                <td><input type="text" name="inputbanknote" id="inputbanknote" class="form-control" value="Banknote" readonly/></td>
+                                <td>Rp. 50.000</td>
+                                <td><input type="text" name="inputunit" id="inputunit" class="form-control" /></td>
+                                <td><input type="text" name="inputamount" id="inputamount" class="form-control" value="tes" readonly/></td>
+                                <td><div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <a class="dropdown-item" name="editdeposit" id="editdeposit" onclick="editshift(tes)"><i class="fas fa-edit"></i> Edit</a>
+                                            <a class="dropdown-item" name="savedeposit" id="savedeposit" onclick="freezeshift(tes)"><i class="fas fa-desktop"></i> Save</a>
+                                            <a class="dropdown-item"  name="deletedeposit" id="deletedeposit"><i class="fas fa-trash"></i> Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="inputbanknote" id="inputbanknote" class="form-control" value="Banknote" readonly/></td>
+                                <td>Rp. 20.000</td>
+                                <td><input type="text" name="inputunit" id="inputunit" class="form-control" /></td>
+                                <td><input type="text" name="inputamount" id="inputamount" class="form-control" value="tes" readonly/></td>
+                                <td><div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <a class="dropdown-item" name="editdeposit" id="editdeposit" onclick="editshift(tes)"><i class="fas fa-edit"></i> Edit</a>
+                                            <a class="dropdown-item" name="savedeposit" id="savedeposit" onclick="freezeshift(tes)"><i class="fas fa-desktop"></i> Save</a>
+                                            <a class="dropdown-item"  name="deletedeposit" id="deletedeposit"><i class="fas fa-trash"></i> Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="inputbanknote" id="inputbanknote" class="form-control" value="Banknote" readonly/></td>
+                                <td>Rp. 10.000</td>
+                                <td><input type="text" name="inputunit" id="inputunit" class="form-control" /></td>
+                                <td><input type="text" name="inputamount" id="inputamount" class="form-control" value="tes" readonly/></td>
+                                <td><div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <a class="dropdown-item" name="editdeposit" id="editdeposit" onclick="editshift(tes)"><i class="fas fa-edit"></i> Edit</a>
+                                            <a class="dropdown-item" name="savedeposit" id="savedeposit" onclick="freezeshift(tes)"><i class="fas fa-desktop"></i> Save</a>
+                                            <a class="dropdown-item"  name="deletedeposit" id="deletedeposit"><i class="fas fa-trash"></i> Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="inputbanknote" id="inputbanknote" class="form-control" value="Banknote" readonly/></td>
+                                <td>Rp. 5.000</td>
+                                <td><input type="text" name="inputunit" id="inputunit" class="form-control" /></td>
+                                <td><input type="text" name="inputamount" id="inputamount" class="form-control" value="tes" readonly/></td>
+                                <td><div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <a class="dropdown-item" name="editdeposit" id="editdeposit" onclick="editshift(tes)"><i class="fas fa-edit"></i> Edit</a>
+                                            <a class="dropdown-item" name="savedeposit" id="savedeposit" onclick="freezeshift(tes)"><i class="fas fa-desktop"></i> Save</a>
+                                            <a class="dropdown-item"  name="deletedeposit" id="deletedeposit"><i class="fas fa-trash"></i> Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="inputbanknote" id="inputbanknote" class="form-control" value="Banknote" readonly/></td>
+                                <td>Rp. 2.000</td>
+                                <td><input type="text" name="inputunit" id="inputunit" class="form-control" /></td>
+                                <td><input type="text" name="inputamount" id="inputamount" class="form-control" value="tes" readonly/></td>
+                                <td><div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <a class="dropdown-item" name="editdeposit" id="editdeposit" onclick="editshift(tes)"><i class="fas fa-edit"></i> Edit</a>
+                                            <a class="dropdown-item" name="savedeposit" id="savedeposit" onclick="freezeshift(tes)"><i class="fas fa-desktop"></i> Save</a>
+                                            <a class="dropdown-item"  name="deletedeposit" id="deletedeposit"><i class="fas fa-trash"></i> Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="inputbanknote" id="inputbanknote" class="form-control" value="Banknote" readonly/></td>
+                                <td>Rp. 1.000</td>
+                                <td><input type="text" name="inputunit" id="inputunit" class="form-control" /></td>
+                                <td><input type="text" name="inputamount" id="inputamount" class="form-control" value="tes" readonly/></td>
+                                <td><div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <a class="dropdown-item" name="editdeposit" id="editdeposit" onclick="editshift(tes)"><i class="fas fa-edit"></i> Edit</a>
+                                            <a class="dropdown-item" name="savedeposit" id="savedeposit" onclick="freezeshift(tes)"><i class="fas fa-desktop"></i> Save</a>
+                                            <a class="dropdown-item"  name="deletedeposit" id="deletedeposit"><i class="fas fa-trash"></i> Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="inputbanknote" id="inputbanknote" class="form-control" value="Coin" readonly/></td>
+                                <td>Rp. 1.000</td>
+                                <td><input type="text" name="inputunit" id="inputunit" class="form-control" /></td>
+                                <td><input type="text" name="inputamount" id="inputamount" class="form-control" value="tes" readonly/></td>
+                                <td><div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <a class="dropdown-item" name="editdeposit" id="editdeposit" onclick="editshift(tes)"><i class="fas fa-edit"></i> Edit</a>
+                                            <a class="dropdown-item" name="savedeposit" id="savedeposit" onclick="freezeshift(tes)"><i class="fas fa-desktop"></i> Save</a>
+                                            <a class="dropdown-item"  name="deletedeposit" id="deletedeposit"><i class="fas fa-trash"></i> Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="inputbanknote" id="inputbanknote" class="form-control" value="Coin" readonly/></td>
+                                <td>Rp. 500</td>
+                                <td><input type="text" name="inputunit" id="inputunit" class="form-control" /></td>
+                                <td><input type="text" name="inputamount" id="inputamount" class="form-control" value="tes" readonly/></td>
+                                <td><div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <a class="dropdown-item" name="editdeposit" id="editdeposit" onclick="editshift(tes)"><i class="fas fa-edit"></i> Edit</a>
+                                            <a class="dropdown-item" name="savedeposit" id="savedeposit" onclick="freezeshift(tes)"><i class="fas fa-desktop"></i> Save</a>
+                                            <a class="dropdown-item"  name="deletedeposit" id="deletedeposit"><i class="fas fa-trash"></i> Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="inputbanknote" id="inputbanknote" class="form-control" value="Coin" readonly/></td>
+                                <td>Rp. 200</td>
+                                <td><input type="text" name="inputunit" id="inputunit" class="form-control" /></td>
+                                <td><input type="text" name="inputamount" id="inputamount" class="form-control" value="tes" readonly/></td>
+                                <td><div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <a class="dropdown-item" name="editdeposit" id="editdeposit" onclick="editshift(tes)"><i class="fas fa-edit"></i> Edit</a>
+                                            <a class="dropdown-item" name="savedeposit" id="savedeposit" onclick="freezeshift(tes)"><i class="fas fa-desktop"></i> Save</a>
+                                            <a class="dropdown-item"  name="deletedeposit" id="deletedeposit"><i class="fas fa-trash"></i> Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="inputbanknote" id="inputbanknote" class="form-control" value="Coin" readonly/></td>
+                                <td>Rp. 100</td>
+                                <td><input type="text" name="inputunit" id="inputunit" class="form-control" /></td>
+                                <td><input type="text" name="inputamount" id="inputamount" class="form-control" value="tes" readonly/></td>
+                                <td><div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <a class="dropdown-item" name="editdeposit" id="editdeposit" onclick="editshift(tes)"><i class="fas fa-edit"></i> Edit</a>
+                                            <a class="dropdown-item" name="savedeposit" id="savedeposit" onclick="freezeshift(tes)"><i class="fas fa-desktop"></i> Save</a>
+                                            <a class="dropdown-item"  name="deletedeposit" id="deletedeposit"><i class="fas fa-trash"></i> Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="inputbanknote" id="inputbanknote" class="form-control" value="Coin" readonly/></td>
+                                <td>Rp. 50</td>
+                                <td><input type="text" name="inputunit" id="inputunit" class="form-control" /></td>
+                                <td><input type="text" name="inputamount" id="inputamount" class="form-control" value="tes" readonly/></td>
+                                <td><div class="btn-group">
+                                        <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+                                        <div class="dropdown-menu dropdown-menu-right" role="menu">
+                                        <a class="dropdown-item" name="editdeposit" id="editdeposit" onclick="editshift(tes)"><i class="fas fa-edit"></i> Edit</a>
+                                            <a class="dropdown-item" name="savedeposit" id="savedeposit" onclick="freezeshift(tes)"><i class="fas fa-desktop"></i> Save</a>
+                                            <a class="dropdown-item"  name="deletedeposit" id="deletedeposit"><i class="fas fa-trash"></i> Delete</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Hour</th>
-                                <th>jumlah cashier</th>
-                                <th>jumlah customer</th>
-                                <th>Keterangan</th>
+                                <th>Currency Type</th>
+                                <th>Denomination</th>
+                                <th>Number Of Unit</th>
+                                <th>Amount</th>
                                 <th>Action</th>
                             </tr>
                         </tfoot>
