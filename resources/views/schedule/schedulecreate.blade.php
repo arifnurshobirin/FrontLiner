@@ -160,7 +160,7 @@
 </div>
 <!-- #END# Create Table -->
 
-<!-- Create Table -->
+<!-- modal codeshift -->
 <div class="modal fade" id="modalcodeshift" data-backdrop="static" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -217,7 +217,7 @@
         </div>
     </div>
 </div>
-<!-- #END# Create Table -->
+<!-- #END# modal codeshift -->
 
 <script>
 var totaltimework=0;
