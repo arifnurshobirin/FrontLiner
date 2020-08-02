@@ -132,6 +132,45 @@
 </div>
 <!-- #END# Create Table -->
 
+<!-- modal codeshift -->
+<div class="modal fade" id="modalpicasso" data-backdrop="static" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalheadingpicasso"></h4>
+            </div>
+            <div class="modal-body">
+                <button type="button" name="createcodeshift" id="createcodeshift" class="btn btn-success">Create Picasso</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <table class="table table-bordered table-striped table-hover dataTable js-exportable" id="PicassoDatatable">
+                    <thead>
+                        <tr>
+                            <th>Code Shift</th>
+                            <th>Start Shift</th>
+                            <th>End Shift</th>
+                            <th>Working Hour</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th>Code Shift</th>
+                            <th>Start Shift</th>
+                            <th>End Shift</th>
+                            <th>Working Hour</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                </table>   
+            </div>
+        </div>
+    </div>
+</div>
+<!-- #END# modal codeshift -->
+
 <script>
 function format ( d ) {
     // `d` is the original data object for the row
@@ -202,9 +241,21 @@ function format ( d ) {
                             $('#scheduleid').val('');
                             $('#scheduleform').trigger("reset");
                             $('#modelHeading').html("Create New Picasso ");
-                            $('#ajaxModel').modal('show');
+                            $('#modalpicasso').modal('show');
                         }
-                    }
+                    },
+                    {
+                        text: '<i class="fas fa-calendar"></i><span> Code Shift</span>',
+                        className: 'btn btn-info',
+                        action: function ( e, dt, node, config ) {
+                            $('#schedulesave').val("create-schedule");
+                            $('#schedulesave').html('Save');
+                            $('#scheduleid').val('');
+                            $('#scheduleform').trigger("reset");
+                            $('#modalheadingcodeshift').html("Daftar Shift Schedule");
+                            $('#modalcodeshift').modal('show');
+                        }
+                }
                 ]
         });
 
