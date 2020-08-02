@@ -20,7 +20,6 @@ Route::get('/profile', 'UserController@index');
 Route::get('/lockscreen', 'ReportController@lockscreen');
 Route::get('/helpdesk', 'ReportController@helpdesk');
 Route::get('/sales', 'ReportController@sales');
-Route::get('/picasso', 'ReportController@picasso');
 Route::get('/deposit', 'ReportController@deposit');
 Route::get('/banana', 'ReportController@banana');
 Route::get('/contact', 'UserController@create');

@@ -24,14 +24,6 @@ $(document).ready(function () {
         $('#contentpage').load('sales');
         return false;
     })
-    $('#contentpicasso').click(function () {
-        $('a').removeClass('active');
-        document.getElementById('contentdaily').className = "nav-link active";
-        document.getElementById('contentpicasso').className = "nav-link active";
-        $('.urlpage').html('Picasso Page');
-        $('#contentpage').load('picasso');
-        return false;
-    })
     $('#contentdeposit').click(function () {
         $('a').removeClass('active');
         document.getElementById('contentdaily').className = "nav-link active";

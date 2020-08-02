@@ -242,12 +242,6 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentpicasso"  class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Picasso</p>
-                  </a>
-                </li>
-                <li class="nav-item">
                   <a href="#" id="contentdeposit"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Deposit Form</p>
