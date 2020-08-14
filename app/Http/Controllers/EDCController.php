@@ -17,25 +17,25 @@ class EDCController extends Controller
      */
 
 
-    public function datatable()
+    public function datatable(Request $request)
     {
-        return view('edc.edcdatatable');
+        $data = EDCModel::latest()->get();
+        return DataTables::of($data)
+        ->addColumn('action','<div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+            <div class="dropdown-menu dropdown-menu-right" role="menu">
+            <a href="#" class="edcshow dropdown-item" id="{{$id}}"><i class="fas fa-desktop"></i> Show</a>
+            <a href="#" class="editedc dropdown-item" id="{{$id}}"><i class="fas fa-edit"></i> Edit</a>
+            <a href="#" class="deleteedc dropdown-item" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
+            </div></div>')
+        ->addColumn('checkbox', '<input type="checkbox" name="edccheckbox[]" class="edccheckbox" value="{{$id}}" />')
+        ->rawColumns(['action','checkbox'])
+        ->make(true);
+
     }
     public function index(Request $request)
     {
-            $data = EDCModel::latest()->get();
-            return DataTables::of($data)
-            ->addColumn('action','<div class="btn-group">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
-                <div class="dropdown-menu dropdown-menu-right" role="menu">
-                <a href="#" class="edcshow dropdown-item" id="{{$id}}"><i class="fas fa-desktop"></i> Show</a>
-                <a href="#" class="editedc dropdown-item" id="{{$id}}"><i class="fas fa-edit"></i> Edit</a>
-                <a href="#" class="deleteedc dropdown-item" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
-                </div></div>')
-            ->addColumn('checkbox', '<input type="checkbox" name="edccheckbox[]" class="edccheckbox" value="{{$id}}" />')
-            ->rawColumns(['action','checkbox'])
-            ->make(true);
-
+        return view('edc.edcdatatable');
     }
     /**
      * Show the form for creating a new resource.

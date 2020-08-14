@@ -1,22 +1,39 @@
-@section('title page','Home Page')
+@extends('layouts.app') 
+@section('title tab','Profile Page')
+@section('title page','Profile Page')
 
-<div class="container-fluid">
-    <div class="row">
-    <div class="preloader">
-        <div class="loading">
-            <div class="spinner-grow text-danger" role="status"></div>
-            <div class="spinner-grow text-danger" role="status"></div>
-            <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
-            <strong>Loading...</strong>
+@section('css')
+<!-- Page CSS -->
+@endsection
+
+@section('content')
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="urlpage">Profile Page</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
+                    <li class="breadcrumb-item active urlpage">Profile Page</li>
+                </ol>
+            </div>
         </div>
-    </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content" id="contentpage">
+    <div class="row">
         <div class="col-md-3">
 
             <!-- Profile Image -->
             <div class="card card-primary card-outline">
                 <div class="card-body box-profile">
                     <div class="text-center">
-                        <img class="profile-user-img img-fluid img-circle" src="img/user4-128x128.jpg"
+                        <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/user4-128x128.jpg') }}"
                             alt="User profile picture">
                     </div>
 
@@ -101,7 +118,7 @@
                             <!-- Post -->
                             <div class="post">
                                 <div class="user-block">
-                                    <img class="img-circle img-bordered-sm" src="img/user1-128x128.jpg"
+                                    <img class="img-circle img-bordered-sm" src="{{ asset('img/user1-128x128.jpg') }}"
                                         alt="user image">
                                     <span class="username">
                                         <a href="#">Jonathan Burke Jr.</a>
@@ -137,7 +154,7 @@
                             <!-- Post -->
                             <div class="post clearfix">
                                 <div class="user-block">
-                                    <img class="img-circle img-bordered-sm" src="img/user7-128x128.jpg"
+                                    <img class="img-circle img-bordered-sm" src="{{ asset('img/user7-128x128.jpg') }}"
                                         alt="User Image">
                                     <span class="username">
                                         <a href="#">Sarah Ross</a>
@@ -168,7 +185,7 @@
                             <!-- Post -->
                             <div class="post">
                                 <div class="user-block">
-                                    <img class="img-circle img-bordered-sm" src="img/user6-128x128.jpg"
+                                    <img class="img-circle img-bordered-sm" src="{{ asset('img/user6-128x128.jpg') }}"
                                         alt="User Image">
                                     <span class="username">
                                         <a href="#">Adam Jones</a>
@@ -179,19 +196,19 @@
                                 <!-- /.user-block -->
                                 <div class="row mb-3">
                                     <div class="col-sm-6">
-                                        <img class="img-fluid" src="img/photo1.png" alt="Photo">
+                                        <img class="img-fluid" src="{{ asset('img/photo1.png') }}" alt="Photo">
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-sm-6">
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <img class="img-fluid mb-3" src="img/photo2.png" alt="Photo">
-                                                <img class="img-fluid" src="img/photo3.jpg" alt="Photo">
+                                                <img class="img-fluid mb-3" src="{{ asset('img/photo2.png') }}" alt="Photo">
+                                                <img class="img-fluid" src="{{ asset('img/photo3.jpg') }}" alt="Photo">
                                             </div>
                                             <!-- /.col -->
                                             <div class="col-sm-6">
-                                                <img class="img-fluid mb-3" src="img/photo4.jpg" alt="Photo">
-                                                <img class="img-fluid" src="img/photo1.png" alt="Photo">
+                                                <img class="img-fluid mb-3" src="{{ asset('img/photo4.jpg') }}" alt="Photo">
+                                                <img class="img-fluid" src="{{ asset('img/photo1.png') }}" alt="Photo">
                                             </div>
                                             <!-- /.col -->
                                         </div>
@@ -376,7 +393,14 @@
         <!-- /.col -->
     </div>
     <!-- /.row -->
-</div><!-- /.container-fluid -->
+ 
+</section>
+<!-- /.content -->
+@endsection
+
+@section('javascript')
+<!-- page script -->
 <script>
-      $(".preloader").fadeOut("slow");
+    $(".preloader").fadeOut("slow");
 </script>
+@endsection

@@ -18,12 +18,7 @@ class CashierController extends Controller
      */
     public function datatable()
     {
-        return view('cashier.cashierdatatable');
-    }
-
-    public function index(Request $request)
-    {
-            $data = CashierModel::latest()->get();
+        $data = CashierModel::latest()->get();
             return DataTables::of($data)
             ->addColumn('action',
                 '<div class="btn-group">
@@ -39,12 +34,17 @@ class CashierController extends Controller
 
     }
 
+    public function index(Request $request)
+    {
+        return view('cashier.cashierdatatable');
+    }
+
     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
         //
     }

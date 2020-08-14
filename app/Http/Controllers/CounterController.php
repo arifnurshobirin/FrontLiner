@@ -15,14 +15,9 @@ class CounterController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function datatable()
+    public function datatable(Request $request)
     {
-        return view('counter.counterdatatable');
-    }
-
-    public function index(Request $request)
-    {
-            $data = CounterModel::latest()->get();
+        $data = CounterModel::latest()->get();
             return DataTables::of($data)
             ->addColumn('action',
             '<div class="btn-group">
@@ -42,7 +37,12 @@ class CounterController extends Controller
             // })
             ->rawColumns(['checkbox','action'])
             ->make(true);
+        
+    }
 
+    public function index(Request $request)
+    {
+        return view('counter.counterdatatable');
     }
 
     /**

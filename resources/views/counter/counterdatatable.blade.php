@@ -1,155 +1,173 @@
-@include('sweetalert::alert')
-<div class="row">
-    <div class="preloader">
-        <div class="loading">
-            <div class="spinner-grow text-danger" role="status"></div>
-            <div class="spinner-grow text-danger" role="status"></div>
-            <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
-            <strong>Loading...</strong>
+@extends('layouts.app') 
+@section('title tab','Counter Page')
+@section('title page','Counter Page')
+
+@section('css')
+<!-- Page CSS -->
+@endsection
+
+@section('content')
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="urlpage">Counter Page</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
+                    <li class="breadcrumb-item active urlpage">Counter Page</li>
+                </ol>
+            </div>
         </div>
-    </div>
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Counter DataTable</h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                        <i class="fas fa-minus"></i></button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
-                        title="Remove">
-                        <i class="fas fa-times"></i></button>
-                </div>
-            </div> 
-            <!-- /.card-header -->
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover dataTable js-exportable"
-                        id="CounterDatatable">
-                        <thead>
-                            <tr>
-                                <th><button type="button" name="countermoredelete" id="countermoredelete" class="btn btn-danger">
-                                <i class="fas fa-times"></i><span></span>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content" id="contentpage">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Counter DataTable</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
+                    title="Remove">
+                    <i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover dataTable js-exportable"
+                    id="CounterDatatable">
+                    <thead>
+                        <tr>
+                            <th><button type="button" name="countermoredelete" id="countermoredelete"
+                                    class="btn btn-danger">
+                                    <i class="fas fa-times"></i><span></span>
                                 </button></th>
-                                <th></th>
-                                <th>No Counter</th>
-                                <th>Ip Address</th>
-                                <th>Mac Address</th>
-                                <th>Type Counter</th>
-                                <th>Status Counter</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th>No Counter</th>
-                                <th>Ip Address</th>
-                                <th>Mac Address</th>
-                                <th>Type Counter</th>
-                                <th>Status Counter</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>
-                    </table>
+                            <th></th>
+                            <th>No Counter</th>
+                            <th>Ip Address</th>
+                            <th>Mac Address</th>
+                            <th>Type Counter</th>
+                            <th>Status Counter</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>No Counter</th>
+                            <th>Ip Address</th>
+                            <th>Mac Address</th>
+                            <th>Type Counter</th>
+                            <th>Status Counter</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <!-- Create Table -->
+            <div class="modal fade" id="ajaxModel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="modelHeading"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" id="counterform" name="counterform">
+                                @csrf
+                                <input type="hidden" name="counterid" id="counterid">
+                                <label for="nopos">No Counter</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="number" id="nocounter" name="nocounter" class="form-control"
+                                            placeholder="Enter your No Counter" required>
+                                    </div>
+                                </div>
+                                <label for="ip">Ip Address</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control ip" id="ipaddress" name="ipaddress"
+                                            placeholder="Enter your Ip Address">
+                                    </div>
+                                </div>
+                                <label for="mac">Mac Address</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" class="form-control" id="macaddress" name="macaddress"
+                                            placeholder="Enter your Mac Address">
+                                    </div>
+                                </div>
+                                <label for="type">Type Counter</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select class="form-control show-tick" id="typecounter" name="typecounter">
+                                            <option value="">-- Please select --</option>
+                                            <option value="Regular">Regular</option>
+                                            <option value="SaladBar">SaladBar</option>
+                                            <option value="Milk">Milk</option>
+                                            <option value="Wine">Wine</option>
+                                            <option value="Deptstore">Deptstore</option>
+                                            <option value="Electronic">Electronic</option>
+                                            <option value="TransHello">TransHello</option>
+                                            <option value="Homedel">Homedel</option>
+                                            <option value="Cigarette">Cigarette</option>
+                                            <option value="TransLiving">TransLiving</option>
+                                            <option value="TransHardware">TransHardware</option>
+                                            <option value="Bakery">Bakery</option>
+                                            <option value="Dokar">Dokar</option>
+                                            <option value="Canvasing">Canvasing</option>
+                                            <option value="Backup">Backup</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <label for="type">Status Counter</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select class="form-control show-tick" id="satuscounter" name="statuscounter">
+                                            <option value="">-- Please select --</option>
+                                            <option value="Active">Active</option>
+                                            <option value="Inactive">Inactive</option>
+                                            <option value="Normal">Normal</option>
+                                            <option value="Broken">Broken</option>
+                                            <option value="Queueing">Queueing</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary m-t-15 waves-effect" id="countersave"
+                                    value="create">Save</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                Project Website Cashier Carrefour Taman Palem
-            </div>
+            <!-- #END# Create Table -->
         </div>
-        <!-- /.card -->
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
-
-
-<!-- Create Table -->
-<div class="modal fade" id="ajaxModel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modelHeading"></h4>
-            </div>
-            <div class="modal-body">
-                <form method="post" id="counterform" name="counterform">
-                    @csrf
-                    <input type="hidden" name="counterid" id="counterid">
-                    <label for="nopos">No Counter</label>
-                    <div class="form-group">
-                        <div class="form-line">
-                            <input type="number" id="nocounter" name="nocounter" class="form-control"
-                                placeholder="Enter your No Counter" required>
-                        </div>
-                    </div>
-                    <label for="ip">Ip Address</label>
-                    <div class="form-group">
-                        <div class="form-line">
-                            <input type="text" class="form-control ip" id="ipaddress" name="ipaddress"
-                                placeholder="Enter your Ip Address">
-                        </div>
-                    </div>
-                    <label for="mac">Mac Address</label>
-                    <div class="form-group">
-                        <div class="form-line">
-                            <input type="text" class="form-control" id="macaddress" name="macaddress"
-                                placeholder="Enter your Mac Address">
-                        </div>
-                    </div>
-                    <label for="type">Type Counter</label>
-                    <div class="form-group">
-                        <div class="form-line">
-                            <select class="form-control show-tick" id="typecounter" name="typecounter">
-                                <option value="">-- Please select --</option>
-                                <option value="Regular">Regular</option>
-                                <option value="SaladBar">SaladBar</option>
-                                <option value="Milk">Milk</option>
-                                <option value="Wine">Wine</option>
-                                <option value="Deptstore">Deptstore</option>
-                                <option value="Electronic">Electronic</option>
-                                <option value="TransHello">TransHello</option>
-                                <option value="Homedel">Homedel</option>
-                                <option value="Cigarette">Cigarette</option>
-                                <option value="TransLiving">TransLiving</option>
-                                <option value="TransHardware">TransHardware</option>
-                                <option value="Bakery">Bakery</option>
-                                <option value="Dokar">Dokar</option>
-                                <option value="Canvasing">Canvasing</option>
-                                <option value="Backup">Backup</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <label for="type">Status Counter</label>
-                    <div class="form-group">
-                        <div class="form-line">
-                            <select class="form-control show-tick" id="satuscounter" name="statuscounter">
-                                <option value="">-- Please select --</option>
-                                <option value="Active">Active</option>
-                                <option value="Inactive">Inactive</option>
-                                <option value="Normal">Normal</option>
-                                <option value="Broken">Broken</option>
-                                <option value="Queueing">Queueing</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary m-t-15 waves-effect" id="countersave"
-                        value="create">Save</button>
-                </form>
-            </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            Project Website Cashier Carrefour Taman Palem
         </div>
     </div>
-</div>
-<!-- #END# Create Table -->
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+@endsection
 
-
-
+@section('javascript')
+<!-- page script -->
 <script>
-function format ( d ) {
+    $(".preloader").fadeOut("slow");
+    function format ( d ) {
     // `d` is the original data object for the row
     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
         '<tr>'+
@@ -165,15 +183,15 @@ function format ( d ) {
             '<td>And any further details here (images etc)...</td>'+
         '</tr>'+
     '</table>';
-}
+    }
+    
     $(document).ready(function() {
-        
         var table = $('#CounterDatatable').DataTable({
         processing: true,
         serverSide: true,
         "responsive": true,
         paging: true,
-        ajax: { url:"{{ route('counter.index') }}",},
+        ajax: { url:"{{ route('counter.datatable') }}",},
         "order": [[ 2, "asc" ]],
         columns: [
             { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
@@ -351,6 +369,5 @@ function format ( d ) {
         });
 
     });
-    $(".preloader").fadeOut("slow");
-
-</script> 
+</script>
+@endsection

@@ -1,17 +1,31 @@
-@include('sweetalert::alert')
-<!-- Helpdesk -->
+@extends('layouts.app') 
+@section('title tab','HelpDesk Page')
+@section('title page','HelpDesk Page')
 
-<div class="preloader">
-    <div class="loading">
-        <div class="spinner-grow text-danger" role="status"></div>
-        <div class="spinner-grow text-danger" role="status"></div>
-        <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
-        <strong>Loading...</strong>
-    </div>
-</div>
+@section('css')
+<!-- Page CSS -->
+@endsection
 
+@section('content')
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="urlpage">HelpDesk Page</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
+                    <li class="breadcrumb-item active urlpage">HelpDesk Page</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
 
-<div class="container-fluid">
+<!-- Main content -->
+<section class="content" id="contentpage">
 
     <!-- Timelime example  -->
     <div class="row">
@@ -119,11 +133,14 @@
         </div>
         <!-- /.col -->
     </div>
-</div>
-<!-- /.timeline -->
+    <!-- /.timeline -->
+</section>
+<!-- /.content -->
+@endsection
 
-
+@section('javascript')
+<!-- page script -->
 <script>
     $(".preloader").fadeOut("slow");
-
 </script>
+@endsection

@@ -1,8 +1,9 @@
 @extends('layouts.auth')
 @section('title','Login Page')
+
+
+
 @section('content')
-
-
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
@@ -16,8 +17,8 @@
       <form id="sign_in" method="POST" action="{{ route('login') }}">
         @csrf
         <div class="input-group mb-3">
-          <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" placeholder="Email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-          @error('email')
+          <input id="username" type="text" class="form-control @error('username') is-invalid @enderror" name="username" placeholder="Username" value="{{ old('username') }}" required autocomplete="username" autofocus>
+          @error('username')
           <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
           </span>

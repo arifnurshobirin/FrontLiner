@@ -1,7 +1,8 @@
 @extends('layouts.auth')
 @section('title','Lockscreen Page')
-@section('content')
 
+
+@section('content')
 <body class="hold-transition lockscreen">
 <!-- Automatic element centering -->
 <div class="lockscreen-wrapper">
@@ -15,7 +16,7 @@
   <div class="lockscreen-item">
     <!-- lockscreen image -->
     <div class="lockscreen-image">
-      <img src="img/userarif160x160.jpg" alt="User Image">
+      <img src="{{ asset('img/userarif160x160.jpg') }}" alt="User Image">
     </div>
     <!-- /.lockscreen-image -->
 

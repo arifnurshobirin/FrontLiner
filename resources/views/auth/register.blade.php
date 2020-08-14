@@ -31,6 +31,20 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
+                        <input id="username" type="text" class="form-control @error('username') is-invalid @enderror"
+                            name="username" placeholder="Username" value="{{ old('username') }}" required autocomplete="username">
+                        @error('username')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
                             name="email" placeholder="Email" value="{{ old('email') }}" required autocomplete="email">
                         @error('email')
@@ -40,7 +54,7 @@
                         @enderror
                         <div class="input-group-append">
                             <div class="input-group-text">
-                                <span class="fas fa-envelope"></span>
+                                <span class="fas fa-user"></span>
                             </div>
                         </div>
                     </div>
@@ -69,8 +83,8 @@
                         </div>
                     </div>
                     <div class="input-group mb-3 custom-file">
-                      <input type="file" class="custom-file-input" id="Avatar" name="Avatar">
-                      <label class="custom-file-label" for="customFile">Choose Profile Image</label>
+                    <input type="file" class="custom-file-input" id="Avatar" name="Avatar">
+                    <label class="custom-file-label" for="customFile">Choose Profile Image</label>
                     </div>
                     <div class="row">
                         <div class="col-8">
@@ -89,7 +103,7 @@
                     </div>
                 </form>
 
-                <div class="social-auth-links text-center">
+                <!-- <div class="social-auth-links text-center">
                     <p>- OR -</p>
                     <a href="#" class="btn btn-block btn-primary">
                         <i class="fab fa-facebook mr-2"></i>
@@ -99,7 +113,7 @@
                         <i class="fab fa-google-plus mr-2"></i>
                         Sign up using Google+
                     </a>
-                </div>
+                </div> -->
 
                 <a href="{{ route('login') }}" class="text-center">I already have a membership</a>
             </div>

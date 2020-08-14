@@ -1,193 +1,209 @@
-@include('sweetalert::alert')
-<!-- POS Table -->
-<div class="row">
-    <div class="preloader">
-        <div class="loading">
-            <div class="spinner-grow text-danger" role="status"></div>
-            <div class="spinner-grow text-danger" role="status"></div>
-            <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
-            <strong>Loading...</strong>
+@extends('layouts.app')
+@section('title tab','POS Page')
+@section('title page','POS Page')
+
+@section('css')
+<!-- Page CSS -->
+@endsection
+
+@section('content')
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="urlpage">POS Page</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
+                    <li class="breadcrumb-item active urlpage">POS Page</li>
+                </ol>
+            </div>
         </div>
-    </div>
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">POS DataTable</h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                        <i class="fas fa-minus"></i></button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
-                        title="Remove">
-                        <i class="fas fa-times"></i></button>
-                </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content" id="contentpage">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">POS DataTable</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
+                    title="Remove">
+                    <i class="fas fa-times"></i></button>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover dataTable js-exportable"
-                        id="POSDatatable">
-                        <thead>
-                            <tr>
-                                <th><button type="button" name="posmoredelete" id="posmoredelete" class="btn btn-danger">
-                                <i class="fas fa-times"></i><span></span>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover dataTable js-exportable" id="POSDatatable">
+                    <thead>
+                        <tr>
+                            <th><button type="button" name="posmoredelete" id="posmoredelete" class="btn btn-danger">
+                                    <i class="fas fa-times"></i><span></span>
                                 </button></th>
-                                <th></th>
-                                <th>No POS</th>
-                                <th>CPU</th>
-                                <th>Printer</th>
-                                <th>Drawer</th>
-                                <th>Scanner</th>
-                                <th>Monitor</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th></th>
-                                <th></th>
-                                <th>No POS</th>
-                                <th>CPU</th>
-                                <th>Printer</th>
-                                <th>Drawer</th>
-                                <th>Scanner</th>
-                                <th>Monitor</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>
-                    </table>
+                            <th></th>
+                            <th>No POS</th>
+                            <th>CPU</th>
+                            <th>Printer</th>
+                            <th>Drawer</th>
+                            <th>Scanner</th>
+                            <th>Monitor</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th>No POS</th>
+                            <th>CPU</th>
+                            <th>Printer</th>
+                            <th>Drawer</th>
+                            <th>Scanner</th>
+                            <th>Monitor</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <!-- Create Table -->
+            <div class="modal fade" id="ajaxModel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="modelHeading"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" id="posform" name="posform">
+                                @csrf
+                                <input type="hidden" name="posid" id="posid">
+                                <label for="nopos">No POS</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="nopos" name="nopos" class="form-control"
+                                            placeholder="Enter your No POS" required>
+                                    </div>
+                                </div>
+                                <label for="cpu">CPU POS</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select class="form-control show-tick" id="cpu" name="cpu">
+                                            <option value="">-- Please select --</option>
+                                            <option value="Zonerich">Zonerich</option>
+                                            <option value="IBM">IBM</option>
+                                            <option value="HP">HP</option>
+                                            <option value="Wincore M2">Wincore M2</option>
+                                            <option value="Wincore M3">Wincore M3</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <label for="printer">Printer</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select class="form-control show-tick" id="printer" name="printer">
+                                            <option value="">-- Please select --</option>
+                                            <option value="ND 77">ND 77</option>
+                                            <option value="Star">Star</option>
+                                            <option value="Zonerich">Zonerich</option>
+                                            <option value="Wincore Nixdrof">Wincore Nixdrof</option>
+                                            <option value="Epson">Epson</option>
+                                            <option value="HP">HP</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <label for="scanner">Scanner</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select class="form-control show-tick" id="scanner" name="scanner">
+                                            <option value="">-- Please select --</option>
+                                            <option value="Magellan 8100">Magellan 8100</option>
+                                            <option value="Magellan 2000">Magellan 2000</option>
+                                            <option value="Datalogic">Datalogic</option>
+                                            <option value="Zonerich">Zonerich</option>
+                                            <option value="HP">HP</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <label for="drawer">Drawer</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select class="form-control show-tick" id="drawer" name="drawer">
+                                            <option value="">-- Please select --</option>
+                                            <option value="Wincore">Wincore</option>
+                                            <option value="IBM">IBM</option>
+                                            <option value="HP">HP</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <label for="monitor">Monitor</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select class="form-control show-tick" id="monitor" name="monitor">
+                                            <option value="">-- Please select --</option>
+                                            <option value="TFT">TFT</option>
+                                            <option value="HP">HP</option>
+                                            <option value="Wincore">Wincore</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary m-t-15 waves-effect" id="possave"
+                                    value="create">Save</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <!-- #END# Create Table -->
+        </div>
         <!-- /.card-body -->
         <div class="card-footer">
-                Project Website Cashier Carrefour Taman Palem
-            </div>
-        </div>
-        <!-- /.card -->
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
-
-<!-- Create Table -->
-<div class="modal fade" id="ajaxModel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modelHeading"></h4>
-            </div>
-            <div class="modal-body">
-                <form method="post" id="posform" name="posform">
-                    @csrf
-                    <input type="hidden" name="posid" id="posid">
-                    <label for="nopos">No POS</label>
-                    <div class="form-group">
-                        <div class="form-line">
-                            <input type="text" id="nopos" name="nopos" class="form-control"
-                                placeholder="Enter your No POS" required>
-                        </div>
-                    </div>
-                    <label for="cpu">CPU POS</label>
-                    <div class="form-group">
-                        <div class="form-line">
-                            <select class="form-control show-tick" id="cpu" name="cpu">
-                                <option value="">-- Please select --</option>
-                                <option value="Zonerich">Zonerich</option>
-                                <option value="IBM">IBM</option>
-                                <option value="HP">HP</option>
-                                <option value="Wincore M2">Wincore M2</option>
-                                <option value="Wincore M3">Wincore M3</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <label for="printer">Printer</label>
-                    <div class="form-group">
-                        <div class="form-line">
-                            <select class="form-control show-tick" id="printer" name="printer">
-                                <option value="">-- Please select --</option>
-                                <option value="ND 77">ND 77</option>
-                                <option value="Star">Star</option>
-                                <option value="Zonerich">Zonerich</option>
-                                <option value="Wincore Nixdrof">Wincore Nixdrof</option>
-                                <option value="Epson">Epson</option>
-                                <option value="HP">HP</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <label for="scanner">Scanner</label>
-                    <div class="form-group">
-                        <div class="form-line">
-                            <select class="form-control show-tick" id="scanner" name="scanner">
-                                <option value="">-- Please select --</option>
-                                <option value="Magellan 8100">Magellan 8100</option>
-                                <option value="Magellan 2000">Magellan 2000</option>
-                                <option value="Datalogic">Datalogic</option>
-                                <option value="Zonerich">Zonerich</option>
-                                <option value="HP">HP</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <label for="drawer">Drawer</label>
-                    <div class="form-group">
-                        <div class="form-line">
-                            <select class="form-control show-tick" id="drawer" name="drawer">
-                                <option value="">-- Please select --</option>
-                                <option value="Wincore">Wincore</option>
-                                <option value="IBM">IBM</option>
-                                <option value="HP">HP</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-                    <label for="monitor">Monitor</label>
-                    <div class="form-group">
-                        <div class="form-line">
-                            <select class="form-control show-tick" id="monitor" name="monitor">
-                                <option value="">-- Please select --</option>
-                                <option value="TFT">TFT</option>
-                                <option value="HP">HP</option>
-                                <option value="Wincore">Wincore</option>
-                            </select>
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary m-t-15 waves-effect" id="possave"
-                        value="create">Save</button>
-                </form>
-            </div>
+            Project Website Cashier Carrefour Taman Palem
         </div>
     </div>
-</div>
-<!-- #END# Create Table -->
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+@endsection
 
+@section('javascript')
+<!-- page script -->
 <script>
     $(".preloader").fadeOut("slow");
-function format ( d ) {
-    // `d` is the original data object for the row
-    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-        '<tr>'+
-            '<td>Full name:</td>'+
-            '<td>'+d.Printer+'</td>'+
-        '</tr>'+
-        '<tr>'+
-            '<td>Extension number:</td>'+
-            '<td>'+d.Printer+'</td>'+
-        '</tr>'+
-        '<tr>'+
-            '<td>Extra info:</td>'+
-            '<td>And any further details here (images etc)...</td>'+
-        '</tr>'+
-    '</table>';
-}
+    function format ( d ) {
+        // `d` is the original data object for the row
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+            '<tr>'+
+                '<td>Full name:</td>'+
+                '<td>'+d.Printer+'</td>'+
+            '</tr>'+
+            '<tr>'+
+                '<td>Extension number:</td>'+
+                '<td>'+d.Printer+'</td>'+
+            '</tr>'+
+            '<tr>'+
+                '<td>Extra info:</td>'+
+                '<td>And any further details here (images etc)...</td>'+
+            '</tr>'+
+        '</table>';
+    }
     $(document).ready(function() {
         // var template = Handlebars.compile($("#details-template").html());
         var table = $('#POSDatatable').DataTable({
         processing: true,
         serverSide: true,
-        ajax: { url:"{{ route('pos.index') }}",},
+        ajax: { url:"{{ route('pos.datatable') }}",},
         "order": [[ 2, "asc" ]],
         columns: [
             { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
@@ -372,3 +388,4 @@ function format ( d ) {
     });
 
 </script>
+@endsection

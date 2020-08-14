@@ -18,13 +18,7 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function datatable()
-    {
-        return view('schedule.scheduledatatable');
-        // "'.$data->id.'"
-    }
-    
-    public function index(Request $request)
+    public function datatable(Request $request)
     {
         $data = DB::table('scheduletable')
             ->select('scheduletable.id','scheduletable.Employee','scheduletable.FullName','scheduletable.Date','scheduletable.CodeShift',
@@ -37,10 +31,22 @@ class ScheduleController extends Controller
                 '<button type="button" class="btn btn-primary"><i class="fas fa-wrench"></i> Masuk</button>')
             ->addColumn('activity', '<input type="text" name="activity{{$id}}" id="activity{{$id}}" class="form-control" />')
             ->addColumn('shift', '<label for="shift">{{$StartShift}} - {{$EndShift}}</label>')
-            ->rawColumns(['shift','activity','attendance'])
+            ->addColumn('checkbox', '<input type="checkbox" name="countercheckbox[]" class="checkbox countercheckbox" value="{{$id}}" />')
+            ->addColumn('action',
+            '<div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+            <div class="dropdown-menu dropdown-menu-right" role="menu">
+            <a class="schedulesave dropdown-item" id="{{$id}}" onclick="freezeschedule({{$id}})"><i class="fas fa-desktop"></i> Save</a>
+            <a class="scheduleedit dropdown-item" id="{{$id}}" onclick="editschedule({{$id}})"><i class="fas fa-edit"></i> Edit</a>
+            <a class="scheduledelete dropdown-item" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
+            </div></div>')
+            ->rawColumns(['checkbox','shift','activity','attendance','action'])
             ->make(true);
-
-
+    }
+    
+    public function index(Request $request)
+    {
+        return view('schedule.scheduledatatable');
     }
     
 

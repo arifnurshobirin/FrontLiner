@@ -6,6 +6,7 @@ use App\ReportModel;
 use Illuminate\Http\Request;
 Use Alert;
 
+
 class ReportController extends Controller
 {
     /**

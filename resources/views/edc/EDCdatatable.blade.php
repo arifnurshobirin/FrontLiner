@@ -1,15 +1,32 @@
-@include('sweetalert::alert')
-<!-- EDC Table -->
-<div class="row">
-    <div class="preloader">
-        <div class="loading">
-            <div class="spinner-grow text-danger" role="status"></div>
-            <div class="spinner-grow text-danger" role="status"></div>
-            <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
-            <strong>Loading...</strong>
+@extends('layouts.app')
+@section('title tab','EDC Page')
+@section('title page','EDC Page')
+
+@section('css')
+<!-- Page CSS -->
+@endsection
+
+@section('content')
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="urlpage">EDC Page</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
+                    <li class="breadcrumb-item active urlpage">EDC Page</li>
+                </ol>
+            </div>
         </div>
-    </div>
-    <div class="col-12">
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content" id="contentpage">
+    <!-- Default box -->
         <div class="card">
             <div class="card-header">
                 <h3 class="card-title">EDC DataTable</h3>
@@ -55,18 +72,6 @@
                         </tfoot>
                     </table>
                 </div>
-            </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                Project Website Cashier Carrefour Taman Palem
-            </div>
-        </div>
-        <!-- /.card -->
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
-
 <!-- Create Table -->
 <div class="modal fade" id="ajaxModel" aria-hidden="true">
     <div class="modal-dialog">
@@ -160,33 +165,48 @@
     </div>
 </div>
 <!-- #END# Create Table -->
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer">
+                Project Website Cashier Carrefour Taman Palem
+            </div>
+        </div>
+        <!-- /.card -->
+        </section>
+<!-- /.content -->
+@endsection
 
+@section('javascript')
+<!-- page script -->
 <script>
-function format ( d ) {
-    // `d` is the original data object for the row
-    return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
-        '<tr>'+
-            '<td>Full name:</td>'+
-            '<td>'+d.TypeEDC+'</td>'+
-        '</tr>'+
-        '<tr>'+
-            '<td>Extension number:</td>'+
-            '<td>'+d.Connection+'</td>'+
-        '</tr>'+
-        '<tr>'+
-            '<td>Extra info:</td>'+
-            '<td>And any further details here (images etc)...</td>'+
-        '</tr>'+
-    '</table>';
-}
+    $(".preloader").fadeOut("slow");
+
+    function format ( d ) {
+        // `d` is the original data object for the row
+        return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
+            '<tr>'+
+                '<td>Full name:</td>'+
+                '<td>'+d.TypeEDC+'</td>'+
+            '</tr>'+
+            '<tr>'+
+                '<td>Extension number:</td>'+
+                '<td>'+d.Connection+'</td>'+
+            '</tr>'+
+            '<tr>'+
+                '<td>Extra info:</td>'+
+                '<td>And any further details here (images etc)...</td>'+
+            '</tr>'+
+        '</table>';
+    }
     $(document).ready(function() {
         var table = $('#EDCDatatable').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
-            url:"{{ route('edc.index') }}",
+            url:"{{ route('edc.datatable') }}",
             },
             "order": [[ 2, "asc" ]],
+            responsive: true,
             columns: [
                 { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
                 {
@@ -364,6 +384,6 @@ function format ( d ) {
             });
 
     });
-    $(".preloader").fadeOut("slow");
 
 </script>
+@endsection

@@ -1,28 +1,46 @@
-<!-- Add Schedule Table -->
-<div class="row">
-    <div class="preloader">
-        <div class="loading">
-            <div class="spinner-grow text-danger" role="status"></div>
-            <div class="spinner-grow text-danger" role="status"></div>
-            <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
-            <strong>Loading...</strong>
-        </div>
-    </div>
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Add Schedule</h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                        <i class="fas fa-minus"></i></button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
-                        title="Remove">
-                        <i class="fas fa-times"></i></button>
-                </div>
+@extends('layouts.app') 
+@section('title tab','Shedule Add Page')
+@section('title page','Shedule Add Page')
+
+@section('css')
+<!-- Page CSS -->
+@endsection
+
+@section('content')
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="urlpage">Shedule Add Page</h1>
             </div>
-            <!-- /.card-header -->
-            <form method="post" id="scheduleform" name="scheduleform">
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
+                    <li class="breadcrumb-item active urlpage">Shedule Add Page</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content" id="contentpage">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Add Schedule</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
+                    title="Remove">
+                    <i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <form method="post" id="scheduleform" name="scheduleform">
             @csrf
             <div class="card-body">
                 <!-- Date range -->
@@ -30,17 +48,21 @@
                     <label>Date range:</label>
                     <div class="row">
                         <div class="col-md-4">
-                        <input type="text" name="fromdate" id="fromdate" class="form-control inputdaterange" placeholder="From Date" readonly />
+                            <input type="text" name="fromdate" id="fromdate" class="form-control inputdaterange"
+                                placeholder="From Date" readonly />
                         </div>
                         <div class="col-md-4 todate2">
-                        <input type="text" name="todate" id="todate" class="form-control todate" placeholder="To Date" readonly />
+                            <input type="text" name="todate" id="todate" class="form-control todate"
+                                placeholder="To Date" readonly />
                         </div>
                         <div class="col-md-4">
-                        <button type="button" name="scheduleapply" id="scheduleapply" class="btn btn-primary">Apply</button>
-                        <button type="button" name="refresh" id="refresh" class="btn btn-default">Refresh</button>
-                        <button type="submit" name="saveallschedule" id="saveallschedule" class="btn btn-success"  value="create">
+                            <button type="button" name="scheduleapply" id="scheduleapply"
+                                class="btn btn-primary">Apply</button>
+                            <button type="button" name="refresh" id="refresh" class="btn btn-default">Refresh</button>
+                            <button type="submit" name="saveallschedule" id="saveallschedule" class="btn btn-success"
+                                value="create">
                                 Save Schedule
-                                </button>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -79,147 +101,154 @@
                         </tfoot>
                     </table>
                 </div>
-            </div>
-            </form>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                Project Website Cashier Carrefour Taman Palem
-            </div>
-        </div>
-        <!-- /.card -->
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
 
-<!-- Create Table -->
-<div class="modal fade" id="modaladdschedule" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modelHeading"></h4>
-            </div>
-            <div class="modal-body">
-                <form method="post" id="scheduleform2" name="scheduleform2" enctype="multipart/form-data">
-                        @csrf
-                    <input type="hidden" name="scheduleid" id="scheduleid">
-                    <label for="emp">Employee</label>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                <span class="input-group-text"><i class="far fa-id-badge"></i></span>
-                                </div>
-                                <input type="text" id="emp" name="emp" class="form-control" data-inputmask='"mask": "(999)"' data-mask required>
-                            </div>    
+
+                <!-- Create Table -->
+                <div class="modal fade" id="modaladdschedule" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="modelHeading"></h4>
+                            </div>
+                            <div class="modal-body">
+                                <form method="post" id="scheduleform2" name="scheduleform2"
+                                    enctype="multipart/form-data">
+                                    @csrf
+                                    <input type="hidden" name="scheduleid" id="scheduleid">
+                                    <label for="emp">Employee</label>
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text"><i class="far fa-id-badge"></i></span>
+                                            </div>
+                                            <input type="text" id="emp" name="emp" class="form-control"
+                                                data-inputmask='"mask": "(999)"' data-mask required>
+                                        </div>
+                                    </div>
+                                    <label for="fullname">Full Name</label>
+                                    <div class="form-group">
+                                        <div class="form-line">
+                                            <input type="text" id="name" name="name" class="form-control"
+                                                placeholder="Enter your Full Name" required>
+                                        </div>
+                                    </div>
+                                    <label for="birth">Date Work</label>
+                                    <div class="form-group">
+                                        <div class="input-group" id="datetimepicker1" data-target-input="nearest">
+                                            <div class="input-group-prepend" data-target="#datetimepicker1"
+                                                data-toggle="datetimepicker">
+                                                <span class="input-group-text">
+                                                    <i class="far fa-calendar-alt"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" id="date" name="date"
+                                                class="form-control datetimepicker-input" data-target="#datetimepicker1"
+                                                placeholder="dd/mm/yyyy">
+                                        </div>
+                                    </div>
+                                    <label for="birth">Start Work</label>
+                                    <div class="form-group">
+                                        <div class="input-group" id="datetimepicker2" data-target-input="nearest">
+                                            <div class="input-group-prepend" data-target="#datetimepicker2"
+                                                data-toggle="datetimepicker">
+                                                <span class="input-group-text">
+                                                    <i class="far fa-clock"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" id="start" name="start"
+                                                class="form-control datetimepicker-input" data-target="#datetimepicker2"
+                                                paceholder="Chosee Start Work">
+                                        </div>
+                                    </div>
+                                    <label for="birth">End Work</label>
+                                    <div class="form-group">
+                                        <div class="input-group" id="datetimepicker3" data-target-input="nearest">
+                                            <div class="input-group-prepend" data-target="#datetimepicker3"
+                                                data-toggle="datetimepicker">
+                                                <span class="input-group-text">
+                                                    <i class="far fa-clock"></i>
+                                                </span>
+                                            </div>
+                                            <input type="text" id="end" name="end"
+                                                class="form-control datetimepicker-input" data-target="#datetimepicker3"
+                                                paceholder="Chosee End Work">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary m-t-15 waves-effect" id="schedulesave2"
+                                        name="schedulesave2" value="create">Save</button>
+                                </form>
+                            </div>
                         </div>
-                    <label for="fullname">Full Name</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" id="name" name="name" class="form-control"
-                                        placeholder="Enter your Full Name" required>
+                    </div>
+                </div>
+                <!-- #END# Create Table -->
+
+                <!-- modal codeshift -->
+                <div class="modal fade" id="modalcodeshift" data-backdrop="static" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <!-- modal-lg -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="modalheadingcodeshift"></h4>
+                            </div>
+                            <div class="modal-body">
+                                <button type="button" name="createcodeshift" id="createcodeshift"
+                                    class="btn btn-success">Create Code Shift</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <br>
+                                <div class="table-responsive">
+                                    <table
+                                        class="display responsive table table-striped table-hover dataTable js-exportable"
+                                        id="CodeShiftDatatable">
+                                        <thead>
+                                            <tr>
+                                                <th>Code Shift</th>
+                                                <th>Start Shift</th>
+                                                <th>End Shift</th>
+                                                <th>Working Hour</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- <tbody>
+                            @foreach($dataworkinghour as $list)        
+                            <tr>
+                                
+                            </tr>
+                            @endforeach
+                        </tbody> -->
+                                        <tfoot>
+                                            <tr>
+                                                <th>Code Shift</th>
+                                                <th>Start Shift</th>
+                                                <th>End Shift</th>
+                                                <th>Working Hour</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
                                 </div>
                             </div>
-                            <label for="birth">Date Work</label>
-                            <div class="form-group">
-                                <div class="input-group" id="datetimepicker1" data-target-input="nearest">
-                                    <div class="input-group-prepend" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                    <span class="input-group-text">
-                                        <i class="far fa-calendar-alt"></i>
-                                    </span>
-                                    </div>
-                                        <input type="text" id="date" name="date" class="form-control datetimepicker-input" data-target="#datetimepicker1" placeholder="dd/mm/yyyy">
-                                </div>
-                            </div>
-                            <label for="birth">Start Work</label>
-                            <div class="form-group">
-                                <div class="input-group" id="datetimepicker2" data-target-input="nearest">
-                                    <div class="input-group-prepend" data-target="#datetimepicker2" data-toggle="datetimepicker">
-                                    <span class="input-group-text">
-                                        <i class="far fa-clock"></i>
-                                    </span>
-                                    </div>
-                                        <input type="text" id="start" name="start" class="form-control datetimepicker-input" data-target="#datetimepicker2" paceholder="Chosee Start Work">
-                                </div>
-                            </div>
-                            <label for="birth">End Work</label>
-                            <div class="form-group">
-                                <div class="input-group" id="datetimepicker3" data-target-input="nearest">
-                                    <div class="input-group-prepend" data-target="#datetimepicker3" data-toggle="datetimepicker">
-                                    <span class="input-group-text">
-                                        <i class="far fa-clock"></i>
-                                    </span>
-                                    </div>
-                                        <input type="text" id="end" name="end" class="form-control datetimepicker-input" data-target="#datetimepicker3" paceholder="Chosee End Work">
-                                </div>
-                            </div>
-                        <button type="submit" class="btn btn-primary m-t-15 waves-effect" id="schedulesave2" name="schedulesave2" value="create">Save</button>
-                </form>
+                        </div>
+                    </div>
+                </div>
+                <!-- #END# modal codeshift -->
+
             </div>
+        </form>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            Project Website Cashier Carrefour Taman Palem
         </div>
     </div>
-</div>
-<!-- #END# Create Table -->
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+@endsection
 
-<!-- modal codeshift -->
-<div class="modal fade" id="modalcodeshift" data-backdrop="static" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modalheadingcodeshift"></h4>
-            </div>
-            <div class="modal-body">
-                <button type="button" name="createcodeshift" id="createcodeshift" class="btn btn-success">Create Code Shift</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <table class="table table-bordered table-striped table-hover dataTable js-exportable" id="CodeShiftDatatable">
-                    <thead>
-                        <tr>
-                            <th>Code Shift</th>
-                            <th>Start Shift</th>
-                            <th>End Shift</th>
-                            <th>Working Hour</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($dataworkinghour as $list)        
-                        <tr>
-                            <td><input type="text" name="code{{$list->id}}" id="code{{$list->id}}" class="form-control input-uppercase" value="{{$list->CodeShift}}" readonly/></td>
-                            <td><input type="text" name="start{{$list->id}}" id="start{{$list->id}}" class="form-control input-uppercase" value="{{$list->StartShift}}" readonly/></td>
-                            <td><input type="text" name="end{{$list->id}}" id="end{{$list->id}}" class="form-control input-uppercase" value="{{$list->EndShift}}" readonly/></td>
-                            <td><div class="input-group">
-                                    <input type="text" name="hour{{$list->id}}" id="hour{{$list->id}}" class="form-control input-uppercase" value="{{$list->WorkingHour}}" readonly/>
-                                    <div class="input-group-prepend"><span class="input-group-text">Hour</span> </div>
-                                </div>
-                            </td>
-                            <td><div class="btn-group">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
-                                    <div class="dropdown-menu dropdown-menu-right" role="menu">
-                                    <a class="scheduleedit dropdown-item" id="{{$list->id}}" onclick="editshift({{$list->id}})"><i class="fas fa-edit"></i> Edit</a>
-                                        <a class="schedulesave dropdown-item" id="{{$list->id}}" onclick="freezeshift({{$list->id}})"><i class="fas fa-desktop"></i> Save</a>
-                                        <a class="scheduledelete dropdown-item" id="{{$list->id}}"><i class="fas fa-trash"></i> Delete</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Code Shift</th>
-                            <th>Start Shift</th>
-                            <th>End Shift</th>
-                            <th>Working Hour</th>
-                            <th>Action</th>
-                        </tr>
-                    </tfoot>
-                </table>   
-            </div>
-        </div>
-    </div>
-</div>
-<!-- #END# modal codeshift -->
-
+@section('javascript')
+<!-- page script -->
 <script>
+    $(".preloader").fadeOut("slow");
 var totaltimework=0;
 var timework=0;
 function format ( d ) {
@@ -544,12 +573,6 @@ function editshift(id){
         $('#datetimepicker1').datetimepicker({
                     format: 'L'
                 });
-        $('#datetimepicker2').datetimepicker({
-                    format: 'LT'
-                });
-        $('#datetimepicker3').datetimepicker({
-                    format: 'LT'
-                });
         $('#timepicker').datetimepicker({
                     format: 'LT'
                 });
@@ -592,6 +615,37 @@ function editshift(id){
 
         });
 
+        var tablecodeshift = $('#CodeShiftDatatable').DataTable({
+        processing: true,
+        serverSide: true,
+        ajax: { url:"{{ route('workinghour.index') }}",},
+        
+        responsive: true,
+        columns: [
+            { data: 'CodeShift', name: 'CodeShift' },
+            { data: 'StartShift', name: 'StartShift'},
+            { data: 'EndShift', name: 'EndShift'},
+            { data: 'WorkingHour', name: 'WorkingHour'},
+            { data: 'action', name: 'action', orderable: false,searchable: false}
+            ] 
+        });
+
+        var code = 1;
+        $('#createcodeshift').on( 'click', function () {
+            tablecodeshift.row.add( [
+            code +'<input type="text" name="code" id="code" class="form-control input-uppercase" value="$list->CodeShift}}" readonly/>',
+            code +'<input type="text" name="start" id="start" class="form-control input-uppercase" value="$list->StartShift}}" readonly/>',
+            code +'<input type="text" name="end" id="end" class="form-control input-uppercase" value="$list->EndShift}}" readonly/>',
+            code +'<div class="input-group"><input type="text" name="hour" id="hour" class="form-control input-uppercase" value="$list->WorkingHour}}" readonly/><div class="input-group-prepend"><span class="input-group-text">Hour</span> </div></div>',
+            code +'<div class="btn-group"><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button><div class="dropdown-menu dropdown-menu-right" role="menu"><a class="scheduleedit dropdown-item" id="" onclick="editshift()"><i class="fas fa-edit"></i> Edit</a><a class="schedulesave dropdown-item" id="" onclick="freezeshift()"><i class="fas fa-desktop"></i> Save</a><a class="scheduledelete dropdown-item" id=""><i class="fas fa-trash"></i> Delete</a></div></div>'
+        ] ).draw( false );
+
+        code++;
+        });
+        // Automatically add a first row of data
+        // $('#createcodeshift').click();
+    
+    
     });
-    $(".preloader").fadeOut("slow");
 </script>
+@endsection

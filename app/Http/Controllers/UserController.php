@@ -16,6 +16,10 @@ class UserController extends Controller
     {
         return view('user.profile');
     }
+    public function lockscreen()
+    {
+        return view('auth.lockscreen');
+    }
 
     /**
      * Show the form for creating a new resource.

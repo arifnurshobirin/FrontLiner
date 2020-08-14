@@ -1,129 +1,151 @@
-@include('sweetalert::alert')
-<!-- Management Table -->
-<div class="row">
-    <div class="preloader">
-        <div class="loading">
-            <div class="spinner-grow text-danger" role="status"></div>
-            <div class="spinner-grow text-danger" role="status"></div>
-            <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
-            <strong>Loading...</strong>
-        </div>
-    </div>
-    <div class="col-12">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Management DataTable</h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
-                        title="Collapse">
-                        <i class="fas fa-minus"></i></button>
-                    <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
-                        title="Remove">
-                        <i class="fas fa-times"></i></button>
-                </div>
+@extends('layouts.app')
+@section('title tab','Management Page')
+@section('title page','Management Page')
+
+@section('css')
+<!-- Page CSS -->
+@endsection
+
+@section('content')
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="urlpage">Management Page</h1>
             </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover dataTable js-exportable"
-                        id="ManagementDatatable">
-                        <thead>
-                            <tr>
-                                <th><button type="button" name="managementmoredelete" id="managementmoredelete" class="btn btn-danger">
-                                <i class="fas fa-times"></i><span></span>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
+                    <li class="breadcrumb-item active urlpage">Management Page</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content" id="contentpage">
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            <h3 class="card-title">Management DataTable</h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                    title="Collapse">
+                    <i class="fas fa-minus"></i></button>
+                <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip"
+                    title="Remove">
+                    <i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped table-hover dataTable js-exportable"
+                    id="ManagementDatatable">
+                    <thead>
+                        <tr>
+                            <th><button type="button" name="managementmoredelete" id="managementmoredelete"
+                                    class="btn btn-danger">
+                                    <i class="fas fa-times"></i><span></span>
                                 </button></th>
-                                <th>Detail</th>
-                                <th>Avatar</th>
-                                <th>Id Card</th>
-                                <th>Full Name</th>
-                                <th>Position</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tfoot>
-                            <tr>
-                                <th>Checkbox</th>
-                                <th>Detail</th>
-                                <th>Avatar</th>
-                                <th>Id Card</th>
-                                <th>Full Name</th>
-                                <th>Position</th>
-                                <th>Action</th>
-                            </tr>
-                        </tfoot>
-                    </table>
+                            <th>Detail</th>
+                            <th>Avatar</th>
+                            <th>Id Card</th>
+                            <th>Full Name</th>
+                            <th>Position</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th>Checkbox</th>
+                            <th>Detail</th>
+                            <th>Avatar</th>
+                            <th>Id Card</th>
+                            <th>Full Name</th>
+                            <th>Position</th>
+                            <th>Action</th>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+
+            <!-- Create Table -->
+            <div class="modal fade" id="ajaxModel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="modelHeading"></h4>
+                        </div>
+                        <div class="modal-body">
+                            <form method="post" id="managementform" name="managementform" enctype="multipart/form-data">
+                                @csrf
+                                <input type="hidden" name="managementid" id="managementid">
+                                <label for="emp">Id Card</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="idcard" name="idcard" class="form-control"
+                                            placeholder="Enter your Id Card" required>
+                                    </div>
+                                </div>
+                                <label for="fullname">Full Name</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="text" id="name" name="name" class="form-control"
+                                            placeholder="Enter your Full Name" required>
+                                    </div>
+                                </div>
+                                <label for="position">Position</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <select class="form-control show-tick" id="position" name="position">
+                                            <option value="">-- Please select --</option>
+                                            <option value="Store General Manager">Store General Manager</option>
+                                            <option value="Secretary">Secretary</option>
+                                            <option value="Divisi Manager">Divisi Manager</option>
+                                            <option value="Sales Manager">Sales Manager</option>
+                                            <option value="Store Controller">Store Controller</option>
+                                            <option value="RPM">RPM</option>
+                                            <option value="aintenance Head">aintenance Head</option>
+                                            <option value="OSS Manager">OSS Manager</option>
+                                            <option value="Receiving Head">Receiving Head</option>
+                                            <option value="TVS Manager">TVS Manager</option>
+                                            <option value="Warung Manager">Warung Manager</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <label for="image">Select Profile Image</label>
+                                <div class="form-group">
+                                    <div class="form-line">
+                                        <input type="file" id="image" name="image" class="form-control">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary m-t-15 waves-effect" id="managementsave"
+                                    value="create">Save</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <!-- /.card-body -->
-            <div class="card-footer">
-                Project Website Cashier Carrefour Taman Palem
-            </div>
-        </div>
-        <!-- /.card -->
-    </div>
-    <!-- /.col -->
-</div>
-<!-- /.row -->
+            <!-- #END# Create Table -->
 
-<!-- Create Table -->
-<div class="modal fade" id="ajaxModel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modelHeading"></h4>
-            </div>
-            <div class="modal-body">
-                <form method="post" id="managementform" name="managementform" enctype="multipart/form-data">
-                        @csrf
-                    <input type="hidden" name="managementid" id="managementid">
-                    <label for="emp">Id Card</label>
-                        <div class="form-group">
-                            <div class="form-line">
-                                <input type="text" id="idcard" name="idcard" class="form-control"
-                                    placeholder="Enter your Id Card" required>
-                            </div>
-                        </div>
-                    <label for="fullname">Full Name</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="text" id="name" name="name" class="form-control"
-                                        placeholder="Enter your Full Name" required>
-                                </div>
-                            </div>
-                            <label for="position">Position</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <select class="form-control show-tick" id="position" name="position">
-                                        <option value="">-- Please select --</option>
-                                        <option value="Store General Manager">Store General Manager</option>
-                                        <option value="Secretary">Secretary</option>
-                                        <option value="Divisi Manager">Divisi Manager</option>
-                                        <option value="Sales Manager">Sales Manager</option>
-                                        <option value="Store Controller">Store Controller</option>
-                                        <option value="RPM">RPM</option>
-                                        <option value="aintenance Head">aintenance Head</option>
-                                        <option value="OSS Manager">OSS Manager</option>
-                                        <option value="Receiving Head">Receiving Head</option>
-                                        <option value="TVS Manager">TVS Manager</option>
-                                        <option value="Warung Manager">Warung Manager</option>
-                                    </select>
-                                </div>
-                            </div>
-                        <label for="image">Select Profile Image</label>
-                            <div class="form-group">
-                                <div class="form-line">
-                                    <input type="file" id="image" name="image" class="form-control">
-                                </div>
-                            </div>
-                        <button type="submit" class="btn btn-primary m-t-15 waves-effect" id="managementsave" value="create">Save</button>
-                </form>
-            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            Project Website Cashier Carrefour Taman Palem
         </div>
     </div>
-</div>
-<!-- #END# Create Table -->
+    <!-- /.card -->
+</section>
+<!-- /.content -->
+@endsection
 
+@section('javascript')
+<!-- page script -->
 <script>
+    $(".preloader").fadeOut("slow");
 function format ( d ) {
     // `d` is the original data object for the row
     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
@@ -146,7 +168,7 @@ function format ( d ) {
             processing: true,
             serverSide: true,
             ajax: {
-            url:"{{ route('management.index') }}",
+            url:"{{ route('management.datatable') }}",
             },
             "order": [[ 3, "asc" ]],
             columns: [
@@ -330,6 +352,6 @@ function format ( d ) {
 
         
     });
-    $(".preloader").fadeOut("slow");
 
 </script>
+@endsection

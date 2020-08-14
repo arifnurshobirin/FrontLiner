@@ -16,14 +16,9 @@ class POSController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function datatable()
+    public function datatable(Request $request)
     {
-        return view('pos.posdatatable');
-    }
-
-    public function index(Request $request)
-    {  
-            $data = POSModel::latest()->get();
+        $data = POSModel::latest()->get();
             return DataTables::of($data)
             ->addColumn('action',
                 '<div class="btn-group">
@@ -36,7 +31,12 @@ class POSController extends Controller
             ->addColumn('checkbox', '<input type="checkbox" name="poscheckbox[]" class="poscheckbox" value="{{$id}}" />')
             ->rawColumns(['checkbox','action'])
             ->make(true);
+    }
 
+    public function index(Request $request)
+    {  
+            
+        return view('pos.posdatatable');
     }
 
     /**

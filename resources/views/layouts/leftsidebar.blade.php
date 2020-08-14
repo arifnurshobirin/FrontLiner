@@ -1,10 +1,10 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-danger elevation-4">
       <!-- Brand Logo -->
-      <a href="home" class="brand-link navbar-danger">
-        <img src="img/TPLogo2.png" alt="TP Logo" class="brand-image img-circle elevation-3"
+      <a href="{{ url('admin') }}" class="brand-link navbar-danger">
+        <img src="{{ asset('img/TPLogo2.png') }}" alt="TP Logo" class="brand-image img-circle elevation-3"
           style="opacity: .8">
-        <span class="brand-text font-weight-light">CashLiner TP</span>
+        <span class="brand-text font-weight-light">{{ config('app.name', 'Laravel') }}</span>
       </a>
 
       <!-- Sidebar -->
@@ -12,7 +12,7 @@
         <!-- Sidebar user (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
           <div class="image">
-            <img src="img/userarif160x160.jpg" class="img-circle elevation-2" alt="User Image">
+            <img src="{{ asset('img/userarif160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
             <a href="#" class="d-block">{{ Auth::user()->name }} online</a>
@@ -26,8 +26,8 @@
             <li class="nav-header">MAIN NAVIGATION</li>
             <!-- Add icons to the links using the .nav-icon class
               with font-awesome or any other icon font library -->
-            <li class="nav-item has-treeview">
-              <a href="#" id="contentdashboard" class="nav-link">
+            <li class="nav-item has-treeview{{ (request()->is('admin/dashboard','admin/sales','admin/helpdesk')) ? ' menu-open' : '' }}">
+              <a href="#" id="contentdashboard" class="nav-link{{ (request()->is('admin/dashboard','admin/sales','admin/helpdesk')) ? ' active' : '' }}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>
                 <p>
                   Dashboard
@@ -37,19 +37,19 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" id="contentdashboardv1" class="nav-link">
+                  <a href="{{ route('dashboard') }}" id="contentdashboardv1" class="nav-link{{ (request()->is('admin/dashboard')) ? ' active' : '' }}">
                     <i class="nav-icon fas fa-tachometer-alt"></i>
                     <p>Dashboard v1</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentsales" class="nav-link">
+                  <a href="{{ route('sales') }}" id="contentsales" class="nav-link{{ (request()->is('admin/sales')) ? ' active' : '' }}">
                     <i class="nav-icon fas fa-meteor"></i>
                     <p>Sales</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                <a href="#" id="contenthelpdesk" class="nav-link">
+                <a href="{{ route('helpdesk') }}" id="contenthelpdesk" class="nav-link{{ (request()->is('admin/helpdesk')) ? ' active' : '' }}">
                     <i class="nav-icon fas fa-handshake"></i>
                     <p>Help Desk</p>
                   </a>
@@ -57,7 +57,7 @@
               </ul>
             </li>
             <li class="nav-item">
-              <a href="#" id="contentmonitoring" class="nav-link">
+              <a href="{{ route('monitoring.index') }}" id="contentmonitoring" class="nav-link{{ (request()->is('admin/monitoring')) ? ' active' : '' }}">
                 <i class="nav-icon fas fa-desktop"></i>
                 <p>
                   Monitoring
@@ -76,7 +76,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" id="contentchronology" class="nav-link">
+                  <a href="{{ route('chronology.index') }}" id="contentchronology" class="nav-link">
                     <i class="nav-icon fas fa-clipboard-list"></i>
                     <p>Chronology</p>
                   </a>
@@ -84,7 +84,7 @@
               </ul>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" id="contentreminder" class="nav-link">
+                  <a href="{{ route('reminder') }}" id="contentreminder" class="nav-link">
                     <i class="nav-icon fas fa-stopwatch"></i>
                     <p>Reminder</p>
                   </a>
@@ -92,15 +92,15 @@
               </ul>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" id="contentperformance" class="nav-link">
+                  <a href="{{ route('performance') }}" id="contentperformance" class="nav-link">
                   <i class="nav-icon fas fa-trophy"></i>
                   <p>Performance</p>
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="nav-item has-treeview">
-              <a href="#" id="contentterminal" class="nav-link">
+            <li class="nav-item has-treeview{{ (request()->is('admin/counter','admin/pos','admin/edc')) ? ' menu-open' : '' }}">
+              <a href="#" id="contentterminal" class="nav-link{{ (request()->is('admin/counter','admin/pos','admin/edc')) ? ' active' : '' }}">
                 <i class="nav-icon fas fa-cash-register"></i>
                 <p>
                   Terminal
@@ -110,27 +110,27 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" id="contentcounter" class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="contentcounter" class="nav-link{{ (request()->is('admin/counter')) ? ' active' : '' }}">
                     <i class="nav-icon fas fa-box"></i>
                     <p>Counter</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentpos" class="nav-link">
+                  <a href="{{ route('pos.index') }}" id="contentpos" class="nav-link{{ (request()->is('admin/pos')) ? ' active' : '' }}">
                     <i class="nav-icon fas fa-hdd"></i>
                     <p>POS</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentedc" class="nav-link">
+                  <a href="{{ route('edc.index') }}" id="contentedc" class="nav-link{{ (request()->is('admin/edc')) ? ' active' : '' }}">
                     <i class="nav-icon fas fa-fax"></i>
                     <p>EDC</p>
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="nav-item has-treeview">
-              <a href="#" id="contentusers"  class="nav-link">
+            <li class="nav-item has-treeview{{ (request()->is('admin/superadmin','admin/cashier','admin/management')) ? ' menu-open' : '' }}">
+              <a href="#" id="contentusers"  class="nav-link{{ (request()->is('admin/superadmin','admin/cashier','admin/management')) ? ' active' : '' }}">
                 <i class="nav-icon fas fa-users"></i>
                 <p>
                   Users
@@ -140,27 +140,27 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" id="contentadmin"  class="nav-link">
+                  <a href="{{ route('cashier.index') }}" id="contentadmin"  class="nav-link{{ (request()->is('admin/superadmin')) ? ' active' : '' }}">
                     <i class="nav-icon fas fa-user-astronaut"></i>
                     <p>Super Admin</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentcashier"  class="nav-link">
+                  <a href="{{ route('cashier.index') }}" id="contentcashier"  class="nav-link{{ (request()->is('admin/cashier')) ? ' active' : '' }}">
                     <i class="nav-icon fas fa-user"></i>
                     <p>Cashier</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentmanagement"  class="nav-link">
+                  <a href="{{ route('management.index') }}" id="contentmanagement"  class="nav-link{{ (request()->is('admin/management')) ? ' active' : '' }}">
                     <i class="nav-icon fas fa-user-tie"></i>
                     <p>Management</p>
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="nav-item has-treeview">
-              <a href="#" id="contentschedule"  class="nav-link">
+            <li class="nav-item has-treeview{{ (request()->is('admin/schedule/create','admin/schedule')) ? ' menu-open' : '' }}">
+              <a href="#" id="contentschedule"  class="nav-link{{ (request()->is('admin/schedule/create','admin/schedule')) ? ' active' : '' }}">
                 <i class="nav-icon far fa-calendar-alt"></i>
                 <p>
                   Schedule
@@ -170,13 +170,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" id="contentschedulecreate"  class="nav-link">
+                  <a href="{{ route('schedule.create') }}" id="contentschedulecreate"  class="nav-link{{ (request()->is('admin/schedule/create')) ? ' active' : '' }}">
                     <i class="nav-icon fas fa-calendar-plus"></i>
                     <p>Create Schedule</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentscheduledatatable"   class="nav-link">
+                  <a href="{{ route('schedule.index') }}" id="contentscheduledatatable"   class="nav-link{{ (request()->is('admin/schedule')) ? ' active' : '' }}">
                     <i class="nav-icon fas fa-calendar-check"></i>
                     <p>Datatable Schedule</p>
                   </a>
@@ -194,31 +194,31 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" id="contentmateri"  class="nav-link">
+                  <a href="{{ route('training.index') }}" id="contentmateri"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Materi Training</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentelearning"  class="nav-link">
+                  <a href="{{ route('elearning.index') }}" id="contentelearning"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>e-Learning</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="../UI/buttons.html" class="nav-link">
+                  <a href="{{ route('pratice') }}" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Pratice</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentquestion"  class="nav-link">
+                  <a href="{{ route('question') }}" id="contentquestion"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Question</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentscore"  class="nav-link">
+                  <a href="{{ route('score') }}" id="contentscore"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Score</p>
                   </a>
@@ -236,19 +236,19 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="#" id="contentconsolidate"  class="nav-link">
+                    <a href="{{ route('consolidate.index') }}" id="contentconsolidate"  class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Consolidate</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentdeposit"  class="nav-link">
+                  <a href="{{ route('consolidate.deposit') }}" id="contentdeposit"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Deposit Form</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentbanana"  class="nav-link">
+                  <a href="{{ route('consolidate.banana') }}" id="contentbanana"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Banana Media</p>
                   </a>
@@ -267,19 +267,19 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" id="contentopening"  class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="contentopening"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Opening Toko</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentclosing"  class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="contentclosing"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Closing Toko</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contenteod"  class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="contenteod"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>EOD</p>
                   </a>
@@ -296,25 +296,25 @@
               </a>
               <ul class="nav nav-treeview">
               <li class="nav-item">
-                  <a href="#" id="contentformsenior"  class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="contentformsenior"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Cashier Head</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentformsenior"  class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="contentformsenior"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Senior Cashier</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentformtdr"  class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="contentformtdr"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>TDR</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentformcs"  class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="contentformcs"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Customer Service</p>
                   </a>
@@ -331,19 +331,19 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" id="content"  class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="content"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Inbox</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="content" class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="content" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Compose</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="content" class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="content" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Read</p>
                   </a>
@@ -360,7 +360,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" id="contentcalendar"  class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="contentcalendar"  class="nav-link">
                     <i class="nav-icon far fa-calendar-alt"></i>
                     <p>Calendar
                       <span class="right badge badge-success">Beta</span>
@@ -368,7 +368,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentgallery" class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="contentgallery" class="nav-link">
                     <i class="nav-icon far fa-image"></i>
                     <p>
                       Multimedia
@@ -377,7 +377,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="content" class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="content" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Game</p>
                   </a>
@@ -392,25 +392,25 @@
               </a>
               <ul class="nav nav-treeview">
               <li class="nav-item">
-                  <a href="#" id="contentformsenior"  class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="contentformsenior"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Cashier Head</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentformsenior"  class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="contentformsenior"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Senior Cashier</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentformtdr"  class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="contentformtdr"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>TDR</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="#" id="contentformcs"  class="nav-link">
+                  <a href="{{ route('counter.index') }}" id="contentformcs"  class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Customer Service</p>
                   </a>
