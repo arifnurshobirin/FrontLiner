@@ -3,6 +3,8 @@
 @section('title page','Monitoring Page')
 
 @section('css')
+<!-- Ekko Lightbox -->
+<link href="{{ asset('plugins/ekko-lightbox/ekko-lightbox.css') }}" rel="stylesheet">
 <!-- Page CSS -->
 @endsection
 
@@ -206,6 +208,10 @@
 @endsection
 
 @section('javascript')
+<!-- Ekko Lightbox -->
+<script src="{{ asset('plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
+<!-- Filterizr-->
+<script src="{{ asset('plugins/filterizr/jquery.filterizr.min.js') }}"></script>
 <!-- page script -->
 <script>
     $(".preloader").fadeOut("slow");

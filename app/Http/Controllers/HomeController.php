@@ -28,7 +28,7 @@ class HomeController extends Controller
 
     public function calendar()
     {
-        alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.')->showConfirmButton('Confirm', '#3085d6')->showCancelButton('Cancel');
+        // alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.')->showConfirmButton('Confirm', '#3085d6')->showCancelButton('Cancel');
         return view('calendar.calendar');
     }
     public function gallery()

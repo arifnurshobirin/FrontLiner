@@ -199,6 +199,12 @@
         '</table>';
     }
     $(document).ready(function() {
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            
         // var template = Handlebars.compile($("#details-template").html());
         var table = $('#POSDatatable').DataTable({
         processing: true,
@@ -338,7 +344,8 @@
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
-                url:"pos/destroy/"+posid,
+                url:"pos/"+posid,
+                type: "DELETE",
                 success:function(data){
                     swal.fire("Deleted!", "Your POS file has been deleted.", "success")
                     $('#POSDatatable').DataTable().ajax.reload();

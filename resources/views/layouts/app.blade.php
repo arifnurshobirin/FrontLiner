@@ -19,19 +19,12 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <!-- Font Awesome -->
         <link href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
-        <!-- Ekko Lightbox -->
-        <link href="{{ asset('plugins/ekko-lightbox/ekko-lightbox.css') }}" rel="stylesheet">
         <!-- Ionicons -->
         <link href="{{ asset('plugins/ionicons-2.0.1/css/ionicons.min.css') }}" rel="stylesheet">
         <!-- Sweetalert Css -->
         <link href="{{ asset('plugins/sweetalert2/sweetalert2.css') }}" rel="stylesheet">
         <!-- Tempusdominus Bbootstrap 4 -->
         <link href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet">
-        <!-- fullCalendar -->
-        <link href="{{ asset('plugins/fullcalendar/main.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('plugins/fullcalendar-daygrid/main.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('plugins/fullcalendar-timegrid/main.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('plugins/fullcalendar-bootstrap/main.min.css') }}" rel="stylesheet">
         <!-- overlayScrollbars -->
         <link href="{{ asset('css/adminlte.min.css') }}" rel="stylesheet">
         <!-- DataTables -->
@@ -202,7 +195,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <!-- User image -->
-                            <li class="user-header bg-primary">
+                            <li class="user-header bg-danger">
                                 <img src="{{ asset('img/userarif160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
 
                                 <p>
@@ -238,12 +231,11 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-widget="" data-slide="true" href="#" role="button">
-                            <!-- <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button"> -->
+                    {{-- <li class="nav-item">
+                        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                             <i class="fas fa-th-large"></i>
                         </a>
-                    </li>
+                    </li> --}}
                 </ul>
             </nav>
             <!-- /.navbar -->
@@ -311,18 +303,7 @@
         <!-- datepicker -->
         <script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
         <!-- InputMask -->
-        <script src="{{ asset('plugins/inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>
-        <!-- Ekko Lightbox -->
-        <script src="{{ asset('plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
-        <!-- Filterizr-->
-        <script src="{{ asset('plugins/filterizr/jquery.filterizr.min.js') }}"></script>
-        <!-- fullCalendar 2.2.5 -->
-        <script src="{{ asset('plugins/fullcalendar/main.min.js') }}"></script>
-        <script src="{{ asset('plugins/fullcalendar-daygrid/main.min.js') }}"></script>
-        <script src="{{ asset('plugins/fullcalendar-timegrid/main.min.js') }}"></script>
-        <script src="{{ asset('plugins/fullcalendar-interaction/main.min.js') }}"></script>
-        <script src="{{ asset('plugins/fullcalendar-bootstrap/main.min.js') }}"></script>
-        
+        <script src="{{ asset('plugins/inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>    
         @yield('javascript')
     </body>
 </html>

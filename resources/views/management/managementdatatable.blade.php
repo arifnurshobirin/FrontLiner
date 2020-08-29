@@ -164,6 +164,12 @@ function format ( d ) {
     '</table>';
 }
     $(document).ready(function() {
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            
             var table = $('#ManagementDatatable').DataTable({
             processing: true,
             serverSide: true,
@@ -303,7 +309,8 @@ function format ( d ) {
             }).then((result) => {
             if (result.value) {
                 $.ajax({
-            url:"management/destroy/"+managementid,
+            url:"management/"+managementid,
+            type: "DELETE",
             success:function(data){
                 swal.fire("Deleted!", "Your Management file has been deleted.", "success")
                 $('#ManagementDatatable').DataTable().ajax.reload();

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {return view('welcome');});
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('admin/profile', 'UserController@index')->name('profile');
 Route::get('admin/lockscreen', 'UserController@lockscreen')->name('lockscreen');
@@ -23,34 +23,28 @@ Route::get('admin/dashboard', 'HomeController@dashboard')->name('dashboard');
 Route::get('admin/cashierdatatable', 'CashierController@datatable')->name('cashier.datatable');
 Route::resource('admin/cashier', 'CashierController');
 Route::get('admin/superadmin', 'CashierController@index')->name('superadmin');
-Route::get('admin/cashier/destroy/{id}', 'CashierController@destroy');
 Route::get('admin/cashiermoredelete', 'CashierController@moredelete')->name('cashier.moredelete');
 
 Route::get('admin/managementdatatable', 'ManagementController@datatable')->name('management.datatable');
 Route::resource('admin/management', 'ManagementController');
-Route::get('admin/management/destroy/{id}', 'ManagementController@destroy');
 Route::get('admin/managementmoredelete', 'ManagementController@moredelete')->name('management.moredelete');
 
 Route::get('admin/edcdatatable', 'EDCController@datatable')->name('edc.datatable');
 Route::resource('admin/edc', 'EDCController');
-Route::get('admin/edc/destroy/{id}', 'EDCController@destroy');
 Route::get('admin/edcmoredelete', 'EDCController@moredelete')->name('edc.moredelete');
 
 Route::get('admin/posdatatable', 'POSController@datatable')->name('pos.datatable');
 Route::resource('admin/pos', 'POSController');
-Route::get('admin/pos/destroy/{id}', 'POSController@destroy');
 Route::get('admin/posmoredelete', 'POSController@moredelete')->name('pos.moredelete');
 
 Route::get('admin/counterdatatable', 'CounterController@datatable')->name('counter.datatable');
 Route::resource('admin/counter', 'CounterController');
-Route::get('admin/counter/destroy/{id}', 'CounterController@destroy');
 Route::get('admin/countersomedelete', 'CounterController@moredelete')->name('counter.moredelete');
 
 Route::get('admin/scheduledatatable', 'ScheduleController@datatable')->name('schedule.datatable');
 Route::get('admin/scheduleadd', 'ScheduleController@getBasic');
 Route::get('admin/schedule/datatablecreate', 'ScheduleController@datatablecreate')->name('schedule.datatablecreate');
 Route::resource('admin/schedule', 'ScheduleController');
-Route::get('admin/schedule/destroy/{id}', 'ScheduleController@destroy');
 Route::get('admin/scheduledatatable/destroy/{id}', 'ScheduleController@destroydatatable');
 Route::post('admin/schedule/day', 'ScheduleController@day');
 

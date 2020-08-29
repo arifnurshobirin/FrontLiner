@@ -1,14 +1,40 @@
+@extends('layouts.app') 
+@section('title tab','Calendar Page')
+@section('title page','Calendar Page')
+
+@section('css')
+<!-- fullCalendar -->
+<link href="{{ asset('plugins/fullcalendar/main.min.css') }}" rel="stylesheet">
+<link href="{{ asset('plugins/fullcalendar-daygrid/main.min.css') }}" rel="stylesheet">
+<link href="{{ asset('plugins/fullcalendar-timegrid/main.min.css') }}" rel="stylesheet">
+<link href="{{ asset('plugins/fullcalendar-bootstrap/main.min.css') }}" rel="stylesheet">
+<!-- Page CSS -->
+@endsection
+
+@section('content')
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="urlpage">Calendar Page</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
+                    <li class="breadcrumb-item active urlpage">Calendar Page</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content" id="contentpage">
+    <!-- Default box -->
 
 <div class="container-fluid">
     <div class="row">
-        <div class="preloader">
-            <div class="loading">
-                <div class="spinner-grow text-danger" role="status"></div>
-                <div class="spinner-grow text-danger" role="status"></div>
-                <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
-                <strong>Loading...</strong>
-            </div>
-        </div>
         <div class="col-md-3">
             <div class="sticky-top mb-3">
                 <div class="card">
@@ -79,7 +105,21 @@
     <!-- /.row -->
 </div><!-- /.container-fluid -->
 
+
+</section>
+<!-- /.content -->
+@endsection
+
+@section('javascript')
+ <!-- fullCalendar 2.2.5 -->
+ <script src="{{ asset('plugins/fullcalendar/main.min.js') }}"></script>
+ <script src="{{ asset('plugins/fullcalendar-daygrid/main.min.js') }}"></script>
+ <script src="{{ asset('plugins/fullcalendar-timegrid/main.min.js') }}"></script>
+ <script src="{{ asset('plugins/fullcalendar-interaction/main.min.js') }}"></script>
+ <script src="{{ asset('plugins/fullcalendar-bootstrap/main.min.js') }}"></script>
+<!-- page script -->
 <script>
+    $(".preloader").fadeOut("slow");
     $(function () {
 
         /* initialize the external events
@@ -247,5 +287,6 @@
             $('#new-event').val('')
         })
     })
-    $(".preloader").fadeOut("slow");
+    
 </script>
+@endsection

@@ -199,6 +199,12 @@
         '</table>';
     }
     $(document).ready(function() {
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            
         var table = $('#EDCDatatable').DataTable({
             processing: true,
             serverSide: true,
@@ -336,7 +342,8 @@
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
-                url:"edc/destroy/"+edcid,
+                url:"edc/"+edcid,
+                type: "DELETE",
                 success:function(data){
                     swal.fire("Deleted!", "Your edc file has been deleted.", "success")
                     $('#EDCDatatable').DataTable().ajax.reload();

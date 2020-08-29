@@ -1,15 +1,34 @@
+@extends('layouts.app') 
+@section('title tab','Gallery Page')
+@section('title page','Gallery Page')
 
+@section('css')
+<!-- Ekko Lightbox -->
+<link href="{{ asset('plugins/ekko-lightbox/ekko-lightbox.css') }}" rel="stylesheet">
+<!-- Page CSS -->
+@endsection
 
-<div class="container-fluid">
-    <div class="row">
-        <div class="preloader">
-            <div class="loading">
-                <div class="spinner-grow text-danger" role="status"></div>
-                <div class="spinner-grow text-danger" role="status"></div>
-                <div class="spinner-grow text-danger" role="status"><span class="sr-only">Loading...</span></div>
-                <strong>Loading...</strong>
+@section('content')
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="urlpage">Gallery Page</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
+                    <li class="breadcrumb-item active urlpage">Gallery Page</li>
+                </ol>
             </div>
         </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content" id="contentpage">
+    <div class="row">
         <div class="col-12">
             <div class="card card-primary">
                 <div class="card-header">
@@ -45,63 +64,63 @@
                     <div>
                         <div class="filter-container p-0 row">
                             <div class="filtr-item col-sm-2" data-category="1" data-sort="white sample">
-                                <a href="img/training1.jpg" data-toggle="lightbox" data-title="sample 1 - white">
-                                    <img src="img/training1.jpg" class="img-fluid mb-2" alt="white sample" />
+                                <a href="{{ asset('img/training1.jpg') }}" data-toggle="lightbox" data-title="sample 1 - white">
+                                    <img src="{{ asset('img/training1.jpg') }}" class="img-fluid mb-2" alt="white sample" />
                                 </a>
                             </div>
                             <div class="filtr-item col-sm-2" data-category="2, 4" data-sort="black sample">
-                                <a href="img/training2.jpg" data-toggle="lightbox" data-title="sample 2 - black">
-                                    <img src="img/training2.jpg" class="img-fluid mb-2" alt="black sample" />
+                                <a href="{{ asset('img/training2.jpg') }}" data-toggle="lightbox" data-title="sample 2 - black">
+                                    <img src="{{ asset('img/training2.jpg') }}" class="img-fluid mb-2" alt="black sample" />
                                 </a>
                             </div>
                             <div class="filtr-item col-sm-2" data-category="3, 4" data-sort="red sample">
-                                <a href="img/training3.jpg" data-toggle="lightbox" data-title="sample 3 - red">
-                                    <img src="img/training3.jpg" class="img-fluid mb-2" alt="red sample" />
+                                <a href="{{ asset('img/training3.jpg') }}" data-toggle="lightbox" data-title="sample 3 - red">
+                                    <img src="{{ asset('img/training3.jpg') }}" class="img-fluid mb-2" alt="red sample" />
                                 </a>
                             </div>
                             <div class="filtr-item col-sm-2" data-category="3, 4" data-sort="red sample">
-                                <a href="img/training4.jpg" data-toggle="lightbox" data-title="sample 4 - red">
-                                    <img src="img/training4.jpg" class="img-fluid mb-2" alt="red sample" />
+                                <a href="{{ asset('img/training4.jpg') }}" data-toggle="lightbox" data-title="sample 4 - red">
+                                    <img src="{{ asset('img/training4.jpg') }}" class="img-fluid mb-2" alt="red sample" />
                                 </a>
                             </div>
                             <div class="filtr-item col-sm-2" data-category="2, 4" data-sort="black sample">
-                                <a href="img/training5.jpg" data-toggle="lightbox" data-title="sample 5 - black">
-                                    <img src="img/training5.jpg" class="img-fluid mb-2" alt="black sample" />
+                                <a href="{{ asset('img/training5.jpg') }}" data-toggle="lightbox" data-title="sample 5 - black">
+                                    <img src="{{ asset('img/training5.jpg') }}" class="img-fluid mb-2" alt="black sample" />
                                 </a>
                             </div>
                             <div class="filtr-item col-sm-2" data-category="1" data-sort="white sample">
-                                <a href="img/training6.jpg" data-toggle="lightbox" data-title="sample 6 - white">
-                                    <img src="img/training6.jpg" class="img-fluid mb-2" alt="white sample" />
+                                <a href="{{ asset('img/training6.jpg') }}" data-toggle="lightbox" data-title="sample 6 - white">
+                                    <img src="{{ asset('img/training6.jpg') }}" class="img-fluid mb-2" alt="white sample" />
                                 </a>
                             </div>
                             <div class="filtr-item col-sm-2" data-category="1" data-sort="white sample">
-                                <a href="img/training7.jpg" data-toggle="lightbox" data-title="sample 7 - white">
-                                    <img src="img/training7.jpg" class="img-fluid mb-2" alt="white sample" />
+                                <a href="{{ asset('img/training7.jpg') }}" data-toggle="lightbox" data-title="sample 7 - white">
+                                    <img src="{{ asset('img/training7.jpg') }}" class="img-fluid mb-2" alt="white sample" />
                                 </a>
                             </div>
                             <div class="filtr-item col-sm-2" data-category="2, 4" data-sort="black sample">
-                                <a href="img/training8.jpg" data-toggle="lightbox" data-title="sample 8 - black">
-                                    <img src="img/training8.jpg" class="img-fluid mb-2" alt="black sample" />
+                                <a href="{{ asset('img/training8.jpg') }}" data-toggle="lightbox" data-title="sample 8 - black">
+                                    <img src="{{ asset('img/training8.jpg') }}" class="img-fluid mb-2" alt="black sample" />
                                 </a>
                             </div>
                             <div class="filtr-item col-sm-2" data-category="3, 4" data-sort="red sample">
-                                <a href="img/training9.jpg" data-toggle="lightbox" data-title="sample 9 - red">
-                                    <img src="img/training9.jpg" class="img-fluid mb-2" alt="red sample" />
+                                <a href="{{ asset('img/training9.jpg') }}" data-toggle="lightbox" data-title="sample 9 - red">
+                                    <img src="{{ asset('img/training9.jpg') }}" class="img-fluid mb-2" alt="red sample" />
                                 </a>
                             </div>
                             <div class="filtr-item col-sm-2" data-category="1" data-sort="white sample">
-                                <a href="img/training10.jpg" data-toggle="lightbox" data-title="sample 10 - white">
-                                    <img src="img/training10.jpg" class="img-fluid mb-2" alt="white sample" />
+                                <a href="{{ asset('img/training10.jpg') }}" data-toggle="lightbox" data-title="sample 10 - white">
+                                    <img src="{{ asset('img/training10.jpg') }}" class="img-fluid mb-2" alt="white sample" />
                                 </a>
                             </div>
                             <div class="filtr-item col-sm-2" data-category="1" data-sort="white sample">
-                                <a href="img/training11.jpg" data-toggle="lightbox" data-title="sample 11 - white">
-                                    <img src="img/training11.jpg" class="img-fluid mb-2" alt="white sample" />
+                                <a href="{{ asset('img/training11.jpg') }}" data-toggle="lightbox" data-title="sample 11 - white">
+                                    <img src="{{ asset('img/training11.jpg') }}" class="img-fluid mb-2" alt="white sample" />
                                 </a>
                             </div>
                             <div class="filtr-item col-sm-2" data-category="2, 4" data-sort="black sample">
-                                <a href="img/training12.jpg" data-toggle="lightbox" data-title="sample 12 - black">
-                                    <img src="img/training12.jpg" class="img-fluid mb-2" alt="black sample" />
+                                <a href="{{ asset('img/training12.jpg') }}" data-toggle="lightbox" data-title="sample 12 - black">
+                                    <img src="{{ asset('img/training12.jpg') }}" class="img-fluid mb-2" alt="black sample" />
                                 </a>
                             </div>
                         </div>
@@ -112,8 +131,18 @@
         </div>
 
     </div>
-</div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+@endsection
+
+@section('javascript')
+<!-- Ekko Lightbox -->
+<script src="{{ asset('plugins/ekko-lightbox/ekko-lightbox.min.js') }}"></script>
+<!-- Filterizr-->
+<script src="{{ asset('plugins/filterizr/jquery.filterizr.min.js') }}"></script>
+<!-- page script -->
 <script>
+    $(".preloader").fadeOut("slow");
     $(function () {
         $(document).on('click', '[data-toggle="lightbox"]', function (event) {
             event.preventDefault();
@@ -130,5 +159,5 @@
             $(this).addClass('active');
         });
     })
-    $(".preloader").fadeOut("slow"); 
 </script>
+@endsection

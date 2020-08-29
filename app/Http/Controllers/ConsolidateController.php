@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\{ConsolidateModel, CashierModel};
+use App\{ConsolidateModel, CashierModel, CounterModel};
 use Illuminate\Http\Request;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
 Use Alert;
+use Illuminate\Support\Carbon;
 
 class ConsolidateController extends Controller
 {
@@ -24,8 +26,11 @@ class ConsolidateController extends Controller
 
     public function deposit()
     {
-        $data = CashierModel::latest()->orderBy('Employee','asc')->get();;
-        return view('daily.deposit',compact('data'));
+        $datacashier = CashierModel::latest()->orderBy('Employee','asc')->get();
+        $datacounter = CounterModel::latest()->orderBy('NoCounter','asc')->get();
+        $timenow = now()->locale('id_ID')->format('H:i');
+        $id = IdGenerator::generate(['table' => 'cashiertable', 'length' => 6, 'prefix' =>date('ym')]);
+        return view('daily.deposit',compact('datacashier','datacounter','timenow','id'));
     }
 
     /**

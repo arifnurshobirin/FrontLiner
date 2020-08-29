@@ -182,6 +182,12 @@ function format ( d ) {
     '</table>';
 }
     $(document).ready(function() {
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            
             var table = $('#ScheduleDatatable').DataTable({
             processing: true,
             serverSide: true,
@@ -339,7 +345,8 @@ function format ( d ) {
             }, function (isConfirm) {
                 if (isConfirm) {
                     $.ajax({
-                url:"schedule/destroy/"+schedule_id,
+                url:"schedule/"+schedule_id,
+                type: "DELETE",
                 success:function(data){
                     swal("Deleted!", "Your Schedule file has been deleted.", "success")
                     $('#ScheduleDatatable').DataTable().ajax.reload();

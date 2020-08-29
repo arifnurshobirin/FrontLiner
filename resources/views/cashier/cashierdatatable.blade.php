@@ -215,6 +215,12 @@ function format ( d ) {
     '</table>';
 }
     $(document).ready(function() {
+        $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            
             var table = $('#CashierDatatable').DataTable({
             processing: true,
             serverSide: true,
@@ -359,7 +365,8 @@ function format ( d ) {
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
-                url:"cashier/destroy/"+cashierid,
+                url:"cashier/"+cashierid,
+                type: "DELETE",
                 success:function(data){
                     swal.fire("Deleted!", "Your Cashier file has been deleted.", "success")
                     $('#CashierDatatable').DataTable().ajax.reload();

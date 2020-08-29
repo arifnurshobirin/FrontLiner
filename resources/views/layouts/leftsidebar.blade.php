@@ -236,16 +236,16 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
+                  <a href="{{ route('consolidate.deposit') }}" id="contentdeposit"  class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Deposit Receipt</p>
+                  </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('consolidate.index') }}" id="contentconsolidate"  class="nav-link">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Consolidate</p>
                     </a>
-                </li>
-                <li class="nav-item">
-                  <a href="{{ route('consolidate.deposit') }}" id="contentdeposit"  class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Deposit Form</p>
-                  </a>
                 </li>
                 <li class="nav-item">
                   <a href="{{ route('consolidate.banana') }}" id="contentbanana"  class="nav-link">
@@ -350,8 +350,8 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item has-treeview">
-              <a href="#" id="content" class="nav-link">
+            <li class="nav-item has-treeview{{ (request()->is('admin/calendar','admin/gallery')) ? ' menu-open' : '' }}">
+              <a href="#" id="content" class="nav-link{{ (request()->is('admin/calendar','admin/gallery')) ? ' active' : '' }}">
                 <i class="nav-icon far fa-smile-beam"></i>
                 <p>
                   Extras
@@ -360,7 +360,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{ route('counter.index') }}" id="contentcalendar"  class="nav-link">
+                  <a href="{{ route('calendar') }}" id="contentcalendar"  class="nav-link{{ (request()->is('admin/calendar')) ? ' active' : '' }}">
                     <i class="nav-icon far fa-calendar-alt"></i>
                     <p>Calendar
                       <span class="right badge badge-success">Beta</span>
@@ -368,7 +368,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('counter.index') }}" id="contentgallery" class="nav-link">
+                  <a href="{{ route('gallery') }}" id="contentgallery" class="nav-link{{ (request()->is('admin/gallery')) ? ' active' : '' }}">
                     <i class="nav-icon far fa-image"></i>
                     <p>
                       Multimedia

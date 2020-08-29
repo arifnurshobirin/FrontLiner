@@ -14,7 +14,7 @@ class CreateConsolidateModelsTable extends Migration
     public function up()
     {
         Schema::create('consolidatetable', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->integer('Employee')->unique;
             $table->string('NoDeposit');
             $table->string('FullName');
@@ -22,6 +22,18 @@ class CreateConsolidateModelsTable extends Migration
             $table->string('DepositName');
             $table->string('DepositType');
             $table->string('Amount');
+            $table->integer('Banknote100000');
+            $table->integer('Banknote50000');
+            $table->integer('Banknote20000');
+            $table->integer('Banknote10000');
+            $table->integer('Banknote5000');
+            $table->integer('Banknote2000');
+            $table->integer('Banknote1000');
+            $table->integer('Coin10000');
+            $table->integer('Coin500');
+            $table->integer('Coin200');
+            $table->integer('Coin100');
+            $table->integer('Coin50');
             $table->timestamps();
         });
     }
