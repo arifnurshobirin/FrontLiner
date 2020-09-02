@@ -15,13 +15,14 @@ class CreateEdctableTable extends Migration
     {
         Schema::create('edctable', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('NoCounter')->unique;
             $table->string('TIDEDC')->unique;;
             $table->string('MIDEDC');
             $table->string('IPAdress')->unique;
-            $table->string('NoTerminal')->unique;
             $table->string('Connection');
             $table->string('SIMCard');
             $table->string('TypeEDC');
+            $table->string('Status');
             $table->timestamps();
         });
     }

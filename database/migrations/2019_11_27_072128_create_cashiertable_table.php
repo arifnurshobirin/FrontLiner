@@ -22,8 +22,8 @@ class CreateCashiertableTable extends Migration
             $table->string('PhoneNumber');
             $table->string('Position');
             $table->date('JoinDate');
-            $table->string('Status');
             $table->string('Avatar');
+            $table->string('Status');
             $table->timestamps();
         });
     }

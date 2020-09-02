@@ -3,6 +3,8 @@
 @section('title page','Cashier Page')
 
 @section('css')
+<!-- Tempusdominus Bbootstrap 4 -->
+<link href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet">
 <!-- Page CSS -->
 @endsection
 
@@ -195,6 +197,8 @@
 @endsection
 
 @section('javascript')
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <!-- page script -->
 <script>
 function format ( d ) {

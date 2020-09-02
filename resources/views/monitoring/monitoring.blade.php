@@ -94,25 +94,25 @@
                         if($oldcounter != $list->NoCounter)
                         {
                             ?>
-                @if($list->StatusCounter == 'Queueing')
+                @if($list->Status == 'Queueing')
                 <div class="col-lg-2 col-6 filtr-item" data-category="1" data-sort="{{$list->NoCounter}}">
                     <!-- small card -->
                     <div id="changecolor" class="small-box bg-danger">
-                        @elseif($list->StatusCounter == 'Active')
+                        @elseif($list->Status == 'Active')
                         <div class="col-lg-2 col-6 filtr-item" data-category="2" data-sort="{{$list->NoCounter}}">
                             <!-- small card -->
                             <div id="changecolor" class="small-box bg-success">
-                                @elseif($list->StatusCounter == 'Inactive')
+                                @elseif($list->Status == 'Inactive')
                                 <div class="col-lg-2 col-6 filtr-item" data-category="3"
                                     data-sort="{{$list->NoCounter}}">
                                     <!-- small card -->
                                     <div id="changecolor" class="small-box bg-warning">
-                                        @elseif($list->StatusCounter == 'Ready')
+                                        @elseif($list->Status == 'Ready')
                                         <div class="col-lg-2 col-6 filtr-item" data-category="4"
                                             data-sort="{{$list->NoCounter}}">
                                             <!-- small card -->
                                             <div id="changecolor" class="small-box bg-secondary">
-                                                @elseif($list->StatusCounter == 'Broken')
+                                                @elseif($list->Status == 'Broken')
                                                 <div class="col-lg-2 col-6 filtr-item" data-category="5"
                                                     data-sort="{{$list->NoCounter}}">
                                                     <!-- small card -->
@@ -124,15 +124,15 @@
                                                             <p>{{ $list->TypeCounter }}</p>
                                                         </div>
                                                         <div class="icon">
-                                                            @if($list->StatusCounter == 'Queueing')
+                                                            @if($list->Status == 'Queueing')
                                                             <i class="fas fa-user"></i>
-                                                            @elseif($list->StatusCounter == 'Active')
+                                                            @elseif($list->Status == 'Active')
                                                             <i class="fas fa-user"></i>
-                                                            @elseif($list->StatusCounter == 'Inactive')
+                                                            @elseif($list->Status == 'Inactive')
                                                             <i class="fas fa-cash-register"></i>
-                                                            @elseif($list->StatusCounter == 'Ready')
+                                                            @elseif($list->Status == 'Ready')
                                                             <i class="fas fa-cash-register"></i>
-                                                            @elseif($list->StatusCounter == 'Broken')
+                                                            @elseif($list->Status == 'Broken')
                                                             <i class="fas fa-cash-register"></i>
                                                             @endif
                                                         </div>
@@ -224,9 +224,9 @@
             $(this).addClass('active');
         });
         // var datapos = new Array();
-        // var status = $(this).attr('list->StatusCounter');
+        // var status = $(this).attr('list->Status');
 
-        // conslole log('StatusCounter');
+        // conslole log('Status');
         // if (status === 'Queueing') {
         //     $("#changecolor").removeClass("bg-secondary");
         //     $("#changecolor").addClass("bg-danger");

@@ -19,6 +19,7 @@ class CreateManagementtableTable extends Migration
             $table->string('FullName');
             $table->string('Position');
             $table->string('Avatar');
+            $table->string('Status');
             $table->timestamps();
         });
     }

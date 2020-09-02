@@ -23,16 +23,12 @@
         <link href="{{ asset('plugins/ionicons-2.0.1/css/ionicons.min.css') }}" rel="stylesheet">
         <!-- Sweetalert Css -->
         <link href="{{ asset('plugins/sweetalert2/sweetalert2.css') }}" rel="stylesheet">
-        <!-- Tempusdominus Bbootstrap 4 -->
-        <link href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet">
         <!-- overlayScrollbars -->
         <link href="{{ asset('css/adminlte.min.css') }}" rel="stylesheet">
         <!-- DataTables -->
         <link href="{{ asset('plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
         <link href="{{ asset('plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
         <link href="{{ asset('plugins/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
-        <!-- datepicker -->
-        <link href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
         @yield('css')
         <style type="text/css">
         .preloader {
@@ -298,10 +294,6 @@
         <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
         <!-- Moment -->
         <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
-        <!-- Tempusdominus Bootstrap 4 -->
-        <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-        <!-- datepicker -->
-        <script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
         <!-- InputMask -->
         <script src="{{ asset('plugins/inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>    
         @yield('javascript')

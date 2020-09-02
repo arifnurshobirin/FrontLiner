@@ -17,7 +17,7 @@ class MonitoringController extends Controller
     public function index()
     {   
         $data = DB::table('countertable')
-            ->select('countertable.id','countertable.NoCounter','countertable.StatusCounter', 'countertable.TypeCounter',
+            ->select('countertable.id','countertable.NoCounter','countertable.Status', 'countertable.TypeCounter',
                     'edctable.id as idEDC','edctable.TIDEDC', 'edctable.MIDEDC','edctable.TypeEDC')
             ->leftJoin('edctable', 'countertable.NoCounter', '=', 'edctable.NoCounter')->orderBy('countertable.NoCounter','asc')
             ->get();

@@ -15,12 +15,13 @@ class CreateConsolidateModelsTable extends Migration
     {
         Schema::create('consolidatetable', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('Employee')->unique;
             $table->string('NoDeposit');
+            $table->integer('Employee')->unique;
             $table->string('FullName');
             $table->date('Date');
-            $table->string('DepositName');
+            $table->time('Time');
             $table->string('DepositType');
+            $table->string('Counter');
             $table->string('Amount');
             $table->integer('Banknote100000');
             $table->integer('Banknote50000');

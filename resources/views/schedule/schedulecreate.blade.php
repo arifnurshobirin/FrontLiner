@@ -3,6 +3,10 @@
 @section('title page','Shedule Add Page')
 
 @section('css')
+<!-- Tempusdominus Bbootstrap 4 -->
+<link href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet">
+<!-- datepicker -->
+<link href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 <!-- Page CSS -->
 @endsection
 
@@ -246,6 +250,10 @@
 @endsection
 
 @section('javascript')
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+<!-- datepicker -->
+<script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <!-- page script -->
 <script>
     $(".preloader").fadeOut("slow");
@@ -573,10 +581,14 @@ function editshift(id){
         $('#datetimepicker1').datetimepicker({
                     format: 'L'
                 });
-        $('#timepicker').datetimepicker({
+        $('#datetimepicker2').datetimepicker({
+                    format: 'LT'
+                });
+        $('#datetimepicker3').datetimepicker({
                     format: 'LT'
                 });
         $('[data-mask]').inputmask()
+
 
         //Date range picker
         $('.inputdaterange').datepicker({

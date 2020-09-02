@@ -18,6 +18,9 @@ Route::get('admin/calendar', 'HomeController@calendar')->name('calendar');
 Route::get('admin/banana', 'HomeController@banana')->name('banana');
 Route::get('admin/helpdesk', 'HomeController@helpdesk')->name('helpdesk');
 Route::get('admin/sales', 'HomeController@sales')->name('sales');
+Route::get('admin/mailbox', 'HomeController@mailbox')->name('mailbox');
+Route::get('admin/compose', 'HomeController@compose')->name('compose');
+Route::get('admin/readmail', 'HomeController@readmail')->name('readmail');
 Route::get('admin/dashboard', 'HomeController@dashboard')->name('dashboard');
 
 Route::get('admin/cashierdatatable', 'CashierController@datatable')->name('cashier.datatable');

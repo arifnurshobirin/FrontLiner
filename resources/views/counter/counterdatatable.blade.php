@@ -133,7 +133,7 @@
                                 <label for="type">Status Counter</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <select class="form-control show-tick" id="satuscounter" name="statuscounter">
+                                        <select class="form-control show-tick" id="satuscounter" name="Status">
                                             <option value="">-- Please select --</option>
                                             <option value="Active">Active</option>
                                             <option value="Inactive">Inactive</option>
@@ -176,7 +176,7 @@
         '</tr>'+
         '<tr>'+
             '<td>Extension number:</td>'+
-            '<td>'+d.StatusCounter+'</td>'+
+            '<td>'+d.Status+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Extra info:</td>'+
@@ -212,7 +212,7 @@
             { data: 'IpAddress', name: 'IpAddress' },
             { data: 'MacAddress', name: 'MacAddress' },
             { data: 'TypeCounter', name: 'TypeCounter' },
-            { data: 'StatusCounter', name: 'StatusCounter' },
+            { data: 'Status', name: 'Status' },
             { data: 'action', name: 'action', orderable: false,searchable: false}
                 ],
         dom: 'Bfrtip',
@@ -304,7 +304,7 @@
                 $('#ipaddress').val(data.IpAddress);
                 $('#macaddress').val(data.MacAddress);
                 $('#typecounter').val(data.TypeCounter);
-                $('#statuscounter').val(data.StatusCounter);
+                $('#Status').val(data.Status);
             })
         });
 

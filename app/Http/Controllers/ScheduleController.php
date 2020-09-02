@@ -186,7 +186,7 @@ class ScheduleController extends Controller
         $data = ScheduleModel::findOrFail($id);
         $data->delete();
     }
-    public function destroydatatable    ($id)
+    public function destroydatatable($id)
     {
         $data = ScheduleModel::findOrFail($id);
         $data->delete();

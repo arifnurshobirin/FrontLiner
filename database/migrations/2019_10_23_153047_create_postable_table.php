@@ -21,6 +21,7 @@ class CreatePostableTable extends Migration
             $table->string('Drawer');
             $table->string('Scanner');
             $table->string('Monitor');
+            $table->string('Status');
             $table->timestamps();
         });
     }

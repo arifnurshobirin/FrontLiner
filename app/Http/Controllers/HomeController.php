@@ -25,7 +25,10 @@ class HomeController extends Controller
     {
         return view('dashboard.dashboard');
     }
-
+    public function dashboard()
+    {
+        return view('dashboard.dashboardv1');
+    }
     public function calendar()
     {
         // alert()->success('SuccessAlert','Lorem ipsum dolor sit amet.')->showConfirmButton('Confirm', '#3085d6')->showCancelButton('Cancel');
@@ -37,7 +40,7 @@ class HomeController extends Controller
     }
     public function monitoring()
     {
-        Alert::success('Success Title', 'Success Message');
+        // Alert::success('Success Title', 'Success Message');
         return view('monitoring.monitoring');
     }
     public function helpdesk()
@@ -60,8 +63,16 @@ class HomeController extends Controller
     {
         return view('daily.banana');
     }
-    public function dashboard()
+    public function mailbox()
     {
-        return view('dashboard.dashboardv1');
+        return view('mailbox.mailbox');
+    }
+    public function compose()
+    {
+        return view('mailbox.compose');
+    }
+    public function readmail()
+    {
+        return view('mailbox.readmail');
     }
 }

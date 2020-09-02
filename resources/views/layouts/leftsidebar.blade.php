@@ -140,19 +140,19 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{ route('cashier.index') }}" id="contentadmin"  class="nav-link{{ (request()->is('admin/superadmin')) ? ' active' : '' }}">
+                  <a href="{{ route('cashier.index') }}" id="contentadmin" class="nav-link{{ (request()->is('admin/superadmin')) ? ' active' : '' }}">
                     <i class="nav-icon fas fa-user-astronaut"></i>
                     <p>Super Admin</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('cashier.index') }}" id="contentcashier"  class="nav-link{{ (request()->is('admin/cashier')) ? ' active' : '' }}">
+                  <a href="{{ route('cashier.index') }}" id="contentcashier" class="nav-link{{ (request()->is('admin/cashier')) ? ' active' : '' }}">
                     <i class="nav-icon fas fa-user"></i>
                     <p>Cashier</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('management.index') }}" id="contentmanagement"  class="nav-link{{ (request()->is('admin/management')) ? ' active' : '' }}">
+                  <a href="{{ route('management.index') }}" id="contentmanagement" class="nav-link{{ (request()->is('admin/management')) ? ' active' : '' }}">
                     <i class="nav-icon fas fa-user-tie"></i>
                     <p>Management</p>
                   </a>
@@ -170,13 +170,13 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{ route('schedule.create') }}" id="contentschedulecreate"  class="nav-link{{ (request()->is('admin/schedule/create')) ? ' active' : '' }}">
+                  <a href="{{ route('schedule.create') }}" id="contentschedulecreate" class="nav-link{{ (request()->is('admin/schedule/create')) ? ' active' : '' }}">
                     <i class="nav-icon fas fa-calendar-plus"></i>
                     <p>Create Schedule</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('schedule.index') }}" id="contentscheduledatatable"   class="nav-link{{ (request()->is('admin/schedule')) ? ' active' : '' }}">
+                  <a href="{{ route('schedule.index') }}" id="contentscheduledatatable" class="nav-link{{ (request()->is('admin/schedule')) ? ' active' : '' }}">
                     <i class="nav-icon fas fa-calendar-check"></i>
                     <p>Datatable Schedule</p>
                   </a>
@@ -225,8 +225,8 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item has-treeview">
-              <a href="#" id="contentdaily"  class="nav-link">
+            <li class="nav-item has-treeview{{ (request()->is('admin/deposit','admin/consolidate','admin/banana')) ? ' menu-open' : '' }}">
+              <a href="#" id="contentdaily"  class="nav-link{{ (request()->is('admin/deposit','admin/consolidate','admin/banana')) ? ' active' : '' }}">
                 <i class="nav-icon fas fa-clipboard-check"></i>
                 <p>
                   Daily Report
@@ -236,19 +236,19 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{ route('consolidate.deposit') }}" id="contentdeposit"  class="nav-link">
+                  <a href="{{ route('consolidate.deposit') }}" id="contentdeposit"  class="nav-link{{ (request()->is('admin/deposit')) ? ' active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Deposit Receipt</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('consolidate.index') }}" id="contentconsolidate"  class="nav-link">
+                    <a href="{{ route('consolidate.index') }}" id="contentconsolidate"  class="nav-link{{ (request()->is('admin/consolidate')) ? ' active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Consolidate</p>
                     </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('consolidate.banana') }}" id="contentbanana"  class="nav-link">
+                  <a href="{{ route('consolidate.banana') }}" id="contentbanana"  class="nav-link{{ (request()->is('admin/banana')) ? ' active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Banana Media</p>
                   </a>
@@ -321,8 +321,8 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item has-treeview">
-              <a href="#" id="contentmailbox"  class="nav-link">
+            <li class="nav-item has-treeview{{ (request()->is('admin/mailbox','admin/compose','admin/readmail')) ? ' menu-open' : '' }}">
+              <a href="#" id="contentmailbox"  class="nav-link{{ (request()->is('admin/mailbox','admin/compose','admin/readmail')) ? ' active' : '' }}">
                 <i class="nav-icon far fa-envelope"></i>
                 <p>
                   E-mail
@@ -331,19 +331,19 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{ route('counter.index') }}" id="content"  class="nav-link">
+                  <a href="{{ route('mailbox') }}" id="content"  class="nav-link{{ (request()->is('admin/mailbox')) ? ' active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Inbox</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('counter.index') }}" id="content" class="nav-link">
+                  <a href="{{ route('compose') }}" id="content" class="nav-link{{ (request()->is('admin/compose')) ? ' active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Compose</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('counter.index') }}" id="content" class="nav-link">
+                  <a href="{{ route('readmail') }}" id="content" class="nav-link{{ (request()->is('admin/readmail')) ? ' active' : '' }}">
                     <i class="far fa-circle nav-icon"></i>
                     <p>Read</p>
                   </a>
