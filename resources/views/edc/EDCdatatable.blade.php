@@ -27,9 +27,9 @@
 <!-- Main content -->
 <section class="content" id="contentpage">
     <!-- Default box -->
-        <div class="card">
+        <div class="card card-danger card-outline">
             <div class="card-header">
-                <h3 class="card-title">EDC DataTable</h3>
+                <h3 class="card-title"><i class="fas fa-desktop"></i> EDC DataTable</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                         title="Collapse">
@@ -107,8 +107,11 @@
                     <label for="no">No Counter</label>
                     <div class="form-group">
                         <div class="form-line">
-                            <input type="number" id="nocounter" name="nocounter" class="form-control"
-                                placeholder="Enter your No Counter" required>
+                            <select class="custom-select" id="selectnocounter" name="selectnocounter">
+                                @foreach($datacounter as $counter)
+                                <option value="{{$counter->NoCounter}}">{{$counter->NoCounter}}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <label for="connection">Connection</label>
@@ -147,18 +150,16 @@
                     <label for="type">Status EDC</label>
                     <div class="form-group">
                         <div class="form-line">
-                            <select class="form-control show-tick" id="satusedc" name="statusedc">
+                            <select class="form-control show-tick" id="statusedc" name="statusedc">
                                 <option value="">-- Please select --</option>
                                 <option value="Active">Active</option>
                                 <option value="Inactive">Inactive</option>
-                                <option value="Normal">Normal</option>
+                                <option value="Lock">Lock</option>
                                 <option value="Broken">Broken</option>
-                                <option value="Queueing">Queueing</option>
                             </select>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary m-t-15 waves-effect" id="saveBtn"
-                        value="create">Save</button>
+                    <button type="submit" class="btn btn-primary m-t-15 waves-effect" id="savebutton" value="create">Save</button>
                 </form>
             </div>
         </div>
@@ -252,8 +253,8 @@
                         text: '<i class="fas fa-plus"></i><span> Add EDC</span>',
                         className: 'btn btn-success',
                         action: function ( e, dt, node, config ) {
-                            $('#saveBtn').val("create-edc");
-                            $('#saveBtn').html('Save');
+                            $('#savebutton').val("create-edc");
+                            $('#savebutton').html('Save');
                             $('#edcid').val('');
                             $('#edcForm').trigger("reset");
                             $('#modelHeading').html("Create New EDC");
@@ -285,8 +286,8 @@
             $.get("{{ route('edc.index') }}" +'/' + edcid +'/edit', function (data)
             {
                 $('#modelHeading').html("Edit Data EDC");
-                $('#saveBtn').val("edit-edc");
-                $('#saveBtn').html('Save Changes');
+                $('#savebutton').val("edit-edc");
+                $('#savebutton').html('Save Changes');
                 $('#ajaxModel').modal('show');
                 $('#edcid').val(data.id);
                 $('#tidedc').val(data.TIDEDC);
@@ -304,7 +305,7 @@
                 $('#contentpage').load('edc'+'/'+id);
         });
 
-        $('#saveBtn').click(function (e) {
+        $('#savebutton').click(function (e) {
             e.preventDefault();
             $(this).html('Sending..');
             $.ajax({
@@ -316,13 +317,13 @@
 
                     $('#edcForm').trigger("reset");
                     $('#ajaxModel').modal('hide');
-                    $('#saveBtn').html('Save');
+                    $('#savebutton').html('Save');
                     table.draw();
                     swal.fire("Good job!", "You success update EDC!", "success");
                 },
                 error: function (data) {
                     console.log('Error:', data);
-                    $('#saveBtn').html('Save Changes');
+                    $('#savebutton').html('Save Changes');
                 }
             });
         });

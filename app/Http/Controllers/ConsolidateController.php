@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\{ConsolidateModel, CashierModel, CounterModel};
 use Illuminate\Http\Request;
-use Haruncpi\LaravelIdGenerator\IdGenerator;
-Use Alert;
 use Illuminate\Support\Carbon;
+use RealRashid\SweetAlert\Facades\Alert;
+use Haruncpi\LaravelIdGenerator\IdGenerator;
+use App\{ConsolidateModel, CashierModel, CounterModel};
+use DataTables;
 
 class ConsolidateController extends Controller
 {
@@ -21,7 +22,7 @@ class ConsolidateController extends Controller
      */
     public function index()
     {
-        //
+        return view('daily.consolidatedatatable');
     }
 
     public function deposit()
@@ -29,9 +30,36 @@ class ConsolidateController extends Controller
         $datacashier = CashierModel::latest()->orderBy('Employee','asc')->get();
         $datacounter = CounterModel::latest()->orderBy('NoCounter','asc')->get();
         $timenow = now()->locale('id_ID')->format('H:i');
-        $id = IdGenerator::generate(['table' => 'consolidatetable', 'length' => 6, 'prefix' =>date('ym')]);
+        $id = IdGenerator::generate(['table' => 'consolidatetable', 'field'=>'NoDeposit', 'length' => 6, 'prefix' =>date('ym')]);
         return view('daily.deposit',compact('datacashier','datacounter','timenow','id'));
     }
+
+    public function banana()
+    {
+        $datacashier = CashierModel::latest()->orderBy('Employee','asc')->get();
+        $datacounter = CounterModel::latest()->orderBy('NoCounter','asc')->get();
+        $timenow = now()->locale('id_ID')->format('H:i');
+        $id = IdGenerator::generate(['table' => 'consolidatetable', 'field'=>'NoDeposit', 'length' => 6, 'prefix' =>date('ym')]);
+        return view('daily.deposit',compact('datacashier','datacounter','timenow','id'));
+    }
+
+    public function datatable(Request $request)
+    {
+        $data = ConsolidateModel::latest()->get();
+        return DataTables::of($data)
+        ->addColumn('action','<div class="btn-group">
+            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+            <div class="dropdown-menu dropdown-menu-right" role="menu">
+            <a href="#" class="edcshow dropdown-item" id="{{$id}}"><i class="fas fa-desktop"></i> Show</a>
+            <a href="#" class="editedc dropdown-item" id="{{$id}}"><i class="fas fa-edit"></i> Edit</a>
+            <a href="#" class="deleteedc dropdown-item" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
+            </div></div>')
+        ->addColumn('checkbox', '<input type="checkbox" name="edccheckbox[]" class="edccheckbox" value="{{$id}}" />')
+        ->rawColumns(['action','checkbox'])
+        ->make(true);
+
+    }
+
 
     /**
      * Show the form for creating a new resource.
@@ -80,14 +108,15 @@ class ConsolidateController extends Controller
             'Coin10000' => $number[7],
             'Coin500' => $number[8],
             'Coin200' => $number[9],
-            'Coin100' => $number[1],
-            'Coin50' => $number[1],
+            'Coin100' => $number[10],
+            'Coin50' => $number[11],
             'Amount' => $request->inputtotal
 
         );
-
         ConsolidateModel::updateOrCreate(['id'=>$request->iddeposit],$form_data);
-        return response()->json(['success' => 'Data Added successfully.']);
+        // dd("hai");
+        Alert::success('Success Title', 'Success Message');
+        return redirect('admin/deposit');
     }
 
     /**
@@ -107,9 +136,10 @@ class ConsolidateController extends Controller
      * @param  \App\ConsolidateModel  $consolidateModel
      * @return \Illuminate\Http\Response
      */
-    public function edit(ConsolidateModel $consolidateModel)
+    public function edit($id)
     {
-        //
+        $data = ConsolidateModel::find($id);
+        return response()->json($data);
     }
 
     /**
@@ -132,6 +162,7 @@ class ConsolidateController extends Controller
      */
     public function destroy(ConsolidateModel $consolidateModel)
     {
-        //
+        
+        
     }
 }

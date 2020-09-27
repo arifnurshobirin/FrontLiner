@@ -68,7 +68,7 @@ class CounterController extends Controller
             'IpAddress' => $request->ipaddress,
             'MacAddress' => $request->macaddress,
             'TypeCounter' => $request->typecounter,
-            'StatusCounter' => $request->statuscounter
+            'Status' => $request->statuscounter
         );
     
         CounterModel::updateOrCreate(['id'=>$request->counterid],$form_data);

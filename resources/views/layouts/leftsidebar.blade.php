@@ -242,7 +242,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('consolidate.index') }}" id="contentconsolidate"  class="nav-link{{ (request()->is('admin/consolidate')) ? ' active' : '' }}">
+                    <a href="{{ route('consolidate.index') }}" id="contentolidate"  class="nav-link{{ (request()->is('admin/consolidate')) ? ' active' : '' }}">
                       <i class="far fa-circle nav-icon"></i>
                       <p>Consolidate</p>
                     </a>

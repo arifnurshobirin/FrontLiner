@@ -28,10 +28,10 @@
 <section class="content" id="contentpage">
     <div class="row">
         <div class="col-lg-6">
-            <div class="card">
+            <div class="card card-danger card-outline">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
-                        <h3 class="card-title">Online Store Visitors</h3>
+                        <h3 class="card-title"><i class="fas fa-desktop"></i> Online Store Visitors</h3>
                         <a href="javascript:void(0);">View Report</a>
                     </div>
                 </div>
@@ -67,9 +67,9 @@
             </div>
             <!-- /.card -->
 
-            <div class="card">
+            <div class="card card-danger card-outline">
                 <div class="card-header border-0">
-                    <h3 class="card-title">Products</h3>
+                    <h3 class="card-title"><i class="fas fa-desktop"></i> Products</h3>
                     <div class="card-tools">
                         <a href="#" class="btn btn-tool btn-sm">
                             <i class="fas fa-download"></i>
@@ -179,10 +179,10 @@
         </div>
         <!-- /.col-md-6 -->
         <div class="col-lg-6">
-            <div class="card">
+            <div class="card card-danger card-outline">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
-                        <h3 class="card-title">Sales</h3>
+                        <h3 class="card-title"><i class="fas fa-desktop"></i> Sales</h3>
                         <a href="javascript:void(0);">View Report</a>
                     </div>
                 </div>
@@ -218,9 +218,9 @@
             </div>
             <!-- /.card -->
 
-            <div class="card">
+            <div class="card card-danger card-outline">
                 <div class="card-header border-0">
-                    <h3 class="card-title">Online Store Overview</h3>
+                    <h3 class="card-title"><i class="fas fa-desktop"></i> Online Store Overview</h3>
                     <div class="card-tools">
                         <a href="#" class="btn btn-sm btn-tool">
                             <i class="fas fa-download"></i>

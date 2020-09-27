@@ -29,9 +29,9 @@
 <!-- Main content -->
 <section class="content" id="contentpage">
     <!-- Default box -->
-    <div class="card">
+    <div class="card card-danger card-outline">
         <div class="card-header">
-            <h3 class="card-title">Monitoring</h3>
+            <h3 class="card-title"><i class="fas fa-desktop"></i> Monitoring</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                     title="Collapse">
@@ -45,15 +45,14 @@
         <div class="card-body">
             <div>
                 <div class="btn-group w-100 mb-2">
-                    <a class="btn btn-info active" href="javascript:void(0)" data-filter="all"> All items </a>
-                    <a class="btn btn-info" href="javascript:void(0)" data-filter="1"> Category 1 (RED) </a>
-                    <a class="btn btn-info" href="javascript:void(0)" data-filter="2"> Category 2 (GREEN) </a>
-                    <a class="btn btn-info" href="javascript:void(0)" data-filter="3"> Category 3 (YELLOW) </a>
-                    <a class="btn btn-info" href="javascript:void(0)" data-filter="4"> Category 4 (GRAY)</a>
-                    <a class="btn btn-info" href="javascript:void(0)" data-filter="5"> Category 5 (BLACK)</a>
+                    <a class="btn btn-primary active" href="javascript:void(0)" data-filter="all">All POS</a>
+                    <a class="btn btn-danger" href="javascript:void(0)" data-filter="1">POS Queueing</a>
+                    <a class="btn btn-success" href="javascript:void(0)" data-filter="2">POS Active </a>
+                    <a class="btn btn-warning" href="javascript:void(0)" data-filter="3">POS Inactive</a>
+                    <a class="btn btn-secondary" href="javascript:void(0)" data-filter="4">POS Broken</a>
                 </div>
                 <div class="mb-2">
-                    <a class="btn btn-secondary" href="javascript:void(0)" data-shuffle> Shuffle items </a>
+                    <a class="btn btn-primary" href="javascript:void(0)" data-shuffle> Shuffle POS </a>
                     <div class="float-right">
                         <select class="custom-select" style="width: auto;" data-sortOrder>
                             <option value="index"> Sort by Position </option>
@@ -66,145 +65,117 @@
                     </div>
                 </div>
             </div>
-            <!-- /.form group -->
-            <div class="form-group">
-                <button type="button" name="infocolor" id="infocolor" class="btn btn-danger"><i
-                        class="fas fa-User"></i></button>
-                <label>POS Queueing</label>
-                <button type="button" name="infocolor" id="infocolor" class="btn btn-success"><i
-                        class="fas fa-User"></i></button>
-                <label>POS Active</label>
-                <button type="button" name="infocolor" id="infocolor" class="btn btn-warning"><i
-                        class="fas fa-User"></i></button>
-                <label>POS Inactive</label>
-                <button type="button" name="infocolor" id="infocolor" class="btn btn-secondary"><i
-                        class="fas fa-User"></i></button>
-                <label>POS Ready</label>
-                <button type="button" name="infocolor" id="infocolor" class="btn bg-black"><i
-                        class="fas fa-User"></i></button>
-                <label>POS Broken</label>
-            </div>
-            <div class="filter-container row">
-                <?php
-                        $oldcounter= 0;
-                    ?>
-                @foreach($data as $list)
-
-                <?php
-                        if($oldcounter != $list->NoCounter)
-                        {
-                            ?>
-                @if($list->Status == 'Queueing')
-                <div class="col-lg-2 col-6 filtr-item" data-category="1" data-sort="{{$list->NoCounter}}">
-                    <!-- small card -->
-                    <div id="changecolor" class="small-box bg-danger">
+            
+                <div class="row">
+                    <div class="filter-container">
+                    @foreach($data as $list)
+                        @if($list->Status == 'Queueing')
+                    <div class="col-lg-2 col-6 filtr-item" data-category="1" data-sort="{{$list->NoCounter}}">
+                        <!-- small card -->
+                        <div id="changecolor" class="small-box bg-danger">
                         @elseif($list->Status == 'Active')
-                        <div class="col-lg-2 col-6 filtr-item" data-category="2" data-sort="{{$list->NoCounter}}">
-                            <!-- small card -->
-                            <div id="changecolor" class="small-box bg-success">
+                    <div class="col-lg-2 col-6 filtr-item" data-category="2" data-sort="{{$list->NoCounter}}">
+                        <!-- small card -->
+                        <div id="changecolor" class="small-box bg-success">
+                        @elseif($list->Status == 'Inactive')
+                    <div class="col-lg-2 col-6 filtr-item" data-category="3" data-sort="{{$list->NoCounter}}">
+                        <!-- small card -->
+                        <div id="changecolor" class="small-box bg-warning">
+                        @elseif($list->Status == 'Broken')
+                    <div class="col-lg-2 col-6 filtr-item" data-category="4" data-sort="{{$list->NoCounter}}">
+                        <!-- small card -->
+                        <div id="changecolor" class="small-box bg-secondary">
+                        @endif
+
+                            <div class="inner">
+                                <h3>{{ $list->NoCounter }}</h3>
+                                <p>{{ $list->TypeCounter }}</p>
+                            </div>
+                            <div class="icon">
+                                @if($list->Status == 'Queueing')
+                                <i class="fas fa-user"></i>
+                                @elseif($list->Status == 'Active')
+                                <i class="fas fa-user"></i>
                                 @elseif($list->Status == 'Inactive')
-                                <div class="col-lg-2 col-6 filtr-item" data-category="3"
-                                    data-sort="{{$list->NoCounter}}">
-                                    <!-- small card -->
-                                    <div id="changecolor" class="small-box bg-warning">
-                                        @elseif($list->Status == 'Ready')
-                                        <div class="col-lg-2 col-6 filtr-item" data-category="4"
-                                            data-sort="{{$list->NoCounter}}">
-                                            <!-- small card -->
-                                            <div id="changecolor" class="small-box bg-secondary">
-                                                @elseif($list->Status == 'Broken')
-                                                <div class="col-lg-2 col-6 filtr-item" data-category="5"
-                                                    data-sort="{{$list->NoCounter}}">
-                                                    <!-- small card -->
-                                                    <div id="changecolor" class="small-box bg-black">
-                                                        @endif
-                                                        <div class="inner">
-                                                            <h3>{{ $list->NoCounter }}</h3>
-
-                                                            <p>{{ $list->TypeCounter }}</p>
-                                                        </div>
-                                                        <div class="icon">
-                                                            @if($list->Status == 'Queueing')
-                                                            <i class="fas fa-user"></i>
-                                                            @elseif($list->Status == 'Active')
-                                                            <i class="fas fa-user"></i>
-                                                            @elseif($list->Status == 'Inactive')
-                                                            <i class="fas fa-cash-register"></i>
-                                                            @elseif($list->Status == 'Ready')
-                                                            <i class="fas fa-cash-register"></i>
-                                                            @elseif($list->Status == 'Broken')
-                                                            <i class="fas fa-cash-register"></i>
+                                <i class="fas fa-cash-register"></i>
+                                @elseif($list->Status == 'Broken')
+                                <i class="fas fa-cash-register"></i>
+                                @endif
+                            </div>
+                            <button type="button" class="btn btn-block bg-dark" data-toggle="modal" data-target="#edcmodal{{$list->NoCounter}}">
+                                EDC <i class="fas fa-fax"></i>
+                            </button>
+                            {{-- <button class="btn btn-block bg-dark" onclick="edcmodalshow({{$list->NoCounter}})"> --}}
+                        </div>
+                        
+                    </div>
+                    <!-- EDC Modal -->
+                    <div class="modal fade" id="edcmodal{{$list->NoCounter}}" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title" id="headingmodal">Detail EDC POS {{$list->NoCounter}}</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="card bg-light">
+                                        <div class="card-header text-muted border-bottom-0">
+                                            Electronic Data Capture
+                                        </div>
+                                        <div class="card-body pt-0">
+                                            <div class="row">
+                                                <div class="col-7">
+                                                    <h2 class="lead"><b>EDC {{$list->TypeEDC}}</b></h2>
+                                                    <p class="text-muted text-sm"><b>TID: </b> {{$list->TIDEDC}} </p>
+                                                    <ul class="ml-4 mb-0 fa-ul text-muted">
+                                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-fax"></i></span> Status: 
+                                                            @if($list->StatusEDC == 'Active')
+                                                            <a class="text-success">{{$list->StatusEDC}}</a>
+                                                            @elseif($list->StatusEDC == 'Inactive')
+                                                            <a class="text-danger">{{$list->StatusEDC}}</a>
+                                                            @elseif($list->StatusEDC == 'Lock')
+                                                            <a class="text-warning">{{$list->StatusEDC}}</a>
+                                                            @elseif($list->StatusEDC == 'Broken')
+                                                            <b class="text-dark">{{$list->StatusEDC}}</b>
                                                             @endif
-                                                        </div>
-                                                        <a class="small-box-footer nav-link" data-toggle="collapse"
-                                                            href=".buka{{ $list->NoCounter }}">
-                                                            More info <i class="fas fa-arrow-circle-right"></i>
-                                                        </a>
-                                                    </div>
+                                                        </li>
+                                                        <li class="small"><span class="fa-li"><i class="fas fa-lg fa-sim-card"></i></span>
+                                                            Connection: {{$list->SIMCard}}</li>
+                                                    </ul>
                                                 </div>
-                                                <!-- <a href="#" class="small-box-footer nav-link" data-toggle="dropdown">
-                    More info <i class="fas fa-arrow-circle-right"></i>
-                </a>
-                        <div class="box-body bg-white dropdown-menu">
-                        <button class="btn-primary dropdown-item">Change Color</button>
-                        </div> -->
-                                                <div class="panel-collapse collapse in buka{{$list->NoCounter}}">
-                                                    <div class="info-box bg-info">
-                                                        <span class="info-box-icon"><i class="fas fa-fax"></i></span>
-                                                        <div class="info-box-content">
-                                                            <span class="info-box-text">{{$list->TIDEDC}}</span>
-                                                            <span class="info-box-text">{{$list->TypeEDC}}</span>
-                                                            <span class="info-box-number">41,410</span>
-                                                            <div class="progress">
-                                                                <div class="progress-bar" style="width: 70%"></div>
-                                                            </div>
-                                                            <span class="progress-description">
-                                                                70%
-                                                            </span>
-                                                        </div>
-                                                        <!-- /.info-box-content -->
-                                                    </div>
-                                                    <!-- /.info-box -->
+                                                <div class="col-5 text-center">
+                                                    <img src="{{ asset('img/'.$list->TypeEDC.'.jpg') }}" alt="" class="img-circle img-fluid">
                                                 </div>
-                                                <?php
-                        }
-                    else
-                    { ?>
-                                                <div class="panel-collapse collapse in buka{{$list->NoCounter}}">
-                                                    <div class="info-box bg-info">
-                                                        <span class="info-box-icon"><i class="fas fa-fax"></i></span>
-                                                        <div class="info-box-content">
-                                                            <span class="info-box-text">{{$list->TIDEDC}}</span>
-                                                            <span class="info-box-text">{{$list->TypeEDC}}</span>
-                                                            <span class="info-box-number">41,410</span>
-                                                            <div class="progress">
-                                                                <div class="progress-bar" style="width: 70%"></div>
-                                                            </div>
-                                                            <span class="progress-description">
-                                                                70%
-                                                            </span>
-                                                        </div>
-                                                        <!-- /.info-box-content -->
-                                                    </div>
-                                                    <!-- /.info-box -->
-                                                </div>
-
-                                                <?php
-                        }
-                            $oldcounter = $list->NoCounter;
-                            ?>
-                                                @endforeach
-
                                             </div>
-                                            <!-- /.card-body -->
-                                            <div class="card-footer">
-                                                Project Website Cashier Carrefour Taman Palem
+                                        </div>
+                                        <div class="card-footer">
+                                            <div class="text-right">
+                                                <a href="{{ route('edc.index') }}" class="btn btn-sm bg-secondary">
+                                                    <i class="fas fa-cogs"></i>
+                                                </a>
+                                                <a href="#" class="edcshow btn btn-sm btn-secondary" id="{{$list->idEDC}}">
+                                                    <i class="fas fa-user"></i> View Profile
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- /.card -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- #END# EDC Modal -->
+            @endforeach
+                </div>
+            </div>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+            Project Website Cashier Carrefour Taman Palem
+        </div>
+    </div>
+    <!-- /.card -->
 </section>
 <!-- /.content -->
+
 @endsection
 
 @section('javascript')
@@ -215,36 +186,30 @@
 <!-- page script -->
 <script>
     $(".preloader").fadeOut("slow");
+    function edcmodalshow(nocounter){
+        judul = 'Detail EDC POS '.concat(nocounter);
+        $('#saveBtn').val("create-edc");
+            $('#savebutton').html('Save');
+            $('#edcid').val('');
+            $('#edcForm').trigger("reset");
+            $('#headingmodal').html(judul);
+            $('#edcmodal').modal('show');
+    }
     $(document).ready(function() {
         $('.filter-container').filterizr({
             gutterPixels: 3
         });
+
         $('.btn[data-filter]').on('click', function () {
             $('.btn[data-filter]').removeClass('active');
             $(this).addClass('active');
         });
-        // var datapos = new Array();
-        // var status = $(this).attr('list->Status');
 
-        // conslole log('Status');
-        // if (status === 'Queueing') {
-        //     $("#changecolor").removeClass("bg-secondary");
-        //     $("#changecolor").addClass("bg-danger");
-        //     }
-        // else if (status === 'Active') {
-        //     $("#changecolor").removeClass("bg-secondary");
-        //     $("#changecolor").addClass("bg-success");
-        //     // $( ".bg-success" ).switchClass( "bg-success", "bg-info", 1000 );
-        //     }
-        // else if (status === 'Inaktive') {
-        //     $("#changecolor").removeClass("bg-secondary");
-        //     $("#changecolor").addClass("bg-warning");
-        //     }
-        // else if (status === 'Broken') {
-        //     $("#changecolor").removeClass("bg-secondary");
-        //     $("#changecolor").addClass("bg-black");
-        //     }
-
+        $(document).on('click', '.edcshow', function () {
+            var id = $(this).attr('id');
+                $('#contentpage').load('edc'+'/'+id);
+        });
+        
     });
 </script>
 @endsection

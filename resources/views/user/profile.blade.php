@@ -30,7 +30,7 @@
         <div class="col-md-3">
 
             <!-- Profile Image -->
-            <div class="card card-primary card-outline">
+            <div class="card card-danger card-outline">
                 <div class="card-body box-profile">
                     <div class="text-center">
                         <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/user4-128x128.jpg') }}"
@@ -60,7 +60,7 @@
             <!-- /.card -->
 
             <!-- About Me Box -->
-            <div class="card card-primary">
+            <div class="card card-danger">
                 <div class="card-header">
                     <h3 class="card-title">About Me</h3>
                 </div>
@@ -103,7 +103,7 @@
         </div>
         <!-- /.col -->
         <div class="col-md-9">
-            <div class="card">
+            <div class="card card-danger card-outline">
                 <div class="card-header p-2">
                     <ul class="nav nav-pills">
                         <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a>

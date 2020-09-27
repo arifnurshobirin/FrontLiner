@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\EDCModel;
+use App\{EDCModel, CounterModel};
 use DataTables;
 use Illuminate\Http\Request;
 use Validator;
@@ -35,7 +35,8 @@ class EDCController extends Controller
     }
     public function index(Request $request)
     {
-        return view('edc.edcdatatable');
+        $datacounter = CounterModel::latest()->orderBy('NoCounter','asc')->get();
+        return view('edc.edcdatatable',compact('datacounter'));
     }
     /**
      * Show the form for creating a new resource.
@@ -61,11 +62,11 @@ class EDCController extends Controller
             'TIDEDC' => $request->tidedc,
             'MIDEDC' => $request->midedc,
             'IPAdress' => $request->ipedc,
-            'NoCounter' => $request->nocounter,
+            'NoCounter' => $request->selectnocounter,
             'Connection' => $request->connection,
             'SIMCard' => $request->simcard,
             'TypeEDC' => $request->typeedc,
-            'StatusEDC' => $request->statusedc
+            'Status' => $request->statusedc
         );
 
         EDCModel::updateOrCreate(['id'=>$request->edcid],$form_data);

@@ -9,9 +9,9 @@
         </div>
     </div>
     <div class="col-12">
-        <div class="card">
+        <div class="card card-danger card-outline">
             <div class="card-header">
-                <h3 class="card-title">Picasso Datatable</h3>
+                <h3 class="card-title"><i class="fas fa-clipboard-check"></i> Picasso Datatable</h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                         title="Collapse">

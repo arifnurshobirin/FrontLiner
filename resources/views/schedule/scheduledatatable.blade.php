@@ -31,9 +31,9 @@
 <!-- Main content -->
 <section class="content" id="contentpage">
     <!-- Default box -->
-    <div class="card">
+    <div class="card card-danger card-outline">
         <div class="card-header">
-            <h3 class="card-title">Schedule DataTable</h3>
+            <h3 class="card-title"><i class="fas fa-calendar-check"></i> Schedule DataTable</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                     title="Collapse">
@@ -70,7 +70,7 @@
                             <th>Full Name</th>
                             <th>Date Work</th>
                             <th>Shift</th>
-                            <th>Action</t>
+                            <th>Action</th>
                         </tr>
                     </tfoot>
                 </table>

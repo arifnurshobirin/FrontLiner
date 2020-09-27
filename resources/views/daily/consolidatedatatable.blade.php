@@ -1,10 +1,12 @@
-@extends('layouts.app')
-@section('title tab','Cashier Page')
-@section('title page','Cashier Page')
+@extends('layouts.app') 
+@section('title tab','Consolidate Page')
+@section('title page','Consolidate Page')
 
 @section('css')
 <!-- Tempusdominus Bbootstrap 4 -->
 <link href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet">
+<!-- datepicker -->
+<link href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
 <!-- Page CSS -->
 @endsection
 
@@ -14,12 +16,12 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="urlpage">Cashier Page</h1>
+                <h1 class="urlpage">Consolidate Page</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
-                    <li class="breadcrumb-item active urlpage">Cashier Page</li>
+                    <li class="breadcrumb-item active urlpage">Consolidate Page</li>
                 </ol>
             </div>
         </div>
@@ -31,7 +33,7 @@
     <!-- Default box -->
     <div class="card card-danger card-outline">
         <div class="card-header">
-            <h3 class="card-title"><i class="fas fa-user"></i> Cashier DataTable</h3>
+            <h3 class="card-title"><i class="fas fa-clipboard-check"></i> Consolidate Page</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                     title="Collapse">
@@ -45,19 +47,18 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped table-hover dataTable js-exportable"
-                    id="CashierDatatable">
+                    id="ConsolidateDatatable">
                     <thead>
                         <tr>
-                            <th><button type="button" name="cashiermoredelete" id="cashiermoredelete"
+                            <th><button type="button" name="consolidatemoredelete" id="consolidatemoredelete"
                                     class="btn btn-danger">
                                     <i class="fas fa-times"></i><span></span>
                                 </button></th>
                             <th>Detail</th>
-                            <th>Avatar</th>
+                            <th>Deposit Type</th>
                             <th>Employee</th>
                             <th>Full Name</th>
-                            <th>Position</th>
-                            <th>Status</th>
+                            <th>Amount</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -65,11 +66,10 @@
                         <tr>
                             <th>Checkbox</th>
                             <th>Detail</th>
-                            <th>Avatar</th>
+                            <th>Deposit Type</th>
                             <th>Employee</th>
                             <th>Full Name</th>
-                            <th>Position</th>
-                            <th>Status</th>
+                            <th>Amount</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
@@ -83,9 +83,9 @@
                             <h4 class="modal-title" id="modelHeading"></h4>
                         </div>
                         <div class="modal-body">
-                            <form method="post" id="cashierform" name="cashierform" enctype="multipart/form-data">
+                            <form method="post" id="consolidateform" name="consolidateform" enctype="multipart/form-data">
                                 @csrf
-                                <input type="hidden" name="cashierid" id="cashierid">
+                                <input type="hidden" name="consolidateid" id="consolidateid">
                                 <label for="emp">Employee</label>
                                 <div class="form-group">
                                     <div class="input-group">
@@ -93,7 +93,7 @@
                                             <span class="input-group-text"><i class="far fa-id-badge"></i></span>
                                         </div>
                                         <input type="text" id="emp" name="emp" class="form-control"
-                                            data-inputmask='"mask": "999"' data-mask required>
+                                            data-inputmask='"mask": "(999)"' data-mask required>
                                     </div>
                                 </div>
                                 <label for="fullname">Full Name</label>
@@ -103,7 +103,7 @@
                                             placeholder="Enter your Full Name" required>
                                     </div>
                                 </div>
-                                <label for="birth">Date Of Birth</label>
+                                <label for="birth">Date Work</label>
                                 <div class="form-group">
                                     <div class="input-group" id="datetimepicker1" data-target-input="nearest">
                                         <div class="input-group-prepend" data-target="#datetimepicker1"
@@ -112,79 +112,47 @@
                                                 <i class="far fa-calendar-alt"></i>
                                             </span>
                                         </div>
-                                        <input type="text" id="birth" name="birth"
+                                        <input type="text" id="date" name="date"
                                             class="form-control datetimepicker-input" data-target="#datetimepicker1"
                                             placeholder="dd/mm/yyyy">
                                     </div>
                                 </div>
-                                <label for="address">Address</label>
-                                <div class="input-group">
-                                    <div class="form-line">
-                                        <textarea rows="2" id="address" name="address" class="form-control no-resize"
-                                            placeholder="Please input your Address..."></textarea>
-                                    </div>
-                                </div>
-                                <label for="phone">Phone Number</label>
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
-                                        </div>
-                                        <input type="text" id="phone" name="phone" class="form-control"
-                                            data-inputmask='"mask": "9999-99999999"' data-mask>
-                                    </div>
-                                </div>
-                                <label for="position">Position</label>
-                                <div class="form-group">
-                                    <div class="form-line">
-                                        <select class="form-control show-tick" id="position" name="position">
-                                            <option value="">-- Please select --</option>
-                                            <option value="Cashier">Cashier</option>
-                                            <option value="Customer Service">Customer Service</option>
-                                            <option value="TDR">TDR</option>
-                                            <option value="Senior Cashier">Senior Cashier</option>
-                                            <option value="Cashier Head">Cashier Head</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <label for="join">Join Date</label>
+                                <label for="birth">Start Work</label>
                                 <div class="form-group">
                                     <div class="input-group" id="datetimepicker2" data-target-input="nearest">
                                         <div class="input-group-prepend" data-target="#datetimepicker2"
                                             data-toggle="datetimepicker">
                                             <span class="input-group-text">
-                                                <i class="far fa-calendar-alt"></i>
+                                                <i class="far fa-clock"></i>
                                             </span>
                                         </div>
-                                        <input type="text" id="join" name="join"
+                                        <input type="text" id="start" name="start"
                                             class="form-control datetimepicker-input" data-target="#datetimepicker2"
-                                            placeholder="dd/mm/yyyy">
+                                            paceholder="Chosee Start Work">
                                     </div>
-                                    <label for="position">Status</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <select class="form-control show-tick" id="statuscashier"
-                                                name="statuscashier">
-                                                <option value="">-- Please select --</option>
-                                                <option value="Active">Active</option>
-                                                <option value="Inactive">Inactive</option>
-                                            </select>
+                                </div>
+                                <label for="birth">End Work</label>
+                                <div class="form-group">
+                                    <div class="input-group" id="datetimepicker3" data-target-input="nearest">
+                                        <div class="input-group-prepend" data-target="#datetimepicker3"
+                                            data-toggle="datetimepicker">
+                                            <span class="input-group-text">
+                                                <i class="far fa-clock"></i>
+                                            </span>
                                         </div>
+                                        <input type="text" id="end" name="end" class="form-control datetimepicker-input"
+                                            data-target="#datetimepicker3" paceholder="Chosee End Work">
                                     </div>
-                                    <label for="image">Select Profile Image</label>
-                                    <div class="form-group">
-                                        <div class="form-line">
-                                            <input type="file" id="image" name="image" class="form-control">
-                                        </div>
-                                    </div>
-                                    <button type="submit" class="btn btn-primary m-t-15 waves-effect" id="cashiersave"
-                                        value="create">Save</button>
+                                </div>
+                                <button type="submit" class="btn btn-primary m-t-15 waves-effect" id="consolidatesave"
+                                    value="create">Save</button>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
             <!-- #END# Create Table -->
+
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
@@ -199,8 +167,11 @@
 @section('javascript')
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
+<!-- datepicker -->
+<script src="{{ asset('plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js') }}"></script>
 <!-- page script -->
 <script>
+    $(".preloader").fadeOut("slow");
 function format ( d ) {
     // `d` is the original data object for the row
     return '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">'+
@@ -210,7 +181,7 @@ function format ( d ) {
         '</tr>'+
         '<tr>'+
             '<td>Extension number:</td>'+
-            '<td>'+d.Position+'</td>'+
+            '<td>'+d.FullName+'</td>'+
         '</tr>'+
         '<tr>'+
             '<td>Extra info:</td>'+
@@ -225,13 +196,13 @@ function format ( d ) {
                 }
             });
             
-            var table = $('#CashierDatatable').DataTable({
+            var table = $('#ConsolidateDatatable').DataTable({
             processing: true,
             serverSide: true,
             ajax: {
-            url:"{{ route('cashier.datatable') }}",
+            url:"{{ route('consolidate.datatable') }}",
             },
-            "order": [[ 3, "asc" ]],
+            "order": [[ 2, "asc" ]],
             columns: [
                 { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
                 {
@@ -241,23 +212,18 @@ function format ( d ) {
                 "data":           null,
                 "defaultContent": ''
                 },
-                {
-                    "render": function (data, type, JsonResultRow, meta) {
-                        return '<img src="../../img/'+JsonResultRow.Avatar+'" class="avatar" width="50" height="50">';
-                    }
-                },
+                { data: 'DepositType', name: 'DepositType' },
                 { data: 'Employee', name: 'Employee' },
                 { data: 'FullName', name: 'FullName' },
-                { data: 'Position', name: 'Position' },
-                { data: 'Status', name: 'Status' },
-                { data: 'action', name: 'action', orderable: false, searchable: false}
+                { data: 'Amount', name: 'Amount' },
+                { data: 'action', name: 'action', orderable: false}
             ],
             dom: 'Bfrtip',
-            lengthMenu: [
+        lengthMenu: [
             [ 10, 25, 50, -1 ],
             [ '10 rows', '25 rows', '50 rows', 'Show all' ]
-            ],
-            buttons:['pageLength',
+        ],
+        buttons:['pageLength',
                     
                     {
                         extend: 'collection',
@@ -272,14 +238,14 @@ function format ( d ) {
                                 ]
                     },
                     {
-                        text: '<i class="fas fa-plus"></i><span> Add Cashier</span>',
+                        text: '<i class="fas fa-plus"></i><span> Add consolidate</span>',
                         className: 'btn btn-success',
                         action: function ( e, dt, node, config ) {
-                            $('#cashiersave').val("create-cashier");
-                            $('#cashiersave').html('Save');
-                            $('#cashierid').val('');
-                            $('#cashierform').trigger("reset");
-                            $('#modelHeading').html("Create New Cashier");
+                            $('#consolidatesave').val("create-consolidate");
+                            $('#consolidatesave').html('Save');
+                            $('#consolidateid').val('');
+                            $('#consolidateform').trigger("reset");
+                            $('#modelHeading').html("Create New consolidate");
                             $('#ajaxModel').modal('show');
                         }
                     }
@@ -287,7 +253,7 @@ function format ( d ) {
         });
 
          // Add event listener for opening and closing details
-        $('#CashierDatatable').on('click', 'td.details-control', function () {
+         $('#ConsolidateDatatable').on('click', 'td.details-control', function () {
             var tr = $(this).closest('tr');
             var row = table.row( tr );
 
@@ -303,41 +269,22 @@ function format ( d ) {
             }
         });
 
-        $('#cashierform').on("submit",function (event) {
-            event.preventDefault();
-            $('#cashiersave').html('Sending..');
-            var formdata = new FormData($(this)[0]);
-            $.ajax({
-                url: "{{ route('cashier.store') }}",
-                type: "POST",
-                data: formdata,
-                processData: false,
-                contentType: false,
-                success: function (data) {
-
-                    $('#cashierform').trigger("reset");
-                    $('#ajaxModel').modal('hide');
-                    $('#cashiersave').html('Save');
-                    table.draw();
-                    swal.fire("Good job!", "You success update Cashier!", "success");
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                    $('#cashiersave').html('Save Changes');
-                }
-            });
+        $('.datepicker').datepicker({
+            format: 'dddd DD MMMM YYYY',
+            clearButton: true,
+            weekStart: 1,
+            time: false
         });
 
-
-        $(document).on('click', '.cashieredit', function () {
-            var cashierid = $(this).attr('id');
-            $.get("{{ route('cashier.index') }}" +'/' + cashierid +'/edit', function (data)
+        $(document).on('click', '.consolidateedit', function () {
+            var consolidateid = $(this).attr('id');
+            $.get("{{ route('consolidate.index') }}" +'/' + consolidateid +'/edit', function (data)
             {
-                $('#modelHeading').html("Edit Data Cashier");
-                $('#cashiersave').val("edit-cashier");
-                $('#cashiersave').html('Save Changes');
+                $('#modelHeading').html("Edit Data consolidate");
+                $('#consolidatesave').val("edit-consolidate");
+                $('#consolidatesave').html('Save Changes');
                 $('#ajaxModel').modal('show');
-                $('#cashierid').val(data.id);
+                $('#consolidateid').val(data.id);
                 $('#emp').val(data.Employee);
                 $('#name').val(data.FullName);
                 $('#birth').val(data.DateOfBirth);
@@ -345,89 +292,90 @@ function format ( d ) {
                 $('#phone').val(data.PhoneNumber);
                 $('#position').val(data.Position);
                 $('#join').val(data.JoinDate);
-                $('#statuscashier').val(data.StatusCashier);
-                $('#image').val(data.Avatar);
             })
         });
 
-        $(document).on('click', '.cashiershow', function () {
+        $(document).on('click', '.showconsolidate', function () {
             var id = $(this).attr('id');
-                $('#contentpage').load('cashier'+'/'+id);
+                $('#contentpage').load('consolidate'+'/'+id);
         });
 
-            var cashierid;
-            $(document).on('click', '.cashierdelete', function(){
-            cashierid = $(this).attr('id');
-            swal.fire({
+
+        $('#consolidateform').on("submit",function (event) {
+            event.preventDefault();
+            var formdata = new FormData($(this)[0]);
+            $.ajax({
+                url: "{{ route('consolidate.store') }}",
+                type: "POST",
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success: function (data) {
+
+                    $('#consolidateform').trigger("reset");
+                    $('#ajaxModel').modal('hide');
+                    $('#consolidatesave').html('Save');
+                    table.draw();
+                },
+                error: function (data) {
+                    console.log('Error:', data);
+                    $('#consolidatesave').html('Save Changes');
+                }
+            });
+        });
+
+            var type;
+            var consolidate_id;
+            $(document).on('click', '.js-sweetalert', function(){
+            consolidate_id = $(this).attr('id');
+            var type = $(this).data('type');
+            if (type === 'basic') {
+                showBasicMessage();
+            }
+            else if (type === 'cancel') {
+                showCancelMessage();
+            }
+        });
+
+
+        function showCancelMessage() {
+            swal({
                 title: "Are you sure?",
-                text: "You will not be able to recover this cashier file!",
-                icon: "warning",
+                text: "You will not be able to recover this edc file!",
+                type: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#DD6B55",
                 confirmButtonText: "Yes, delete!",
-                cancelButtonText: "No, cancel!"
-            }).then((result) => {
-                if (result.value) {
+                cancelButtonText: "No, cancel!",
+                closeOnConfirm: false,
+                closeOnCancel: false,
+                showLoaderOnConfirm: true
+            }, function (isConfirm) {
+                if (isConfirm) {
                     $.ajax({
-                url:"cashier/"+cashierid,
+                url:"consolidate/"+consolidate_id,
                 type: "DELETE",
                 success:function(data){
-                    swal.fire("Deleted!", "Your Cashier file has been deleted.", "success")
-                    $('#CashierDatatable').DataTable().ajax.reload();
+                    swal("Deleted!", "Your consolidate file has been deleted.", "success")
+                    $('#ConsolidateDatatable').DataTable().ajax.reload();
                 }
                 });
                 } else {
-                    swal.fire("Cancelled", "Your Cashier file is safe :)", "error");
+                    swal("Cancelled", "Your consolidate file is safe :)", "error");
                 }
             });
-        });
-
-        $(document).on('click', '#cashiermoredelete', function(){
-            var id = [];
-            swal.fire({
-                title: "Are you sure?",
-                text: "You will not be able to recover this Cashier file!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, delete!",
-                cancelButtonText: "No, cancel!"
-            }).then((result) => {
-                if (result.value) {
-                    $('.cashiercheckbox:checked').each(function(){
-                        id.push($(this).val());
-                    });
-                    if(id.length > 0)
-                    {
-                        $.ajax({
-                        url:"{{ route('cashier.moredelete')}}",
-                        method:"get",
-                        data:{id:id},
-                        success:function(data){
-                        swal.fire("Deleted!", "Your Cashier file has been deleted.", "success")
-                        $('#CashierDatatable').DataTable().ajax.reload();
-                            }
-                        });
-                    }
-                    else
-                    {swal.fire("Please select atleast one checkbox");}
-                } 
-                else 
-                {swal.fire("Cancelled", "Your Cashier file is safe :)", "error");}
-                });
-            });
-
-
+        }
         $('#datetimepicker1').datetimepicker({
                     format: 'L'
                 });
         $('#datetimepicker2').datetimepicker({
-                    format: 'L'
+                    format: 'LT'
+                });
+        $('#datetimepicker3').datetimepicker({
+                    format: 'LT'
                 });
         $('[data-mask]').inputmask()
 
     });
-    $(".preloader").fadeOut("slow");
-
 </script>
 @endsection

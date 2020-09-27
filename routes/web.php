@@ -8,11 +8,12 @@ Route::get('/', function () {return view('welcome');});
 
 Auth::routes(['verify' => true]);
 
+Route::get('/admin', 'HomeController@index')->name('admin');
+
 Route::get('admin/profile', 'UserController@index')->name('profile');
 Route::get('admin/lockscreen', 'UserController@lockscreen')->name('lockscreen');
 Route::get('admin/contact', 'UserController@create')->name('contact');
-
-Route::get('/admin', 'HomeController@index')->name('admin');
+Route::get('admin/dashboard', 'HomeController@dashboard')->name('dashboard');
 Route::get('admin/gallery', 'HomeController@gallery')->name('gallery');
 Route::get('admin/calendar', 'HomeController@calendar')->name('calendar');
 Route::get('admin/banana', 'HomeController@banana')->name('banana');
@@ -21,7 +22,7 @@ Route::get('admin/sales', 'HomeController@sales')->name('sales');
 Route::get('admin/mailbox', 'HomeController@mailbox')->name('mailbox');
 Route::get('admin/compose', 'HomeController@compose')->name('compose');
 Route::get('admin/readmail', 'HomeController@readmail')->name('readmail');
-Route::get('admin/dashboard', 'HomeController@dashboard')->name('dashboard');
+
 
 Route::get('admin/cashierdatatable', 'CashierController@datatable')->name('cashier.datatable');
 Route::resource('admin/cashier', 'CashierController');
@@ -67,6 +68,7 @@ Route::get('admin/elearning', 'ActivityController@elearning')->name('elearning.i
 
 Route::resource('admin/consolidate', 'ConsolidateController');
 Route::get('admin/deposit', 'ConsolidateController@deposit')->name('consolidate.deposit');
+Route::get('admin/consolidatedatatable', 'ConsolidateController@datatable')->name('consolidate.datatable');
 Route::get('admin/banana', 'ConsolidateController@banana')->name('consolidate.banana');
 
 Route::resource('admin/report', 'ReportController');

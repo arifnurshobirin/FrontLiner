@@ -27,9 +27,9 @@
 <!-- Main content -->
 <section class="content" id="contentpage">
     <!-- Default box -->
-    <div class="card">
+    <div class="card card-danger card-outline">
         <div class="card-header">
-            <h3 class="card-title">Counter DataTable</h3>
+            <h3 class="card-title"><i class="fas fa-box"></i> Counter DataTable</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                     title="Collapse">
@@ -133,13 +133,12 @@
                                 <label for="type">Status Counter</label>
                                 <div class="form-group">
                                     <div class="form-line">
-                                        <select class="form-control show-tick" id="satuscounter" name="Status">
+                                        <select class="form-control show-tick" id="statuscounter" name="statuscounter">
                                             <option value="">-- Please select --</option>
+                                            <option value="Queueing">Queueing</option>
                                             <option value="Active">Active</option>
                                             <option value="Inactive">Inactive</option>
-                                            <option value="Normal">Normal</option>
                                             <option value="Broken">Broken</option>
-                                            <option value="Queueing">Queueing</option>
                                         </select>
                                     </div>
                                 </div>

@@ -27,9 +27,9 @@
 <!-- Main content -->
 <section class="content" id="contentpage">
     <!-- Default box -->
-    <div class="card">
+    <div class="card card-danger card-outline">
         <div class="card-header">
-            <h3 class="card-title">Cash Deposit Report</h3>
+            <h3 class="card-title"><i class="fas fa-clipboard-check"></i> Cash Deposit Report</h3>
             <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
                     title="Collapse">
@@ -42,7 +42,7 @@
         <!-- /.card-header -->
         <div class="card-body">
             <!-- Deposit Form-->
-            <form method="post" id="depositform" name="depositform">
+            <form method="post" id="depositform" name="depositform" action="{{ route('consolidate.store') }}">
                 @csrf
                 <input type="hidden" name="iddeposit" id="iddeposit">
 
@@ -56,7 +56,7 @@
                 <div class="form-group row">
                     <label for="labelcashiercode" class="col-sm-2 col-form-label">Cashier Employee :</label>
                     <div class="form-line">
-                        <select class="custom-select" id="selectemp" name="selectemp">
+                        <select class="custom-select" id="selectemp" name="selectemp" onchange="setFullName();">
                             @foreach($datacashier as $cashier)
                             <option value="{{$cashier->Employee}}">{{$cashier->Employee}}</option>
                             @endforeach
@@ -68,15 +68,15 @@
                     <label for="labeltype" class="col-sm-2 col-form-label">Deposit Type:</label>
                     <div class="form-line">
                         <select class="custom-select" id="selecttype" name="selecttype">
-                            <option value="Active">MDS</option>
-                            <option value="Inactive">CVS</option>
-                            <option value="Normal">OP</option>
-                            <option value="Broken">SC</option>
-                            <option value="Broken">TH</option>
-                            <option value="Broken">Billpayment</option>
-                            <option value="Queueing">Warung</option>
-                            <option value="Broken">Simpatindo</option>
-                            <option value="Broken">Antum</option>
+                            <option value="MDS">MDS</option>
+                            <option value="CVS">CVS</option>
+                            <option value="OP">OP</option>
+                            <option value="SC">SC</option>
+                            <option value="TH">TH</option>
+                            <option value="Billpayment">Billpayment</option>
+                            <option value="Warung">Warung</option>
+                            <option value="Simpatindo">Simpatindo</option>
+                            <option value="Antum">Antum</option>
                         </select>
                     </div>
                 </div>
@@ -100,11 +100,11 @@
                 <div class="form-group row">
                     <label for="labeldate" class="col-sm-2 col-form-label">Counter Number :</label>
                     <div class="form-line">
-                            <select class="custom-select" id="selectcounter" name="selectcounter">
-                                @foreach($datacounter as $counter)
-                                <option value="{{$counter->TypeCounter}}">{{$counter->TypeCounter}}</option>
-                                @endforeach
-                            </select>
+                        <select class="custom-select" id="selectcounter" name="selectcounter">
+                            @foreach($datacounter as $counter)
+                            <option value="{{$counter->TypeCounter}}">{{$counter->TypeCounter}}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 
@@ -387,6 +387,8 @@
 <!-- page script -->
 <script>
     $(".preloader").fadeOut("slow");
+    var datacashierjs = {!! json_encode($datacashier) !!};
+    setFullName();
     var amount=[0,0,0,0,0,0,0,0,0,0,0,0];
     const formatRupiah = (rupiah) => { return new Intl.NumberFormat('id-ID',{ style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(rupiah); }
 
@@ -410,9 +412,16 @@
         }
 
     }
-        
+    function setFullName(){
+        var selectemp = $('#selectemp').val();
+        for(i=0;i<datacashierjs.length;i++){
+            if(selectemp == datacashierjs[i]['Employee']){
+                $('#inputname').val(datacashierjs[i]['FullName']);
+                break;
+            }
+        }
+    }
     $(document).ready(function() {
-        var datacashierjs = {!! json_encode($datacashier) !!};
         var currentdate = new Date();
         var hr = currentdate.getHours();
         var min = currentdate.getMinutes();
@@ -429,38 +438,16 @@
         //     autoclose:true
         // });
         
-        $('#selectemp').change(function(){
-            var selectemp = $('#selectemp').val();
-            for(i=0;i<datacashierjs.length;i++){
-                if(selectemp == datacashierjs[i]['Employee']){
-                    $('#inputname').val(datacashierjs[i]['FullName']);
-                    break;
-                }
-            }
-        });
-
-        $('#depositform').on("submit",function (event) {
-            event.preventDefault();
-            var formdata = new FormData($(this)[0]);
-            $.ajax({
-                url: "{{ route('consolidate.store') }}",
-                type: "POST",
-                data: formdata,
-                processData: false,
-                contentType: false,
-                success: function (data) {
-
-                    $('#depositform').trigger("reset");
-                    $('#depositsave').html('Save');
-                    table.draw();
-                },
-                error: function (data) {
-                    console.log('Error:', data);
-                    $('#depositsave').html('Save Changes');
-                }
-            });
-        });
-
+        // $('#selectemp').change(function(){
+        //     var selectemp = $('#selectemp').val();
+        //     for(i=0;i<datacashierjs.length;i++){
+        //         if(selectemp == datacashierjs[i]['Employee']){
+        //             $('#inputname').val(datacashierjs[i]['FullName']);
+        //             break;
+        //         }
+        //     }
+        // });
+  
 
 
     });

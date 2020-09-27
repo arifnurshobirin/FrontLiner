@@ -27,7 +27,7 @@
 <!-- Main content -->
 <section class="content" id="contentpage">
     <!-- Default box -->
-    <div class="card">
+    <div class="card card-danger card-outline">
         <div class="card-header">
             <h3 class="card-title">Alamat Website Carrefour Taman Palem</h3>
 
