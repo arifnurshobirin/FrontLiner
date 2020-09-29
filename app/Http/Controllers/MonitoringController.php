@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\MonitoringModel;
-use App\CounterModel;
+use App\{Counter, MonitoringModel, Edc};
 use DB;
 use Illuminate\Http\Request;
 
@@ -16,14 +15,14 @@ class MonitoringController extends Controller
      */
     public function index()
     {   
-        $data = DB::table('countertable')
-            ->select('countertable.id','countertable.NoCounter','countertable.Status', 'countertable.TypeCounter',
-                    'edctable.id as idEDC','edctable.TIDEDC', 'edctable.MIDEDC','edctable.TypeEDC', 'edctable.SIMCard', 'edctable.Status as StatusEDC')
-            ->leftJoin('edctable', 'countertable.NoCounter', '=', 'edctable.NoCounter')->orderBy('countertable.NoCounter','asc')
-            ->get();
-            // $data = CounterModel::all();
-            // dd($data);
-        return view('monitoring.monitoring',compact('data'));
+        // $data = DB::table('countertable')
+        //     ->select('countertable.id','countertable.NoCounter','countertable.Status', 'countertable.TypeCounter',
+        //             'edctable.id as idEDC','edctable.TIDEDC', 'edctable.MIDEDC','edctable.TypeEDC', 'edctable.SIMCard', 'edctable.Status as StatusEDC')
+        //     ->leftJoin('edctable', 'countertable.NoCounter', '=', 'edctable.NoCounter')->orderBy('countertable.NoCounter','asc')
+        //     ->get();
+            $datacounter = Counter::latest()->orderBy('NoCounter','asc')->get();
+    
+        return view('monitoring.monitoring',compact('datacounter'));
     }
 
     /**
@@ -53,9 +52,12 @@ class MonitoringController extends Controller
      * @param  \App\MonitoringModel  $monitoringModel
      * @return \Illuminate\Http\Response
      */
-    public function show(MonitoringModel $monitoringModel)
+    public function show($id)
     {
-        //
+        $dataedc =  Counter::find($id)->edcs;
+        // $data = response()->json($dataedc);
+             // dd($data);
+        return response()->json($dataedc);
     }
 
     /**

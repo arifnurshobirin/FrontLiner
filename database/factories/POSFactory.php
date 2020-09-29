@@ -15,5 +15,6 @@ $factory->define(POSModel::class, function () {
         'Drawer' =>$faker->randomElement($array = array ('Wincore','IBM','HP')),
         'Scanner' =>$faker->randomElement($array = array ('Magellan 8100', 'Magellan 2000','Datalogic','Zonerich','HP')),
         'Monitor' =>$faker->randomElement($array = array ('TFT', 'HP','Wincore')),
+        'Status' => $faker->randomElement($array = array ('Active', 'Inaktive','Broken'))
     ];
 });
