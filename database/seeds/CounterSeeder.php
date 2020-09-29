@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\CounterModel;
+use App\Counter;
 
 class CounterSeeder extends Seeder
 {
@@ -12,6 +12,6 @@ class CounterSeeder extends Seeder
      */
     public function run()
     {
-        factory(CounterModel::class, 50)->create();
+        factory(Counter::class, 50)->create();
     }
 }

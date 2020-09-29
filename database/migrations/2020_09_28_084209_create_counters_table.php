@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePostableTable extends Migration
+class CreateCountersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,16 @@ class CreatePostableTable extends Migration
      */
     public function up()
     {
-        Schema::create('postable', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('NoPOS')->unique;
-            $table->string('CPU');
-            $table->string('Printer');
-            $table->string('Drawer');
-            $table->string('Scanner');
-            $table->string('Monitor');
+        Schema::create('counters', function (Blueprint $table) {
+            $table->id();
+            $table->integer('NoCounter');
+            $table->ipAddress('IpAddress');
+            $table->macAddress('MacAddress');
+            $table->string('TypeCounter');
             $table->string('Status');
             $table->timestamps();
             $table->softDeletes();
+            $table->unique(['NoCounter', 'IpAddress','MacAddress']);
         });
     }
 
@@ -34,6 +33,6 @@ class CreatePostableTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('postable');
+        Schema::dropIfExists('counters');
     }
 }

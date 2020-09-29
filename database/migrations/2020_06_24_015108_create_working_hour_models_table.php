@@ -19,6 +19,7 @@ class CreateWorkingHourModelsTable extends Migration
             $table->string('Shift');
             $table->integer('WorkingHour');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

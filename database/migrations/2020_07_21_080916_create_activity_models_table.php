@@ -16,6 +16,7 @@ class CreateActivityModelsTable extends Migration
         Schema::create('activity_models', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

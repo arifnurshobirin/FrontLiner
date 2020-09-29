@@ -1,31 +1,56 @@
-@section('title page','Home Page')
+@extends('layouts.app')
+@section('title tab','Profile Page')
+@section('title page','Profile Page')
 
-<div class="container-fluid">
+@section('css')
+<!-- Page CSS -->
+@endsection
+
+@section('content')
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="urlpage">EDC Profile Page</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
+                    <li class="breadcrumb-item"><a href="{{ url('admin/edc') }}">EDC</a></li>
+                    <li class="breadcrumb-item active urlpage">Profile Page</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content" id="contentpage">
     <div class="row">
         <div class="col-md-3">
 
-
             <!-- Profile Image -->
-            <div class="card card-primary card-outline">
+            <div class="card card-danger card-outline">
                 <div class="card-body box-profile">
                     <div class="text-center">
-                        <img class="profile-user-img img-fluid img-circle" src="img/{{ $data->TypeEDC }}.jpg"
-                            alt="EDC profile picture">
+                        <img class="profile-user-img img-fluid img-circle" src="{{ asset('img/user4-128x128.jpg') }}"
+                            alt="User profile picture">
                     </div>
 
-                    <h3 class="profile-username text-center">EDC {{ $data->TypeEDC }}</h3>
+                    <h3 class="profile-username text-center">Nina Mcintire</h3>
 
-                    <p class="text-muted text-center">Transmart EDC</p>
+                    <p class="text-muted text-center">Software Engineer</p>
 
                     <ul class="list-group list-group-unbordered mb-3">
                         <li class="list-group-item">
-                            <b>MID</b> <a class="float-right">{{ $data->MIDEDC }}</a>
+                            <b>Followers</b> <a class="float-right">1,322</a>
                         </li>
                         <li class="list-group-item">
-                            <b>TID</b> <a class="float-right">{{ $data->TIDEDC }}</a>
+                            <b>Following</b> <a class="float-right">543</a>
                         </li>
                         <li class="list-group-item">
-                            <b>No Counter</b> <a class="float-right">{{ $data->NoCounter }}</a>
+                            <b>Friends</b> <a class="float-right">13,287</a>
                         </li>
                     </ul>
 
@@ -36,7 +61,7 @@
             <!-- /.card -->
 
             <!-- About Me Box -->
-            <div class="card card-primary">
+            <div class="card card-danger">
                 <div class="card-header">
                     <h3 class="card-title">About Me</h3>
                 </div>
@@ -52,18 +77,19 @@
 
                     <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
 
-                    <p class="text-muted">Jakarta, Indonesia</p>
+                    <p class="text-muted">Malibu, California</p>
 
                     <hr>
 
                     <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
 
                     <p class="text-muted">
-                        <span class="label bg-red">UI Design</span>
-                        <span class="label bg-red">Coding</span>
-                        <span class="label bg-teal">JavaScript</span>
-                        <span class="label bg-blue">PHP</span>
-                        <span class="label bg-amber">Node.js</span>
+                        <span class="tag tag-danger">UI Design</span>
+                        <span class="tag tag-success">Coding</span>
+                        <span class="tag tag-info">Javascript</span>
+                        <span class="tag tag-warning">PHP</span>
+                        <span class="tag tag-primary">Node.js</span>
+                    </p>
 
                     <hr>
 
@@ -78,15 +104,13 @@
         </div>
         <!-- /.col -->
         <div class="col-md-9">
-            <div class="card">
+            <div class="card card-danger card-outline">
                 <div class="card-header p-2">
                     <ul class="nav nav-pills">
                         <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a>
                         </li>
                         <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a></li>
                         <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a></li>
-                        <li class="nav-item"><a class="btn btn-success waves-effect" href="#" id="backedc"><i class="fas fa-hand-point-left mr-1"></i><span>Back to Table</span></a></li>
-                        
                     </ul>
                 </div><!-- /.card-header -->
                 <div class="card-body">
@@ -95,19 +119,21 @@
                             <!-- Post -->
                             <div class="post">
                                 <div class="user-block">
-                                    <img class="img-circle img-bordered-sm" src="img/{{ $data->TypeEDC }}.jpg"
+                                    <img class="img-circle img-bordered-sm" src="{{ asset('img/user1-128x128.jpg') }}"
                                         alt="user image">
                                     <span class="username">
-                                        <a href="#">EDC {{ $data->TypeEDC }}</a>
+                                        <a href="#">Jonathan Burke Jr.</a>
                                         <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
                                     </span>
                                     <span class="description">Shared publicly - 7:30 PM today</span>
                                 </div>
                                 <!-- /.user-block -->
                                 <p>
-                                I am a very simple wall post. I am good at containing <a
-                                                    href="#">#small</a> bits of <a href="#">#information</a>. I
-                                                require little more information to use effectively.
+                                    Lorem ipsum represents a long-held tradition for designers,
+                                    typographers and the like. Some people hate it and argue for
+                                    its demise, but others ignore the hate as they create awesome
+                                    tools to help create filler text for everyone from bacon lovers
+                                    to Charlie Sheen fans.
                                 </p>
 
                                 <p>
@@ -129,20 +155,21 @@
                             <!-- Post -->
                             <div class="post clearfix">
                                 <div class="user-block">
-                                    <img class="img-circle img-bordered-sm" src="img/{{ $data->TypeEDC }}.jpg"
+                                    <img class="img-circle img-bordered-sm" src="{{ asset('img/user7-128x128.jpg') }}"
                                         alt="User Image">
                                     <span class="username">
-                                        <a href="#">EDC {{ $data->TypeEDC }}</a>
+                                        <a href="#">Sarah Ross</a>
                                         <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
                                     </span>
                                     <span class="description">Sent you a message - 3 days ago</span>
                                 </div>
                                 <!-- /.user-block -->
                                 <p>
-                                " Kamu tidak akan pernah bisa kehabisan kreativitas. 
-                                Semakin kamu menggunakannya, semakin banyak yang kamu miliki." - Maya Angelou
-                                “Senyuman di setiap hariku bukan karena hidupku sempurna
-                                ountertapi karena aku bersyukur untuk setiap rahmat yang diberi Tuhan.”
+                                    Lorem ipsum represents a long-held tradition for designers,
+                                    typographers and the like. Some people hate it and argue for
+                                    its demise, but others ignore the hate as they create awesome
+                                    tools to help create filler text for everyone from bacon lovers
+                                    to Charlie Sheen fans.
                                 </p>
 
                                 <form class="form-horizontal">
@@ -159,10 +186,10 @@
                             <!-- Post -->
                             <div class="post">
                                 <div class="user-block">
-                                    <img class="img-circle img-bordered-sm" src="img/{{ $data->TypeEDC }}.jpg"
+                                    <img class="img-circle img-bordered-sm" src="{{ asset('img/user6-128x128.jpg') }}"
                                         alt="User Image">
                                     <span class="username">
-                                        <a href="#">EDC {{ $data->TypeEDC }}</a>
+                                        <a href="#">Adam Jones</a>
                                         <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
                                     </span>
                                     <span class="description">Posted 5 photos - 5 days ago</span>
@@ -170,19 +197,19 @@
                                 <!-- /.user-block -->
                                 <div class="row mb-3">
                                     <div class="col-sm-6">
-                                        <img class="img-fluid" src="img/photo1.png" alt="Photo">
+                                        <img class="img-fluid" src="{{ asset('img/photo1.png') }}" alt="Photo">
                                     </div>
                                     <!-- /.col -->
                                     <div class="col-sm-6">
                                         <div class="row">
                                             <div class="col-sm-6">
-                                                <img class="img-fluid mb-3" src="img/photo2.png" alt="Photo">
-                                                <img class="img-fluid" src="img/photo3.jpg" alt="Photo">
+                                                <img class="img-fluid mb-3" src="{{ asset('img/photo2.png') }}" alt="Photo">
+                                                <img class="img-fluid" src="{{ asset('img/photo3.jpg') }}" alt="Photo">
                                             </div>
                                             <!-- /.col -->
                                             <div class="col-sm-6">
-                                                <img class="img-fluid mb-3" src="img/photo4.jpg" alt="Photo">
-                                                <img class="img-fluid" src="img/photo1.png" alt="Photo">
+                                                <img class="img-fluid mb-3" src="{{ asset('img/photo4.jpg') }}" alt="Photo">
+                                                <img class="img-fluid" src="{{ asset('img/photo1.png') }}" alt="Photo">
                                             </div>
                                             <!-- /.col -->
                                         </div>
@@ -229,9 +256,10 @@
                                         <h3 class="timeline-header"><a href="#">Support Team</a> sent you an email</h3>
 
                                         <div class="timeline-body">
-                                        <p>jalanin hidup dengan bersyukur dan berusaha sebaik mungkin agar
-                                                tidak ada penyesalan." Pertama, berpikirlah. Yang kedua, percayalah. Yang ketiga, mimpikanlah.
-                                                Lalu yang terakhir, tantanglah." - Walt Disney</p>
+                                            Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
+                                            weebly ning heekya handango imeem plugg dopplr jibjab, movity
+                                            jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
+                                            quora plaxo ideeli hulu weebly balihoo...
                                         </div>
                                         <div class="timeline-footer">
                                             <a href="#" class="btn btn-primary btn-sm">Read more</a>
@@ -366,11 +394,14 @@
         <!-- /.col -->
     </div>
     <!-- /.row -->
-</div><!-- /.container-fluid -->
+ 
+</section>
+<!-- /.content -->
+@endsection
+
+@section('javascript')
+<!-- page script -->
 <script>
-    $(document).ready(function() {
-        $('#backedc').click(function() {
-            $('#contentpage').load('edctable');
-        })
-    });
+    $(".preloader").fadeOut("slow");
 </script>
+@endsection

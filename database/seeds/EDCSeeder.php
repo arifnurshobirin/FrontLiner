@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\EDCModel;
+use App\Edc;
 
 class EDCSeeder extends Seeder
 {
@@ -12,7 +12,7 @@ class EDCSeeder extends Seeder
      */
     public function run()
     {
-        factory(EDCModel::class, 50)->create();
+        factory(Edc::class, 50)->create();
 
     }
 }

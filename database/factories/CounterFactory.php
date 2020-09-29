@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\CounterModel;
+use App\Counter;
 
 
-$factory->define(CounterModel::class, function () {
+$factory->define(Counter::class, function () {
     $faker = Faker\Factory::create('id_ID');
 
     return [
@@ -13,6 +13,6 @@ $factory->define(CounterModel::class, function () {
         'IpAddress' => $faker->unique()->ipv4,
         'MacAddress' => $faker->unique()->macAddress,
         'TypeCounter' => $faker->randomElement($array = array ('Regular', 'SaladBar','Milk','Wine','Deptstore','Electronic','TransHello','Homedel','Cigarette','TransLiving','TransHardware','Bakery','Dokar','Canvasing','Backup')),
-        'StatusCounter' => $faker->randomElement($array = array ('Active', 'Inaktive','Normal','Broken','Queueing'))
+        'Status' => $faker->randomElement($array = array ('Queueing','Active', 'Inactive','Broken'))
     ];
 });

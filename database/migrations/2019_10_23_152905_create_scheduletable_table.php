@@ -20,6 +20,7 @@ class CreateScheduletableTable extends Migration
             $table->date('Date');
             $table->string('CodeShift');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

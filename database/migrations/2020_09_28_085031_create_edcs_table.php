@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEdctableTable extends Migration
+class CreateEdcsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateEdctableTable extends Migration
      */
     public function up()
     {
-        Schema::create('edctable', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->foreignId('idcounter');
+        Schema::create('edcs', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('counter_id')->constrained('counters')->onUpdate('cascade')->onDelete('cascade');
             $table->string('TIDEDC')->unique;;
             $table->string('MIDEDC');
             $table->string('IPAdress')->unique;
@@ -35,6 +35,6 @@ class CreateEdctableTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('edctable');
+        Schema::dropIfExists('edcs');
     }
 }

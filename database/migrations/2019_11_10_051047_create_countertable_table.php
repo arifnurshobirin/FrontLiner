@@ -21,6 +21,7 @@ class CreateCountertableTable extends Migration
             $table->string('TypeCounter');
             $table->string('Status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

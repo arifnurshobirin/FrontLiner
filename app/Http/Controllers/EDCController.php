@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\{EDCModel, CounterModel};
+use App\{Edc, Counter};
 use DataTables;
 use Illuminate\Http\Request;
 use Validator;
@@ -19,23 +19,27 @@ class EDCController extends Controller
 
     public function datatable(Request $request)
     {
-        $data = EDCModel::latest()->get();
-        return DataTables::of($data)
+        $dataedc = Edc::latest()->get();
+        //$caricounter=array_column($dataedc, 'id');
+        //dd($dataedc);
+        //$carinocounter =  Counter::find($dataedc->id)->edcs;
+        return DataTables::of($dataedc)
         ->addColumn('action','<div class="btn-group">
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
             <div class="dropdown-menu dropdown-menu-right" role="menu">
-            <a href="#" class="edcshow dropdown-item" id="{{$id}}"><i class="fas fa-desktop"></i> Show</a>
+            <a href="edc/{{$id}}" class="edcshow dropdown-item" id="{{$id}}"><i class="fas fa-desktop"></i> Show</a>
             <a href="#" class="editedc dropdown-item" id="{{$id}}"><i class="fas fa-edit"></i> Edit</a>
             <a href="#" class="deleteedc dropdown-item" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
             </div></div>')
-        ->addColumn('checkbox', '<input type="checkbox" name="edccheckbox[]" class="edccheckbox" value="{{$id}}" />')
-        ->rawColumns(['action','checkbox'])
+        ->addColumn('checkbox', '<input type="checkbox" name="edccheckbox[]" class="edccheckbox" value="{{$counter_id}}" />')
+        ->addColumn('nocounter', '<input type="checkbox" name="edccheckbox[]" class="edccheckbox" value="{{$counter_id}}" />')
+        ->rawColumns(['action','checkbox','nocounter'])
         ->make(true);
 
     }
     public function index(Request $request)
     {
-        $datacounter = CounterModel::latest()->orderBy('NoCounter','asc')->get();
+        $datacounter = Counter::latest()->orderBy('NoCounter','asc')->get();
         return view('edc.edcdatatable',compact('datacounter'));
     }
     /**
@@ -69,7 +73,7 @@ class EDCController extends Controller
             'Status' => $request->statusedc
         );
 
-        EDCModel::updateOrCreate(['id'=>$request->edcid],$form_data);
+        Edc::updateOrCreate(['id'=>$request->edcid],$form_data);
 
         return response()->json(['success' => 'Data Added successfully.']);
     }
@@ -77,26 +81,26 @@ class EDCController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\EDCModel  $eDCModel
+     * @param  \App\Edc  $Edc
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
 
 
-        $data = EDCModel::findOrFail($id);
-        return view('edc.EDCprofile',compact('data'));
+        $data = Edc::findOrFail($id);
+        return view('edc.edcprofile',compact('data'));
     }
 
     /**
      * Show the form for editing the specified resource.
       *
-     * @param  \App\EDCModel  $eDCModel
+     * @param  \App\Edc  $Edc
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $data = EDCModel::find($id);
+        $data = Edc::find($id);
         return response()->json($data);
     }
 
@@ -104,10 +108,10 @@ class EDCController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\EDCModel  $eDCModel
+     * @param  \App\Edc  $Edc
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, EDCModel $eDCModel)
+    public function update(Request $request, Edc $Edc)
     {
         //
     }
@@ -115,17 +119,17 @@ class EDCController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\EDCModel  $eDCModel
+     * @param  \App\Edc  $Edc
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $data = EDCModel::findOrFail($id);
+        $data = Edc::findOrFail($id);
         $data->delete();
     }
     public function moredelete(Request $request)
     {   
         $idarray = $request->input('id');
-        $edc = EDCModel::whereIn('id',$idarray)->delete();
+        $edc = Edc::whereIn('id',$idarray)->delete();
     }
 }

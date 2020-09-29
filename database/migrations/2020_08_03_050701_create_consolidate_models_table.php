@@ -36,6 +36,7 @@ class CreateConsolidateModelsTable extends Migration
             $table->integer('Coin100');
             $table->integer('Coin50');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

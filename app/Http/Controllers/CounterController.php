@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\CounterModel;
+use App\Counter;
 use DataTables;
 use Illuminate\Http\Request;
 use Validator;
@@ -17,7 +17,7 @@ class CounterController extends Controller
      */
     public function datatable(Request $request)
     {
-        $data = CounterModel::latest()->get();
+        $data = Counter::latest()->get();
             return DataTables::of($data)
             ->addColumn('action',
             '<div class="btn-group">
@@ -71,7 +71,7 @@ class CounterController extends Controller
             'Status' => $request->statuscounter
         );
     
-        CounterModel::updateOrCreate(['id'=>$request->counterid],$form_data);
+        Counter::updateOrCreate(['id'=>$request->counterid],$form_data);
 
         return response()->json(['success' => 'Data Added successfully.']);
     }
@@ -79,24 +79,24 @@ class CounterController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\CounterModel  $counterModel
+     * @param  \App\Counter  $Counter
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $data = CounterModel::findOrFail($id);
+        $data = Counter::findOrFail($id);
         return view('counter.counterprofile',compact('data'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\CounterModel  $counterModel
+     * @param  \App\Counter  $Counter
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $data = CounterModel::find($id);
+        $data = Counter::find($id);
         return response()->json($data);
     }
 
@@ -104,10 +104,10 @@ class CounterController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\CounterModel  $counterModel
+     * @param  \App\Counter  $Counter
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CounterModel $counterModel)
+    public function update(Request $request, Counter $Counter)
     {
         //
     }
@@ -115,12 +115,12 @@ class CounterController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\CounterModel  $counterModel
+     * @param  \App\Counter  $Counter
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $data = CounterModel::findOrFail($id);
+        $data = Counter::findOrFail($id);
         $data->delete();
     }
 
@@ -131,6 +131,6 @@ class CounterController extends Controller
         // }
         // return response()->json(['status'=>'Http request']);
         $idarray = $request->input('id');
-        $counter = CounterModel::whereIn('id',$idarray)->delete();
+        $counter = Counter::whereIn('id',$idarray)->delete();
     }
 }

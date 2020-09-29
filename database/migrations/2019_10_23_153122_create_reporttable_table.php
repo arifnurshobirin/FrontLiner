@@ -16,6 +16,7 @@ class CreateReporttableTable extends Migration
         Schema::create('reporttable', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

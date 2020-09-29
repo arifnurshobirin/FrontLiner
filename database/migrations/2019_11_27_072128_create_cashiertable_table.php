@@ -25,6 +25,7 @@ class CreateCashiertableTable extends Migration
             $table->string('Avatar');
             $table->string('Status');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

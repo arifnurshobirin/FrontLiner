@@ -109,7 +109,7 @@
                         <div class="form-line">
                             <select class="custom-select" id="selectnocounter" name="selectnocounter">
                                 @foreach($datacounter as $counter)
-                                <option value="{{$counter->NoCounter}}">{{$counter->NoCounter}}</option>
+                                <option value="{{$counter->id}}">{{$counter->NoCounter}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -224,7 +224,7 @@
                 "defaultContent": ''
                 },
                 { data: 'TIDEDC', name: 'TIDEDC' },
-                { data: 'NoCounter', name: 'NoCounter' },
+                { data: 'nocounter', name: 'nocounter' },
                 { data: 'Connection', name: 'Connection' },
                 { data: 'SIMCard', name: 'SIMCard' },
                 { data: 'TypeEDC', name: 'TypeEDC' },
@@ -279,7 +279,7 @@
                 row.child( format(row.data()) ).show();
                 tr.addClass('shown');
             }
-        });
+        }); 
 
         $(document).on('click', '.editedc', function () {
             var edcid = $(this).attr('id');
@@ -300,10 +300,10 @@
             })
         });
 
-        $(document).on('click', '.edcshow', function () {
-            var id = $(this).attr('id');
-                $('#contentpage').load('edc'+'/'+id);
-        });
+        // $(document).on('click', '.edcshow', function () {
+        //     var id = $(this).attr('id');
+        //         $('#contentpage').load('edc'+'/'+id);
+        // });
 
         $('#savebutton').click(function (e) {
             e.preventDefault();
