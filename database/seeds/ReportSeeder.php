@@ -1,5 +1,6 @@
 <?php
 
+use App\Report;
 use Illuminate\Database\Seeder;
 
 class ReportSeeder extends Seeder
@@ -11,6 +12,6 @@ class ReportSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Report::class, 50)->create();
     }
 }

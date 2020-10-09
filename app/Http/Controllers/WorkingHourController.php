@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\WorkingHourModel;
+use App\Workinghour;
 use DataTables;
 use Illuminate\Http\Request;
 
@@ -15,7 +15,7 @@ class WorkingHourController extends Controller
      */
     public function index()
     {
-        $data = WorkingHourModel::latest()->get();
+        $data = Workinghour::latest()->get();
             return DataTables::of($data)
             ->addColumn('codeshift', '<input type="text" name="code{{$id}}" id="code{{$id}}" class="form-control" value="{{$CodeShift}}" readonly/>')
             ->addColumn('startshift', '<input type="text" name="start{{$id}}" id="start{{$id}}" class="form-control" value="{{$StartShift}}" readonly/>')
@@ -60,10 +60,10 @@ class WorkingHourController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\WorkingHourModel  $workingHourModel
+     * @param  \App\Workinghour  $Workinghour
      * @return \Illuminate\Http\Response
      */
-    public function show(WorkingHourModel $workingHourModel)
+    public function show(Workinghour $Workinghour)
     {
         //
     }
@@ -71,10 +71,10 @@ class WorkingHourController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\WorkingHourModel  $workingHourModel
+     * @param  \App\Workinghour  $Workinghour
      * @return \Illuminate\Http\Response
      */
-    public function edit(WorkingHourModel $workingHourModel)
+    public function edit(Workinghour $Workinghour)
     {
         //
     }
@@ -83,10 +83,10 @@ class WorkingHourController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\WorkingHourModel  $workingHourModel
+     * @param  \App\Workinghour  $Workinghour
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, WorkingHourModel $workingHourModel)
+    public function update(Request $request, Workinghour $Workinghour)
     {
         //
     }
@@ -94,10 +94,10 @@ class WorkingHourController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\WorkingHourModel  $workingHourModel
+     * @param  \App\Workinghour  $Workinghour
      * @return \Illuminate\Http\Response
      */
-    public function destroy(WorkingHourModel $workingHourModel)
+    public function destroy(Workinghour $Workinghour)
     {
         //
     }

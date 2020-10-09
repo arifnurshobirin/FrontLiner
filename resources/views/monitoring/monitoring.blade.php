@@ -13,10 +13,23 @@
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <h1 class="urlpage">Monitoring Page</h1>
             </div>
-            <div class="col-sm-6">
+            <!-- SEARCH FORM -->
+            <div class="col-sm-4">
+                <form action="admin">
+                    <div class="input-group">
+                        <input type="search" class="form-control" placeholder="Search">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn  btn-default">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-4">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
                     <li class="breadcrumb-item active urlpage">Monitoring Page</li>
@@ -72,19 +85,19 @@
                         @if($listcounter->Status == 'Queueing')
                     <div class="col-lg-2 col-6 filtr-item" data-category="1" data-sort="{{$listcounter->NoCounter}}">
                         <!-- small card -->
-                        <div id="changecolor" class="small-box bg-danger">
+                        <div id="changecolor" class="small-box bg-gradient-danger">
                         @elseif($listcounter->Status == 'Active')
                     <div class="col-lg-2 col-6 filtr-item" data-category="2" data-sort="{{$listcounter->NoCounter}}">
                         <!-- small card -->
-                        <div id="changecolor{{$listcounter->Connection}}" class="small-box bg-success">
+                        <div id="changecolor{{$listcounter->Connection}}" class="small-box bg-gradient-success">
                         @elseif($listcounter->Status == 'Inactive')
                     <div class="col-lg-2 col-6 filtr-item" data-category="3" data-sort="{{$listcounter->NoCounter}}">
                         <!-- small card -->
-                        <div id="changecolor" class="small-box bg-warning">
+                        <div id="changecolor" class="small-box bg-gradient-warning">
                         @elseif($listcounter->Status == 'Broken')
                     <div class="col-lg-2 col-6 filtr-item" data-category="4" data-sort="{{$listcounter->NoCounter}}">
                         <!-- small card -->
-                        <div id="changecolor" class="small-box bg-secondary">
+                        <div id="changecolor" class="small-box bg-gradient-secondary">
                         @endif
 
                             <div class="inner">

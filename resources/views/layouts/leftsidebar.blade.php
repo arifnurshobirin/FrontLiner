@@ -1,5 +1,5 @@
 <!-- Main Sidebar Container -->
-<aside class="main-sidebar sidebar-dark-danger elevation-4">
+<aside class="main-sidebar main-sidebar-custom sidebar-dark-danger elevation-4">
       <!-- Brand Logo -->
       <a href="{{ url('admin') }}" class="brand-link navbar-danger">
         <img src="{{ asset('img/TPLogo2.png') }}" alt="TP Logo" class="brand-image img-circle elevation-3"
@@ -15,10 +15,22 @@
             <img src="{{ asset('img/userarif160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
           </div>
           <div class="info">
-            <a href="#" class="d-block">{{ Auth::user()->name }} online</a>
+            <a href="#" class="d-block">{{ Auth::user()->fullname }} online</a>
             <!-- <i class="fas fa-asymmetrik"></i> -->
           </div>
         </div>
+
+        <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -84,7 +96,7 @@
               </ul>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="{{ route('reminder') }}" id="contentreminder" class="nav-link">
+                  <a href="{{ route('error') }}" id="contentreminder" class="nav-link">
                     <i class="nav-icon fas fa-stopwatch"></i>
                     <p>Reminder</p>
                   </a>
@@ -99,8 +111,8 @@
                 </li>
               </ul>
             </li>
-            <li class="nav-item has-treeview{{ (request()->is('admin/counter','admin/pos','admin/edc')) ? ' menu-open' : '' }}">
-              <a href="#" id="contentterminal" class="nav-link{{ (request()->is('admin/counter','admin/pos','admin/edc')) ? ' active' : '' }}">
+            <li class="nav-item has-treeview{{ (request()->is('admin/counter','admin/computer','admin/edc')) ? ' menu-open' : '' }}">
+              <a href="#" id="contentterminal" class="nav-link{{ (request()->is('admin/counter','admin/computer','admin/edc')) ? ' active' : '' }}">
                 <i class="nav-icon fas fa-cash-register"></i>
                 <p>
                   Terminal
@@ -116,9 +128,9 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="{{ route('pos.index') }}" id="contentpos" class="nav-link{{ (request()->is('admin/pos')) ? ' active' : '' }}">
+                  <a href="{{ route('computer.index') }}" id="contentcomputer" class="nav-link{{ (request()->is('admin/computer')) ? ' active' : '' }}">
                     <i class="nav-icon fas fa-hdd"></i>
-                    <p>POS</p>
+                    <p>Computer</p>
                   </a>
                 </li>
                 <li class="nav-item">
@@ -424,4 +436,10 @@
         <!-- /.sidebar-menu -->
       </div>
       <!-- /.sidebar -->
+
+      <div class="sidebar-custom">
+        <a href="#" class="btn btn-link"><i class="fas fa-cogs"></i></a>
+        <a href="#" class="btn btn-secondary hide-on-collapse pos-right">Help</a>
+      </div>
+      <!-- /.sidebar-custom -->
     </aside>

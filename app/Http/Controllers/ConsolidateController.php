@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
-use App\{ConsolidateModel, CashierModel, CounterModel};
+use App\{Consolidate, Cashier, Counter};
 use DataTables;
 
 class ConsolidateController extends Controller
@@ -27,8 +27,8 @@ class ConsolidateController extends Controller
 
     public function deposit()
     {
-        $datacashier = CashierModel::latest()->orderBy('Employee','asc')->get();
-        $datacounter = CounterModel::latest()->orderBy('NoCounter','asc')->get();
+        $datacashier = Cashier::latest()->orderBy('Employee','asc')->get();
+        $datacounter = Counter::latest()->orderBy('NoCounter','asc')->get();
         $timenow = now()->locale('id_ID')->format('H:i');
         $id = IdGenerator::generate(['table' => 'consolidatetable', 'field'=>'NoDeposit', 'length' => 6, 'prefix' =>date('ym')]);
         return view('daily.deposit',compact('datacashier','datacounter','timenow','id'));
@@ -36,8 +36,8 @@ class ConsolidateController extends Controller
 
     public function banana()
     {
-        $datacashier = CashierModel::latest()->orderBy('Employee','asc')->get();
-        $datacounter = CounterModel::latest()->orderBy('NoCounter','asc')->get();
+        $datacashier = Cashier::latest()->orderBy('Employee','asc')->get();
+        $datacounter = Counter::latest()->orderBy('NoCounter','asc')->get();
         $timenow = now()->locale('id_ID')->format('H:i');
         $id = IdGenerator::generate(['table' => 'consolidatetable', 'field'=>'NoDeposit', 'length' => 6, 'prefix' =>date('ym')]);
         return view('daily.deposit',compact('datacashier','datacounter','timenow','id'));
@@ -45,7 +45,7 @@ class ConsolidateController extends Controller
 
     public function datatable(Request $request)
     {
-        $data = ConsolidateModel::latest()->get();
+        $data = Consolidate::latest()->get();
         return DataTables::of($data)
         ->addColumn('action','<div class="btn-group">
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
@@ -113,7 +113,7 @@ class ConsolidateController extends Controller
             'Amount' => $request->inputtotal
 
         );
-        ConsolidateModel::updateOrCreate(['id'=>$request->iddeposit],$form_data);
+        Consolidate::updateOrCreate(['id'=>$request->iddeposit],$form_data);
         // dd("hai");
         Alert::success('Success Title', 'Success Message');
         return redirect('admin/deposit');
@@ -122,10 +122,10 @@ class ConsolidateController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ConsolidateModel  $consolidateModel
+     * @param  \App\Consolidate  $consolidate
      * @return \Illuminate\Http\Response
      */
-    public function show(ConsolidateModel $consolidateModel)
+    public function show(Consolidate $consolidate)
     {
         //
     }
@@ -133,12 +133,12 @@ class ConsolidateController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ConsolidateModel  $consolidateModel
+     * @param  \App\Consolidate  $consolidate
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $data = ConsolidateModel::find($id);
+        $data = Consolidate::find($id);
         return response()->json($data);
     }
 
@@ -146,10 +146,10 @@ class ConsolidateController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ConsolidateModel  $consolidateModel
+     * @param  \App\Consolidate  $consolidate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ConsolidateModel $consolidateModel)
+    public function update(Request $request, Consolidate $consolidate)
     {
         //
     }
@@ -157,10 +157,10 @@ class ConsolidateController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ConsolidateModel  $consolidateModel
+     * @param  \App\Consolidate  $consolidate
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ConsolidateModel $consolidateModel)
+    public function destroy(Consolidate $consolidate)
     {
         
         

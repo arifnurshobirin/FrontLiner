@@ -25,6 +25,7 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::get('mailbox', 'HomeController@mailbox')->name('mailbox');
     Route::get('compose', 'HomeController@compose')->name('compose');
     Route::get('readmail', 'HomeController@readmail')->name('readmail');
+    Route::get('error', 'HomeController@error')->name('error');
 
 
     Route::get('cashierdatatable', 'CashierController@datatable')->name('cashier.datatable');
@@ -36,13 +37,15 @@ Route::prefix('admin')->middleware('auth')->group(function(){
     Route::resource('management', 'ManagementController');
     Route::get('managementmoredelete', 'ManagementController@moredelete')->name('management.moredelete');
 
-    Route::get('edcdatatable', 'EDCController@datatable')->name('edc.datatable');
+    Route::get('edc/yajra', 'EDCController@yajra')->name('edc.yajra');
     Route::resource('edc', 'EDCController');
+    Route::get('edcdatatable', 'EDCController@datatable')->name('edc.datatable');
+    
     Route::get('edcmoredelete', 'EDCController@moredelete')->name('edc.moredelete');
 
-    Route::get('posdatatable', 'POSController@datatable')->name('pos.datatable');
-    Route::resource('pos', 'POSController');
-    Route::get('posmoredelete', 'POSController@moredelete')->name('pos.moredelete');
+    Route::get('computerdatatable', 'ComputerController@datatable')->name('computer.datatable');
+    Route::resource('computer', 'ComputerController');
+    Route::get('computermoredelete', 'ComputerController@moredelete')->name('computer.moredelete');
 
     Route::get('counterdatatable', 'CounterController@datatable')->name('counter.datatable');
     Route::resource('counter', 'CounterController');

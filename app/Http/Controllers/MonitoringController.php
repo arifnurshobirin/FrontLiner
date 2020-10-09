@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\{Counter, MonitoringModel, Edc};
+use App\{Counter, Edc};
 use DB;
 use Illuminate\Http\Request;
 
@@ -20,7 +20,7 @@ class MonitoringController extends Controller
         //             'edctable.id as idEDC','edctable.TIDEDC', 'edctable.MIDEDC','edctable.TypeEDC', 'edctable.SIMCard', 'edctable.Status as StatusEDC')
         //     ->leftJoin('edctable', 'countertable.NoCounter', '=', 'edctable.NoCounter')->orderBy('countertable.NoCounter','asc')
         //     ->get();
-            $datacounter = Counter::latest()->orderBy('NoCounter','asc')->get();
+            $datacounter = Counter::orderBy('NoCounter','asc')->get();
     
         return view('monitoring.monitoring',compact('datacounter'));
     }
@@ -49,7 +49,7 @@ class MonitoringController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\MonitoringModel  $monitoringModel
+     * @param  \App\Counter  $Counter
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -63,10 +63,10 @@ class MonitoringController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\MonitoringModel  $monitoringModel
+     * @param  \App\Counter  $Counter
      * @return \Illuminate\Http\Response
      */
-    public function edit(MonitoringModel $monitoringModel)
+    public function edit(Counter $Counter)
     {
         //
     }
@@ -75,10 +75,10 @@ class MonitoringController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\MonitoringModel  $monitoringModel
+     * @param  \App\Counter  $Counter
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MonitoringModel $monitoringModel)
+    public function update(Request $request, Counter $Counter)
     {
         //
     }
@@ -86,10 +86,10 @@ class MonitoringController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\MonitoringModel  $monitoringModel
+     * @param  \App\Counter  $Counter
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MonitoringModel $monitoringModel)
+    public function destroy(Counter $Counter)
     {
         //
     }

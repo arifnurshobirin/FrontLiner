@@ -4,25 +4,32 @@ namespace App\Http\Controllers;
 
 use App\{Edc, Counter};
 use DataTables;
+use App\DataTables\EdcsDataTable;
 use Illuminate\Http\Request;
 use Validator;
 Use Alert;
 
-class EDCController extends Controller
+class EdcController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
+    public function yajra(EdcsDataTable $dataTable)
+    {
+        return $dataTable->render('edc.index');
+    }
+
 
 
     public function datatable(Request $request)
     {
-        $dataedc = Edc::latest()->get();
+        $dataedc = Edc::with('counter')->latest()->get();
         //$caricounter=array_column($dataedc, 'id');
+        //$carinocounter =  $dataedc->id_counter->counter();
         //dd($dataedc);
-        //$carinocounter =  Counter::find($dataedc->id)->edcs;
+        //return $dataedc;
         return DataTables::of($dataedc)
         ->addColumn('action','<div class="btn-group">
             <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
@@ -31,15 +38,18 @@ class EDCController extends Controller
             <a href="#" class="editedc dropdown-item" id="{{$id}}"><i class="fas fa-edit"></i> Edit</a>
             <a href="#" class="deleteedc dropdown-item" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
             </div></div>')
-        ->addColumn('checkbox', '<input type="checkbox" name="edccheckbox[]" class="edccheckbox" value="{{$counter_id}}" />')
-        ->addColumn('nocounter', '<input type="checkbox" name="edccheckbox[]" class="edccheckbox" value="{{$counter_id}}" />')
-        ->rawColumns(['action','checkbox','nocounter'])
+        ->addColumn('checkbox', '<input type="checkbox" name="edccheckbox[]" class="edccheckbox" value="{{$id}}" />')
+        //->addColumn('nocounter', '<input type="checkbox" name="edccheckbox[]" class="edccheckbox" value="{{$counter->NoCounter}}" />')
+        ->rawColumns(['action','checkbox'])
         ->make(true);
 
     }
     public function index(Request $request)
     {
         $datacounter = Counter::latest()->orderBy('NoCounter','asc')->get();
+
+        //$dataedc = Edc::with('counter')->latest()->get();
+        //return $dataedc->NoCounter;
         return view('edc.edcdatatable',compact('datacounter'));
     }
     /**
@@ -66,7 +76,7 @@ class EDCController extends Controller
             'TIDEDC' => $request->tidedc,
             'MIDEDC' => $request->midedc,
             'IPAdress' => $request->ipedc,
-            'NoCounter' => $request->selectnocounter,
+            'counter_id' => $request->selectnocounter,
             'Connection' => $request->connection,
             'SIMCard' => $request->simcard,
             'TypeEDC' => $request->typeedc,

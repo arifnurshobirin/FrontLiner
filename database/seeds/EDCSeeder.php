@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Edc;
 
-class EDCSeeder extends Seeder
+class EdcSeeder extends Seeder
 {
     /**
      * Run the database seeds.

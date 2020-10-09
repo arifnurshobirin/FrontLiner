@@ -19,6 +19,8 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <!-- Font Awesome -->
         <link href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+        <!-- overlayScrollbars -->
+        <link href="{{ asset('plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}" rel="stylesheet">
         <!-- Ionicons -->
         <link href="{{ asset('plugins/ionicons-2.0.1/css/ionicons.min.css') }}" rel="stylesheet">
         <!-- Sweetalert Css -->
@@ -29,6 +31,7 @@
         <link href="{{ asset('plugins/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}" rel="stylesheet">
         <link href="{{ asset('plugins/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}" rel="stylesheet">
         <link href="{{ asset('plugins/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') }}" rel="stylesheet">
+
         @yield('css')
         <style type="text/css">
         .preloader {
@@ -49,7 +52,7 @@
         }
         </style>
     </head>
-    <body class="hold-transition sidebar-mini">
+    <body class="hold-transition sidebar-mini layout-fixed">
         <!-- Page Loader -->
         <div class="preloader">
             <div class="loading">
@@ -78,19 +81,6 @@
                         <a href="{{ route('contact') }}" id="contentcontact" class="nav-link">Contact</a>
                     </li>
                 </ul>
-
-                <!-- SEARCH FORM -->
-                <form class="form-inline ml-3">
-                    <div class="input-group input-group-sm">
-                        <input class="form-control form-control-navbar" type="search" placeholder="Search"
-                            aria-label="Search">
-                        <div class="input-group-append">
-                            <button class="btn btn-navbar" type="submit">
-                                <i class="fas fa-search"></i>
-                            </button>
-                        </div>
-                    </div>
-                </form>
 
                 <!-- Right navbar links -->
                 <ul class="navbar-nav ml-auto">
@@ -187,7 +177,7 @@
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                             <img src="{{ asset('img/userarif160x160.jpg') }}" class="user-image img-circle elevation-2"
                                 alt="User Image">
-                            <!-- <span class="d-none d-md-inline">{{ Auth::user()->name }}</span> -->
+                            <!-- <span class="d-none d-md-inline">{{ Auth::user()->fullname }}</span> -->
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                             <!-- User image -->
@@ -195,7 +185,7 @@
                                 <img src="{{ asset('img/userarif160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
 
                                 <p>
-                                    {{ Auth::user()->name }} - Web Developer
+                                    {{ Auth::user()->fullname }} - Web Developer
                                     <small>Member since Jan. 2012</small>
                                 </p>
                             </li>
@@ -227,11 +217,16 @@
                             </li>
                         </ul>
                     </li>
-                    {{-- <li class="nav-item">
+                    <li class="nav-item">
+                        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                          <i class="fas fa-expand-arrows-alt"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
                             <i class="fas fa-th-large"></i>
                         </a>
-                    </li> --}}
+                    </li>
                 </ul>
             </nav>
             <!-- /.navbar -->
@@ -284,7 +279,8 @@
         <script src="{{ asset('plugins/jszip/jszip.min.js') }}"></script>
         <!-- jQuery UI -->
         <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-        <!-- AdminLTE App -->
+        <!-- overlayScrollbars -->
+        <script src="{{ asset('plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
         <script src="{{ asset('js/adminlte.min.js') }}"></script>
         <!-- AdminLTE for demo purposes -->
         <script src="{{ asset('js/demo.js') }}"></script>
@@ -295,8 +291,11 @@
         <!-- Moment -->
         <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
         <!-- InputMask -->
-        <script src="{{ asset('plugins/inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>    
+        <script src="{{ asset('plugins/inputmask/min/jquery.inputmask.bundle.min.js') }}"></script>
+        
+        {{-- <script src="{{ mix('js/app.js') }}"></script> --}}
         @yield('javascript')
+        @stack('scripts')
     </body>
 </html>
 

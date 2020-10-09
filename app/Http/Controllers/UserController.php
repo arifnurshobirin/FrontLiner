@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\UserModel;
+use App\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -45,10 +45,10 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\UserModel  $userModel
+     * @param  \App\User  $User
      * @return \Illuminate\Http\Response
      */
-    public function show(UserModel $userModel)
+    public function show(User $User)
     {
         //
     }
@@ -56,10 +56,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\UserModel  $userModel
+     * @param  \App\User  $User
      * @return \Illuminate\Http\Response
      */
-    public function edit(UserModel $userModel)
+    public function edit(User $User)
     {
         //
     }
@@ -68,10 +68,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\UserModel  $userModel
+     * @param  \App\User  $User
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, UserModel $userModel)
+    public function update(Request $request, User $User)
     {
         //
     }
@@ -79,10 +79,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\UserModel  $userModel
+     * @param  \App\User  $User
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UserModel $userModel)
+    public function destroy(User $User)
     {
         //
     }

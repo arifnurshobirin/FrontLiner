@@ -1,9 +1,9 @@
 <?php
 
+use App\Workinghour;
 use Illuminate\Database\Seeder;
-use App\WorkingHourModel;
 
-class WorkingHourSeeder extends Seeder
+class WorkinghourSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,6 +12,6 @@ class WorkingHourSeeder extends Seeder
      */
     public function run()
     {
-        factory(WorkingHourModel::class, 50)->create();
+        factory(Workinghour::class, 50)->create();
     }
 }

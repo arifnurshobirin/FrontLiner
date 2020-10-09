@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\CashierModel;
+use App\Cashier;
 use DataTables;
 use Illuminate\Http\Request;
 use Validator;
@@ -18,7 +18,7 @@ class CashierController extends Controller
      */
     public function datatable()
     {
-        $data = CashierModel::latest()->get();
+        $data = Cashier::latest()->get();
             return DataTables::of($data)
             ->addColumn('action',
                 '<div class="btn-group">
@@ -86,7 +86,7 @@ class CashierController extends Controller
             'Avatar' => $imagename
         );
 
-        CashierModel::updateOrCreate(['id'=>$request->cashierid],$form_data);
+        Cashier::updateOrCreate(['id'=>$request->cashierid],$form_data);
 
         return response()->json(['success' => 'Data Added successfully.']);
     }
@@ -94,24 +94,24 @@ class CashierController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\CashierModel  $cashierModel
+     * @param  \App\Cashier  $Cashier
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $data = CashierModel::findOrFail($id);
+        $data = Cashier::findOrFail($id);
         return view('cashier.cashierprofile',compact('data'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\CashierModel  $cashierModel
+     * @param  \App\Cashier  $Cashier
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $data = CashierModel::find($id);
+        $data = Cashier::find($id);
         return response()->json($data);
     }
 
@@ -119,10 +119,10 @@ class CashierController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\CashierModel  $cashierModel
+     * @param  \App\Cashier  $Cashier
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, CashierModel $cashierModel)
+    public function update(Request $request, Cashier $Cashier)
     {
         //
     }
@@ -130,17 +130,17 @@ class CashierController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\CashierModel  $cashierModel
+     * @param  \App\Cashier  $Cashier
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $data = CashierModel::findOrFail($id);
+        $data = Cashier::findOrFail($id);
         $data->delete();
     }
     public function moredelete(Request $request)
     {   
         $idarray = $request->input('id');
-        $pos = CashierModel::whereIn('id',$idarray)->delete();
+        $pos = Cashier::whereIn('id',$idarray)->delete();
     }
 }

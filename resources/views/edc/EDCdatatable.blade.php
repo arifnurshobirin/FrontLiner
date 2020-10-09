@@ -3,7 +3,7 @@
 @section('title page','EDC Page')
 
 @section('css')
-<!-- Page CSS -->
+<!-- Page CSS --> 
 @endsection
 
 @section('content')
@@ -11,10 +11,23 @@
 <section class="content-header">
     <div class="container-fluid">
         <div class="row mb-2">
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <h1 class="urlpage">EDC Page</h1>
             </div>
-            <div class="col-sm-6">
+            <!-- SEARCH FORM -->
+            <div class="col-sm-4">
+                <form action="admin">
+                    <div class="input-group">
+                        <input type="search" class="form-control" placeholder="Search">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn  btn-default">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm-4">
                 <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
                     <li class="breadcrumb-item active urlpage">EDC Page</li>
@@ -73,11 +86,12 @@
                     </table>
                 </div>
 <!-- Create Table -->
-<div class="modal fade" id="ajaxModel" aria-hidden="true">
+<div class="modal fade" id="ajaxModel" data-backdrop="static"  aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <h4 class="modal-title" id="modelHeading"></h4>
+                <button type="button" class="btn btn-danger" id="resetmodal" data-dismiss="modal"><i class='fas fa-times'></i> Close</button>
             </div>
             <div class="modal-body">
                 <form method="post" id="edcForm" name="edcForm">
@@ -179,6 +193,9 @@
 
 @section('javascript')
 <!-- page script -->
+@endsection
+
+@push('scripts')
 <script>
     $(".preloader").fadeOut("slow");
 
@@ -212,7 +229,6 @@
             ajax: {
             url:"{{ route('edc.datatable') }}",
             },
-            "order": [[ 2, "asc" ]],
             responsive: true,
             columns: [
                 { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
@@ -224,12 +240,13 @@
                 "defaultContent": ''
                 },
                 { data: 'TIDEDC', name: 'TIDEDC' },
-                { data: 'nocounter', name: 'nocounter' },
+                { data: 'counter.NoCounter', name: 'counter.NoCounter' },
                 { data: 'Connection', name: 'Connection' },
                 { data: 'SIMCard', name: 'SIMCard' },
                 { data: 'TypeEDC', name: 'TypeEDC' },
                 { data: 'action', name: 'action', orderable: false,searchable: false}
             ],
+            order: [[ 2, "asc" ]],
             dom: 'Bfrtip',
         lengthMenu: [
             [ 10, 25, 50, -1 ],
@@ -394,4 +411,4 @@
     });
 
 </script>
-@endsection
+@endpush

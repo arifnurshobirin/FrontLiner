@@ -16,10 +16,10 @@
                 <form method="POST" action="{{ route('register') }}">
                     @csrf
                     <div class="input-group mb-3">
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                            name="name" placeholder="Full name" value="{{ old('name') }}" required autocomplete="name"
+                        <input id="fullname" type="text" class="form-control @error('fullname') is-invalid @enderror"
+                            name="fullname" placeholder="Full name" value="{{ old('fullname') }}" required autocomplete="fullname"
                             autofocus>
-                        @error('name')
+                        @error('fullname')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

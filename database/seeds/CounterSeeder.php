@@ -12,6 +12,6 @@ class CounterSeeder extends Seeder
      */
     public function run()
     {
-        factory(Counter::class, 50)->create();
+        factory(Counter::class, 99)->create();
     }
 }

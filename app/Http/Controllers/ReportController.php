@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\ReportModel;
+use App\Report;
 use Illuminate\Http\Request;
 Use Alert;
 
@@ -85,10 +85,10 @@ class ReportController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ReportModel  $reportModel
+     * @param  \App\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function show(ReportModel $reportModel)
+    public function show(Report $report)
     {
         //
     }
@@ -96,10 +96,10 @@ class ReportController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ReportModel  $reportModel
+     * @param  \App\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function edit(ReportModel $reportModel)
+    public function edit(Report $report)
     {
         //
     }
@@ -108,10 +108,10 @@ class ReportController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ReportModel  $reportModel
+     * @param  \App\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ReportModel $reportModel)
+    public function update(Request $request, Report $report)
     {
         //
     }
@@ -119,10 +119,10 @@ class ReportController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ReportModel  $reportModel
+     * @param  \App\Report  $report
      * @return \Illuminate\Http\Response
      */
-    public function destroy(ReportModel $reportModel)
+    public function destroy(Report $report)
     {
         //
     }

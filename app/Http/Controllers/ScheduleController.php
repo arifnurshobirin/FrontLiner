@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\ScheduleModel;
-use App\CashierModel;
-use App\WorkingHourModel;
+use App\Schedule;
+use App\Cashier;
+use App\Workinghour;
 use DataTables;
 use Alert;
 use Carbon\Carbon;
@@ -25,7 +25,7 @@ class ScheduleController extends Controller
                     'workinghourtable.id as idWH','workinghourtable.StartShift', 'workinghourtable.EndShift','workinghourtable.WorkingHour')
             ->leftJoin('workinghourtable', 'scheduletable.CodeShift', '=', 'workinghourtable.CodeShift')->orderBy('scheduletable.Employee','asc')
             ->get();
-            //$data = ScheduleModel::latest()->get();
+            //$data = Schedule::latest()->get();
         return DataTables::of($data)
             ->addColumn('attendance',
                 '<button type="button" class="btn btn-primary"><i class="fas fa-wrench"></i> Masuk</button>')
@@ -57,16 +57,16 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-         // $dataschedule = ScheduleModel::latest()->get();
-         // $datacashier = CashierModel::latest()->get();
-        $dataworkinghour = WorkingHourModel::all();
+         // $dataschedule = Schedule::latest()->get();
+         // $datacashier = Cashier::latest()->get();
+        $dataworkinghour = WorkingHour::all();
         return view('schedule.schedulecreate',compact('dataworkinghour'));
     }
 
     public function datatablecreate()
     {
-            // $dataworkinghour = WorkingHourModel::all();
-            $data = CashierModel::where('Status','Active')->get();
+            // $dataworkinghour = WorkingHour::all();
+            $data = Cashier::where('Status','Active')->get();
             return DataTables::of($data)
             ->addColumn('cashier', '{{$Employee}} {{$FullName}}')
             ->addColumn('monday', '<input type="text" name="monshift{{$id}}" id="monshift{{$id}}" class="form-control input-uppercase" oninput="shifthour({{$id}})"/>')
@@ -134,7 +134,7 @@ class ScheduleController extends Controller
         //     'CodeShift' => $codeshift
         // );
 
-        // ScheduleModel::updateOrCreate($form_data);
+        // Schedule::updateOrCreate($form_data);
 
         // return response()->json(['success' => 'Data Added successfully.']);
     }
@@ -142,24 +142,24 @@ class ScheduleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\ScheduleModel  $scheduleModel
+     * @param  \App\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        $data = ScheduleModel::findOrFail($id);
+        $data = Schedule::findOrFail($id);
         return view('schedule.scheduleprofile',compact('data'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\ScheduleModel  $scheduleModel
+     * @param  \App\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-        $data = ScheduleModel::find($id);
+        $data = Schedule::find($id);
         return response()->json($data);
     }
 
@@ -167,10 +167,10 @@ class ScheduleController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\ScheduleModel  $scheduleModel
+     * @param  \App\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, ScheduleModel $scheduleModel)
+    public function update(Request $request, Schedule $schedule)
     {
         //
     }
@@ -178,22 +178,22 @@ class ScheduleController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\ScheduleModel  $scheduleModel
+     * @param  \App\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
-        $data = ScheduleModel::findOrFail($id);
+        $data = Schedule::findOrFail($id);
         $data->delete();
     }
     public function destroydatatable($id)
     {
-        $data = ScheduleModel::findOrFail($id);
+        $data = Schedule::findOrFail($id);
         $data->delete();
     }
     public function day($monday)
     {
-        $data = ScheduleModel::findOrFail($id);
+        $data = Schedule::findOrFail($id);
         $data->delete();
     }
 }

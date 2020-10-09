@@ -14,4 +14,14 @@ class Counter extends Model
     {
         return $this->hasMany(Edc::class);
     }
+
+    public function computer()
+    {
+        return $this->hasOne(Computer::class);
+    }
+
+    public function activities()
+    {
+        return $this->belongsToMany(Activity::class);
+    }
 }

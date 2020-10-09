@@ -75,4 +75,9 @@ class HomeController extends Controller
     {
         return view('mailbox.readmail');
     }
+
+    public function error()
+    {
+        return view('errors.404lte');
+    }
 }

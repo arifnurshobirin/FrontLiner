@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\CashierModel;
+use App\Cashier;
 
 class CashierSeeder extends Seeder
 {
@@ -12,6 +12,6 @@ class CashierSeeder extends Seeder
      */
     public function run()
     {
-        factory(CashierModel::class, 50)->create();
+        factory(Cashier::class, 50)->create();
     }
 }

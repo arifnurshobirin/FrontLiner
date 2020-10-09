@@ -20,6 +20,7 @@ class CreateCountersTable extends Migration
             $table->macAddress('MacAddress');
             $table->string('TypeCounter');
             $table->string('Status');
+            $table->string('Author')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->unique(['NoCounter', 'IpAddress','MacAddress']);
