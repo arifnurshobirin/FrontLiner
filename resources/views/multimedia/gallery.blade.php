@@ -1,6 +1,7 @@
-@extends('layouts.app') 
-@section('title tab','Gallery Page')
+@extends('layouts.app')
 @section('title page','Gallery Page')
+@section('title tab','Gallery')
+
 
 @section('css')
 <!-- Ekko Lightbox -->
@@ -9,23 +10,6 @@
 @endsection
 
 @section('content')
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="urlpage">Gallery Page</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
-                    <li class="breadcrumb-item active urlpage">Gallery Page</li>
-                </ol>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
-
 <!-- Main content -->
 <section class="content" id="contentpage">
     <div class="row">

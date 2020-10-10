@@ -1,6 +1,7 @@
-@extends('layouts.app') 
-@section('title tab','Mail Box Page')
+@extends('layouts.app')
 @section('title page','Mail Box Page')
+@section('title tab','Mail Box')
+
 
 @section('css')
 <!-- icheck bootstrap -->
@@ -9,22 +10,6 @@
 @endsection
 
 @section('content')
-<!-- Content Header (Page header) -->
-<section class="content-header">
-    <div class="container-fluid">
-        <div class="row mb-2">
-            <div class="col-sm-6">
-                <h1 class="urlpage">Mail Box Page</h1>
-            </div>
-            <div class="col-sm-6">
-                <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ url('admin') }}">Home</a></li>
-                    <li class="breadcrumb-item active urlpage">Mail Box Page</li>
-                </ol>
-            </div>
-        </div>
-    </div><!-- /.container-fluid -->
-</section>
 <!-- Main content -->
 <section class="content">
     <div class="row">
