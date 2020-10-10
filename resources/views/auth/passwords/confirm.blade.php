@@ -4,11 +4,10 @@
 
 <body class="hold-transition login-page">
 <div class="login-box">
-  <div class="login-logo">
-    <a href="javascript:void(0);"><b>Admin</b>FR</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
+  <div class="card card-outline card-danger">
+    <div class="card-header text-center">
+      <a href="../../index2.html" class="h1"><b>FrLi</b>ANS</a>
+    </div>
     <div class="card-body login-card-body">
       <p class="login-box-msg">You are only one step a way from your new password, recover your password now.</p>
 

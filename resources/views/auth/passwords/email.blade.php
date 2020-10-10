@@ -4,11 +4,10 @@
 
 <body class="hold-transition login-page">
 <div class="login-box">
-  <div class="login-logo">
-    <a href="javascript:void(0);"><b>Admin</b>FR</a>
-  </div>
-  <!-- /.login-logo -->
-  <div class="card">
+  <div class="card card-outline card-danger">
+    <div class="card-header text-center">
+      <a href="javascript:void(0);" class="h1"><b>FrLi</b>ANS</a>
+    </div>
     <div class="card-body login-card-body">
       <p class="login-box-msg">You forgot your password? Here you can easily retrieve a new password.</p>
       @if (session('status'))
