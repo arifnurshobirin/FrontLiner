@@ -16,7 +16,7 @@
   <!-- Ionicons -->
   <link href="{{ asset('plugins/ionicons-2.0.1/css/ionicons.min.css') }}" rel="stylesheet">
   <!-- Sweetalert Css -->
-  {{-- <link href="{{ asset('plugins/sweetalert2/sweetalert2.css') }}" rel="stylesheet"> --}}
+  <link href="{{ asset('plugins/sweetalert2/sweetalert2.css') }}" rel="stylesheet">
   <!-- Tempusdominus Bbootstrap 4 -->
   <link href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet">
   <!-- fullCalendar -->
@@ -303,7 +303,7 @@
   <!-- Content Page-->
   <script src="{{ asset('js/content.js') }}"></script>
   <!-- SweetAlert Plugin Js -->
-  {{-- <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script> --}}
+  <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js') }}"></script>
   <!-- Moment -->
   <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
   <!-- Tempusdominus Bootstrap 4 -->

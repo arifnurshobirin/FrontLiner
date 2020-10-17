@@ -236,7 +236,7 @@
 
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper" id="contentpage">
-                @include('sweetalert::alert')
+                {{-- @include('sweetalert::alert') --}}
 
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
