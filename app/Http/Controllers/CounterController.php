@@ -21,7 +21,7 @@ class CounterController extends Controller
             return DataTables::of($data)
             ->addColumn('action',
             '<div class="btn-group">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> </button>
             <div class="dropdown-menu dropdown-menu-right" role="menu">
             <a href="#" class="countershow dropdown-item" id="{{$id}}"><i class="fas fa-desktop"></i> Show</a>
             <a href="#" class="counteredit dropdown-item" id="{{$id}}"><i class="fas fa-edit"></i> Edit</a>

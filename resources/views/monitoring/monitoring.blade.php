@@ -91,9 +91,9 @@
                             {{-- <button type="button" class="btn btn-block bg-dark" data-toggle="modal" data-target="#edcmodal{{$listcounter->NoCounter}}">
                                 EDC <i class="fas fa-fax"></i>
                             </button> --}}
-                            <button type="button" class="btn btn-block bg-dark edcshow" id="{{$listcounter->id}}" name="{{$listcounter->NoCounter}}">
+                            <a type="button" class="btn btn-block bg-dark edcshow" id="{{$listcounter->id}}" name="{{$listcounter->NoCounter}}">
                                 EDC <i class="fas fa-fax"></i>
-                            </button>
+                            </a>
                         </div>
                         
                     </div>
@@ -150,6 +150,7 @@
         });
 
         $(document).on('click', '.edcshow', function () {
+            $('.edcshow').addClass('disabled');
             var id = $(this).attr('id');
             var nocounter = $(this).attr('name');
             judul = "Detail EDC POS ".concat(nocounter);
@@ -198,6 +199,7 @@
         });
         
         $(document).on('click', '#resetmodal', function () {
+            $('.edcshow').removeClass('disabled');
             $('#createedc').html("");
         });
     });

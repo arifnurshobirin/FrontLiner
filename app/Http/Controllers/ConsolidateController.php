@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use RealRashid\SweetAlert\Facades\Alert;
 use Haruncpi\LaravelIdGenerator\IdGenerator;
-use App\{Consolidate, Cashier, Counter};
+use App\{Consolidate,Cashier,Counter,Banknote,Coin};
 use DataTables;
 
 class ConsolidateController extends Controller
@@ -27,28 +27,29 @@ class ConsolidateController extends Controller
 
     public function deposit()
     {
-        $datacashier = Cashier::latest()->orderBy('Employee','asc')->get();
-        $datacounter = Counter::latest()->orderBy('NoCounter','asc')->get();
+        $datacashier = Cashier::orderBy('Employee','asc')->get();
+        $datacounter = Counter::orderBy('NoCounter','asc')->get();
         $timenow = now()->locale('id_ID')->format('H:i');
-        $id = IdGenerator::generate(['table' => 'consolidatetable', 'field'=>'NoDeposit', 'length' => 6, 'prefix' =>date('ym')]);
+        $id = IdGenerator::generate(['table' => 'consolidates', 'field'=>'NoDeposit', 'length' => 6, 'prefix' =>date('ym')]);
         return view('daily.deposit',compact('datacashier','datacounter','timenow','id'));
     }
 
     public function banana()
     {
-        $datacashier = Cashier::latest()->orderBy('Employee','asc')->get();
-        $datacounter = Counter::latest()->orderBy('NoCounter','asc')->get();
+        $datacashier = Cashier::orderBy('Employee','asc')->get();
+        $datacounter = Counter::orderBy('NoCounter','asc')->get();
         $timenow = now()->locale('id_ID')->format('H:i');
-        $id = IdGenerator::generate(['table' => 'consolidatetable', 'field'=>'NoDeposit', 'length' => 6, 'prefix' =>date('ym')]);
+        $id = IdGenerator::generate(['table' => 'consolidates', 'field'=>'NoDeposit', 'length' => 6, 'prefix' =>date('ym')]);
         return view('daily.deposit',compact('datacashier','datacounter','timenow','id'));
     }
 
-    public function datatable(Request $request)
+    public function datatable()
     {
-        $data = Consolidate::latest()->get();
-        return DataTables::of($data)
+        $dataconsolidate = Consolidate::with('cashier','counter')->latest()->get();
+            
+        return DataTables::of($dataconsolidate)
         ->addColumn('action','<div class="btn-group">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> </button>
             <div class="dropdown-menu dropdown-menu-right" role="menu">
             <a href="#" class="edcshow dropdown-item" id="{{$id}}"><i class="fas fa-desktop"></i> Show</a>
             <a href="#" class="editedc dropdown-item" id="{{$id}}"><i class="fas fa-edit"></i> Edit</a>
@@ -90,30 +91,42 @@ class ConsolidateController extends Controller
             var_dump($number);
         }
         
-        $form_data = array(
+        $banknoteform = array(
+            'id' => $request->inputno,
+            'seratusribu' => $number[0],
+            'limapuluhribu' => $number[1],
+            'duapuluhribu' => $number[2],
+            'sepuluhribu' => $number[3],
+            'limaribu' => $number[4],
+            'duaribu' => $number[5],
+            'seribu' => $number[6],
+        );
+
+        $coinform = array(
+            'id' => $request->inputno,
+            'seribu' => $number[7],
+            'limaratus' => $number[8],
+            'duaratus' => $number[9],
+            'seratus' => $number[10],
+            'limapuluh' => $number[11]
+        );
+
+        $consolidateform = array(
+            'cashier_id' => $request->selectemp,
+            'counter_id' => $request->selectcounter,
+            'banknote_id' => $request->inputno,
+            'coin_id' => $request->inputno,
             'NoDeposit' => $request->inputno,
             'Date' => $datetime->toDateString(),
             'Time' => $datetime->toTimeString(),
-            'Employee' => $request->selectemp,
-            'FullName' => $request->inputname,
             'DepositType' => $request->selecttype,
-            'Counter' => $request->selectcounter,
-            'Banknote100000' => $number[0],
-            'Banknote50000' => $number[1],
-            'Banknote20000' => $number[2],
-            'Banknote10000' => $number[3],
-            'Banknote5000' => $number[4],
-            'Banknote2000' => $number[5],
-            'Banknote1000' => $number[6],
-            'Coin10000' => $number[7],
-            'Coin500' => $number[8],
-            'Coin200' => $number[9],
-            'Coin100' => $number[10],
-            'Coin50' => $number[11],
-            'Amount' => $request->inputtotal
-
+            'Amount' => $request->inputtotalint
         );
-        Consolidate::updateOrCreate(['id'=>$request->iddeposit],$form_data);
+
+
+        Banknote::updateOrCreate(['id'=>$request->iddeposit],$banknoteform);
+        Coin::updateOrCreate(['id'=>$request->iddeposit],$coinform);
+        Consolidate::updateOrCreate(['id'=>$request->iddeposit],$consolidateform);
         // dd("hai");
         Alert::success('Success Title', 'Success Message');
         return redirect('admin/deposit');

@@ -24,4 +24,9 @@ class Counter extends Model
     {
         return $this->belongsToMany(Activity::class);
     }
+
+    public function consolidates()
+    {
+        return $this->hasMany(Consolidate::class);
+    }
 }

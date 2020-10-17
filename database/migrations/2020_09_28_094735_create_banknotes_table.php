@@ -15,13 +15,13 @@ class CreateBanknotesTable extends Migration
     {
         Schema::create('banknotes', function (Blueprint $table) {
             $table->id();
-            $table->integer('seratusribu');
-            $table->integer('limapuluhribu');
-            $table->integer('duapuluhribu');
-            $table->integer('sepuluhribu');
-            $table->integer('limaribu');
-            $table->integer('duaribu');
-            $table->integer('seribu');
+            $table->integer('seratusribu')->nullable();
+            $table->integer('limapuluhribu')->nullable();
+            $table->integer('duapuluhribu')->nullable();
+            $table->integer('sepuluhribu')->nullable();
+            $table->integer('limaribu')->nullable();
+            $table->integer('duaribu')->nullable();
+            $table->integer('seribu')->nullable();
             $table->string('Author')->nullable();
             $table->timestamps();
             $table->softDeletes();

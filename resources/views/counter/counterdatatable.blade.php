@@ -27,11 +27,11 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped table-hover dataTable js-exportable"
-                    id="CounterDatatable">
+                    id="CounterDatatable" style="width:100%">
                     <thead>
                         <tr>
                             <th><button type="button" name="countermoredelete" id="countermoredelete"
-                                    class="btn btn-danger">
+                                    class="btn btn-danger btn-sm">
                                     <i class="fas fa-times"></i><span></span>
                                 </button></th>
                             <th></th>

@@ -4,10 +4,14 @@
 
 
 @section('css')
+<!-- daterange picker -->
+<link href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}" rel="stylesheet">
 <!-- Tempusdominus Bbootstrap 4 -->
 <link href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}" rel="stylesheet">
 <!-- datepicker -->
 <link href="{{ asset('plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css') }}" rel="stylesheet">
+<!-- Select2 -->
+<link href="{{ asset('plugins/select2/css/select2.min.css') }}" rel="stylesheet">
 <!-- Page CSS -->
 @endsection
 
@@ -29,31 +33,76 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+            <!-- Date range -->
+            <form method="post" id="scheduleform" name="scheduleform">
+                @csrf
+                <div class="form-group">
+                    <label>Filter :</label>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <!-- Date range -->
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                    <i class="far fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+                            <input type="text" class="form-control float-right" id="datefilter">
+                            </div>
+                            <!-- /.input group -->
+                        </div>
+                        <div class="col-md-3">
+                            <div class="select2-danger">
+                                <select data-column="4" class="select2 filter-position" multiple="multiple" data-placeholder="Select a Position" style="width: 100%;" 
+                                data-dropdown-css-class="select2-danger" id="selectposition" name="selectposition">
+                                    <option value="Cashier">Cashier</option>
+                                    <option value="Customer Service">Customer Service</option>
+                                    <option value="TDR">TDR</option>
+                                    <option value="Senior Cashier">Senior Cashier</option>
+                                    <option value="Cashier Head">Cashier Head</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="button" name="scheduleapply" id="scheduleapply"
+                                class="btn btn-primary">Apply</button>
+                            <button type="button" name="refresh" id="refresh" class="btn btn-default">Refresh</button>
+                            <button type="submit" name="saveallschedule" id="saveallschedule" class="btn btn-success"
+                                value="create">
+                                Save Schedule
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!-- /.form group -->
             <div class="table-responsive">
                 <table class="table table-bordered table-striped table-hover dataTable js-exportable"
-                    id="ScheduleDatatable">
+                    id="ScheduleDatatable" style="width:100%">
                     <thead>
                         <tr>
                             <th><button type="button" name="schedulemoredelete" id="schedulemoredelete"
-                                    class="btn btn-danger">
+                                    class="btn btn-danger btn-sm">
                                     <i class="fas fa-times"></i><span></span>
                                 </button></th>
-                            <th>Detail</th>
-                            <th>Employee</th>
-                            <th>Full Name</th>
+                            <th></th>
+                            <th>Employee Name</th>
+                            <th>FullName</th>
+                            <th>Position</th>
                             <th>Date Work</th>
-                            <th>Shift</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>Checkbox</th>
-                            <th>Detail</th>
-                            <th>Employee</th>
-                            <th>Full Name</th>
+                            <th></th>
+                            <th></th>
+                            <th>Employee Name</th>
+                            <th>FullName</th>
+                            <th>Position</th>
                             <th>Date Work</th>
-                            <th>Shift</th>
+                            <th>Status</th>
                             <th>Action</th>
                         </tr>
                     </tfoot>
@@ -149,6 +198,10 @@
 @endsection
 
 @section('javascript')
+<!-- Select2 -->
+<script src="{{ asset('plugins/select2/js/select2.full.min.js') }}"></script>
+<!-- date-range-picker -->
+<script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
 <!-- Tempusdominus Bootstrap 4 -->
 <script src="{{ asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
 <!-- datepicker -->
@@ -186,7 +239,6 @@ function format ( d ) {
             ajax: {
             url:"{{ route('schedule.datatable') }}",
             },
-            "order": [[ 2, "asc" ]],
             columns: [
                 { data: 'checkbox', name: 'checkbox', orderable:false, searchable: false},
                 {
@@ -196,12 +248,22 @@ function format ( d ) {
                 "data":           null,
                 "defaultContent": ''
                 },
-                { data: 'Employee', name: 'Employee' },
-                { data: 'FullName', name: 'FullName' },
+                { data: 'cashier.Employee', name: 'cashier.Employee' },
+                { data: 'cashier.FullName', name: 'cashier.FullName' },
+                { data: 'cashier.Position', name: 'cashier.Position' },
                 { data: 'Date', name: 'Date' },
-                { data: 'CodeShift', name: 'CodeShift' },
+                { data: 'cashier.Status', name: 'cashier.Status' },
                 { data: 'action', name: 'action', orderable: false}
             ],
+            columnDefs : [{
+                render : function (data,type,row){
+                    return data + ' -  ' + row['cashier.FullName']; 
+                },
+                "targets" : 2
+            },
+                {"visible": false, "targets" : 3}
+            ],
+            order: [[ 2, "asc" ]],
             dom: 'Bfrtip',
         lengthMenu: [
             [ 10, 25, 50, -1 ],
@@ -251,13 +313,6 @@ function format ( d ) {
                 row.child( format(row.data()) ).show();
                 tr.addClass('shown');
             }
-        });
-
-        $('.datepicker').datepicker({
-            format: 'dddd DD MMMM YYYY',
-            clearButton: true,
-            weekStart: 1,
-            time: false
         });
 
         $(document).on('click', '.scheduleedit', function () {
@@ -349,6 +404,29 @@ function format ( d ) {
                 }
             });
         }
+
+        $('.datepicker').datepicker({
+            format: 'dddd DD MMMM YYYY',
+            clearButton: true,
+            weekStart: 1,
+            time: false
+        });
+
+        //Date range picker
+        $('.inputdaterange').datepicker({
+            todayBtn:'linked',
+            todayHighlight:'true',
+            calendarWeeks:'true',
+            showWeek: true,
+            // format:'dd MM  yyyy',
+            autoclose:true,
+            beforeShow: function(elem, ui) {
+                            $(ui.dpDiv).on('click', 'tbody .ui-datepicker-week-col', function() {
+                                $(elem).val('Week ' + $(this).text()).datepicker( "hide" );
+                            });
+                            }
+        });
+
         $('#datetimepicker1').datetimepicker({
                     format: 'L'
                 });
@@ -359,6 +437,29 @@ function format ( d ) {
                     format: 'LT'
                 });
         $('[data-mask]').inputmask()
+
+        //Date range picker
+        $('#datefilter').daterangepicker({
+            "showWeekNumbers": true,
+            "showISOWeekNumbers": true
+
+        })
+
+        //Initialize Select2 Elements
+        $('.select2').select2()
+
+        //filter berdasarkan Nama Product
+        $('.filter-positiongagal').keyup(function () {
+        table.column( $(this).data('column'))
+        .search( $(this).val() )
+        .draw();
+        });
+
+        $('.filter-position').change(function () {
+        table.column( $(this).data('column'))
+        .search( $(this).val() )
+        .draw();
+    });
 
     });
 </script>

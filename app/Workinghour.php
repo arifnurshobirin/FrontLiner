@@ -12,7 +12,7 @@ class Workinghour extends Model
 
     public function schedules()
     {
-        return $this->belongsToMany(Schedules::class);
+        return $this->hasMany(Schedules::class);
     }
 
     public function activities()

@@ -10,14 +10,14 @@ class Schedule extends Model
     use SoftDeletes;
     protected $guarded = [];
 
-    public function cashiers()
+    public function cashier()
     {
-        return $this->belongsToMany(Cashier::class);
+        return $this->belongsTo(Cashier::class);
     }
 
-    public function workinghours()
+    public function workinghour()
     {
-        return $this->hasMany(Workinghour::class);
+        return $this->belongsTo(Workinghour::class);
     }
 
     public function activities()

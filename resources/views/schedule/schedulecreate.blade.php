@@ -58,7 +58,7 @@
                 <br>
                 <div class="table-responsive">
                     <table class="display responsive table table-striped table-hover dataTable js-exportable"
-                        id="ScheduleAddDatatable">
+                        id="ScheduleAddDatatable" style="width:100%">
                         <thead>
                             <tr>
                                 <th></th>
@@ -181,13 +181,13 @@
                             </div>
                             <div class="modal-body">
                                 <button type="button" name="createcodeshift" id="createcodeshift"
-                                    class="btn btn-success">Create Code Shift</button>
+                                    onclick="fnClickAddRow()" class="btn btn-success">Create Code Shift</button>
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 <br>
                                 <div class="table-responsive">
                                     <table
                                         class="display responsive table table-striped table-hover dataTable js-exportable"
-                                        id="CodeShiftDatatable">
+                                        id="CodeShiftDatatable" style="width:100%">
                                         <thead>
                                             <tr>
                                                 <th>Code Shift</th>
@@ -460,7 +460,7 @@ function editshift(id){
                                     ]
                         },
                         {
-                            text: '<i class="fas fa-plus"></i><span> Add Schedule</span>',
+                            text: '<i class="fas fa-plus"></i><span> Position</span>',
                             className: 'btn btn-success',
                             action: function ( e, dt, node, config ) {
                                 $('#schedulesave').val("create-schedule");
@@ -626,22 +626,35 @@ function editshift(id){
             ] 
         });
 
-        var code = 1;
-        $('#createcodeshift').on( 'click', function () {
-            tablecodeshift.row.add( [
-            code +'<input type="text" name="code" id="code" class="form-control input-uppercase" value="$list->CodeShift}}" readonly/>',
-            code +'<input type="text" name="start" id="start" class="form-control input-uppercase" value="$list->StartShift}}" readonly/>',
-            code +'<input type="text" name="end" id="end" class="form-control input-uppercase" value="$list->EndShift}}" readonly/>',
-            code +'<div class="input-group"><input type="text" name="hour" id="hour" class="form-control input-uppercase" value="$list->WorkingHour}}" readonly/><div class="input-group-prepend"><span class="input-group-text">Hour</span> </div></div>',
-            code +'<div class="btn-group"><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button><div class="dropdown-menu dropdown-menu-right" role="menu"><a class="scheduleedit dropdown-item" id="" onclick="editshift()"><i class="fas fa-edit"></i> Edit</a><a class="schedulesave dropdown-item" id="" onclick="freezeshift()"><i class="fas fa-desktop"></i> Save</a><a class="scheduledelete dropdown-item" id=""><i class="fas fa-trash"></i> Delete</a></div></div>'
-        ] ).draw( false );
+        //var code = 1;
+        // $('#createcodeshift').on( 'click', function () {
+        //     tablecodeshift.row.add( [
+        //     code +'<input type="text" name="code" id="code" class="form-control input-uppercase" value="" readonly/>',
+        //     code +'<input type="text" name="start" id="start" class="form-control input-uppercase" value="" readonly/>',
+        //     code +'<input type="text" name="end" id="end" class="form-control input-uppercase" value="" readonly/>',
+        //     code +'<div class="input-group"><input type="text" name="hour" id="hour" class="form-control input-uppercase" value="" readonly/><div class="input-group-prepend"><span class="input-group-text">Hour</span> </div></div>',
+        //     code +'<div class="btn-group"><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button><div class="dropdown-menu dropdown-menu-right" role="menu"><a class="scheduleedit dropdown-item" id="" onclick="editshift()"><i class="fas fa-edit"></i> Edit</a><a class="schedulesave dropdown-item" id="" onclick="freezeshift()"><i class="fas fa-desktop"></i> Save</a><a class="scheduledelete dropdown-item" id=""><i class="fas fa-trash"></i> Delete</a></div></div>'
+        // ] ).draw( false );
 
-        code++;
-        });
+        // code++;
+        // });
         // Automatically add a first row of data
-        // $('#createcodeshift').click();
+         //$('#createcodeshift').click();
+
+        
     
     
     });
+    var giCount = 1;
+    function fnClickAddRow() {
+        $('#CodeShiftDatatable').dataTable().fnAddData( [
+            giCount+".1",
+            giCount+".2",
+            giCount+".3",
+            giCount+".4",
+            giCount+".5" ] );
+        
+        giCount++;
+        }
 </script>
 @endsection

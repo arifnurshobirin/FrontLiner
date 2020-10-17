@@ -10,14 +10,14 @@ class Consolidate extends Model
     use SoftDeletes;
     protected $guarded = [];
 
-    public function cashiers()
+    public function cashier()
     {
-        return $this->belongsToMany(Cashier::class);
+        return $this->belongsTo(Cashier::class);
     }
 
-    public function counters()
+    public function counter()
     {
-        return $this->belongsToMany(Counter::class);
+        return $this->belongsTo(Counter::class);
     }
 
     public function banknotes()

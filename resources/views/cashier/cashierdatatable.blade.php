@@ -29,14 +29,14 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-bordered table-striped table-hover dataTable js-exportable"
-                    id="CashierDatatable">
+                    id="CashierDatatable" style="width:100%">
                     <thead>
                         <tr>
                             <th><button type="button" name="cashiermoredelete" id="cashiermoredelete"
-                                    class="btn btn-danger">
+                                    class="btn btn-danger btn-sm">
                                     <i class="fas fa-times"></i><span></span>
                                 </button></th>
-                            <th>Detail</th>
+                            <th></th>
                             <th>Avatar</th>
                             <th>Employee</th>
                             <th>Full Name</th>
@@ -47,8 +47,8 @@
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>Checkbox</th>
-                            <th>Detail</th>
+                            <th></th>
+                            <th></th>
                             <th>Avatar</th>
                             <th>Employee</th>
                             <th>Full Name</th>
@@ -256,7 +256,7 @@ function format ( d ) {
                                 ]
                     },
                     {
-                        text: '<i class="fas fa-plus"></i><span> Add Cashier</span>',
+                        text: '<i class="fas fa-user-plus"></i><span> Add Cashier</span>',
                         className: 'btn btn-success',
                         action: function ( e, dt, node, config ) {
                             $('#cashiersave').val("create-cashier");

@@ -26,10 +26,10 @@
         <!-- /.card-header -->
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped table-hover dataTable js-exportable" id="ComputerDatatable">
+                <table class="table table-bordered table-striped table-hover dataTable js-exportable" id="ComputerDatatable" style="width:100%">
                     <thead>
                         <tr>
-                            <th><button type="button" name="computermoredelete" id="computermoredelete" class="btn btn-danger">
+                            <th><button type="button" name="computermoredelete" id="computermoredelete" class="btn btn-danger btn-sm">
                                     <i class="fas fa-times"></i><span></span>
                                 </button></th>
                             <th></th>

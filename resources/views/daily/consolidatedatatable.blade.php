@@ -29,30 +29,58 @@
         </div>
         <!-- /.card-header -->
         <div class="card-body">
+            <!-- Date range -->
+            <div class="form-group">
+                <label>Date range:</label>
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="text" name="fromdate" id="fromdate" class="form-control inputdaterange"
+                            placeholder="From Date" readonly />
+                    </div>
+                    <div class="col-md-4 todate2">
+                        <input type="text" name="todate" id="todate" class="form-control todate"
+                            placeholder="To Date" readonly />
+                    </div>
+                    <div class="col-md-4">
+                        <button type="button" name="scheduleapply" id="scheduleapply"
+                            class="btn btn-primary">Apply</button>
+                        <button type="button" name="refresh" id="refresh" class="btn btn-default">Refresh</button>
+                        <button type="submit" name="saveallschedule" id="saveallschedule" class="btn btn-success"
+                            value="create">
+                            Save Schedule
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- /. Date range -->
             <div class="table-responsive">
                 <table class="table table-bordered table-striped table-hover dataTable js-exportable"
-                    id="ConsolidateDatatable">
+                    id="ConsolidateDatatable" style="width:100%">
                     <thead>
                         <tr>
                             <th><button type="button" name="consolidatemoredelete" id="consolidatemoredelete"
-                                    class="btn btn-danger">
+                                    class="btn btn-danger btn-sm">
                                     <i class="fas fa-times"></i><span></span>
                                 </button></th>
-                            <th>Detail</th>
+                            <th></th>
                             <th>Deposit Type</th>
+                            <th>No Deposit</th>
                             <th>Employee</th>
                             <th>Full Name</th>
+                            <th>Counter</th>
                             <th>Amount</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tfoot>
                         <tr>
-                            <th>Checkbox</th>
-                            <th>Detail</th>
+                            <th></th>
+                            <th></th>
                             <th>Deposit Type</th>
+                            <th>No Deposit</th>
                             <th>Employee</th>
                             <th>Full Name</th>
+                            <th>Counter</th>
                             <th>Amount</th>
                             <th>Action</th>
                         </tr>
@@ -197,8 +225,10 @@ function format ( d ) {
                 "defaultContent": ''
                 },
                 { data: 'DepositType', name: 'DepositType' },
-                { data: 'Employee', name: 'Employee' },
-                { data: 'FullName', name: 'FullName' },
+                { data: 'NoDeposit', name: 'NoDeposit' },
+                { data: 'cashier.Employee', name: 'cashier.Employee' },
+                { data: 'cashier.FullName', name: 'cashier.FullName' },
+                { data: 'counter.TypeCounter', name: 'counter.TypeCounter' },
                 { data: 'Amount', name: 'Amount' },
                 { data: 'action', name: 'action', orderable: false}
             ],

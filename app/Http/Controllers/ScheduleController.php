@@ -20,33 +20,36 @@ class ScheduleController extends Controller
      */
     public function datatable(Request $request)
     {
-        $data = DB::table('scheduletable')
-            ->select('scheduletable.id','scheduletable.Employee','scheduletable.FullName','scheduletable.Date','scheduletable.CodeShift',
-                    'workinghourtable.id as idWH','workinghourtable.StartShift', 'workinghourtable.EndShift','workinghourtable.WorkingHour')
-            ->leftJoin('workinghourtable', 'scheduletable.CodeShift', '=', 'workinghourtable.CodeShift')->orderBy('scheduletable.Employee','asc')
-            ->get();
-            //$data = Schedule::latest()->get();
-        return DataTables::of($data)
-            ->addColumn('attendance',
-                '<button type="button" class="btn btn-primary"><i class="fas fa-wrench"></i> Masuk</button>')
-            ->addColumn('activity', '<input type="text" name="activity{{$id}}" id="activity{{$id}}" class="form-control" />')
-            ->addColumn('shift', '<label for="shift">{{$StartShift}} - {{$EndShift}}</label>')
+        // $data = DB::table('scheduletable')
+        //     ->select('scheduletable.id','scheduletable.Employee','scheduletable.FullName','scheduletable.Date','scheduletable.CodeShift',
+        //             'workinghourtable.id as idWH','workinghourtable.StartShift', 'workinghourtable.EndShift','workinghourtable.WorkingHour')
+        //     ->leftJoin('workinghourtable', 'scheduletable.CodeShift', '=', 'workinghourtable.CodeShift')->orderBy('scheduletable.Employee','asc')
+        //     ->get();
+                // ->addColumn('attendance',
+                // '<button type="button" class="btn btn-primary"><i class="fas fa-wrench"></i> Masuk</button>')
+                // ->addColumn('activity', '<input type="text" name="activity{{$id}}" id="activity{{$id}}" class="form-control" />')
+                // ->addColumn('shift', '<label for="shift">{{$StartShift}} - {{$EndShift}}</label>')
+        //$dataconsolidate = Consolidate::with('cashier','counter')->latest()->get();
+        $dataschedule = Schedule::with('cashier','workinghour')->orderBy('date','asc')->get();
+        return DataTables::of($dataschedule)
+            // ->addColumn('cashier', '{{$cashier->Employee}} {{$cashier->FullName}}')
             ->addColumn('checkbox', '<input type="checkbox" name="countercheckbox[]" class="checkbox countercheckbox" value="{{$id}}" />')
             ->addColumn('action',
             '<div class="btn-group">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> </button>
             <div class="dropdown-menu dropdown-menu-right" role="menu">
             <a class="schedulesave dropdown-item" id="{{$id}}" onclick="freezeschedule({{$id}})"><i class="fas fa-desktop"></i> Save</a>
             <a class="scheduleedit dropdown-item" id="{{$id}}" onclick="editschedule({{$id}})"><i class="fas fa-edit"></i> Edit</a>
             <a class="scheduledelete dropdown-item" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
             </div></div>')
-            ->rawColumns(['checkbox','shift','activity','attendance','action'])
+            ->rawColumns(['checkbox','action'])
             ->make(true);
     }
     
     public function index(Request $request)
     {
-        return view('schedule.scheduledatatable');
+        $datacashier = Cashier::all();
+        return view('schedule.scheduledatatable',compact('datacashier'));
     }
     
 
@@ -61,6 +64,14 @@ class ScheduleController extends Controller
          // $datacashier = Cashier::latest()->get();
         $dataworkinghour = WorkingHour::all();
         return view('schedule.schedulecreate',compact('dataworkinghour'));
+    }
+
+    public function indexnew()
+    {
+         // $dataschedule = Schedule::latest()->get();
+         // $datacashier = Cashier::latest()->get();
+        $dataworkinghour = WorkingHour::all();
+        return view('schedule.schedulecreatenew',compact('dataworkinghour'));
     }
 
     public function datatablecreate()
@@ -78,9 +89,9 @@ class ScheduleController extends Controller
             ->addColumn('sunday', '<input type="text" name="sunshift{{$id}}" id="sunshift{{$id}}" class="form-control input-uppercase" oninput="shifthour({{$id}})" />')
             ->addColumn('action',
                 '<div class="btn-group">
-                <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+                <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> </button>
                 <div class="dropdown-menu dropdown-menu-right" role="menu">
-                <a class="schedulesave dropdown-item" id="{{$id}}" onclick="freezeschedule({{$id}})"><i class="fas fa-desktop"></i> Save</a>
+                <a class="schedulesave dropdown-item" id="{{$id}}" onclick="freezeschedule({{$id}})"><i class="fas fa-desktop"></i> Create</a>
                 <a class="scheduleedit dropdown-item" id="{{$id}}" onclick="editschedule({{$id}})"><i class="fas fa-edit"></i> Edit</a>
                 <a class="scheduledelete dropdown-item" id="{{$id}}"><i class="fas fa-trash"></i> Delete</a>
                 </div></div>')

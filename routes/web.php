@@ -53,6 +53,7 @@ Route::prefix('admin')->middleware('auth')->group(function(){
 
     Route::get('scheduledatatable', 'ScheduleController@datatable')->name('schedule.datatable');
     Route::get('scheduleadd', 'ScheduleController@getBasic');
+    Route::get('schedulenew', 'ScheduleController@indexnew');
     Route::get('schedule/datatablecreate', 'ScheduleController@datatablecreate')->name('schedule.datatablecreate');
     Route::resource('schedule', 'ScheduleController');
     Route::get('scheduledatatable/destroy/{id}', 'ScheduleController@destroydatatable');

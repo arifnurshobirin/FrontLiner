@@ -15,11 +15,11 @@ class CreateCoinsTable extends Migration
     {
         Schema::create('coins', function (Blueprint $table) {
             $table->id();
-            $table->integer('seribu');
-            $table->integer('limaratus');
-            $table->integer('duaratus');
-            $table->integer('seratus');
-            $table->integer('limapuluh');
+            $table->integer('seribu')->nullable();
+            $table->integer('limaratus')->nullable();
+            $table->integer('duaratus')->nullable();
+            $table->integer('seratus')->nullable();
+            $table->integer('limapuluh')->nullable();
             $table->string('Author')->nullable();
             $table->timestamps();
             $table->softDeletes();

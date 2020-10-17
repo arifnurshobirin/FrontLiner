@@ -6,8 +6,8 @@ use App\{Edc, Counter};
 use DataTables;
 use App\DataTables\EdcsDataTable;
 use Illuminate\Http\Request;
-use Validator;
-Use Alert;
+//use Validator;
+// Use Alert;
 
 class EdcController extends Controller
 {
@@ -26,13 +26,14 @@ class EdcController extends Controller
     public function datatable(Request $request)
     {
         $dataedc = Edc::with('counter')->latest()->get();
+        // $dataconsolidate = Consolidate::with('cashiers')->latest()->get();
         //$caricounter=array_column($dataedc, 'id');
         //$carinocounter =  $dataedc->id_counter->counter();
-        //dd($dataedc);
+        //  dd($dataedc);
         //return $dataedc;
         return DataTables::of($dataedc)
         ->addColumn('action','<div class="btn-group">
-            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> Option</button>
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><i class="fas fa-wrench"></i> </button>
             <div class="dropdown-menu dropdown-menu-right" role="menu">
             <a href="edc/{{$id}}" class="edcshow dropdown-item" id="{{$id}}"><i class="fas fa-desktop"></i> Show</a>
             <a href="#" class="editedc dropdown-item" id="{{$id}}"><i class="fas fa-edit"></i> Edit</a>
@@ -70,22 +71,34 @@ class EdcController extends Controller
      */
     public function store(Request $request)
     {
+        $attr=$request->validate([
+            'TIDEDC' => 'required|min:5',
+            'MIDEDC' => 'required|string',
+            'IPAdress' => 'required',
+            'counter_id' => 'required',
+            'Connection' => 'required',
+            'SIMCard' => 'required',
+            'TypeEDC' => 'required',
+            'Status' => 'required'
+        ]);
 
+        // $form_data = array(
+        //     'TIDEDC' => $request->tidedc,
+        //     'MIDEDC' => $request->midedc,
+        //     'IPAdress' => $request->ipedc,
+        //     'counter_id' => $request->selectnocounter,
+        //     'Connection' => $request->connection,
+        //     'SIMCard' => $request->simcard,
+        //     'TypeEDC' => $request->typeedc,
+        //     'Status' => $request->statusedc
+        // );
 
-        $form_data = array(
-            'TIDEDC' => $request->tidedc,
-            'MIDEDC' => $request->midedc,
-            'IPAdress' => $request->ipedc,
-            'counter_id' => $request->selectnocounter,
-            'Connection' => $request->connection,
-            'SIMCard' => $request->simcard,
-            'TypeEDC' => $request->typeedc,
-            'Status' => $request->statusedc
-        );
+        
 
-        Edc::updateOrCreate(['id'=>$request->edcid],$form_data);
+        //Edc::updateOrCreate(['id'=>$request->id],$attr);
+        Edc::Create($attr);
 
-        return response()->json(['success' => 'Data Added successfully.']);
+        return back()->with('success', 'Success Message');
     }
 
     /**

@@ -12,11 +12,16 @@ class Cashier extends Model
 
     public function schedules()
     {
-        return $this->belongsToMany(Schedule::class);
+        return $this->hasMany(Schedule::class);
     }
 
     public function activities()
     {
         return $this->belongsToMany(Activity::class);
+    }
+
+    public function consolidates()
+    {
+        return $this->hasMany(Consolidate::class);
     }
 }
