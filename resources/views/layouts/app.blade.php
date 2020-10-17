@@ -52,7 +52,7 @@
         }
         </style>
     </head>
-    <body class="hold-transition sidebar-mini layout-fixed">
+    <body class="hold-transition sidebar-mini sidebar-collapse">
         <!-- Page Loader -->
         <div class="preloader">
             <div class="loading">
