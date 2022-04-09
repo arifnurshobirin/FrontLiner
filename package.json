@@ -42,7 +42,7 @@
         "filterizr": "^2.2.4",
         "handlebars": "^4.7.6",
         "jszip": "^3.4.0",
-        "moment": "^2.25.3",
+        "moment": "^2.29.2",
         "pdfmake": "^0.1.65"
     }
 }
